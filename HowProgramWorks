@@ -1,6 +1,7 @@
 
 
 Forrit opnað
+	Setja upp forsíðu, (console art)
 	Upplýsingar lesnar úr skrá,
 		Notandi velur skrá
 		Tókst opnun?
@@ -9,6 +10,7 @@ Forrit opnað
 		Bæta inn aðila
 			Hreinsa skjá
 			Innskráningarsíða kemur upp
+					Viltu bæta við fleiri aðilum
 				Villutékk á inntaki
 				Aðila bætt við í skrá
 				Aðila bætt við í vector
@@ -23,11 +25,14 @@ Forrit opnað
 			Filtera lista, hvað viljum við sjá?
 			Hvernig viltu raða listanum
 			Hreinsa skjá
-			Listi birtur
+			Listi birtur, einfaldur línulisti með valmöguleikum
+				Ef beðið er um frekari upplýsingar um einhvern, þá er það birt.
 		Hætta í forriti
 Forriti lokað
 
 Hvað á heima hvar
+	Hvað þurfum við af klösum?
+		
 		
 Presentation layer
 	Birta aðalvalmynd
