@@ -1,0 +1,13 @@
+#ifndef WORKINGCLASS_H
+#define WORKINGCLASS_H
+
+
+class WorkingClass
+{
+public:
+    WorkingClass();
+private:
+    
+};
+
+#endif // WORKINGCLASS_H
