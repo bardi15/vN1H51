@@ -2,18 +2,25 @@
 
 Forrit opnað
 	Upplýsingar lesnar úr skrá,
+		Notandi velur skrá
+		Tókst opnun?
+			Ef ekki þá leyfa endurtekningu.
 	Valmynd birtist
 		Bæta inn aðila
 			Hreinsa skjá
 			Innskráningarsíða kemur upp
+				Villutékk á inntaki
 				Aðila bætt við í skrá
 				Aðila bætt við í vector
+		Eyða aðila (úr fyrirlestri)
+		Breyta aðila (úr fyrirlestri)
 		Leita að aðila
 			Hvernig viltu leita
 			Ef fleiri en einn koma til greina, kannað hvað skuli gera (b krafa)
 			Aðili birtur
 		Birta lista yfir aðila
 			Hreinsa skjá
+			Filtera lista, hvað viljum við sjá?
 			Hvernig viltu raða listanum
 			Hreinsa skjá
 			Listi birtur
@@ -30,6 +37,7 @@ Presentation layer
 Logic layer
 	Leita að aðila (kunna að vera fleiri en eitt fall)
 	Sortera lista (kunna að vera fleiri en eitt fall)
+		substr
 Data layer
 	Opna skrá
 	Skrifa skrá
