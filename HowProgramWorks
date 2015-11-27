@@ -1,0 +1,46 @@
+
+
+Forrit opnað
+	Upplýsingar lesnar úr skrá,
+	Valmynd birtist
+		Bæta inn aðila
+			Hreinsa skjá
+			Innskráningarsíða kemur upp
+				Aðila bætt við í skrá
+				Aðila bætt við í vector
+		Leita að aðila
+			Hvernig viltu leita
+			Ef fleiri en einn koma til greina, kannað hvað skuli gera (b krafa)
+			Aðili birtur
+		Birta lista yfir aðila
+			Hreinsa skjá
+			Hvernig viltu raða listanum
+			Hreinsa skjá
+			Listi birtur
+		Hætta í forriti
+Forriti lokað
+
+Hvað á heima hvar
+		
+Presentation layer
+	Birta aðalvalmynd
+	Birta leitarvalmynd
+	Innsetningarsíða fyrir aðila
+	Innsetningarsíða fyrir leit	
+Logic layer
+	Leita að aðila (kunna að vera fleiri en eitt fall)
+	Sortera lista (kunna að vera fleiri en eitt fall)
+Data layer
+	Opna skrá
+	Skrifa skrá
+	Fylla vector
+	Útfærsla klasa
+		Get og set föll
+		Önnur nauðsynleg meðlima-/klasaföll
+		Privat breytur
+		
+Vangaveltur:
+	Hvernig viljum við hafa nafngift falla, breyta, klasa?
+		Lýsandi nöfn, descriptiveNames
+		Passa óljósar styttingar
+		Hlaupabreytur líka með lýsandi nöfn!
