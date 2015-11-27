@@ -1,26 +1,39 @@
 
 
 Forrit opnað
+	Setja upp forsíðu, (console art)
 	Upplýsingar lesnar úr skrá,
+		Notandi velur skrá
+		Tókst opnun?
+			Ef ekki þá leyfa endurtekningu.
 	Valmynd birtist
 		Bæta inn aðila
 			Hreinsa skjá
 			Innskráningarsíða kemur upp
+					Viltu bæta við fleiri aðilum
+				Villutékk á inntaki
 				Aðila bætt við í skrá
 				Aðila bætt við í vector
+		Eyða aðila (úr fyrirlestri)
+		Breyta aðila (úr fyrirlestri)
 		Leita að aðila
 			Hvernig viltu leita
 			Ef fleiri en einn koma til greina, kannað hvað skuli gera (b krafa)
 			Aðili birtur
 		Birta lista yfir aðila
 			Hreinsa skjá
+			Filtera lista, hvað viljum við sjá?
 			Hvernig viltu raða listanum
 			Hreinsa skjá
-			Listi birtur
+			Listi birtur, einfaldur línulisti með valmöguleikum
+				Ef beðið er um frekari upplýsingar um einhvern, þá er það birt.
 		Hætta í forriti
 Forriti lokað
 
 Hvað á heima hvar
+	Hvað þurfum við af klösum?
+		
+		
 		
 Presentation layer
 	Birta aðalvalmynd
@@ -30,6 +43,7 @@ Presentation layer
 Logic layer
 	Leita að aðila (kunna að vera fleiri en eitt fall)
 	Sortera lista (kunna að vera fleiri en eitt fall)
+		substr
 Data layer
 	Opna skrá
 	Skrifa skrá
