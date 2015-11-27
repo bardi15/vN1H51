@@ -5,16 +5,16 @@
 
 using namespace std;
 
-class compSciClass
+class compsciclass
 {
     public:
-        compSciClass();
-        void getName();
-        void getgender();
-        void getYearOfBirth();
-        void getYearOfDeath();
-        void getDescription();
-        void getLink();
+        compsciclass();
+        string getName();
+        bool getgender();
+        int getYearOfBirth();
+        int getYearOfDeath();
+        string getDescription();
+        string getLink();
 
         void setName();
         void setgender();
@@ -25,7 +25,7 @@ class compSciClass
 
     private:
         string name;
-        string gender;
+        bool gender;
         int yearOfBirth;
         int yearOfDeath;
         string description;

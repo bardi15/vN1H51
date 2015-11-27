@@ -1,16 +1,16 @@
-#include "compSciClass.h"
+#include "compsciclass.h"
 #include <iostream>
 #include <string>
 #include <fstream>
 
 using namespace std;
 
-compSciClass::compSciClass()
+compSciClass::compsciclass()
 {
-    name = ' ';
-    gender = ' ';
+    name = '';
+    gender = '';
     yearOfBirth=0;
     yearOfDeath=0;
-    description = ' ';
-    link = ' ';
+    description = '';
+    link = '';
 }
