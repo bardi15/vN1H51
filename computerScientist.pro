@@ -9,7 +9,8 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     compSciClass.cpp
+    infodisplay.cpp
 
 HEADERS += \
     compSciClass.h
-
+    infodisplay.h
