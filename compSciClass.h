@@ -47,6 +47,7 @@ class compsciclass
         // Postcondition:   The YearOfDeath has been set to parameter deathYear.
         void setDescription(string desc);
         // Precondition:    The parameter is of a legal type and value.
+        // Postcondition:   The description has been set to parameter desc.
         void setLink(string url);
         // Precondition:    The parameter is of a legal type and value.
         // Postcondition:   The link has been set to parameter url.
