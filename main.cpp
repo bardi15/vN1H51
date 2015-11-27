@@ -1,6 +1,8 @@
 #include <QCoreApplication>
 #include <iostream>
 #include "compSciClass.h"
+#include "workingclass.h"
+#include "infodisplay.h"
 #include <vector>
 
 using namespace std;

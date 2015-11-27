@@ -8,9 +8,13 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    compSciClass.cpp
+    compSciClass.cpp \
+    workingclass.cpp \
+    infodisplay.cpp
     infodisplay.cpp
 
 HEADERS += \
-    compSciClass.h
+    compSciClass.h \
+    infodisplay.h \
+    workingclass.h
     infodisplay.h
