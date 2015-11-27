@@ -9,6 +9,19 @@ class compSciClass
 {
     public:
         compSciClass();
+        void getName();
+        void getgender();
+        void getYearOfBirth();
+        void getYearOfDeath();
+        void getDescription();
+        void getLink();
+
+        void setName();
+        void setgender();
+        void setYearOfBirth();
+        void setYearOfDeath();
+        void setDescription();
+        void setLink();
 
     private:
         string name;
