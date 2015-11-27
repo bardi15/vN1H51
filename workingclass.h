@@ -7,10 +7,10 @@ class WorkingClass
 {
 public:
     WorkingClass();
-    tovector(compsciclass input_dot, vector<compsciclass> invect);
+    tovector(compsciclass input_dot);
 
 private:
-    vector workingVector;
+    vector<compsciclass> workingVector;
 };
 
 #endif // WORKINGCLASS_H

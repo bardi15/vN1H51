@@ -1,5 +1,6 @@
 #include "workingclass.h"
 #include <vector>
+#include <fstream>
 
 WorkingClass::WorkingClass()
 {
@@ -9,4 +10,6 @@ WorkingClass::WorkingClass()
 WorkingClass::tovector(compsciclass input_dot)
 {
     workingVector.push_back(input_dot);
+    istream skra_inn;
+    skra_inn.o
 }
