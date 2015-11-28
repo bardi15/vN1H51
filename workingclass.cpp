@@ -23,26 +23,62 @@ void workingclass::readFile()
     skra_inn.open(WORKFILE.c_str());
     if(skra_inn.fail())
     {
-        cout << "error";
+        cout << "error opening readFile file";
         exit(1);
     }
-    while(!skra_inn.eof())
+    readLinesFromFile(skra_inn);
+    skra_inn.close();
+
+}
+void workingclass::addLineToFile(string& outstring) const
+{
+    ofstream file_out;
+    file_out.open(WORKFILE.c_str(), ios::app);
+    if(file_out.fail())
+    {
+        cout << "error opening addToFile file";
+        exit(1);
+    }
+    file_out << outstring;
+    file_out.close();
+
+}
+
+string workingclass::scientistToFile( scientist s) const
+{
+    string nextline;
+    nextline += s.getName();
+    nextline += ";";
+    nextline += s.getGender();
+    nextline += ";";
+    nextline += s.getYearOfBirth();
+    nextline += ";";
+    nextline += s.getYearOfDeath();
+    nextline += ";";
+    nextline += s.getDescription();
+    nextline += ";";
+    nextline += s.getLink();
+    nextline += ";";
+
+    return nextline;
+}
+
+void workingclass::readLinesFromFile(ifstream& fileWithLines)
+{
+    while(!fileWithLines.eof())
     {
         int loc = 0;
         string next= "";
         char nextchar;
-        skra_inn.get(nextchar);
-        while(!skra_inn.eof() && nextchar != '\n')
+        fileWithLines.get(nextchar);
+        while(!fileWithLines.eof() && nextchar != '\n')
         {
             next += nextchar;
-            skra_inn.get(nextchar);
+            fileWithLines.get(nextchar);
         }
         createScientist(next, loc);
     }
-    skra_inn.close();
-
 }
-
 
 void workingclass::pushToVector(scientist s)
 {
@@ -85,6 +121,7 @@ void workingclass::printVector() const
         cout << "dd: " << scientistVector[i].getYearOfBirth() << endl;
         cout << "descr: " << scientistVector[i].getDescription() << endl;
         cout << "url: " << scientistVector[i].getLink() << endl;
+        cout << endl;
 
         //s.getName() << endl;
     }

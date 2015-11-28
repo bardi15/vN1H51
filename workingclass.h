@@ -17,6 +17,10 @@ public:
     workingclass();
     void selectAction(int sel);
     void readFile();
+    void addToFile();
+    void readLinesFromFile(ifstream& fileWithLines);
+    void addLineToFile(string& outstring) const;
+    string scientistToFile( scientist s) const;
 //    vector<scientist> getVector();
     void pushToVector(scientist s);
     void fillScientist(string text, scientist& s, const int field);
