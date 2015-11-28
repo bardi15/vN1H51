@@ -10,11 +10,11 @@ TEMPLATE = app
 SOURCES += main.cpp \
     workingclass.cpp \
     infodisplay.cpp \
-    compsciclass.cpp
+    scientist.cpp
     infodisplay.cpp
 
 HEADERS += \
     infodisplay.h \
     workingclass.h \
-    compsciclass.h
+    scientist.h
     infodisplay.h

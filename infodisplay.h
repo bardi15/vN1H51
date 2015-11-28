@@ -1,6 +1,6 @@
 #ifndef INFODISPLAY_H
 #define INFODISPLAY_H
-#include "compsciclass.h"
+#include "scientist.h"
 #include "infodisplay.h"
 #include "workingclass.h"
 
