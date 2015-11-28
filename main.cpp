@@ -1,4 +1,4 @@
-#include <QCoreApplication>
+//#include <QCoreApplication>
 #include <iostream>
 #include "scientist.h"
 #include "infodisplay.h"
@@ -11,6 +11,7 @@ int main()
 {
     workingclass jon;
     jon.readFile();
+    jon.printVector();
 
     return 0;
 }

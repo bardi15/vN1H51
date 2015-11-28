@@ -17,7 +17,7 @@ public:
     workingclass();
     void selectAction(int sel);
     void readFile();
-    void addToVectorFromFile(string line);
+//    vector<scientist> getVector();
     void pushToVector(scientist s);
     void fillScientist(string text, scientist& s, const int field);
     void createScientist(string& line, int& oldfind);

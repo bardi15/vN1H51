@@ -47,9 +47,9 @@ string scientist::getLink() const
     return link;
 }
 
-void scientist::setName(string name)
+void scientist::setName(string inName)
 {
-    name = name;
+    name = inName;
 }
 
 void scientist::setGender(bool sex)

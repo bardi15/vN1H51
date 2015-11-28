@@ -5,13 +5,18 @@
 #include <cstring>
 #include <cstdlib>
 
-const string WORKFILE = "Scientistinfo.csv";
+const string WORKFILE = "Scientistinfo.txt";
 const int MAXFIELDS = 6;
 
 workingclass::workingclass()
 {
 
 }
+//vector<scientist> workingclass::getVector()
+//{
+//    return vector<scientist> scientistVector;
+//}
+
 void workingclass::readFile()
 {
     ifstream skra_inn;
@@ -27,7 +32,7 @@ void workingclass::readFile()
         string next= "";
         char nextchar;
         skra_inn.get(nextchar);
-        while(nextchar != '\n')
+        while(!skra_inn.eof() && nextchar != '\n')
         {
             next += nextchar;
             skra_inn.get(nextchar);
@@ -55,20 +60,19 @@ void workingclass::createScientist(string& line, int& oldfind)
     {
         currFind = line.find(';',oldfind);
         fieldtext = line.substr(oldfind, (currFind-oldfind));
-        cout << fieldtext << endl;
         fillScientist(fieldtext, s, fieldno);
         fieldno++;
         oldfind = currFind + 1;
     }
-    while(fieldno < 6);
+    while(fieldno <= 6);
 
-    if(fieldno == MAXFIELDS)
+    if(fieldno == MAXFIELDS+1)
     {
         pushToVector(s);
     }
-    printVector();
-
 }
+
+
 
 void workingclass::printVector() const
 {
@@ -92,24 +96,30 @@ void workingclass::fillScientist(string text, scientist& s, const int field)
     {
     case 1:
         s.setName(text);
+        //cout << "Nafn: " << text << endl;
         break;
     case 2:
         s.setGender(atoi(text.c_str()));
+        //cout << "Gender: " << atoi(text.c_str()) << endl;
         break;
     case 3:
         s.setYearOfBirth(atoi(text.c_str()));
+        //cout << "YOB: " << atoi(text.c_str()) << endl;
         break;
     case 4:
         s.setYearOfDeath(atoi(text.c_str()));
+        //cout << "YOD: " << atoi(text.c_str()) << endl;
         break;
     case 5:
         s.setDescription(text);
+        //cout << "Descr: " << text << endl;;
         break;
     case 6:
         s.setLink(text);
+        //cout << "Link: " << text << endl;
         break;
     default:
-        cout << "error" << endl;
+        cout << "error" << endl << endl;
         break;
     }
 }

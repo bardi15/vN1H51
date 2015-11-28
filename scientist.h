@@ -34,7 +34,7 @@ public:
     // Precondition:    The class has been initialised with a legal link.
     // Postcondition:   Returns a string with a link.
 
-    void setName(string name);
+    void setName(string inName);
     // Precondition:    The parameter is of a legal type and value.
     // Postcondition:   The name has been set to the parameter name.
     void setGender(bool sex);
