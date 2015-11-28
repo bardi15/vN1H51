@@ -1,4 +1,6 @@
 #include "compsciclass.h"
+#include "infodisplay.h"
+#include "workingclass.h"
 #include <iostream>
 #include <string>
 #include <fstream>

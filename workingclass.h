@@ -1,9 +1,14 @@
 #ifndef WORKINGCLASS_H
 #define WORKINGCLASS_H
+
+//#include "scientist.h"
 #include "infodisplay.h"
 #include "workingclass.h"
-#include "scientist.h"
 #include <vector>
+#include "scientist.h"
+#include <string>
+
+using namespace std;
 
 class workingclass
 {

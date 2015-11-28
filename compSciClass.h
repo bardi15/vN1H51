@@ -2,7 +2,9 @@
 #define COMPSCICLASS_H
 #include <iostream>
 #include <string>
-
+#include "compsciclass.h"
+#include "infodisplay.h"
+#include "workingclass.h"
 using namespace std;
 
 class compsciclass

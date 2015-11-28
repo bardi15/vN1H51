@@ -1,6 +1,6 @@
+#include "scientist.h"
 #include "infodisplay.h"
 #include "workingclass.h"
-#include "scientist.h"
 #include "fstream"
 #include <cstring>
 #include <cstdlib>
