@@ -1,16 +1,24 @@
 #ifndef WORKINGCLASS_H
 #define WORKINGCLASS_H
-#include "compsciclass.h"
+#include "infodisplay.h"
+#include "workingclass.h"
+#include "scientist.h"
 #include <vector>
 
-class WorkingClass
+class workingclass
 {
 public:
-    WorkingClass();
-    tovector(compsciclass input_dot);
+    workingclass();
+    void selectAction(int sel);
+    void readFile();
+    void addToVectorFromFile(string line);
+    void pushToVector(scientist s);
+    void fillScientist(string text, scientist& s, const int field);
+    void createScientist(string& line);
+    void printVector() const;
 
 private:
-    vector<compsciclass> workingVector;
+    vector<scientist> scientistVector;
 };
 
 #endif // WORKINGCLASS_H

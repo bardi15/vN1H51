@@ -7,12 +7,12 @@ using namespace std;
 
 compsciclass::compsciclass()
 {
-    name = ' ';
-    gender = ' ';
+    name = "";
+    gender = 0;
     yearOfBirth=0;
     yearOfDeath=0;
-    description = ' ';
-    link = ' ';
+    description = "";
+    link = "";
 }
 compsciclass::compsciclass(string name, bool sex, int yoBirth,int yoDeath, string desc, string link)
 {
