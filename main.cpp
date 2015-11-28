@@ -3,16 +3,15 @@
 #include "scientist.h"
 #include "infodisplay.h"
 #include "workingclass.h"
-#include <vector>
+
 
 using namespace std;
 
-int main(int argc, char *argv[])
+int main()
 {
-    QCoreApplication a(argc, argv);
+    workingclass jon;
+    jon.readFile();
 
-    vector<scientist> progrVector;
-
-    return a.exec();
+    return 0;
 }
 
