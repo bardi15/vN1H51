@@ -8,6 +8,7 @@ class infoDisplay
 {
 public:
     infoDisplay();
+    void printVector() const;
     void splashScreen();
     void screenSelection();
     void displayAddScientist();
