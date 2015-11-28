@@ -26,7 +26,7 @@ string scientist::getName() const
     return name;
 }
 
-bool scientist::getgender() const
+bool scientist::getGender() const
 {
     return gender;
 }
@@ -52,7 +52,7 @@ void scientist::setName(string name)
     name = name;
 }
 
-void scientist::setgender(bool sex)
+void scientist::setGender(bool sex)
 {
     gender = sex;
 }

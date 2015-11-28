@@ -23,9 +23,16 @@ void workingclass::readFile()
     }
     while(!skra_inn.eof())
     {
-        string next;
-        getline(cin, next);
-        createScientist(next);
+        int loc = 0;
+        string next= "";
+        char nextchar;
+        skra_inn.get(nextchar);
+        while(nextchar != '\n')
+        {
+            next += nextchar;
+            skra_inn.get(nextchar);
+        }
+        createScientist(next, loc);
     }
     skra_inn.close();
 
@@ -37,28 +44,29 @@ void workingclass::pushToVector(scientist s)
     scientistVector.push_back(s);
 }
 
-void workingclass::createScientist(string& line)
+void workingclass::createScientist(string& line, int& oldfind)
 {
     string fieldtext;
-    int currFind = 0;
-    int oldFind = 0;
+    int currFind = oldfind;
     scientist s;
     int fieldno = 1;
 
     do
     {
-        currFind = line.find(';',currFind) - 1;
-        fieldtext = line.substr(oldFind, currFind);
+        currFind = line.find(';',oldfind);
+        fieldtext = line.substr(oldfind, (currFind-oldfind));
+        cout << fieldtext << endl;
         fillScientist(fieldtext, s, fieldno);
         fieldno++;
-        oldFind = currFind + 1;
+        oldfind = currFind + 1;
     }
-    while(fieldno <= 6);
+    while(fieldno < 6);
 
     if(fieldno == MAXFIELDS)
     {
         pushToVector(s);
     }
+    printVector();
 
 }
 
@@ -66,8 +74,15 @@ void workingclass::printVector() const
 {
     for(unsigned int i = 0; i < scientistVector.size(); i++)
     {
-        scientist s = scientistVector.at(i);
-        cout << "Nafn: " << s.getName() << endl;
+        //scientist s = scientistVector.at(i);
+        cout << "Nafn: " << scientistVector[i].getName() << endl;
+        cout << "kyn: " << scientistVector[i].getGender() << endl;
+        cout << "fd: " << scientistVector[i].getYearOfBirth() << endl;
+        cout << "dd: " << scientistVector[i].getYearOfBirth() << endl;
+        cout << "descr: " << scientistVector[i].getDescription() << endl;
+        cout << "url: " << scientistVector[i].getLink() << endl;
+
+        //s.getName() << endl;
     }
 }
 
@@ -79,7 +94,7 @@ void workingclass::fillScientist(string text, scientist& s, const int field)
         s.setName(text);
         break;
     case 2:
-        s.setgender(atoi(text.c_str()));
+        s.setGender(atoi(text.c_str()));
         break;
     case 3:
         s.setYearOfBirth(atoi(text.c_str()));

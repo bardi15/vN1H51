@@ -18,7 +18,7 @@ public:
     string getName() const;
     // Precondition:    The class has been initialised with a legal name.
     // Postcondition:   Returns a string with the name of the famous scientist.
-    bool getgender() const;
+    bool getGender() const;
     // Precondition:    The class has been initialised with a legal gender.
     // Postcondition:   Returns 0 for female and 1 for male.
     int getYearOfBirth() const;
@@ -37,7 +37,7 @@ public:
     void setName(string name);
     // Precondition:    The parameter is of a legal type and value.
     // Postcondition:   The name has been set to the parameter name.
-    void setgender(bool sex);
+    void setGender(bool sex);
     // Precondition:    The parameter is of a legal type and value.
     // Postcondition:   The gender has been set to the parameter sex.
     void setYearOfBirth(int birthYear);

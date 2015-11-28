@@ -10,6 +10,7 @@
 
 using namespace std;
 
+
 class workingclass
 {
 public:
@@ -19,7 +20,7 @@ public:
     void addToVectorFromFile(string line);
     void pushToVector(scientist s);
     void fillScientist(string text, scientist& s, const int field);
-    void createScientist(string& line);
+    void createScientist(string& line, int& oldfind);
     void printVector() const;
 
 private:
@@ -27,3 +28,4 @@ private:
 };
 
 #endif // WORKINGCLASS_H
+
