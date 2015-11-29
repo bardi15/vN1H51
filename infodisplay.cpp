@@ -6,6 +6,8 @@
 #include <vector>
 #include <stdio.h>
 #include <string>
+#include <stdlib.h>
+#include <sstream>
 
 //new
 
@@ -35,6 +37,7 @@ void infoDisplay::clearScreen()
 
 void infoDisplay::mainMenu()
 {
+    //clearScreen();
     int sel;
     cout << "Welcome to the computer scientist database! \n";
     cout << "What would you like to do? \n";
@@ -43,8 +46,10 @@ void infoDisplay::mainMenu()
     cout << "2) Delete existing information. \n";
     cout << "3) Edit existing information. \n";
     cout << "4) Browse the list of computer scientists. \n";
+    cout << "5) See a list of current scientists \n";
     cout << "All other entries exit the program. \n";
     cin >> sel;
+    cin.ignore();
     selectAction(sel);
 }
 
@@ -69,6 +74,11 @@ void infoDisplay::selectAction(int sel)
                clearScreen();
                displaySearchScientist();
                break;
+            case 5:
+               clearScreen();
+               displayListOfScientists();
+               break;
+
            default:
                clearScreen();
                cout << "Thank you, come again!." << endl;
@@ -95,8 +105,6 @@ void infoDisplay::AddScientist()
 {
     int selectedGender;
     bool wYLTContinue = true;
-    //bool badInput = false;
-    //bool quit = false;
 
     scientist sO;
 
@@ -115,7 +123,8 @@ void infoDisplay::AddScientist()
         name = (addScientistName(name));
         selectedGender = addScientistGender(gender);
 
-        yob = (addScientistYearOfBirth(yob));
+        //yob = (addScientistYearOfBirth(yob));
+        yob = (addScientistYearOfBirth());
 
 
         bool addEvenMore = true;
@@ -151,11 +160,14 @@ void infoDisplay::AddScientist()
         vector<scientist> tempVector;
         tempVector = workingobject.returnVector();
         tempVector.push_back(sO);
-        workingobject.modifyVector(tempVector);
+        //workingobject.modifyVector(tempVector);
+        workingobject.pushToVector(sO);
     };
 
     cout<<"output out of vector: "<<endl<<endl;
     workingobject.printVector();
+
+    mainMenu();
 
 }
 
@@ -167,19 +179,16 @@ string infoDisplay::addScientistName(string &name)
     do
     {
         cout<<"Enter name: ";
-        //getline(cin, name);  <---- ÞARF AÐ LAGA!!!!!!!!!!!!!!!!!
-        cin>>name;
+        getline(cin, name);
         name = workingobject.nameCorrection(name, badName);
         if (badName == true)
         {
-            cout<<"bad name!"<<endl;
+            cout<<"Incorrect name format!"<<endl;
         }
     }
     while(badName == true);
 
     return name;
-
-
 }
 
 int infoDisplay::addScientistGender(string &gender)
@@ -199,14 +208,32 @@ int infoDisplay::addScientistGender(string &gender)
     return selectedGender;
 }
 
-int infoDisplay::addScientistYearOfBirth(int &yob)
+int infoDisplay::addScientistYearOfBirth()
 {
-    workingclass workingobject;
-    cout<<"Enter year of birth: ";
-    cin>>yob;
-    yob = workingobject.yearCorrection(yob);
+    string tempInput;
+    int temp;
 
-    return yob;
+    bool errorInYear = false;
+    workingclass workingobject;
+
+    do
+    {
+        cout<<"Enter year of birth: ";
+        cin>>tempInput;
+
+        stringstream stringToInt (tempInput);
+        stringToInt >> temp;
+
+        temp = workingobject.yearCorrection(temp, errorInYear);
+
+        if (errorInYear == true)
+        {
+            cout<<"Incorrect year format!"<<endl;
+        }
+    }
+    while (errorInYear == true);
+
+    return temp;
 }
 
 bool infoDisplay::addScientistMore(int &yod, string &descr, string &link)
@@ -214,15 +241,16 @@ bool infoDisplay::addScientistMore(int &yod, string &descr, string &link)
     workingclass workingobject;
 
     cout<<"1. Add year of Death, 2. Description, 3. "
-          "Website link, everything else quits."<<endl;
+          "Website link, any other key skips."<<endl;
 
     char choice;
     cin>>choice;
+    cin.ignore();
 
     switch(choice)
     {
         case '1':
-        yod = addScientistYearOfDeath(yod);
+        yod = addScientistYearOfDeath();
         break;
 
         case '2':
@@ -242,26 +270,45 @@ bool infoDisplay::addScientistMore(int &yod, string &descr, string &link)
     return addAnother;
 }
 
-int infoDisplay::addScientistYearOfDeath(int &yod)
+int infoDisplay::addScientistYearOfDeath()
 {
+    bool errorInYear = false;
+
+    string tempInput;
+    int temp;
+
     workingclass workingobject;
-    cout<<"Year of Death: ";
-    cin>>yod;
-    yod = workingobject.yearCorrection(yod);
-    return yod;
+
+    do
+    {
+        cout<<"Year of Death: ";
+        cin>>tempInput;
+
+        stringstream stringToInt (tempInput);
+        stringToInt >> temp;
+
+        temp = workingobject.yearCorrection(temp, errorInYear);
+
+        if (errorInYear == true)
+        {
+            cout<<"Incorrect year format!"<<endl;
+        }
+    }
+    while (errorInYear == true);
+    return temp;
 }
 
 string infoDisplay::addScientistDescription(string &descr)
 {
     cout<<"Description: ";
-    cin>>descr;
+    getline(cin, descr);
     return descr;
 }
 
 string infoDisplay::addScientistLink(string &link)
 {
     cout<<"Website Link:";
-    cin>>link;
+    getline(cin, link);
     return link;
 }
 
@@ -269,15 +316,15 @@ string infoDisplay::addScientistLink(string &link)
 bool infoDisplay::addScientistCheck(string name, int gender, int yob, int yod, string desc, string link)
 {
     clearScreen();
-    char input;
+    //char input;
     cout<<"Current entry: "<<endl;
     cout<<"======================================"<<endl;
     cout<<"Name: "<<name<<endl;
-    if (gender == 0)
+    if (gender == 1)
     {
         cout<<"Gender: Male"<<endl;
     }
-    else if (gender == 1)
+    else if (gender == 0)
     {
         cout<<"Gender: Female"<<endl;
     }
@@ -305,6 +352,7 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
     cout<<"1. Name, 2. Gender, 3. Year of Birth, 4. "
           "Year of Death, 5. Description, 6. Link"<<endl;
     cin>>input;
+    cin.ignore();
 
     switch (input)
     {
@@ -315,10 +363,11 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
         selectedGender = addScientistGender(gender);
         break;
     case 3:
-        yob = addScientistYearOfBirth(yob);
+        //yob = addScientistYearOfBirth(yob);
+        yob = addScientistYearOfBirth();
         break;
     case 4:
-        yod = addScientistYearOfDeath(yod);
+        yod = addScientistYearOfDeath();
         break;
     case 5:
         desc = addScientistDescription(desc);
@@ -336,18 +385,6 @@ bool infoDisplay::addScientistContinue()
 
     bool input = loopFunction();
     return input;
-
-//    cin>>input;
-//    (toupper(input));
-
-//    if (input == 'Y')
-//    {
-//        return true;
-//    }
-//    else
-//    {
-//        return false;
-//    }
 }
 
 
@@ -360,7 +397,6 @@ void infoDisplay::displayRemoveScientist()
 void infoDisplay::displayChangeScientist()
 {
     string name; //, age, yob, yod, descr, link;
-    //char y = 1, n = 0;
     int choice = 0;
 
     cout << "Enter the name of the scientist you would like to edit: ";
@@ -390,6 +426,14 @@ void infoDisplay::displaySearchScientist()
 
 }
 
+void infoDisplay::displayListOfScientists()
+{
+    workingclass workingobject;
+
+    cout<<"output out of vector: "<<endl<<endl;
+    workingobject.printVector();
+}
+
 void infoDisplay::quitProgram()
 {
 
@@ -399,6 +443,8 @@ bool infoDisplay::loopFunction()
 {
     char input;
     cin>>input;
+    cin.ignore();
+
 
     input = (toupper(input));
 
@@ -410,4 +456,6 @@ bool infoDisplay::loopFunction()
     {
         return false;
     }
+
+    return false;
 }

@@ -9,9 +9,10 @@
 #include <vector>
 #include <algorithm>
 
-const string WORKFILE = "Scientistinfo.txt";
-const int MAXFIELDS = 6;
-const int MAXNAMELENGTH = 30;
+//const string WORKFILE = "Scientistinfo.txt";
+//const int MAXFIELDS = 6;
+//const int MAXNAMELENGTH = 30;
+//const int CURRENTYEAR = 2015;
 
 workingclass::workingclass()
 {
@@ -238,12 +239,12 @@ int workingclass::genderCorrection(string gender)
 
     if (isMale == true)
     {
-        return 0;
+        return 1;
     }
 
     else if (isFemale == true)
     {
-        return 1;
+        return 0;
     }
     else
     {
@@ -251,16 +252,27 @@ int workingclass::genderCorrection(string gender)
     }
 }
 
-int workingclass::yearCorrection(int year)
+int workingclass::yearCorrection(int year, bool &errorInYear)
 {
+
     int tempYear = year;
+
     if ((tempYear >= 20) && (tempYear < 100))
     {
         tempYear += 1900;
     }
-    else if ((tempYear >= 0) && (tempYear < 20))
+    else if ((tempYear > 0) && (tempYear < 20))
     {
         tempYear += 2000;
+    }
+
+    if ((tempYear > 0) && (tempYear < CURRENTYEAR))
+    {
+        errorInYear = false;
+    }
+    else
+    {
+        errorInYear = true;
     }
 
     return tempYear;
