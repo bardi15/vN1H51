@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <vector>
+#include <stdio.h>
 
 using namespace std;
 
@@ -41,7 +42,85 @@ void infoDisplay::screenSelection()
 
 void infoDisplay::displayAddScientist()
 {
+    string name, gender, yob, yod, descr, link;
 
+    int choice;
+    char wYLTContinue = 'Y';
+    bool badInput = true;
+    bool quit = false;
+
+    workingclass workingobject;
+
+    workingobject.returnVector();
+
+    scientist sO;
+
+    cout<<"Enter name: ";
+    cin>>name;
+    //sO.setName(name);
+
+    cout<<"Enter gender: ";
+    cin>>gender;
+    //sO.setGender(gender);
+
+    cout<<"Enter year of birth: ";
+    cin>>yob;
+    //sO.setYearOfBirth(yob);
+
+    cout<<"Would you like to add more information?: "<<endl;
+
+
+    while (badInput == true)
+    {
+
+    cout<<"1. Add year of Death, 2. Description, 3. "
+          "Website link, everything else quits."<<endl;
+
+    cin>>choice;
+
+        switch(choice)
+        {
+            case 1:
+            cout<<"Year of Death: ";
+            cin>>yod;
+            //sO.setYearOfDeath(yod);
+            break;
+
+            case 2:
+            cout<<"Description: ";
+            cin>>descr;
+            //sO.setDescription(descr);
+            break;
+
+            case 3:
+            cout<<"Website Link:";
+            cin>>link;
+            //sO.setLink(link);
+            break;
+
+            default:
+            quit = true;
+            badInput = false;
+        }
+
+        if (quit == false)
+        {
+            cout<<"Would you like to continue? Y/N: ";
+            cin>>wYLTContinue;
+            (toupper(wYLTContinue));
+
+            if (wYLTContinue == 'Y')
+            {
+                badInput = true;
+            }
+            else
+            {
+                badInput = false;
+            }
+        }
+    }
+
+    cout<<"finished!!!!!!!";
 }
 
 void infoDisplay::displayRemoveScientist()

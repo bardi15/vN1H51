@@ -27,6 +27,10 @@ public:
     void createScientist(string& line, int& oldfind);
     void printVector() const;
     vector<scientist> returnVector ();
+    string nameCorrection(string name);
+    int genderCorrection(string gender);
+    int yearCorrection(string year);
+
 
 private:
     vector<scientist> scientistVector;

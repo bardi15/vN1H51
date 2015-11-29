@@ -9,7 +9,7 @@ scientist::scientist()
     description = "";
     link = "";
 }
-scientist::scientist(string name, bool sex, int yoBirth,int yoDeath, string desc, string link)
+scientist::scientist(string name, int sex, int yoBirth,int yoDeath, string desc, string link)
 {
     name = name;
     gender = sex;
@@ -26,7 +26,7 @@ string scientist::getName() const
     return name;
 }
 
-bool scientist::getGender() const
+int scientist::getGender() const
 {
     return gender;
 }
@@ -52,7 +52,7 @@ void scientist::setName(string inName)
     name = inName;
 }
 
-void scientist::setGender(bool sex)
+void scientist::setGender(int sex)
 {
     gender = sex;
 }

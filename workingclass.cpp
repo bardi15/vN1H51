@@ -4,6 +4,8 @@
 #include "fstream"
 #include <cstring>
 #include <cstdlib>
+#include <stdlib.h>
+#include <string>
 
 const string WORKFILE = "Scientistinfo.txt";
 const int MAXFIELDS = 6;
@@ -164,4 +166,21 @@ void workingclass::fillScientist(string text, scientist& s, const int field)
 vector<scientist> workingclass::returnVector ()
 {
     return scientistVector;
+}
+
+string workingclass::nameCorrection(string name)
+{
+    return name;
+}
+
+int workingclass::genderCorrection(string gender)
+{
+    int gen = (atoi(gender.c_str()));
+    return gen;
+}
+
+int workingclass::yearCorrection(string year)
+{
+    int yea = (atoi(year.c_str()));
+    return yea;
 }

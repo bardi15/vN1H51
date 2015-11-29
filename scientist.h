@@ -12,13 +12,13 @@ public:
     scientist();
     // Precondition:    An instance of the class has been created.
     // Postcondition:   Initialises all string variablaes with a space, integer and boolean variables as 0.
-    scientist(string name, bool sex, int yoBirth,int yoDeath, string desc, string link);
+    scientist(string name, int sex, int yoBirth,int yoDeath, string desc, string link);
     // Precondition:    All variables have been set with leagal values.
     // Postcondition:   Initialises all variables according to parameters.
     string getName() const;
     // Precondition:    The class has been initialised with a legal name.
     // Postcondition:   Returns a string with the name of the famous scientist.
-    bool getGender() const;
+    int getGender() const;
     // Precondition:    The class has been initialised with a legal gender.
     // Postcondition:   Returns 0 for female and 1 for male.
     int getYearOfBirth() const;
@@ -37,7 +37,7 @@ public:
     void setName(string inName);
     // Precondition:    The parameter is of a legal type and value.
     // Postcondition:   The name has been set to the parameter name.
-    void setGender(bool sex);
+    void setGender(int sex);
     // Precondition:    The parameter is of a legal type and value.
     // Postcondition:   The gender has been set to the parameter sex.
     void setYearOfBirth(int birthYear);
@@ -55,7 +55,7 @@ public:
 
 private:
     string name;
-    bool gender;
+    int gender; //0. is Male, 1. is Female, 2 is Bad INPUT.
     int yearOfBirth;
     int yearOfDeath;
     string description;
