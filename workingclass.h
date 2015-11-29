@@ -10,6 +10,10 @@
 
 using namespace std;
 
+const string WORKFILE = "Scientistinfo.txt";
+const int MAXFIELDS = 6;
+const int MAXNAMELENGTH = 30;
+const int CURRENTYEAR = 2015;
 
 class workingclass
 {
@@ -30,10 +34,14 @@ public:
     void modifyVector(vector<scientist> mVector);
     string nameCorrection(string name, bool& badName);
     int genderCorrection(string gender);
+<<<<<<< HEAD
     int yearCorrection(int year);
     vector<scientist> searchByName(string subName, bool& isFound);
     vector<scientist> searchByGender(string sex, bool& isFound);
     vector<scientist> searchByYear(int& yr, char bORd, bool& isFound);
+=======
+    int yearCorrection(int year, bool &errorInYear);
+>>>>>>> origin/master
 
 
 private:
