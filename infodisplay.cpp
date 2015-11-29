@@ -92,14 +92,13 @@ void infoDisplay::screenSelection()
 
 void infoDisplay::AddScientist()
 {
-    cout<<endl;
     string name, gender, descr, link;
     int yob = 0, yod = 0;
 
     int selectedGender;
     bool wYLTContinue = true;
-    bool badInput = false;
-    bool quit = false;
+    //bool badInput = false;
+    //bool quit = false;
     bool badName = false;
 
     scientist sO;
@@ -148,20 +147,23 @@ void infoDisplay::AddScientist()
 string infoDisplay::addScientistName(string name)
 {
     workingclass workingobject;
-
     bool badName = false;
-    cout<<"Enter name: ";
-    //getline(cin, name);  <---- ÞARF AÐ LAGA!!!!!!!!!!!!!!!!!
-    cin>>name;
-    name = workingobject.nameCorrection(name, badName);
-    if (badName == true)
+
+    do
     {
-        cout<<"bad name!"<<endl;
+        cout<<"Enter name: ";
+        //getline(cin, name);  <---- ÞARF AÐ LAGA!!!!!!!!!!!!!!!!!
+        cin>>name;
+        name = workingobject.nameCorrection(name, badName);
+        if (badName == true)
+        {
+            cout<<"bad name!"<<endl;
+        }
     }
-    else
-    {
-        return name;
-    }
+    while(badName == true);
+
+    return name;
+
 
 }
 
@@ -241,10 +243,22 @@ string infoDisplay::addScientistLink(string link)
 
 bool infoDisplay::addScientistCheck(string name, int gender, int yob, int yod, string desc, string link)
 {
+    clearScreen();
     char input;
     cout<<"Current entry: "<<endl;
     cout<<"Name: "<<name<<endl;
-    cout<<"Gender: "<<gender<<endl;
+    if (gender == 0)
+    {
+        cout<<"Gender: Male"<<endl;
+    }
+    else if (gender == 1)
+    {
+        cout<<"Gender: Female"<<endl;
+    }
+    else
+    {
+        cout<<"Gender: Unspecified"<<endl;
+    }
     cout<<"Year of Birth: "<<yob<<endl;
     cout<<"Year of Death: "<<yod<<endl;
     cout<<"Description: "<<desc<<endl;
@@ -269,6 +283,7 @@ bool infoDisplay::addScientistCheck(string name, int gender, int yob, int yod, s
 
 void infoDisplay::addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender)
 {
+    clearScreen();
     int input = 0;
     cout<<"What would you like to change? Choose: "<<endl;
     cout<<"1. Name, 2. Gender, 3. Year of Birth, 4. "
