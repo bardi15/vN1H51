@@ -25,9 +25,13 @@ void infoDisplay::printVector() const
     }
 }
 
+void infoDisplay::clearScreen()
+{
+    system("cls");
+}
 void infoDisplay::mainMenu()
 {
-    int select;
+    int sel;
     cout << "Welcome to the computer scientist database!";
     cout << "What would you like to do?" << endl;
 
@@ -35,12 +39,14 @@ void infoDisplay::mainMenu()
     cout << "2) Delete existing information. \n";
     cout << "3) Edit existing information. \n";
     cout << "4) Browse the list of computer scientists. \n";
-    cin >> select;
+    cout << "All other entries exit the program. \n";
+    cin >> sel;
     selectAction(sel);
 }
 
 void infoDisplay::selectAction(int sel)
 {
+
     switch(sel)
            {
            case 1:
@@ -61,7 +67,9 @@ void infoDisplay::selectAction(int sel)
                break;
            default:
                clearScreen();
-               cout << "Invalid choice, please try again." << endl;
+               cout << "Thank you, come again!." << endl;
+               exit(0);
+               break;
            }
 }
 

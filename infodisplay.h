@@ -10,6 +10,7 @@ public:
     infoDisplay();
     void printVector() const;
     void selectAction(int sel);
+    void clearScreen();
     void mainMenu();
     void splashScreen();
     void screenSelection();

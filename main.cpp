@@ -25,7 +25,8 @@ int main()
 
     infoDisplay display;
 
-    display.displayAddScientist();
+    display.mainMenu();
+    //display.displayAddScientist();
 
     return 0;
 }
