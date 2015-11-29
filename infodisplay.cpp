@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <vector>
 #include <stdio.h>
+#include <string>
 
 //new
 
@@ -92,13 +93,10 @@ void infoDisplay::screenSelection()
 
 void infoDisplay::AddScientist()
 {
-
-
     int selectedGender;
     bool wYLTContinue = true;
     //bool badInput = false;
     //bool quit = false;
-    bool badName = false;
 
     scientist sO;
 
@@ -106,6 +104,10 @@ void infoDisplay::AddScientist()
 
     while(wYLTContinue == true)
     {
+
+        clearScreen();
+        cout<<"Creating a new Scientist: "<<endl;
+        cout<<"======================================"<<endl;
 
         string name = " ", gender = " ", descr = " ", link = " ";
         int yob = 0, yod = 0;
@@ -116,7 +118,7 @@ void infoDisplay::AddScientist()
         yob = (addScientistYearOfBirth(yob));
 
 
-        bool addEvenMore = addScientistMore(yod, descr, link);
+        bool addEvenMore = true;
 
         while (addEvenMore == true)
         {
@@ -129,12 +131,12 @@ void infoDisplay::AddScientist()
         {
             changeInput = addScientistCheck(name,selectedGender,yob,yod,descr,link);
 
-            if (changeInput == true)
+            if (changeInput == false)
             {
                 addScientistChange(name,gender,yob,yod,descr,link,selectedGender);
             }
         }
-        while (changeInput == true);
+        while (changeInput == false);
 
 
         wYLTContinue = addScientistContinue();
@@ -237,6 +239,7 @@ bool infoDisplay::addScientistMore(int &yod, string &descr, string &link)
 
     cout<<"Add more fields? Y/N? ";
     bool addAnother = loopFunction();
+    cout<<"just before"<<endl;
     return addAnother;
 }
 
@@ -289,18 +292,10 @@ bool infoDisplay::addScientistCheck(string name, int gender, int yob, int yod, s
     cout<<"Link: "<<link<<endl<<endl;
 
     cout<<"Are you happy with this input ? Y/N:";
-    cin>>input;
 
-    (toupper(input));
+    bool cont = loopFunction();
 
-    if (input == 'Y')
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
+    return cont;
 }
 
 void infoDisplay::addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender)
@@ -337,19 +332,23 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
 
 bool infoDisplay::addScientistContinue()
 {
-    char input;
+    //char input;
     cout<<"Would you like to add more Scientists? Y/N: ";
-    cin>>input;
-    (toupper(input));
 
-    if (input == 'Y')
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    bool input = loopFunction();
+    return input;
+
+//    cin>>input;
+//    (toupper(input));
+
+//    if (input == 'Y')
+//    {
+//        return true;
+//    }
+//    else
+//    {
+//        return false;
+//    }
 }
 
 
@@ -401,13 +400,14 @@ bool infoDisplay::loopFunction()
 {
     char input;
     cin>>input;
-    (toupper(input));
+
+    input = (toupper(input));
 
     if (input == 'Y')
     {
         return true;
     }
-    else
+    else if (input == 'N')
     {
         return false;
     }
