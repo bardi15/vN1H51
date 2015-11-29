@@ -92,8 +92,7 @@ void infoDisplay::screenSelection()
 
 void infoDisplay::AddScientist()
 {
-    string name, gender, descr, link;
-    int yob = 0, yod = 0;
+
 
     int selectedGender;
     bool wYLTContinue = true;
@@ -105,46 +104,60 @@ void infoDisplay::AddScientist()
 
     workingclass workingobject;
 
-
-    name = (addScientistName(name));
-    selectedGender = addScientistGender(gender);
-
-    yob = (addScientistYearOfBirth(yob));
-
-    addScientistMore(yod, descr, link);
-    bool changeInput = false;
-
-    do
+    while(wYLTContinue == true)
     {
-        changeInput = addScientistCheck(name,selectedGender,yob,yod,descr,link);
 
-        if (changeInput == true)
+        string name = " ", gender = " ", descr = " ", link = " ";
+        int yob = 0, yod = 0;
+
+        name = (addScientistName(name));
+        selectedGender = addScientistGender(gender);
+
+        yob = (addScientistYearOfBirth(yob));
+
+
+        bool addEvenMore = addScientistMore(yod, descr, link);
+
+        while (addEvenMore == true)
         {
-            addScientistChange(name,gender,yob,yod,descr,link,selectedGender);
+            addEvenMore = addScientistMore(yod, descr, link);
         }
-    }
-    while (changeInput == true);
+
+        bool changeInput = false;
+
+        do
+        {
+            changeInput = addScientistCheck(name,selectedGender,yob,yod,descr,link);
+
+            if (changeInput == true)
+            {
+                addScientistChange(name,gender,yob,yod,descr,link,selectedGender);
+            }
+        }
+        while (changeInput == true);
 
 
-    wYLTContinue = addScientistContinue();
+        wYLTContinue = addScientistContinue();
 
-    sO.setName(name);
-    sO.setGender(selectedGender);
-    sO.setYearOfBirth(yob);
-    sO.setYearOfDeath(yod);
-    sO.setDescription(descr);
-    sO.setLink(link);
+        sO.setName(name);
+        sO.setGender(selectedGender);
+        sO.setYearOfBirth(yob);
+        sO.setYearOfDeath(yod);
+        sO.setDescription(descr);
+        sO.setLink(link);
 
-    vector<scientist> tempVector;
-    tempVector = workingobject.returnVector();
-    tempVector.push_back(sO);
-    workingobject.modifyVector(tempVector);
+        vector<scientist> tempVector;
+        tempVector = workingobject.returnVector();
+        tempVector.push_back(sO);
+        workingobject.modifyVector(tempVector);
+    };
+
     cout<<"output out of vector: "<<endl<<endl;
     workingobject.printVector();
 
 }
 
-string infoDisplay::addScientistName(string name)
+string infoDisplay::addScientistName(string &name)
 {
     workingclass workingobject;
     bool badName = false;
@@ -167,18 +180,24 @@ string infoDisplay::addScientistName(string name)
 
 }
 
-int infoDisplay::addScientistGender(string gender)
+int infoDisplay::addScientistGender(string &gender)
 {
     workingclass workingobject;
     int selectedGender;
     cout<<"Enter gender: ";
     cin>>gender;
+
+    for(unsigned int i = 0; i < gender.length(); ++i)
+    {
+        gender[i] = tolower(gender[i]);
+    }
+
     selectedGender = workingobject.genderCorrection(gender);
 
     return selectedGender;
 }
 
-int infoDisplay::addScientistYearOfBirth(int yob)
+int infoDisplay::addScientistYearOfBirth(int &yob)
 {
     workingclass workingobject;
     cout<<"Enter year of birth: ";
@@ -188,36 +207,40 @@ int infoDisplay::addScientistYearOfBirth(int yob)
     return yob;
 }
 
-void infoDisplay::addScientistMore(int &yod, string &descr, string &link)
+bool infoDisplay::addScientistMore(int &yod, string &descr, string &link)
 {
     workingclass workingobject;
 
     cout<<"1. Add year of Death, 2. Description, 3. "
           "Website link, everything else quits."<<endl;
 
-    int choice;
+    char choice;
     cin>>choice;
 
     switch(choice)
     {
-        case 1:
+        case '1':
         yod = addScientistYearOfDeath(yod);
         break;
 
-        case 2:
+        case '2':
         descr = addScientistDescription(descr);
         break;
 
-        case 3:
+        case '3':
         link = addScientistLink(link);
         break;
 
         default:
         cout<<"Nothing selected. "<<endl;
     }
+
+    cout<<"Add more fields? Y/N? ";
+    bool addAnother = loopFunction();
+    return addAnother;
 }
 
-int infoDisplay::addScientistYearOfDeath(int yod)
+int infoDisplay::addScientistYearOfDeath(int &yod)
 {
     workingclass workingobject;
     cout<<"Year of Death: ";
@@ -226,14 +249,14 @@ int infoDisplay::addScientistYearOfDeath(int yod)
     return yod;
 }
 
-string infoDisplay::addScientistDescription(string descr)
+string infoDisplay::addScientistDescription(string &descr)
 {
     cout<<"Description: ";
     cin>>descr;
     return descr;
 }
 
-string infoDisplay::addScientistLink(string link)
+string infoDisplay::addScientistLink(string &link)
 {
     cout<<"Website Link:";
     cin>>link;
@@ -246,6 +269,7 @@ bool infoDisplay::addScientistCheck(string name, int gender, int yob, int yod, s
     clearScreen();
     char input;
     cout<<"Current entry: "<<endl;
+    cout<<"======================================"<<endl;
     cout<<"Name: "<<name<<endl;
     if (gender == 0)
     {
@@ -262,7 +286,7 @@ bool infoDisplay::addScientistCheck(string name, int gender, int yob, int yod, s
     cout<<"Year of Birth: "<<yob<<endl;
     cout<<"Year of Death: "<<yod<<endl;
     cout<<"Description: "<<desc<<endl;
-    cout<<"Link: "<<link<<endl;
+    cout<<"Link: "<<link<<endl<<endl;
 
     cout<<"Are you happy with this input ? Y/N:";
     cin>>input;
@@ -277,8 +301,6 @@ bool infoDisplay::addScientistCheck(string name, int gender, int yob, int yod, s
     {
         return true;
     }
-
-
 }
 
 void infoDisplay::addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender)
@@ -316,7 +338,7 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
 bool infoDisplay::addScientistContinue()
 {
     char input;
-    cout<<"Would you like to continue? Y/N: ";
+    cout<<"Would you like to add more Scientists? Y/N: ";
     cin>>input;
     (toupper(input));
 
@@ -373,4 +395,20 @@ void infoDisplay::displaySearchScientist()
 void infoDisplay::quitProgram()
 {
 
+}
+
+bool infoDisplay::loopFunction()
+{
+    char input;
+    cin>>input;
+    (toupper(input));
+
+    if (input == 'Y')
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

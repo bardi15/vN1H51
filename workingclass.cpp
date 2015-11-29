@@ -184,6 +184,9 @@ string workingclass::nameCorrection(string name, bool& badName)
 
     for (unsigned int i = 0; i < name.length(); i++)
     {
+        name[i] = (tolower(name[i]));
+
+
         if ((i < MAXNAMELENGTH) && (i > 1))
         {
            spaceCount = (name.find(" ", i));

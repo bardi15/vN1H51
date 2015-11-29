@@ -15,13 +15,13 @@ public:
     void splashScreen();
     void screenSelection();
     void AddScientist();
-        string addScientistName(string name);
-        int addScientistGender(string gender);
-        int addScientistYearOfBirth(int yob);
-        void addScientistMore(int &yod, string &descr, string &link);
-        int addScientistYearOfDeath(int yod);
-        string addScientistDescription(string descr);
-        string addScientistLink(string link);
+        string addScientistName(string &name);
+        int addScientistGender(string &gender);
+        int addScientistYearOfBirth(int &yob);
+        bool addScientistMore(int &yod, string &descr, string &link);
+        int addScientistYearOfDeath(int &yod);
+        string addScientistDescription(string &descr);
+        string addScientistLink(string &link);
         bool addScientistCheck(string name, int gender, int yob, int yod, string desc, string link);
         void addScientistPushToVector(workingclass &workingobject, scientist sO);
         bool addScientistContinue();
@@ -30,6 +30,8 @@ public:
     void displayChangeScientist();
     void displaySearchScientist();
     void quitProgram();
+    bool loopFunction();
+
 };
 
 #endif // INFODISPLAY_H
