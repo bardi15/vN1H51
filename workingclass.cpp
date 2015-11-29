@@ -316,7 +316,12 @@ vector<scientist> workingclass::searchByYear(int& yr, char bORd, bool& isFound)
 {
     vector<scientist> v;
     scientist s;
-    yr = yearCorrection(yr);
+    bool error;
+    yr = yearCorrection(yr, error);
+    if (error)
+    {
+        return v;
+    }
     for(unsigned int i = 0; i < scientistVector.size(); i++)
     {
         if(bORd == 'b')

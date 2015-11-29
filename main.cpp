@@ -6,7 +6,7 @@
 
 
 using namespace std;
-void clearscreen();
+
 int main()
 {    
 //    workingclass jon;

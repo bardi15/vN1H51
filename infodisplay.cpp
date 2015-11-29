@@ -44,21 +44,18 @@ void infoDisplay::mainMenu()
     cout << "\t Welcome to the computer scientist database! \n";
     cout << "\t What would you like to do? \n";
     cout << endl;
-<<<<<<< HEAD
     cout << "\t 1) Add a new computer scientist. \n";
     cout << "\t 2) Delete existing information. \n";
     cout << "\t 3) Edit existing information. \n";
     //cout << "\t 4) Browse the list of computer scientists. \n";
     cout << "\t 4) Search for a computer scientists. \n";
     cout << "\t All other entries exit the program. \n";
-=======
     cout << "1) Add a new computer scientist. \n";
     cout << "2) Delete existing information. \n";
     cout << "3) Edit existing information. \n";
     cout << "4) Browse the list of computer scientists. \n";
     cout << "5) See a list of current scientists \n";
     cout << "All other entries exit the program. \n";
->>>>>>> origin/master
     cin >> sel;
     cin.ignore();
     selectAction(sel);
@@ -460,7 +457,6 @@ void infoDisplay::displaySearchScientist()
 
 }
 
-<<<<<<< HEAD
 void infoDisplay::searchSelection(int select)
 {
     workingclass work;
@@ -576,23 +572,20 @@ void infoDisplay::searchSelection(int select)
 }
 
 void infoDisplay::addEmtyLines(int numLines)
-=======
+{
+    do
+    {
+        cout << endl;
+        numLines--;
+    }while(numLines>0);
+}
+
 void infoDisplay::displayListOfScientists()
 {
     workingclass workingobject;
 
     cout<<"output out of vector: "<<endl<<endl;
     workingobject.printVector();
-}
-
-void infoDisplay::quitProgram()
->>>>>>> origin/master
-{
-    do
-    {
-        cout << endl;
-        numLines--;
-    }while(numLines > 0);
 }
 
 void infoDisplay::quitProgram()
@@ -625,9 +618,4 @@ bool infoDisplay::loopFunction()
     {
         return false;
     }
-
-<<<<<<< HEAD
-=======
-    return false;
->>>>>>> origin/master
 }
