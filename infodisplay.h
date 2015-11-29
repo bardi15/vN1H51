@@ -9,6 +9,7 @@ class infoDisplay
 public:
     infoDisplay();
     void printVector() const;
+    void selectAction(int sel);
     void mainMenu();
     void splashScreen();
     void screenSelection();

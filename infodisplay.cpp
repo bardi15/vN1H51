@@ -39,6 +39,31 @@ void infoDisplay::mainMenu()
     selectAction(sel);
 }
 
+void infoDisplay::selectAction(int sel)
+{
+    switch(sel)
+           {
+           case 1:
+               clearScreen();
+               displayAddScientist();
+               break;
+           case 2:
+               clearScreen();
+               displayRemoveScientist();
+               break;
+           case 3:
+               clearScreen();
+               displayChangeScientist();
+               break;
+           case 4:
+               clearScreen();
+               displaySearchScientist();
+               break;
+           default:
+               clearScreen();
+               cout << "Invalid choice, please try again." << endl;
+           }
+}
 
 infoDisplay::infoDisplay()
 {
