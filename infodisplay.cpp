@@ -239,7 +239,6 @@ bool infoDisplay::addScientistMore(int &yod, string &descr, string &link)
 
     cout<<"Add more fields? Y/N? ";
     bool addAnother = loopFunction();
-    cout<<"just before"<<endl;
     return addAnother;
 }
 
