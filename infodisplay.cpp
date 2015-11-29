@@ -24,6 +24,21 @@ void infoDisplay::printVector() const
     }
 }
 
+void infoDisplay::mainMenu()
+{
+    int select;
+    cout << "Welcome to the computer scientist database!";
+    cout << "What would you like to do?" << endl;
+
+    cout << "1) Add a new computer scientist. \n";
+    cout << "2) Delete existing information. \n";
+    cout << "3) Edit existing information. \n";
+    cout << "4) Browse the list of computer scientists. \n";
+    cin >> select;
+    selectAction(sel);
+}
+
+
 infoDisplay::infoDisplay()
 {
 
