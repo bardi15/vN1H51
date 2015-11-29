@@ -25,8 +25,12 @@ int main()
 
     infoDisplay display;
 
+    //infoDisplay display;
+
     display.mainMenu();
 
+
+    //display.AddScientist();
 
     return 0;
 }

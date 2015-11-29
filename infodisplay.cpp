@@ -2,10 +2,11 @@
 #include "infodisplay.h"
 #include "workingclass.h"
 #include <iostream>
-#include <fstream>
 #include <cstdlib>
 #include <vector>
 #include <stdio.h>
+
+//new
 
 using namespace std;
 
@@ -53,7 +54,7 @@ void infoDisplay::selectAction(int sel)
            {
            case 1:
                clearScreen();
-               displayAddScientist();
+               AddScientist();
                break;
            case 2:
                clearScreen();
@@ -74,7 +75,6 @@ void infoDisplay::selectAction(int sel)
                break;
            }
 }
-
 infoDisplay::infoDisplay()
 {
 
@@ -90,88 +90,232 @@ void infoDisplay::screenSelection()
 
 }
 
-void infoDisplay::displayAddScientist()
+void infoDisplay::AddScientist()
 {
-    string name, gender, yob, yod, descr, link;
+    cout<<endl;
+    string name, gender, descr, link;
+    int yob = 0, yod = 0;
 
-    int choice;
-    char wYLTContinue = 'Y';
-    bool badInput = true;
+    int selectedGender;
+    bool wYLTContinue = true;
+    bool badInput = false;
     bool quit = false;
-
-    workingclass workingobject;
-
-    workingobject.returnVector();
+    bool badName = false;
 
     scientist sO;
 
-    cout<<"Enter name: ";
-    cin>>name;
-    //sO.setName(name);
+    workingclass workingobject;
 
+
+    name = (addScientistName(name));
+    selectedGender = addScientistGender(gender);
+
+    yob = (addScientistYearOfBirth(yob));
+
+    addScientistMore(yod, descr, link);
+    bool changeInput = false;
+
+    do
+    {
+        changeInput = addScientistCheck(name,selectedGender,yob,yod,descr,link);
+
+        if (changeInput == true)
+        {
+            addScientistChange(name,gender,yob,yod,descr,link,selectedGender);
+        }
+    }
+    while (changeInput == true);
+
+
+    wYLTContinue = addScientistContinue();
+
+    sO.setName(name);
+    sO.setGender(selectedGender);
+    sO.setYearOfBirth(yob);
+    sO.setYearOfDeath(yod);
+    sO.setDescription(descr);
+    sO.setLink(link);
+
+    vector<scientist> tempVector;
+    tempVector = workingobject.returnVector();
+    tempVector.push_back(sO);
+    workingobject.modifyVector(tempVector);
+    cout<<"output out of vector: "<<endl<<endl;
+    workingobject.printVector();
+
+}
+
+string infoDisplay::addScientistName(string name)
+{
+    workingclass workingobject;
+
+    bool badName = false;
+    cout<<"Enter name: ";
+    //getline(cin, name);  <---- ÞARF AÐ LAGA!!!!!!!!!!!!!!!!!
+    cin>>name;
+    name = workingobject.nameCorrection(name, badName);
+    if (badName == true)
+    {
+        cout<<"bad name!"<<endl;
+    }
+    else
+    {
+        return name;
+    }
+
+}
+
+int infoDisplay::addScientistGender(string gender)
+{
+    workingclass workingobject;
+    int selectedGender;
     cout<<"Enter gender: ";
     cin>>gender;
-    //sO.setGender(gender);
+    selectedGender = workingobject.genderCorrection(gender);
 
+    return selectedGender;
+}
+
+int infoDisplay::addScientistYearOfBirth(int yob)
+{
+    workingclass workingobject;
     cout<<"Enter year of birth: ";
     cin>>yob;
-    //sO.setYearOfBirth(yob);
+    yob = workingobject.yearCorrection(yob);
 
-    cout<<"Would you like to add more information?: "<<endl;
+    return yob;
+}
 
-
-    while (badInput == true)
-    {
+void infoDisplay::addScientistMore(int &yod, string &descr, string &link)
+{
+    workingclass workingobject;
 
     cout<<"1. Add year of Death, 2. Description, 3. "
           "Website link, everything else quits."<<endl;
 
+    int choice;
     cin>>choice;
 
-        switch(choice)
-        {
-            case 1:
-            cout<<"Year of Death: ";
-            cin>>yod;
-            //sO.setYearOfDeath(yod);
-            break;
+    switch(choice)
+    {
+        case 1:
+        yod = addScientistYearOfDeath(yod);
+        break;
 
-            case 2:
-            cout<<"Description: ";
-            cin>>descr;
-            //sO.setDescription(descr);
-            break;
+        case 2:
+        descr = addScientistDescription(descr);
+        break;
 
-            case 3:
-            cout<<"Website Link:";
-            cin>>link;
-            //sO.setLink(link);
-            break;
+        case 3:
+        link = addScientistLink(link);
+        break;
 
-            default:
-            quit = true;
-            badInput = false;
-        }
+        default:
+        cout<<"Nothing selected. "<<endl;
+    }
+}
 
-        if (quit == false)
-        {
-            cout<<"Would you like to continue? Y/N: ";
-            cin>>wYLTContinue;
-            (toupper(wYLTContinue));
+int infoDisplay::addScientistYearOfDeath(int yod)
+{
+    workingclass workingobject;
+    cout<<"Year of Death: ";
+    cin>>yod;
+    yod = workingobject.yearCorrection(yod);
+    return yod;
+}
 
-            if (wYLTContinue == 'Y')
-            {
-                badInput = true;
-            }
-            else
-            {
-                badInput = false;
-            }
-        }
+string infoDisplay::addScientistDescription(string descr)
+{
+    cout<<"Description: ";
+    cin>>descr;
+    return descr;
+}
+
+string infoDisplay::addScientistLink(string link)
+{
+    cout<<"Website Link:";
+    cin>>link;
+    return link;
+}
+
+
+bool infoDisplay::addScientistCheck(string name, int gender, int yob, int yod, string desc, string link)
+{
+    char input;
+    cout<<"Current entry: "<<endl;
+    cout<<"Name: "<<name<<endl;
+    cout<<"Gender: "<<gender<<endl;
+    cout<<"Year of Birth: "<<yob<<endl;
+    cout<<"Year of Death: "<<yod<<endl;
+    cout<<"Description: "<<desc<<endl;
+    cout<<"Link: "<<link<<endl;
+
+    cout<<"Are you happy with this input ? Y/N:";
+    cin>>input;
+
+    (toupper(input));
+
+    if (input == 'Y')
+    {
+        return false;
+    }
+    else
+    {
+        return true;
     }
 
-    cout<<"finished!!!!!!!";
+
 }
+
+void infoDisplay::addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender)
+{
+    int input = 0;
+    cout<<"What would you like to change? Choose: "<<endl;
+    cout<<"1. Name, 2. Gender, 3. Year of Birth, 4. "
+          "Year of Death, 5. Description, 6. Link"<<endl;
+    cin>>input;
+
+    switch (input)
+    {
+    case 1:
+        name = addScientistName(name);
+        break;
+    case 2:
+        selectedGender = addScientistGender(gender);
+        break;
+    case 3:
+        yob = addScientistYearOfBirth(yob);
+        break;
+    case 4:
+        yod = addScientistYearOfDeath(yod);
+        break;
+    case 5:
+        desc = addScientistDescription(desc);
+        break;
+    case 6:
+        link = addScientistLink(link);
+        break;
+    }
+}
+
+bool infoDisplay::addScientistContinue()
+{
+    char input;
+    cout<<"Would you like to continue? Y/N: ";
+    cin>>input;
+    (toupper(input));
+
+    if (input == 'Y')
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+
 
 void infoDisplay::displayRemoveScientist()
 {

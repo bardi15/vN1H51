@@ -6,9 +6,12 @@
 #include <cstdlib>
 #include <stdlib.h>
 #include <string>
+#include <vector>
+#include <algorithm>
 
 const string WORKFILE = "Scientistinfo.txt";
 const int MAXFIELDS = 6;
+const int MAXNAMELENGTH = 30;
 
 workingclass::workingclass()
 {
@@ -110,10 +113,7 @@ void workingclass::createScientist(string& line, int& oldfind)
     }
 }
 
-void workingclass::sortList()
-{
 
-}
 
 void workingclass::printVector() const
 {
@@ -123,7 +123,7 @@ void workingclass::printVector() const
         cout << "Nafn: " << scientistVector[i].getName() << endl;
         cout << "kyn: " << scientistVector[i].getGender() << endl;
         cout << "fd: " << scientistVector[i].getYearOfBirth() << endl;
-        cout << "dd: " << scientistVector[i].getYearOfBirth() << endl;
+        cout << "dd: " << scientistVector[i].getYearOfDeath() << endl;
         cout << "descr: " << scientistVector[i].getDescription() << endl;
         cout << "url: " << scientistVector[i].getLink() << endl;
         cout << endl;
@@ -166,25 +166,99 @@ void workingclass::fillScientist(string text, scientist& s, const int field)
     }
 }
 
-
 vector<scientist> workingclass::returnVector ()
 {
     return scientistVector;
 }
 
-string workingclass::nameCorrection(string name)
+void workingclass::modifyVector(vector<scientist> mVector)
 {
+    scientistVector = mVector;
+}
+
+string workingclass::nameCorrection(string name, bool& badName)
+{
+    int spaceCount = 0;
+    vector<int> spacePositions;
+    badName = false;
+
+    for (unsigned int i = 0; i < name.length(); i++)
+    {
+        if ((i < MAXNAMELENGTH) && (i > 1))
+        {
+           spaceCount = (name.find(" ", i));
+        }
+
+        if (find(spacePositions.begin(), spacePositions.end(), spaceCount) ==
+                spacePositions.end())
+        {
+            if (spaceCount != 0)
+            {
+                spacePositions.push_back(spaceCount);
+            }
+        }
+
+        if (string::npos != name.find_first_of("0123456789"))
+        {
+            badName = true;
+        }
+        else
+        {
+            badName = false;
+        }
+    }
+
+    for (unsigned int i = 0; i < spacePositions.size(); i++)
+    {
+        int spacePos = spacePositions.at(i) + 1;
+        name[spacePos] = toupper(name[spacePos]);
+    }
+
     return name;
 }
 
 int workingclass::genderCorrection(string gender)
 {
-    int gen = (atoi(gender.c_str()));
-    return gen;
+
+    string male[14] = {"karlmadur", "karlkyns", "karl", "kk", "male", "man", "guy", "bro",
+                      "kall", "gaur", "dude", "sjomli", "strakur", "piltur"};
+
+    vector<string> maleVector (male, male + sizeof(male) / sizeof(male[0]));
+
+    string female[12] = {"kona", "kvenmadur", "kvenkyns", "kvk", "stelpa", "female", "stulka",
+                        "kerling", "lady", "woman", "girl", "gal"};
+
+    vector<string> femaleVector (female, female + sizeof(female) / sizeof(female[0]));
+
+    bool isMale = find(maleVector.begin(), maleVector.end(), gender) != maleVector.end();
+    bool isFemale = find(femaleVector.begin(), femaleVector.end(), gender) != femaleVector.end();
+
+    if (isMale == true)
+    {
+        return 0;
+    }
+
+    else if (isFemale == true)
+    {
+        return 1;
+    }
+    else
+    {
+        return 2;
+    }
 }
 
-int workingclass::yearCorrection(string year)
+int workingclass::yearCorrection(int year)
 {
-    int yea = (atoi(year.c_str()));
-    return yea;
+    int tempYear = year;
+    if ((tempYear >= 20) && (tempYear < 100))
+    {
+        tempYear += 1900;
+    }
+    else if ((tempYear >= 0) && (tempYear < 20))
+    {
+        tempYear += 2000;
+    }
+
+    return tempYear;
 }
