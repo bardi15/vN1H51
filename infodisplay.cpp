@@ -2,6 +2,7 @@
 #include "infodisplay.h"
 #include "workingclass.h"
 #include <iostream>
+#include <fstream>
 #include <cstdlib>
 #include <vector>
 #include <stdio.h>
@@ -29,12 +30,13 @@ void infoDisplay::clearScreen()
 {
     system("cls");
 }
+
 void infoDisplay::mainMenu()
 {
     int sel;
-    cout << "Welcome to the computer scientist database!";
-    cout << "What would you like to do?" << endl;
-
+    cout << "Welcome to the computer scientist database! \n";
+    cout << "What would you like to do? \n";
+    cout << endl;
     cout << "1) Add a new computer scientist. \n";
     cout << "2) Delete existing information. \n";
     cout << "3) Edit existing information. \n";
@@ -178,7 +180,30 @@ void infoDisplay::displayRemoveScientist()
 
 void infoDisplay::displayChangeScientist()
 {
+    string name; //, age, yob, yod, descr, link;
+    //char y = 1, n = 0;
+    int choice = 0;
 
+    cout << "Enter the name of the scientist you would like to edit: ";
+    cin >> name;
+
+    cout << "Which part of " << name <<"'s profile would you like to edit? \n";
+    cout << endl;
+    cout << "1) The name. \n";
+    cout << "2) Year of birth. \n";
+    cout << "3) Year of untimely demise(Should it apply). \n";
+    cout << "4) Description. \n";
+    cout << "5) Change the link. \n";
+    cout << "Any other entrie returns to the main menu. \n";
+    cin >> choice;
+
+    switch(choice)
+    {
+        default:
+            clearScreen();
+            mainMenu();
+            break;
+    }
 }
 
 void infoDisplay::displaySearchScientist()

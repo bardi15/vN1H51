@@ -110,7 +110,10 @@ void workingclass::createScientist(string& line, int& oldfind)
     }
 }
 
+void workingclass::sortList()
+{
 
+}
 
 void workingclass::printVector() const
 {
@@ -162,6 +165,7 @@ void workingclass::fillScientist(string text, scientist& s, const int field)
         break;
     }
 }
+
 
 vector<scientist> workingclass::returnVector ()
 {
