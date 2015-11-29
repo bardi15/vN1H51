@@ -160,3 +160,8 @@ void workingclass::fillScientist(string text, scientist& s, const int field)
         break;
     }
 }
+
+vector<scientist> workingclass::returnVector ()
+{
+    return scientistVector;
+}

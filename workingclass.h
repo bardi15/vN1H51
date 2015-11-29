@@ -26,6 +26,7 @@ public:
     void fillScientist(string text, scientist& s, const int field);
     void createScientist(string& line, int& oldfind);
     void printVector() const;
+    vector<scientist> returnVector ();
 
 private:
     vector<scientist> scientistVector;

@@ -9,8 +9,12 @@ using namespace std;
 
 void infoDisplay::printVector() const
 {
-    for(unsigned int i = 0; i < scientistVector.size(); i++){
-        scientist s = scientistVector.at(i);
+    workingclass worker;
+
+    vector<scientist> tempVector = worker.returnVector();
+
+    for(unsigned int i = 0; i < tempVector.size(); i++){
+        scientist s = tempVector.at(i);
     cout << s.getName();
     cout << s.getGender();
     cout << s.getYearOfBirth();
@@ -18,7 +22,6 @@ void infoDisplay::printVector() const
     cout << s.getDescription();
     cout << s.getLink();
     }
-
 }
 
 infoDisplay::infoDisplay()
