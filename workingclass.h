@@ -31,6 +31,9 @@ public:
     string nameCorrection(string name, bool& badName);
     int genderCorrection(string gender);
     int yearCorrection(int year);
+    vector<scientist> searchByName(string subName, bool& isFound);
+    vector<scientist> searchByGender(string sex, bool& isFound);
+    vector<scientist> searchByYear(int& yr, char bORd, bool& isFound);
 
 
 private:

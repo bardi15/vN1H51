@@ -36,14 +36,17 @@ void infoDisplay::clearScreen()
 void infoDisplay::mainMenu()
 {
     int sel;
-    cout << "Welcome to the computer scientist database! \n";
-    cout << "What would you like to do? \n";
+    clearScreen();
+    addEmtyLines(5);
+    cout << "\t Welcome to the computer scientist database! \n";
+    cout << "\t What would you like to do? \n";
     cout << endl;
-    cout << "1) Add a new computer scientist. \n";
-    cout << "2) Delete existing information. \n";
-    cout << "3) Edit existing information. \n";
-    cout << "4) Browse the list of computer scientists. \n";
-    cout << "All other entries exit the program. \n";
+    cout << "\t 1) Add a new computer scientist. \n";
+    cout << "\t 2) Delete existing information. \n";
+    cout << "\t 3) Edit existing information. \n";
+    //cout << "\t 4) Browse the list of computer scientists. \n";
+    cout << "\t 4) Search for a computer scientists. \n";
+    cout << "\t All other entries exit the program. \n";
     cin >> sel;
     selectAction(sel);
 }
@@ -71,7 +74,9 @@ void infoDisplay::selectAction(int sel)
                break;
            default:
                clearScreen();
+               addEmtyLines(10);
                cout << "Thank you, come again!." << endl;
+               addEmtyLines(10);
                exit(0);
                break;
            }
@@ -212,7 +217,7 @@ int infoDisplay::addScientistYearOfBirth(int &yob)
 bool infoDisplay::addScientistMore(int &yod, string &descr, string &link)
 {
     workingclass workingobject;
-
+    addEmtyLines(2);
     cout<<"1. Add year of Death, 2. Description, 3. "
           "Website link, everything else quits."<<endl;
 
@@ -270,7 +275,7 @@ string infoDisplay::addScientistLink(string &link)
 bool infoDisplay::addScientistCheck(string name, int gender, int yob, int yod, string desc, string link)
 {
     clearScreen();
-    char input;
+    //char input;
     cout<<"Current entry: "<<endl;
     cout<<"======================================"<<endl;
     cout<<"Name: "<<name<<endl;
@@ -302,6 +307,7 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
 {
     clearScreen();
     int input = 0;
+    addEmtyLines(5);
     cout<<"What would you like to change? Choose: "<<endl;
     cout<<"1. Name, 2. Gender, 3. Year of Birth, 4. "
           "Year of Death, 5. Description, 6. Link"<<endl;
@@ -333,6 +339,7 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
 bool infoDisplay::addScientistContinue()
 {
     //char input;
+    addEmtyLines(1);
     cout<<"Would you like to add more Scientists? Y/N: ";
 
     bool input = loopFunction();
@@ -388,13 +395,163 @@ void infoDisplay::displayChangeScientist()
 
 void infoDisplay::displaySearchScientist()
 {
+    int sel;
+    addEmtyLines(5);
+    cout << "= = = = = M e n u  f o r  S e a r c h = = = = = " << endl;
+    cout << "Enter \"1\" to search by name or part of name." << endl;
+    addEmtyLines(1);
+    cout << "Enter \"2\" to search by gender." << endl;
+    addEmtyLines(1);
+    cout << "Enter \"3\" to search by year of birth." << endl;
+    addEmtyLines(1);
+    cout << "Enter \"4\" to search by year of death." << endl;
+    addEmtyLines(1);
+    cout << "Enter \"5\" to return to main menu." << endl;
+    addEmtyLines(1);
+    cout << "= = = = = = = = = = = = = = = = = = = = = = = ";
+    addEmtyLines(2);
+    cout << "Enter your selection: ";
+    cin >> sel;
+    searchSelection(sel);
+    mainMenu();
 
+}
+
+void infoDisplay::searchSelection(int select)
+{
+    workingclass work;
+    //infoDisplay disp;
+    char cont;
+
+    switch (select)
+    {
+    case 1:
+
+        do
+        {
+            string tempName;
+            bool found = false;
+
+            clearScreen();
+            cout << "Please enter a part of the name you would like to find: " << endl;
+            cin >> tempName;
+            work.searchByName(tempName, found);
+            if( found == true)
+            {
+                work.printVector();
+                cont = 'N';
+            }
+            else
+            {
+                cout << "Nothing found! - Do you want to try again? (Y/N): ";
+                cin >> cont;
+            }
+        }while(toupper(cont) == 'Y');
+        break;
+    case 2:
+        do
+        {
+            string tempGender;
+            bool found = false;
+
+            clearScreen();
+            cout << "Please enter the gender you would like to see: " << endl;
+            cin >> tempGender;
+            work.searchByGender(tempGender, found);
+            if( found == true)
+            {
+                work.printVector();
+                cont = 'N';
+            }
+            else
+            {
+                cout << "Nothing found! - Do you want to try again? (Y/N): ";
+                cin >> cont;
+            }
+        }while(toupper(cont) == 'Y');
+
+        break;
+    case 3:
+        do
+        {
+            int yr;
+            bool found = false;
+
+            clearScreen();
+            cout << "Please enter the year you would like to search for: " << endl;
+            cin >> yr;
+            work.searchByYear(yr, 'b', found);
+            if( found == true)
+            {
+                work.printVector();
+                cont = 'N';
+            }
+            else
+            {
+                cout << "Nothing found! - Do you want to try again? (Y/N): ";
+                cin >> cont;
+            }
+
+        }while(toupper(cont) == 'Y');
+        break;
+    case 4:
+        do
+        {
+            int yr;
+            bool found = false;
+
+            clearScreen();
+            cout << "Please enter the year you would like to search for: " << endl;
+            cin >> yr;
+            work.searchByYear(yr, 'd', found);
+            if( found == true)
+            {
+                work.printVector();
+                cont = 'N';
+            }
+            else
+            {
+                cout << "Nothing found! - Do you want to try again? (Y/N): ";
+                cin >> cont;
+            }
+
+        }while(toupper(cont) == 'Y');
+        break;
+    case 5:
+        clearScreen();
+        mainMenu();
+        break;
+    default:
+        addEmtyLines(5);
+        cout << "Illigal selection!!" << endl;
+        cout << "Returning to Search menu" << endl;
+        sleep(3);
+        displaySearchScientist();
+        break;
+    }
+}
+
+void infoDisplay::addEmtyLines(int numLines)
+{
+    do
+    {
+        cout << endl;
+        numLines--;
+    }while(numLines > 0);
 }
 
 void infoDisplay::quitProgram()
 {
-
+    char ans;
+    cout << "Are you sure you want to quit?  (Y/N): ";
+    cin >> ans;
+    if (toupper(ans) == 'Y')
+    {
+        exit(0);
+    }
+    mainMenu();
 }
+
 
 bool infoDisplay::loopFunction()
 {
@@ -407,8 +564,9 @@ bool infoDisplay::loopFunction()
     {
         return true;
     }
-    else if (input == 'N')
+    else //if (input == 'N')
     {
         return false;
     }
+
 }

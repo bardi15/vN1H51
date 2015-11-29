@@ -265,3 +265,64 @@ int workingclass::yearCorrection(int year)
 
     return tempYear;
 }
+
+vector<scientist> workingclass::searchByName(string subName, bool& isFound)
+{
+    vector<scientist> v;
+    scientist s;
+    for(unsigned int i = 0; i < scientistVector.size(); i++)
+    {
+        if(scientistVector.at(i).getName() == subName)
+       {
+            s = scientistVector.at(i);
+            v.push_back(s);
+            isFound = true;
+       }
+    }
+    return v;
+}
+
+vector<scientist> workingclass::searchByGender(string sex, bool& isFound)
+{
+    vector<scientist> v;
+    scientist s;
+    int tempGender = genderCorrection(sex);
+
+    for(unsigned int i = 0; i < scientistVector.size(); i++)
+    {
+        if(scientistVector.at(i).getGender() == tempGender)
+       {
+            s = scientistVector.at(i);
+            v.push_back(s);
+            isFound = true;
+       }
+    }
+    return v;
+}
+
+vector<scientist> workingclass::searchByYear(int& yr, char bORd, bool& isFound)
+{
+    vector<scientist> v;
+    scientist s;
+    yr = yearCorrection(yr);
+    for(unsigned int i = 0; i < scientistVector.size(); i++)
+    {
+        if(bORd == 'b')
+        {
+           if(scientistVector.at(i).getYearOfBirth() == yr)
+           {
+                s = scientistVector.at(i);
+                v.push_back(s);
+                isFound = true;
+           }
+        }
+        else if(scientistVector.at(i).getYearOfDeath() == yr)
+        {
+            s = scientistVector.at(i);
+            v.push_back(s);
+            isFound = true;
+        }
+    }
+    return v;
+}
+
