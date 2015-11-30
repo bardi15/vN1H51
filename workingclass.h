@@ -50,9 +50,7 @@ public:
         void addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender);
 
 
-    void removeScientist(scientist s);
-    void add(scientist s);
-    void save();
+    void removeScientist(string s);
     void write(scientist s);
     void update(scientist s, scientist &replace);
     void printVector() const;

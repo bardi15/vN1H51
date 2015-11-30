@@ -138,22 +138,34 @@ void workingclass::createScientist(string& line, int& oldfind)
     }
 }
 
-//void workingclass::add(scientist s){
-//    scientistVector.push_back(s);
-//    write(s);
-//}
 
 
-//void workingclass::removeScientist(scientist s){
 
-//    for(unsigned int i = 0; i < scientistVector.size(); i++){
-//        if(scientistVector[i] == s){
-//            scientistVector.erase(scientistVector.begin() + i);
-//            break;
-//        }
-//    }
-//    save();
-//}
+void workingclass::removeScientist(string s){
+    readFile();
+    for(unsigned int j = 0; j < scientistVector.size(); j++){
+        if(scientistVector[j].getName() == s){
+            scientistVector.erase(scientistVector.begin() + j);
+              cout << s << " has been removed " << endl;
+              ofstream newFile("Scientistinfo.txt");
+              if(newFile.is_open()){
+                  for(unsigned int i = 0; i < scientistVector.size()-1; i++){
+                      newFile << scientistVector[i].getName() << ";" <<
+                                 scientistVector[i].getGender() << ";" <<
+                                 scientistVector[i].getYearOfBirth() << ";" <<
+                                 scientistVector[i].getYearOfDeath() << ";" <<
+                                 scientistVector[i].getDescription() << ";" <<
+                                 scientistVector[i].getLink() << endl;
+                  }
+              }else {
+                  cout << "can't open file";
+              }
+              break;
+        }
+   }
+
+}
+
 
 //void workingclass::update(scientist s, scientist &replace){
 //    //Searches for the name and removes it from the vector.
