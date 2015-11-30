@@ -36,21 +36,46 @@ void workingclass::readFile()
     skra_inn.close();
 
 }
-void workingclass::addLineToFile(string& outstring) const
+void workingclass::VectorToFile(vector<scientist>& v, char AppOver) const
 {
+    for(unsigned int i = 0; i < v.size(); i++)
+    {
+        if(toupper(AppOver) == 'A')
+        {
+            addLineToFile(v.at(i), 'A');
+        }
+        else
+        {
+            addLineToFile(v.at(i), 'O');
+        }
+    }
+}
+void workingclass::addLineToFile(scientist& s, char AppOver) const
+{
+
+
+    string outstring;
     ofstream file_out;
-    file_out.open(WORKFILE.c_str(), ios::app);
+    if (toupper(AppOver) == 'A')
+    {
+        file_out.open(WORKFILE.c_str(), ios::app);
+    }
+    else if (toupper(AppOver) == 'O')
+    {
+        file_out.open(WORKFILE.c_str());
+    }
     if(file_out.fail())
     {
         cout << "error opening addToFile file";
         exit(1);
     }
+    outstring = scientistToString(s);
     file_out << outstring;
     file_out.close();
 
 }
 
-string workingclass::scientistToFile( scientist s) const
+string workingclass::scientistToString(scientist& s) const
 {
     string nextline;
     nextline += s.getName();

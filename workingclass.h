@@ -24,8 +24,8 @@ public:
     void readFile();
     void addToFile();
     void readLinesFromFile(ifstream& fileWithLines);
-    void addLineToFile(string& outstring) const;
-    string scientistToFile( scientist s) const;
+    void addLineToFile(scientist& s, char AppOver) const;
+    void VectorToFile(vector<scientist>& v, char AppOver) const;
 //    vector<scientist> getVector();
     void pushToVector(scientist s);
     void fillScientist(string text, scientist& s, const int field);
@@ -42,6 +42,9 @@ public:
     int yearCorrection(int year, bool &errorInYear);
 
 private:
+    string scientistToString(scientist& s) const;
+    //  Precondition:   Takes in a scientist s.
+    //  Postcondition:
     vector<scientist> scientistVector;
 };
 
