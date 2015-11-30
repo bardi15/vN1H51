@@ -28,8 +28,7 @@ int main()
 
     //infoDisplay display;
 
-    display.mainMenu();
-
+    display.splashScreen();
 
     //display.AddScientist();
 

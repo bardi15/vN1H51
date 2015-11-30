@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include <sstream>
 #include <time.h>
+#include "opengreeting.h"
+
 
 //new
 
@@ -55,6 +57,7 @@ void infoDisplay::mainMenu()
     //cout << "\t 4) Browse the list of computer scientists. \n";
     cout << "\t 4) Search for a computer scientists. \n";
     cout << "\t 5) Print list of computer scientists. \n";
+    cout << "\t 6) Play greeting. \n";
     cout << "\t All other entries exit the program. \n";
     cin >> sel;
     cin.ignore();
@@ -64,36 +67,40 @@ void infoDisplay::mainMenu()
 void infoDisplay::selectAction(int sel)
 {
     switch(sel)
-           {
-           case 1:
-               clearScreen();
-               AddScientist();
-               break;
-           case 2:
-               clearScreen();
-               displayRemoveScientist();
-               break;
-           case 3:
-               clearScreen();
-               displayChangeScientist();
-               break;
-           case 4:
-               clearScreen();
-               displaySearchScientist();
-               break;
-            case 5:
-               clearScreen();
-               displayListOfScientists();
-               break;
+        {
+        case 1:
+            clearScreen();
+            AddScientist();
+            break;
+        case 2:
+            clearScreen();
+            displayRemoveScientist();
+            break;
+        case 3:
+            clearScreen();
+            displayChangeScientist();
+            break;
+        case 4:
+            clearScreen();
+            displaySearchScientist();
+            break;
+        case 5:
+            clearScreen();
+            displayListOfScientists();
+            break;
+        case 6:
+            clearScreen();
+            splashScreen();
+            break;
 
-           default:
-               clearScreen();
-               addEmtyLines(10);
-               cout << "Thank you, come again!." << endl;
-               addEmtyLines(10);
-               exit(0);
-               break;
-           }
+        default:
+            clearScreen();
+            addEmtyLines(10);
+            cout << "Thank you, come again!." << endl;
+            addEmtyLines(10);
+            exit(0);
+            break;
+       }
 }
 infoDisplay::infoDisplay()
 {
@@ -102,7 +109,10 @@ infoDisplay::infoDisplay()
 
 void infoDisplay::splashScreen()
 {
+    opengreeting greet;
 
+    greet.greetingPost();
+    mainMenu();
 }
 
 void infoDisplay::screenSelection()
