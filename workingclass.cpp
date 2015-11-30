@@ -396,6 +396,46 @@ vector<scientist> workingclass::searchByYear(int& yr, char bORd, bool& isFound)
     return v;
 }
 
+bool AlphComp(scientist a, scientist b)
+{
+    return a.getName() > b.getName();
+}
+
+bool RevAlphComp(scientist a, scientist b)
+{
+    return a.getName() < b.getName();
+}
+
+bool DB_Comp(scientist a, scientist b)
+{
+    return a.getYearOfBirth() > b.getYearOfBirth();
+}
+
+bool DD_Comp(scientist a, scientist b)
+{
+    return a.getYearOfDeath() > b.getYearOfDeath();
+}
+
+void workingclass::sortAlph()
+{
+    sort(scientistVector.begin(), scientistVector.end(), AlphComp);
+}
+
+void workingclass::sortRevAlph()
+{
+    sort(scientistVector.begin(), scientistVector.end(), RevAlphComp);
+}
+
+void workingclass::sortYOB()
+{
+   sort(scientistVector.begin(), scientistVector.end(), DB_Comp);
+}
+
+void workingclass::sortYOD()
+{
+    sort(scientistVector.begin(), scientistVector.end(), DD_Comp);
+}
+
 void workingclass::AddScientist()
 {
     int selectedGender;

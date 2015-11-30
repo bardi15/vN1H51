@@ -15,6 +15,7 @@ public:
     //void screenSelection();
     void selectAction(int sel);
     void searchSelection(int select);
+    void chooseSortion(int choice);
 
 
 

@@ -555,6 +555,25 @@ void infoDisplay::displaySearchScientist()
 
 }
 
+void infoDisplay::displaySortOptions()
+{
+    service servant;
+    int choice;
+
+    cout << "How would you like the list to be sorted? \n";
+    addEmtyLines(1);
+    cout << "1) In alphabetical order. \n";
+    cout << "2) In reverse alphabetical order. \n";
+    cout << "3) By year of birth. \n";
+    cout << "4) By year of death. \n";
+    cout << "Enter any other key to return to the main menu. \n";
+    addEmtyLines(1);
+    cout << "Input choice here: ";
+    cin >> choice;
+    servant.chooseSortion(choice);
+
+}
+
 
 
 void infoDisplay::addEmtyLines(int numLines)

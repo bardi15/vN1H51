@@ -47,6 +47,10 @@ public:
         bool addScientistContinue();
         void addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender);
 
+    void sortAlph();
+    void sortRevAlph();
+    void sortYOB();
+    void sortYOD();
 
     void removeScientist(scientist s);
     void add(scientist s);

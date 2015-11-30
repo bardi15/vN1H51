@@ -164,3 +164,34 @@ void service::searchSelection(int select)
         break;
     }
 }
+
+void service::chooseSortion(int choice)
+{
+    workingclass Wobj;
+    infoDisplay display;
+
+    switch(choice)
+    {
+        case 1:
+            display.clearScreen();
+            Wobj.sortAlph();
+            break;
+        case 2:
+            display.clearScreen();
+            Wobj.sortRevAlph();
+            break;
+        case 3:
+            display.clearScreen();
+            Wobj.sortYOB();
+            break;
+        case 4:
+            display.clearScreen();
+            Wobj.sortYOD();
+        default:
+            display.clearScreen();
+            display.mainMenu();
+            break;
+    }
+
+
+}
