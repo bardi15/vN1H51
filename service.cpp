@@ -7,6 +7,16 @@ service::service()
 {
 
 }
+vector<scientist> service::getWCVector()
+{
+    workingclass wc;
+    return wc.getVector();
+}
+void service::setWCVector(vector<scientist>& v)
+{
+    workingclass wc;
+    wc.setVector(v);
+}
 
 void service::selectAction(int sel)
 {

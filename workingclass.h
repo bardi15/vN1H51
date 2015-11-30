@@ -23,6 +23,8 @@ class workingclass
 {
 public:
     workingclass();
+    vector<scientist> getVector();
+    void setVector(vector<scientist>& v);
     void selectAction(int sel);
     void readFile();
     void addToFile();
@@ -52,9 +54,7 @@ public:
     void sortYOB();
     void sortYOD();
 
-    void removeScientist(scientist s);
-    void add(scientist s);
-    void save();
+    void removeScientist(string s);
     void write(scientist s);
     void update(scientist s, scientist &replace);
     void printVector() const;
