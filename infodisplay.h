@@ -29,6 +29,8 @@ public:
     void displayOneScientist(scientist& s);
     void displayList(vector<scientist>& v);
     void moreInfoOnScientist(vector<scientist>& v);  //Á þetta kannski heima í service?
+    void dispScientistToEdit(vector<scientist>& v);
+    void dispSelectScientistToDelete(vector<scientist>& v);
 //    void screenSelection();
 
 //    void AddScientist();

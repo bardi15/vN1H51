@@ -50,6 +50,36 @@ void infoDisplay::moreInfoOnScientist(vector<scientist>& v)
         displayOneScientist(v.at(sel-1));
     }
 }
+void infoDisplay::dispSelectScientistToDelete(vector<scientist>& v)
+{
+    int sel;
+    cout << "\tWhich scientist would you like delete?" << endl;
+    cout << "\tPlease enter your choise, or 0 (zero) to quit: ";
+    cin >> sel;
+    if(sel == 0)
+    {
+        mainMenu();
+    }
+    else
+    {
+        displayOneScientist(v.at(sel-1));
+    }
+}
+void infoDisplay::dispScientistToEdit(vector<scientist>& v)
+{
+    int sel;
+    cout << "\tWhich scientist would you like edit?" << endl;
+    cout << "\tPlease enter your choise, or 0 (zero) to quit: ";
+    cin >> sel;
+    if(sel == 0)
+    {
+        mainMenu();
+    }
+    else
+    {
+        displayOneScientist(v.at(sel-1));
+    }
+}
 
 void infoDisplay::displayOneScientist(scientist& s)
 {
