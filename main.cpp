@@ -23,12 +23,12 @@ int main()
 //    clearscreen();
 //    jon.printVector();
 
+
     infoDisplay display;
 
     //infoDisplay display;
 
-    display.mainMenu();
-
+    display.splashScreen();
 
     //display.AddScientist();
 

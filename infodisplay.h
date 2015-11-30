@@ -16,22 +16,19 @@ public:
     void splashScreen();
     void screenSelection();
     void AddScientist();
-    //int addScientistYearOfBirth(int &yob);
-    int addScientistYearOfDeath(int &yod);
-    //bool addScientistCheck(string name, int gender, int yob, int yod, string desc, string link);
-    //void addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender);
-    void searchSelection(int select);
-    string addScientistName(string &name);
-    int addScientistGender(string &gender);
-    int addScientistYearOfBirth();
-    bool addScientistMore(int &yod, string &descr, string &link);
-    int addScientistYearOfDeath();
-    string addScientistDescription(string &descr);
-    string addScientistLink(string &link);
-    bool addScientistCheck(string name, int gender, int yob, int yod, string desc, string link);
-    void addScientistPushToVector(workingclass &workingobject, scientist sO);
-    bool addScientistContinue();
-    void addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender);
+        int addScientistYearOfDeath(int &yod);
+        void searchSelection(int select);
+        string addScientistName(string &name);
+        int addScientistGender(string &gender);
+        int addScientistYearOfBirth();
+        bool addScientistMore(int &yod, string &descr, string &link);
+        int addScientistYearOfDeath();
+        string addScientistDescription(string &descr);
+        string addScientistLink(string &link);
+        bool addScientistCheck(string name, int gender, int yob, int yod, string desc, string link);
+        void addScientistPushToVector(workingclass &workingobject, scientist sO);
+        bool addScientistContinue();
+        void addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender);
     void displayRemoveScientist();
     void displayChangeScientist();
     void displaySearchScientist();
@@ -39,7 +36,7 @@ public:
     void quitProgram();
     bool loopFunction();
     void addEmtyLines(int numLines);
-
+    int getCurrentDate (string date);
 };
 
 #endif // INFODISPLAY_H

@@ -8,6 +8,9 @@
 #include <string>
 #include <stdlib.h>
 #include <sstream>
+#include <time.h>
+#include "opengreeting.h"
+
 
 //new
 
@@ -43,6 +46,10 @@ void infoDisplay::mainMenu()
     int sel;
     clearScreen();
     addEmtyLines(5);
+
+    cout <<"\t Today is: ";
+    cout <<getCurrentDate("day")<<"."<<getCurrentDate("month")<<"."<<getCurrentDate("year")<<endl;
+
     cout << "\t Welcome to the computer scientist database! \n";
     cout << "\t What would you like to do? \n";
     cout << endl;
@@ -51,13 +58,9 @@ void infoDisplay::mainMenu()
     cout << "\t 3) Edit existing information. \n";
     //cout << "\t 4) Browse the list of computer scientists. \n";
     cout << "\t 4) Search for a computer scientists. \n";
+    cout << "\t 5) Print list of computer scientists. \n";
+    cout << "\t 6) Play greeting. \n";
     cout << "\t All other entries exit the program. \n";
-    cout << "1) Add a new computer scientist. \n";
-    cout << "2) Delete existing information. \n";
-    cout << "3) Edit existing information. \n";
-    cout << "4) Browse the list of computer scientists. \n";
-    cout << "5) See a list of current scientists \n";
-    cout << "All other entries exit the program. \n";
     cin >> sel;
     cin.ignore();
     selectAction(sel);
@@ -65,38 +68,41 @@ void infoDisplay::mainMenu()
 
 void infoDisplay::selectAction(int sel)
 {
-
     switch(sel)
-           {
-           case 1:
-               clearScreen();
-               AddScientist();
-               break;
-           case 2:
-               clearScreen();
-               displayRemoveScientist();
-               break;
-           case 3:
-               clearScreen();
-               displayChangeScientist();
-               break;
-           case 4:
-               clearScreen();
-               displaySearchScientist();
-               break;
-            case 5:
-               clearScreen();
-               displayListOfScientists();
-               break;
+        {
+        case 1:
+            clearScreen();
+            AddScientist();
+            break;
+        case 2:
+            clearScreen();
+            displayRemoveScientist();
+            break;
+        case 3:
+            clearScreen();
+            displayChangeScientist();
+            break;
+        case 4:
+            clearScreen();
+            displaySearchScientist();
+            break;
+        case 5:
+            clearScreen();
+            displayListOfScientists();
+            break;
+        case 6:
+            clearScreen();
+            splashScreen();
+            break;
 
-           default:
-               clearScreen();
-               addEmtyLines(10);
-               cout << "Thank you, come again!." << endl;
-               addEmtyLines(10);
-               exit(0);
-               break;
-           }
+        default:
+            clearScreen();
+            addEmtyLines(10);
+            cout << "Thank you, come again!." << endl;
+            addEmtyLines(10);
+            exit(0);
+            break;
+       }
 }
 infoDisplay::infoDisplay()
 {
@@ -105,7 +111,10 @@ infoDisplay::infoDisplay()
 
 void infoDisplay::splashScreen()
 {
+    opengreeting greet;
 
+    greet.greetingPost();
+    mainMenu();
 }
 
 void infoDisplay::screenSelection()
@@ -124,7 +133,6 @@ void infoDisplay::AddScientist()
 
     while(wYLTContinue == true)
     {
-
         clearScreen();
         cout<<"Creating a new Scientist: "<<endl;
         cout<<"======================================"<<endl;
@@ -135,7 +143,6 @@ void infoDisplay::AddScientist()
         name = (addScientistName(name));
         selectedGender = addScientistGender(gender);
 
-        //yob = (addScientistYearOfBirth(yob));
         yob = (addScientistYearOfBirth());
 
 
@@ -172,7 +179,6 @@ void infoDisplay::AddScientist()
         vector<scientist> tempVector;
         tempVector = workingobject.returnVector();
         tempVector.push_back(sO);
-        //workingobject.modifyVector(tempVector);
         workingobject.pushToVector(sO);
     };
 
@@ -586,7 +592,12 @@ void infoDisplay::displayListOfScientists()
 {
     workingclass workingobject;
 
+    vector<scientist> tempVector;
+
     cout<<"output out of vector: "<<endl<<endl;
+
+    cout<<tempVector.size();
+
     workingobject.printVector();
 }
 
@@ -620,4 +631,33 @@ bool infoDisplay::loopFunction()
     {
         return false;
     }
+}
+
+int infoDisplay::getCurrentDate (string date)
+{
+
+    time_t theTime = time(NULL);
+    struct tm *aTime = localtime(&theTime);
+
+    int day = aTime->tm_mday;
+    int month = aTime->tm_mon + 1;
+    int year = aTime->tm_year + 1900;
+
+    if (date == "day")
+    {
+        return day;
+    }
+    else if (date == "year")
+    {
+        return year;
+    }
+    else if (date == "month")
+    {
+        return month;
+    }
+    else
+    {
+        return 0;
+    }
+
 }
