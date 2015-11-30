@@ -284,7 +284,7 @@ vector<scientist> workingclass::searchByName(string subName, bool& isFound)
     scientist s;
     for(unsigned int i = 0; i < scientistVector.size(); i++)
     {
-        if(scientistVector.at(i).getName() == subName)
+        if( subName.find( scientistVector.at(i).getName()))
        {
             s = scientistVector.at(i);
             v.push_back(s);

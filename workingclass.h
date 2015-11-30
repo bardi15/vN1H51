@@ -7,6 +7,7 @@
 #include <vector>
 #include "scientist.h"
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
