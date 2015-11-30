@@ -19,6 +19,8 @@ void infoDisplay::printVector() const
 
     vector<scientist> tempVector = worker.returnVector();
 
+    //Header á listann
+    cout << "Nr.\t\t Name"
     for(unsigned int i = 0; i < tempVector.size(); i++){
         scientist s = tempVector.at(i);
     cout << s.getName();
