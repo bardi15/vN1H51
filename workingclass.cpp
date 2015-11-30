@@ -134,6 +134,33 @@ void workingclass::createScientist(string& line, int& oldfind)
     }
 }
 
+void workingclass::add(scientist s){
+    scientistVector.push_back(s);
+    write(s);
+}
+
+
+void workingclass::removeScientist(scientist s){
+
+    for(unsigned int i = 0; i < scientistVector.size(); i++){
+        if(scientistVector[i] == s){
+            scientistVector.erase(scientistVector.begin() + i);
+            break;
+        }
+    }
+    save();
+}
+
+void workingclass::update(scientist s, scientist &replace){
+    //Searches for the name and removes it from the vector.
+    for(unsigned int i = 0; i < scientistVector.size() ; i++){
+        if(scientistVector[i] == s){
+            scientistVector[i] = replace;
+            break;
+        }
+    }
+    save();
+}
 
 
 void workingclass::printVector() const

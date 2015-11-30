@@ -32,6 +32,11 @@ public:
     void pushToVector(scientist s);
     void fillScientist(string text, scientist& s, const int field);
     void createScientist(string& line, int& oldfind);
+    void removeScientist(scientist s);
+    void add(scientist s);
+    void save();
+    void write(scientist s);
+    void update(scientist s, scientist &replace);
     void printVector() const;
     vector<scientist> returnVector ();
     void modifyVector(vector<scientist> mVector);
