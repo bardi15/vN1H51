@@ -1,28 +1,91 @@
 #include "infodisplay.h"
 
-
-//new
-
 using namespace std;
 
-void infoDisplay::printVector() const
+void infoDisplay::displayList(vector<scientist>& v)
 {
-    workingclass worker;
+    //workingclass worker;
 
-    vector<scientist> tempVector = worker.returnVector();
+    //vector<scientist> tempVector = worker.returnVector();
 
     //Header á listann
-    cout << "Nr.\t\t Name";
-    for(unsigned int i = 0; i < tempVector.size(); i++){
-        scientist s = tempVector.at(i);
-    cout << s.getName();
-    cout << s.getGender();
-    cout << s.getYearOfBirth();
-    cout << s.getYearOfDeath();
-    cout << s.getDescription();
-    cout << s.getLink();
+    addEmtyLines(5);
+    cout.setf(ios::left);
+    cout << "\t Nr.";
+    cout.width(30);
+    cout << "\tName";
+    cout << "Gender\tBorn" << endl;
+    cout << "\t-----------------------------------------------------" << endl;
+    for(unsigned int i = 0; i < v.size(); i++)
+    {
+        scientist s = v.at(i);
+        cout.width(2);
+        cout << "\t" << i+1 << ")\t";
+        cout.width(30);
+        cout << s.getName();// << "\t";
+        if(s.getGender() == 0)
+        {
+            cout << "female";
+        }
+        else
+        {
+            cout << "male";
+        }
+        cout << "\t" << s.getYearOfBirth()<< "\t" << endl;
+    }
+    cout << "\t-----------------------------------------------------" << endl;
+}
+void infoDisplay::moreInfoOnScientist(vector<scientist>& v)
+{
+    int sel;
+    cout << "\tWould you like more info on any of the scientist?" << endl;
+    cout << "\tPlease enter your choise, or 0 (zero) to quit: ";
+    cin >> sel;
+    if(sel == 0)
+    {
+        mainMenu();
+    }
+    else
+    {
+        displayOneScientist(v.at(sel-1));
     }
 }
+
+void infoDisplay::displayOneScientist(scientist& s)
+{
+    char ans;
+    clearScreen();
+    addEmtyLines(5);
+    cout << "\tNafn: " << s.getName() << endl;
+    cout << "\tGender: ";
+    if(s.getGender()== 0)
+    {
+        cout << "female" << endl;
+    }
+    cout << "\tDate of birth: " << s.getYearOfBirth() << endl;
+    cout << "\tDate of death: " << s.getYearOfDeath() << endl;
+    if(s.getDescription().size() > 60)
+    {
+        string less;
+        less = s.getDescription().substr(0,80);
+        cout << "\tDecsription: " << less << endl;
+        for(unsigned int i = 0; i*100+80 < s.getDescription().size(); i++)
+        {
+
+            less = s.getDescription().substr(i*100+80,100);
+            cout << "\t\t" << less << endl;
+        }
+    }
+    //cout << "\t Decsription: " << s.getDescription() << endl;
+    cout << "\tLink: " << s.getLink() << endl;
+    addEmtyLines(1);
+    cout << "\t-------------------------------------------------------------" << endl;
+    cout << "\tEnter any character to continue";
+    cin >> ans;
+}
+
+
+
 
 void infoDisplay::clearScreen()
 {
@@ -56,6 +119,7 @@ void infoDisplay::mainMenu()
     cin.ignore();
     serviceobject.selectAction(sel);
 }
+
 
 //void infoDisplay::selectAction(int sel)
 //{

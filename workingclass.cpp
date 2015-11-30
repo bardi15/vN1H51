@@ -165,19 +165,25 @@ void workingclass::createScientist(string& line, int& oldfind)
 
 void workingclass::printVector() const
 {
-    for(unsigned int i = 0; i < scientistVector.size(); i++)
-    {
-        //scientist s = scientistVector.at(i);
-        cout << "Nafn: " << scientistVector[i].getName() << endl;
-        cout << "kyn: " << scientistVector[i].getGender() << endl;
-        cout << "fd: " << scientistVector[i].getYearOfBirth() << endl;
-        cout << "dd: " << scientistVector[i].getYearOfDeath() << endl;
-        cout << "descr: " << scientistVector[i].getDescription() << endl;
-        cout << "url: " << scientistVector[i].getLink() << endl;
-        cout << endl;
+    infoDisplay disp;
+    vector<scientist> v = scientistVector;
+    disp.displayList(v);
+    disp.moreInfoOnScientist(v);
+    // disp.displayList(scientistVector);
+    // This shoul not be hear!! - display fall - Jón
+//    for(unsigned int i = 0; i < scientistVector.size(); i++)
+//    {
+//        //scientist s = scientistVector.at(i);
+//        cout << "Nafn: " << scientistVector[i].getName() << endl;
+//        cout << "kyn: " << scientistVector[i].getGender() << endl;
+//        cout << "fd: " << scientistVector[i].getYearOfBirth() << endl;
+//        cout << "dd: " << scientistVector[i].getYearOfDeath() << endl;
+//        cout << "descr: " << scientistVector[i].getDescription() << endl;
+//        cout << "url: " << scientistVector[i].getLink() << endl;
+//        cout << endl;
 
         //s.getName() << endl;
-    }
+    //}
 }
 
 void workingclass::fillScientist(string text, scientist& s, const int field)

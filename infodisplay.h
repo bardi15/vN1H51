@@ -14,17 +14,21 @@
 #include "infodisplay.h"
 #include "workingclass.h"
 #include "service.h"
+#include <iomanip>
 
 
 class infoDisplay
 {
 public:
     infoDisplay();
-    void printVector() const;
+    //void printVector() const;
 //    void selectAction(int sel);
     void mainMenu();
     void clearScreen();
     void splashScreen();
+    void displayOneScientist(scientist& s);
+    void displayList(vector<scientist>& v);
+    void moreInfoOnScientist(vector<scientist>& v);  //Á þetta kannski heima í service?
 //    void screenSelection();
 
 //    void AddScientist();
