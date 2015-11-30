@@ -13,10 +13,14 @@ workingclass::workingclass()
 {
 
 }
-//vector<scientist> workingclass::getVector()
-//{
-//    return vector<scientist> scientistVector;
-//}
+vector<scientist> workingclass::getVector()
+{
+    return scientistVector;
+}
+void workingclass::setVector(vector<scientist>& v)
+{
+    scientistVector = v;
+}
 
 void workingclass::readFile()
 {
@@ -168,7 +172,7 @@ void workingclass::printVector() const
     infoDisplay disp;
     vector<scientist> v = scientistVector;
     disp.displayList(v);
-    disp.moreInfoOnScientist(v);
+    //disp.moreInfoOnScientist(v);
     // disp.displayList(scientistVector);
     // This shoul not be hear!! - display fall - Jón
 //    for(unsigned int i = 0; i < scientistVector.size(); i++)

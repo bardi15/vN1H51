@@ -23,6 +23,8 @@ class workingclass
 {
 public:
     workingclass();
+    vector<scientist> getVector();
+    void setVector(vector<scientist>& v);
     void selectAction(int sel);
     void readFile();
     void addToFile();
