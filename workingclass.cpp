@@ -1,13 +1,8 @@
 #include "scientist.h"
 #include "infodisplay.h"
 #include "workingclass.h"
-#include "fstream"
-#include <cstring>
-#include <cstdlib>
-#include <stdlib.h>
-#include <string>
-#include <vector>
-#include <algorithm>
+
+
 
 //const string WORKFILE = "Scientistinfo.txt";
 //const int MAXFIELDS = 6;

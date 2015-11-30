@@ -1,12 +1,15 @@
 #ifndef WORKINGCLASS_H
 #define WORKINGCLASS_H
 
-//#include "scientist.h"
 #include "infodisplay.h"
 #include "workingclass.h"
-#include <vector>
 #include "scientist.h"
+#include <fstream>
+#include <cstring>
+#include <cstdlib>
+#include <stdlib.h>
 #include <string>
+#include <vector>
 #include <algorithm>
 
 using namespace std;
@@ -26,7 +29,6 @@ public:
     void readLinesFromFile(ifstream& fileWithLines);
     void addLineToFile(scientist& s, char AppOver) const;
     void VectorToFile(vector<scientist>& v, char AppOver) const;
-//    vector<scientist> getVector();
     void pushToVector(scientist s);
     void fillScientist(string text, scientist& s, const int field);
     void createScientist(string& line, int& oldfind);
@@ -44,7 +46,7 @@ public:
 private:
     string scientistToString(scientist& s) const;
     //  Precondition:   Takes in a scientist s.
-    //  Postcondition:
+    //  Postcondition:  Returns a string ready to be written to file
     vector<scientist> scientistVector;
 };
 

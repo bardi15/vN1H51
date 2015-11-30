@@ -1,9 +1,19 @@
 #ifndef INFODISPLAY_H
 #define INFODISPLAY_H
+#include <iostream>
+#include <cstdlib>
+#include <vector>
+#include <stdio.h>
+#include <string>
+#include <stdlib.h>
+#include <sstream>
+#include <time.h>
+#include <unistd.h>
+#include "opengreeting.h"
 #include "scientist.h"
 #include "infodisplay.h"
 #include "workingclass.h"
-#include <unistd.h>
+
 
 class infoDisplay
 {

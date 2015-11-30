@@ -1,5 +1,7 @@
 #ifndef OPENGREETING_H
 #define OPENGREETING_H
+#include "infodisplay.h"
+#include <math.h>
 #include <iostream>
 #include <windows.h>
 

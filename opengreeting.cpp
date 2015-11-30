@@ -1,6 +1,5 @@
 #include "opengreeting.h"
-#include "infodisplay.h"
-#include <math.h>
+
 
 opengreeting::opengreeting()
 {

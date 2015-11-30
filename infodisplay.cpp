@@ -1,15 +1,4 @@
-#include "scientist.h"
 #include "infodisplay.h"
-#include "workingclass.h"
-#include <iostream>
-#include <cstdlib>
-#include <vector>
-#include <stdio.h>
-#include <string>
-#include <stdlib.h>
-#include <sstream>
-#include <time.h>
-#include "opengreeting.h"
 
 
 //new
