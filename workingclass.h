@@ -32,6 +32,22 @@ public:
     void pushToVector(scientist s);
     void fillScientist(string text, scientist& s, const int field);
     void createScientist(string& line, int& oldfind);
+
+    void AddScientist();
+        int addScientistYearOfDeath(int &yod);
+        string addScientistName(string &name);
+        int addScientistGender(string &gender);
+        int addScientistYearOfBirth();
+        bool addScientistMore(int &yod, string &descr, string &link);
+        int addScientistYearOfDeath();
+        string addScientistDescription(string &descr);
+        string addScientistLink(string &link);
+        bool addScientistCheck(string name, int gender, int yob, int yod, string desc, string link);
+        void addScientistPushToVector(workingclass &workingobject, scientist sO);
+        bool addScientistContinue();
+        void addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender);
+
+
     void removeScientist(scientist s);
     void add(scientist s);
     void save();

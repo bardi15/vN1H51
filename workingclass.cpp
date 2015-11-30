@@ -134,33 +134,33 @@ void workingclass::createScientist(string& line, int& oldfind)
     }
 }
 
-void workingclass::add(scientist s){
-    scientistVector.push_back(s);
-    write(s);
-}
+//void workingclass::add(scientist s){
+//    scientistVector.push_back(s);
+//    write(s);
+//}
 
 
-void workingclass::removeScientist(scientist s){
+//void workingclass::removeScientist(scientist s){
 
-    for(unsigned int i = 0; i < scientistVector.size(); i++){
-        if(scientistVector[i] == s){
-            scientistVector.erase(scientistVector.begin() + i);
-            break;
-        }
-    }
-    save();
-}
+//    for(unsigned int i = 0; i < scientistVector.size(); i++){
+//        if(scientistVector[i] == s){
+//            scientistVector.erase(scientistVector.begin() + i);
+//            break;
+//        }
+//    }
+//    save();
+//}
 
-void workingclass::update(scientist s, scientist &replace){
-    //Searches for the name and removes it from the vector.
-    for(unsigned int i = 0; i < scientistVector.size() ; i++){
-        if(scientistVector[i] == s){
-            scientistVector[i] = replace;
-            break;
-        }
-    }
-    save();
-}
+//void workingclass::update(scientist s, scientist &replace){
+//    //Searches for the name and removes it from the vector.
+//    for(unsigned int i = 0; i < scientistVector.size() ; i++){
+//        if(scientistVector[i] == s){
+//            scientistVector[i] = replace;
+//            break;
+//        }
+//    }
+//    save();
+//}
 
 
 void workingclass::printVector() const
@@ -390,3 +390,413 @@ vector<scientist> workingclass::searchByYear(int& yr, char bORd, bool& isFound)
     return v;
 }
 
+void workingclass::AddScientist()
+{
+    int selectedGender;
+    bool wYLTContinue = true;
+
+    scientist sO;
+
+    //workingclass workingobject;
+
+    infoDisplay display;
+
+    while(wYLTContinue == true)
+    {
+        display.clearScreen();
+        cout<<"Creating a new Scientist: "<<endl;
+        cout<<"======================================"<<endl;
+
+        string name = " ", gender = " ", descr = " ", link = " ";
+        int yob = 0, yod = 0;
+
+        name = (addScientistName(name));
+        selectedGender = addScientistGender(gender);
+
+        yob = (addScientistYearOfBirth());
+
+
+        bool addEvenMore = true;
+
+        while (addEvenMore == true)
+        {
+            addEvenMore = addScientistMore(yod, descr, link);
+        }
+
+        bool changeInput = false;
+
+        do
+        {
+            changeInput = addScientistCheck(name,selectedGender,yob,yod,descr,link);
+
+            if (changeInput == false)
+            {
+                addScientistChange(name,gender,yob,yod,descr,link,selectedGender);
+            }
+        }
+        while (changeInput == false);
+
+
+        wYLTContinue = addScientistContinue();
+
+        sO.setName(name);
+        sO.setGender(selectedGender);
+        sO.setYearOfBirth(yob);
+        sO.setYearOfDeath(yod);
+        sO.setDescription(descr);
+        sO.setLink(link);
+
+        vector<scientist> tempVector;
+        //tempVector = returnVector();
+        tempVector = returnVector();
+        tempVector.push_back(sO);
+        //workingobject.pushToVector(sO);
+        pushToVector(sO);
+
+    };
+
+    cout<<"output out of vector: "<<endl<<endl;
+    //workingobject.printVector();
+    printVector();
+
+    display.mainMenu();
+
+}
+
+string workingclass::addScientistName(string &name)
+{
+    //workingclass workingobject;
+    bool badName = false;
+
+    do
+    {
+        cout<<"Enter name: ";
+        getline(cin, name);
+        name = nameCorrection(name, badName);
+        if (badName == true)
+        {
+            cout<<"Incorrect name format!"<<endl;
+        }
+    }
+    while(badName == true);
+
+    return name;
+}
+
+int workingclass::addScientistGender(string &gender)
+{
+    //workingclass workingobject;
+    int selectedGender;
+    cout<<"Enter gender: ";
+    cin>>gender;
+
+    for(unsigned int i = 0; i < gender.length(); ++i)
+    {
+        gender[i] = tolower(gender[i]);
+    }
+
+    selectedGender = genderCorrection(gender);
+
+    return selectedGender;
+}
+
+int workingclass::addScientistYearOfBirth()
+{
+    string tempInput;
+    int temp;
+
+    bool errorInYear = false;
+    //workingclass workingobject;
+
+    do
+    {
+        cout<<"Enter year of birth: ";
+        cin>>tempInput;
+
+        stringstream stringToInt (tempInput);
+        stringToInt >> temp;
+
+        temp = yearCorrection(temp, errorInYear);
+
+        if (errorInYear == true)
+        {
+            cout<<"Incorrect year format!"<<endl;
+        }
+    }
+    while (errorInYear == true);
+
+    return temp;
+}
+
+bool workingclass::addScientistMore(int &yod, string &descr, string &link)
+{
+    //workingclass workingobject;
+    infoDisplay display;
+    display.addEmtyLines(2);
+    cout<<"1. Add year of Death, 2. Description, 3. "
+          "Website link, any other key skips."<<endl;
+
+    char choice;
+    cin>>choice;
+    cin.ignore();
+
+    switch(choice)
+    {
+        case '1':
+        yod = addScientistYearOfDeath();
+        break;
+
+        case '2':
+        descr = addScientistDescription(descr);
+        break;
+
+        case '3':
+        link = addScientistLink(link);
+        break;
+
+        default:
+        cout<<"Nothing selected. "<<endl;
+    }
+
+    cout<<"Add more fields? Y/N? ";
+    bool addAnother = display.loopFunction();
+    return addAnother;
+}
+
+int workingclass::addScientistYearOfDeath()
+{
+    bool errorInYear = false;
+
+    string tempInput;
+    int temp;
+
+    //workingclass workingobject;
+
+    do
+    {
+        cout<<"Year of Death: ";
+        cin>>tempInput;
+
+        stringstream stringToInt (tempInput);
+        stringToInt >> temp;
+
+        temp = yearCorrection(temp, errorInYear);
+
+        if (errorInYear == true)
+        {
+            cout<<"Incorrect year format!"<<endl;
+        }
+    }
+    while (errorInYear == true);
+    return temp;
+}
+
+string workingclass::addScientistDescription(string &descr)
+{
+    cout<<"Description: ";
+    getline(cin, descr);
+    return descr;
+}
+
+string workingclass::addScientistLink(string &link)
+{
+    cout<<"Website Link:";
+    getline(cin, link);
+    return link;
+}
+
+
+bool workingclass::addScientistCheck(string name, int gender, int yob, int yod, string desc, string link)
+{
+    infoDisplay display;
+    display.clearScreen();
+    //char input;
+    cout<<"Current entry: "<<endl;
+    cout<<"======================================"<<endl;
+    cout<<"Name: "<<name<<endl;
+    if (gender == 1)
+    {
+        cout<<"Gender: Male"<<endl;
+    }
+    else if (gender == 0)
+    {
+        cout<<"Gender: Female"<<endl;
+    }
+    else
+    {
+        cout<<"Gender: Unspecified"<<endl;
+    }
+    cout<<"Year of Birth: "<<yob<<endl;
+    cout<<"Year of Death: "<<yod<<endl;
+    cout<<"Description: "<<desc<<endl;
+    cout<<"Link: "<<link<<endl<<endl;
+
+    cout<<"Are you happy with this input ? Y/N:";
+
+    bool cont = display.loopFunction();
+
+    return cont;
+}
+
+void workingclass::addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender)
+{
+    infoDisplay display;
+    display.clearScreen();
+    int input = 0;
+    display.addEmtyLines(5);
+    cout<<"What would you like to change? Choose: "<<endl;
+    cout<<"1. Name, 2. Gender, 3. Year of Birth, 4. "
+          "Year of Death, 5. Description, 6. Link"<<endl;
+    cin>>input;
+    cin.ignore();
+
+    switch (input)
+    {
+    case 1:
+        name = addScientistName(name);
+        break;
+    case 2:
+        selectedGender = addScientistGender(gender);
+        break;
+    case 3:
+        //yob = addScientistYearOfBirth(yob);
+        yob = addScientistYearOfBirth();
+        break;
+    case 4:
+        yod = addScientistYearOfDeath();
+        break;
+    case 5:
+        desc = addScientistDescription(desc);
+        break;
+    case 6:
+        link = addScientistLink(link);
+        break;
+    }
+}
+
+bool workingclass::addScientistContinue()
+{
+    infoDisplay display;
+
+    //char input;
+    display.addEmtyLines(1);
+    cout<<"Would you like to add more Scientists? Y/N: ";
+
+    bool input = display.loopFunction();
+    return input;
+}
+
+//void workingclass::searchSelection(int select)
+//{
+//    workingclass work;
+//    infoDisplay display;
+//    //infoDisplay disp;
+//    char cont;
+
+//    switch (select)
+//    {
+//    case 1:
+
+//        do
+//        {
+//            string tempName;
+//            bool found = false;
+
+//            display.clearScreen();
+//            cout << "Please enter a part of the name you would like to find: " << endl;
+//            cin >> tempName;
+//            work.searchByName(tempName, found);
+//            if( found == true)
+//            {
+//                work.printVector();
+//                cont = 'N';
+//            }
+//            else
+//            {
+//                cout << "Nothing found! - Do you want to try again? (Y/N): ";
+//                cin >> cont;
+//            }
+//        }while(toupper(cont) == 'Y');
+//        break;
+//    case 2:
+//        do
+//        {
+//            string tempGender;
+//            bool found = false;
+
+//            display.clearScreen();
+//            cout << "Please enter the gender you would like to see: " << endl;
+//            cin >> tempGender;
+//            work.searchByGender(tempGender, found);
+//            if( found == true)
+//            {
+//                work.printVector();
+//                cont = 'N';
+//            }
+//            else
+//            {
+//                cout << "Nothing found! - Do you want to try again? (Y/N): ";
+//                cin >> cont;
+//            }
+//        }while(toupper(cont) == 'Y');
+
+//        break;
+//    case 3:
+//        do
+//        {
+//            int yr;
+//            bool found = false;
+
+//            display.clearScreen();
+//            cout << "Please enter the year you would like to search for: " << endl;
+//            cin >> yr;
+//            work.searchByYear(yr, 'b', found);
+//            if( found == true)
+//            {
+//                work.printVector();
+//                cont = 'N';
+//            }
+//            else
+//            {
+//                cout << "Nothing found! - Do you want to try again? (Y/N): ";
+//                cin >> cont;
+//            }
+
+//        }while(toupper(cont) == 'Y');
+//        break;
+//    case 4:
+//        do
+//        {
+//            int yr;
+//            bool found = false;
+
+//            display.clearScreen();
+//            cout << "Please enter the year you would like to search for: " << endl;
+//            cin >> yr;
+//            work.searchByYear(yr, 'd', found);
+//            if( found == true)
+//            {
+//                work.printVector();
+//                cont = 'N';
+//            }
+//            else
+//            {
+//                cout << "Nothing found! - Do you want to try again? (Y/N): ";
+//                cin >> cont;
+//            }
+
+//        }while(toupper(cont) == 'Y');
+//        break;
+//    case 5:
+//        display.clearScreen();
+//        display.mainMenu();
+//        break;
+//    default:
+//        display.addEmtyLines(5);
+//        cout << "Illigal selection!!" << endl;
+//        cout << "Returning to Search menu" << endl;
+//        sleep(3);
+//        display.displaySearchScientist();
+//        break;
+//    }
+//}
