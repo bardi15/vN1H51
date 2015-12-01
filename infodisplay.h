@@ -11,8 +11,7 @@
 #include <unistd.h>
 #include "opengreeting.h"
 #include "scientist.h"
-#include "infodisplay.h"
-#include "workingclass.h"
+//#include "workingclass.h"
 #include "service.h"
 #include <iomanip>
 
@@ -27,8 +26,10 @@ public:
     void clearScreen();
     void splashScreen();
     void displayOneScientist(scientist& s);
+    //  Precondition:   Takes in one scientist to display as a parameter.
+    //  Postcondition:  Displays all information about the scientist on screen
     void displayList(vector<scientist>& v);
-    void moreInfoOnScientist(vector<scientist>& v);  //Á þetta kannski heima í service?
+    int moreInfoOnScientist(vector<scientist>& v);  //Á þetta kannski heima í service?
     void dispScientistToEdit(vector<scientist>& v);
     void dispSelectScientistToDelete(vector<scientist>& v);
 //    void screenSelection();

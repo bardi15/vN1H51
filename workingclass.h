@@ -1,8 +1,8 @@
 #ifndef WORKINGCLASS_H
 #define WORKINGCLASS_H
 
-#include "infodisplay.h"
-#include "workingclass.h"
+//#include "infodisplay.h"
+//#include "workingclass.h"
 #include "scientist.h"
 #include <fstream>
 #include <cstring>

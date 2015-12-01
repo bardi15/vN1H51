@@ -17,10 +17,11 @@ void service::setWCVector(vector<scientist>& v)
     workingclass wc;
     wc.setVector(v);
 }
-
 void service::selectAction(int sel)
 {
+    vector<scientist> v;
     workingclass workingobject;
+    workingobject.readFile();
     infoDisplay display;
 
     switch(sel)
@@ -42,9 +43,23 @@ void service::selectAction(int sel)
             display.displaySearchScientist();
             break;
         case 5:
-            display.clearScreen();
-            display.displayListOfScientists();
-            break;
+            unsigned int sel;
+            do
+            {
+                display.clearScreen();
+                v = workingobject.getVector();
+                display.displayList(v);
+                sel = display.moreInfoOnScientist(v);
+                if(sel > 0 && sel <= v.size())
+                {
+                    display.displayOneScientist(v.at(sel-1));
+                }
+                else
+                {
+                    break;
+                }
+            }while(sel > 0);
+                break;
         case 6:
             display.clearScreen();
             display.splashScreen();
@@ -59,10 +74,10 @@ void service::selectAction(int sel)
             break;
        }
 }
-
 void service::searchSelection(int select)
 {
     workingclass work;
+    work.readFile();
     infoDisplay display;
     //infoDisplay disp;
     char cont;
@@ -75,14 +90,30 @@ void service::searchSelection(int select)
         {
             string tempName;
             bool found = false;
-
+            vector<scientist> v;
             display.clearScreen();
-            cout << "Please enter a part of the name you would like to find: " << endl;
+            display.addEmtyLines(5);
+            cout << "\tPlease enter a part of the name you would like to find: " << endl;
             cin >> tempName;
-            work.searchByName(tempName, found);
+            v = work.searchByName(tempName, found);
             if( found == true)
             {
-                work.printVector();
+                unsigned int sel;
+                do
+                {
+                    display.clearScreen();
+                    display.displayList(v);
+                    sel = display.moreInfoOnScientist(v);
+                    if(sel > 0 && sel <= v.size())
+                    {
+                        display.displayOneScientist(v.at(sel-1));
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }while(sel > 0);
+                //work.printVector();
                 cont = 'N';
             }
             else
@@ -97,14 +128,28 @@ void service::searchSelection(int select)
         {
             string tempGender;
             bool found = false;
-
+            vector<scientist> v;
             display.clearScreen();
             cout << "Please enter the gender you would like to see: " << endl;
             cin >> tempGender;
-            work.searchByGender(tempGender, found);
+            v = work.searchByGender(tempGender, found);
             if( found == true)
             {
-                work.printVector();
+                unsigned int sel;
+                do
+                {
+                    display.clearScreen();
+                    display.displayList(v);
+                    sel = display.moreInfoOnScientist(v);
+                    if(sel > 0 && sel <= v.size())
+                    {
+                        display.displayOneScientist(v.at(sel-1));
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }while(sel > 0);
                 cont = 'N';
             }
             else
@@ -124,10 +169,26 @@ void service::searchSelection(int select)
             display.clearScreen();
             cout << "Please enter the year you would like to search for: " << endl;
             cin >> yr;
-            work.searchByYear(yr, 'b', found);
+            vector<scientist> v;
+            v = work.searchByYear(yr, 'b', found);
+
             if( found == true)
             {
-                work.printVector();
+                unsigned int sel;
+                do
+                {
+                    display.clearScreen();
+                    display.displayList(v);
+                    sel = display.moreInfoOnScientist(v);
+                    if(sel > 0 && sel <= v.size())
+                    {
+                        display.displayOneScientist(v.at(sel-1));
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }while(sel > 0);
                 cont = 'N';
             }
             else
@@ -147,10 +208,25 @@ void service::searchSelection(int select)
             display.clearScreen();
             cout << "Please enter the year you would like to search for: " << endl;
             cin >> yr;
-            work.searchByYear(yr, 'd', found);
+            vector<scientist> v;
+            v = work.searchByYear(yr, 'd', found);
             if( found == true)
             {
-                work.printVector();
+                unsigned int sel;
+                do
+                {
+                    display.clearScreen();
+                    display.displayList(v);
+                    sel = display.moreInfoOnScientist(v);
+                    if(sel > 0 && sel <= v.size())
+                    {
+                        display.displayOneScientist(v.at(sel-1));
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }while(sel > 0);
                 cont = 'N';
             }
             else
@@ -174,7 +250,6 @@ void service::searchSelection(int select)
         break;
     }
 }
-
 void service::chooseSortion(int choice)
 {
     workingclass Wobj;

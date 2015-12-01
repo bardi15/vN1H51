@@ -9,9 +9,9 @@ using namespace std;
 
 int main()
 {    
-    workingclass jon;
-    jon.readFile();
-    jon.printVector();
+//    workingclass jon;
+//    jon.readFile();
+//    jon.printVector();
 //    scientist gunna;
 //    gunna.setName("gunna");
 //    gunna.setGender(0);
@@ -24,11 +24,11 @@ int main()
 //    jon.printVector();
 
 
-   // infoDisplay display;
+    infoDisplay display;
 
     //infoDisplay display;
 
-   // display.splashScreen();
+    display.splashScreen();
 
     //display.AddScientist();
 
