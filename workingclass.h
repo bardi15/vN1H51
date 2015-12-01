@@ -54,7 +54,8 @@ public:
     void sortYOB();
     void sortYOD();
 
-    void removeScientist(string s);
+    void removeScientist(scientist& s);
+    void eraseVector();
     void write(scientist s);
     void update(scientist s, scientist &replace);
     void printVector() const;
