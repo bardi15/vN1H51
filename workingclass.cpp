@@ -66,6 +66,7 @@ void workingclass::addLineToFile(scientist& s, char AppOver) const
     file_out.close();
 
 }
+
 string workingclass::scientistToString(scientist& s) const
 {
     string nextline;

@@ -55,6 +55,7 @@ int infoDisplay::moreInfoOnScientist(vector<scientist>& v)
         }
     }
 }
+
 void infoDisplay::dispSelectScientistToDelete(vector<scientist>& v)
 {
     int sel;
@@ -70,6 +71,7 @@ void infoDisplay::dispSelectScientistToDelete(vector<scientist>& v)
         displayOneScientist(v.at(sel-1));
     }
 }
+
 void infoDisplay::dispScientistToEdit(vector<scientist>& v)
 {
     int sel;
