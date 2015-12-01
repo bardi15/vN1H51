@@ -23,6 +23,8 @@ void infoDisplay::displayList(vector<scientist>& v)
     int holyScroll = 20;
     bool scroll = false;
 
+
+
     cout<<"scrollBase is: "<<scrollBase<<endl;
     cout<<"scrollFactor is: "<<scrollFactor<<endl;
 
@@ -36,9 +38,12 @@ void infoDisplay::displayList(vector<scientist>& v)
         scrollFactor = v.size();
         scroll = false;
     }
+    int scrollCount = 0;
 
     do
     {
+        scrollCount++;
+
         for(; scrollBase < scrollFactor; scrollBase++)
         {
             scientist s = v.at(scrollBase);
@@ -61,19 +66,19 @@ void infoDisplay::displayList(vector<scientist>& v)
         cout<<"scrollBase is: "<<scrollBase<<endl;
         cout<<"scrollFactor is: "<<scrollFactor<<endl;
 
+
         if (v.size() > holyScroll)
         {
+            cout<<"scrollCount is: "<<scrollCount<<endl;
             cout<<"Press U to scroll up, and D to scroll down, any other key to stop scrolling.";
             cin>>input;
             (toupper(input));
             if (input == 'D')
             {
-                scrollBase = holyScroll;
-                scrollFactor = scrollFactor + (v.size() - scrollFactor);
+                scrollBase = scrollCount * holyScroll;
+                scrollFactor = scrollBase + holyScroll;
                 cout<<"scrollBase is: "<<scrollBase<<endl;
                 cout<<"scrollFactor is: "<<scrollFactor<<endl;
-
-
             }
             else if (input == 'U')
             {
@@ -87,7 +92,7 @@ void infoDisplay::displayList(vector<scientist>& v)
                 {
                     scrollFactor = 0;
                 }
-                else if (scrollFactor < 20)
+                else if (scrollFactor > 20)
                 {
                     scrollFactor = 20;
                 }
@@ -259,7 +264,7 @@ void infoDisplay::displayOneScientist(scientist& s)
 
 void infoDisplay::clearScreen()
 {
-    system("cls");
+    //system("cls");
 }
 
 void infoDisplay::mainMenu()

@@ -199,9 +199,14 @@ void service::editScientistService(int i) //(int selection, int scientist)
 
     v.at(i) = sO;
 
-    v.at(i).getName();
+    v.at(i+1).getName();
 
-    //workingobject.VectorToFile(v,'O');
+    for (unsigned int i = 0; i < v.size(); i++ )
+    {
+        cout<<v.at(i).getName()<<endl;
+    }
+
+    workingobject.VectorToFile(v,'O');
 
     cout<<"in editScientistService: "<<endl;
     cout<<name<<" "<<gender<<" "<<yob<<" "<<yod<<" "<<descr<<" "<<link<<endl;
