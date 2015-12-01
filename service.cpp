@@ -274,7 +274,7 @@ void service::chooseSortion(int choice)
             Wobj.sortYOD();
         default:
             display.clearScreen();
-            display.mainMenu();
+            //display.mainMenu();
             break;
     }
 
