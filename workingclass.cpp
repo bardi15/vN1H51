@@ -106,13 +106,22 @@ void workingclass::readLinesFromFile(ifstream& fileWithLines)
             next += nextchar;
             fileWithLines.get(nextchar);
         }
-        createScientist(next, loc);
+        if( next.size() > 3)
+        {
+            createScientist(next, loc);
+        }
+
     }
 }
 void workingclass::pushToVector(scientist s)
 {
     scientistVector.push_back(s);
 }
+void workingclass::eraseVector()
+{
+    scientistVector.clear();
+}
+
 void workingclass::createScientist(string& line, int& oldfind)
 {
     string fieldtext;
@@ -135,16 +144,20 @@ void workingclass::createScientist(string& line, int& oldfind)
         pushToVector(s);
     }
 }
-void workingclass::removeScientist(string s)
+void workingclass::removeScientist(scientist& s)
 {
     readFile();
-    for(unsigned int j = 0; j < scientistVector.size(); j++){
-        if(scientistVector[j].getName() == s){
+    for(unsigned int j = 0; j < scientistVector.size(); j++)
+    {
+        if(scientistVector[j].getName() == s.getName())
+        {
             scientistVector.erase(scientistVector.begin() + j);
-              cout << s << " has been removed " << endl;
-              ofstream newFile("Scientistinfo.txt");
-              if(newFile.is_open()){
-                  for(unsigned int i = 0; i < scientistVector.size()-1; i++){
+
+              ofstream newFile(WORKFILE.c_str());
+              if(newFile.is_open())
+              {
+                  for(unsigned int i = 0; i < scientistVector.size(); i++)
+                  {
                       if(i == 0)
                       {
                         addLineToFile(scientistVector[i], 'O');
@@ -170,9 +183,9 @@ void workingclass::removeScientist(string s)
 }
 void workingclass::printVector() const
 {
-    infoDisplay disp;
-    vector<scientist> v = scientistVector;
-    disp.displayList(v);
+//    infoDisplay disp;
+//    vector<scientist> v = scientistVector;
+//    disp.displayList(v);
     //disp.moreInfoOnScientist(v);
     // disp.displayList(scientistVector);
     // This shoul not be hear!! - display fall - Jón

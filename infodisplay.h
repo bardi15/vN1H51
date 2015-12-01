@@ -32,6 +32,7 @@ public:
     int moreInfoOnScientist(vector<scientist>& v);  //Á þetta kannski heima í service?
     void dispScientistToEdit(vector<scientist>& v);
     void dispSelectScientistToDelete(vector<scientist>& v);
+    bool dispSureToRemove(int gender);
 //    void screenSelection();
 
 //    void AddScientist();

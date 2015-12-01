@@ -59,19 +59,47 @@ int infoDisplay::moreInfoOnScientist(vector<scientist>& v)
 void infoDisplay::dispSelectScientistToDelete(vector<scientist>& v)
 {
     int sel;
+    workingclass workobj;
     cout << "\tWhich scientist would you like delete?" << endl;
     cout << "\tPlease enter your choise, or 0 (zero) to quit: ";
     cin >> sel;
-    if(sel == 0)
+    if(sel > 0)
     {
-        mainMenu();
+        displayOneScientist(v.at(sel-1));
+        if(dispSureToRemove(v.at(sel-1).getGender()))
+        {
+            workobj.removeScientist(v.at(sel-1));
+            workobj.readFile();
+        }
+    }
+
+
+}
+bool infoDisplay::dispSureToRemove(int gender)
+{
+    char ans;
+    addEmtyLines(2);
+    if(gender == 0)
+    {
+        cout << "\tAre you sure you would like to delete her: " << endl;
+    }
+    else if(gender == 1)
+    {
+        cout << "\tAre you sure you would like to delete him: " << endl;
     }
     else
     {
-        displayOneScientist(v.at(sel-1));
+        cout << "\tAre you sure you would like to delete it: " << endl;
     }
+    addEmtyLines(1);
+    cout << "\tEnter (Y/N):";
+    cin >> ans;
+    if(toupper(ans) == 'Y')
+    {
+        return true;
+    }
+    return false;
 }
-
 void infoDisplay::dispScientistToEdit(vector<scientist>& v)
 {
     int sel;

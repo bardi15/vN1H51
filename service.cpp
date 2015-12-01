@@ -99,7 +99,11 @@ void service::selectAction()
                     break;
                 case 2:
                     display.clearScreen();
-                    display.displayRemoveScientist();
+                    v = workingobject.getVector();
+                    display.displayList(v);
+                    display.dispSelectScientistToDelete(v);
+                    workingobject.eraseVector();
+                    workingobject.readFile();
                     break;
                 case 3:
                     display.clearScreen();
