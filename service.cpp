@@ -47,6 +47,7 @@ void service::selectAction()
                     break;
                 case 5:
                     unsigned int sel;
+                    chooseSortion(v);
                     do
                     {
                         display.clearScreen();
@@ -313,31 +314,30 @@ void service::searchSelection(int select)
     }
 }
 
-void service::chooseSortion(int choice)
+void service::chooseSortion(vector<scientist>& v)
 {
     infoDisplay display;
+    int choice = display.displaySortOptions();
 
     switch(choice)
     {
         case 1:
             display.clearScreen();
-            workingobject.sortAlph();
+            workingobject.sortAlph(v);
             break;
         case 2:
             display.clearScreen();
-            workingobject.sortRevAlph();
+            workingobject.sortRevAlph(v);
             break;
         case 3:
             display.clearScreen();
-            workingobject.sortYOB();
+            workingobject.sortYOB(v);
             break;
         case 4:
             display.clearScreen();
-            workingobject.sortYOD();
+            workingobject.sortYOD(v);
         default:
             display.clearScreen();
             break;
     }
-
-
 }

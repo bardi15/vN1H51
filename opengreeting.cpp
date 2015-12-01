@@ -27,9 +27,9 @@ void opengreeting::fillarray (char ascii [][80], char input)
     ascii[10][40] = 'X';
 }
 
-void opengreeting::printscreen (char ascii [][80], int largeNumber)
+void opengreeting::printscreen (char ascii [][80])
 {
-    pause(largeNumber);
+    usleep(50);
     system("cls");
 
     for (int i = 0; i < 20; i++)
@@ -44,54 +44,35 @@ void opengreeting::printscreen (char ascii [][80], int largeNumber)
 
 void opengreeting::art (char ascii [][80])
 {
-    int greetingSpeed = 175;
-
     for (int i = 0; i < 10; i++)
     {
         ascii[i+10][40] = 'X';
         ascii[10-i][40] = 'X';
-        printscreen(ascii, (0.75 * greetingSpeed));
+        printscreen(ascii);
     }
 
     for (int i = 0; i < 20; i++)
     {
         ascii[10][40+i] = 'X';
         ascii[10][40-i] = 'X';
-        printscreen(ascii, (0.75 * greetingSpeed));
+        printscreen(ascii);
     }
 
     fillarray(ascii, ' ');
-    printscreen(ascii, 0);
+    printscreen(ascii);
 
     char welcome[7] = {'W', 'E', 'L', 'C', 'O', 'M', 'E'};
 
     for (int i = 0; i < 7; i++)
     {
         ascii[11][37+i] = welcome[i];
-        printscreen(ascii, (0.75 * greetingSpeed));
+        printscreen(ascii);
     }
 
     for (int i = 0; i < 7; i++)
     {
         ascii[12][37+i] = '.';
-        printscreen(ascii, greetingSpeed);
+        printscreen(ascii);
     }
-}
-
-void opengreeting::pause(int largeNumber)
-{
-    for (int i = 0; i < largeNumber/10; i++)
-    {
-        //cout<<"tick ";
-        for (int y = 0; y < largeNumber; y++)
-        {
-            for (int x = 0; x < largeNumber; x++)
-            {
-                for (int z = 0; z < largeNumber; z++)
-                {
-                    (y * x * i * z);
-                }
-            }
-        }
-    }
+    sleep(1);
 }

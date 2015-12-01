@@ -279,7 +279,7 @@ void infoDisplay::mainMenu()
     cout << "\t2) Delete existing information. \n";
     cout << "\t3) Edit existing information. \n";
     cout << "\t4) Search for a computer scientists. \n";
-    cout << "\t5) Print list of computer scientists. \n";
+    cout << "\t5) Display list of computer scientists. \n";
     cout << "\t6) Play greeting. \n";
     cout << "\tAll other entries exit the program: ";
 }
@@ -293,7 +293,7 @@ void infoDisplay::splashScreen()
 {
     opengreeting greet;
 
-    //greet.greetingPost();
+    greet.greetingPost();
 }
 
 void infoDisplay::displayChangeScientist()
@@ -350,7 +350,7 @@ void infoDisplay::displaySearchScientist()
 
 }
 
-void infoDisplay::displaySortOptions()
+int infoDisplay::displaySortOptions()
 {
     service servant;
     int choice;
@@ -365,7 +365,8 @@ void infoDisplay::displaySortOptions()
     addEmtyLines(1);
     cout << "Input choice here: ";
     cin >> choice;
-    servant.chooseSortion(choice);
+    return choice;
+//    servant.chooseSortion(choice);
 
 }
 

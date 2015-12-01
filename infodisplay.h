@@ -37,7 +37,7 @@ public:
     void displayChangeScientist();
     void displaySearchScientist();
     void displayListOfScientists();
-    void displaySortOptions();
+    int displaySortOptions();
     void quitProgram();
     bool loopFunction();
     void addEmtyLines(int numLines);

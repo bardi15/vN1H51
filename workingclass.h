@@ -48,10 +48,11 @@ public:
         bool addScientistContinue();
         void addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender);
 
-    void sortAlph();
-    void sortRevAlph();
-    void sortYOB();
-    void sortYOD();
+    void sortAlph(vector<scientist>& v);
+
+    void sortRevAlph(vector<scientist>& v);
+    void sortYOB(vector<scientist>& v);
+    void sortYOD(vector<scientist>& v);
 
     void removeScientist(scientist& s);
     void eraseVector();

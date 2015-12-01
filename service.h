@@ -15,7 +15,7 @@ public:
     void selectAction();
     int selection();
     void searchSelection(int select);
-    void chooseSortion(int choice);
+    void chooseSortion(vector<scientist>& v);
     void editScientistDisplayService();
     void editScientistService(int i); //(int selection, int scientist);
     workingclass workingobject;

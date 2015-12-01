@@ -423,11 +423,13 @@ vector<scientist> workingclass::searchByYear(int& yr, char bORd, bool& isFound)
 }
 bool AlphComp(scientist a, scientist b)
 {
-    return a.getName() > b.getName();
+    return a.getName() < b.getName();
+
 }
 bool RevAlphComp(scientist a, scientist b)
 {
-    return a.getName() < b.getName();
+    return a.getName() > b.getName();
+
 }
 bool DB_Comp(scientist a, scientist b)
 {
@@ -437,21 +439,22 @@ bool DD_Comp(scientist a, scientist b)
 {
     return a.getYearOfDeath() > b.getYearOfDeath();
 }
-void workingclass::sortAlph()
+void workingclass::sortAlph(vector<scientist>& v)
 {
-    sort(scientistVector.begin(), scientistVector.end(), AlphComp);
+
+    sort(v.begin(), v.end(), AlphComp);
 }
-void workingclass::sortRevAlph()
+void workingclass::sortRevAlph(vector<scientist>& v)
 {
-    sort(scientistVector.begin(), scientistVector.end(), RevAlphComp);
+    sort(v.begin(), v.end(), RevAlphComp);
 }
-void workingclass::sortYOB()
+void workingclass::sortYOB(vector<scientist>& v)
 {
-   sort(scientistVector.begin(), scientistVector.end(), DB_Comp);
+   sort(v.begin(), v.end(), DB_Comp);
 }
-void workingclass::sortYOD()
+void workingclass::sortYOD(vector<scientist>& v)
 {
-    sort(scientistVector.begin(), scientistVector.end(), DD_Comp);
+    sort(v.begin(), v.end(), DD_Comp);
 }
 void workingclass::AddScientist()
 {
