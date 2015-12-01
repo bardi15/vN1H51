@@ -134,7 +134,8 @@ void workingclass::createScientist(string& line, int& oldfind)
         pushToVector(s);
     }
 }
-void workingclass::removeScientist(string s){
+void workingclass::removeScientist(string s)
+{
     readFile();
     for(unsigned int j = 0; j < scientistVector.size(); j++){
         if(scientistVector[j].getName() == s){
@@ -489,9 +490,9 @@ void workingclass::AddScientist()
 
     };
 
-    cout<<"output out of vector: "<<endl<<endl;
+    //cout<<"output out of vector: "<<endl<<endl;
     //workingobject.printVector();
-    printVector();
+    //printVector();
 
     display.mainMenu();
 
@@ -586,10 +587,18 @@ bool workingclass::addScientistMore(int &yod, string &descr, string &link)
 
         default:
         cout<<"Nothing selected. "<<endl;
+        sleep(1);
     }
 
-    cout<<"Add more fields? Y/N? ";
-    bool addAnother = display.loopFunction();
+
+    bool addAnother;
+
+    if ((choice >=1)&&(choice <=3))
+    {
+        cout<<"Add more fields? Y/N? ";
+        addAnother = display.loopFunction();
+    }
+
     return addAnother;
 }
 int workingclass::addScientistYearOfDeath()

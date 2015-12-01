@@ -4,6 +4,7 @@
 #include "infodisplay.h"
 #include "workingclass.h"
 
+//new
 
 using namespace std;
 
@@ -26,9 +27,13 @@ int main()
 
     infoDisplay display;
 
+    service service;
+
     //infoDisplay display;
 
-    display.splashScreen();
+    //display.splashScreen();
+
+    service.selectAction();
 
     //display.AddScientist();
 
