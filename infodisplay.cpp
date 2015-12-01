@@ -17,25 +17,96 @@ void infoDisplay::displayList(vector<scientist>& v)
     cout << "\tName";
     cout << "Gender\tBorn" << endl;
     cout << "\t-----------------------------------------------------" << endl;
-    for(unsigned int i = 0; i < v.size(); i++)
+
+    int scrollFactor = 0;
+    int scrollBase = 0;
+    int holyScroll = 20;
+    bool scroll = false;
+
+    cout<<"scrollBase is: "<<scrollBase<<endl;
+    cout<<"scrollFactor is: "<<scrollFactor<<endl;
+
+    if (v.size() > holyScroll)
     {
-        scientist s = v.at(i);
-        cout.width(2);
-        cout << "\t" << i+1 << ")\t";
-        cout.width(30);
-        cout << s.getName();// << "\t";
-        if(s.getGender() == 0)
-        {
-            cout << "female";
-        }
-        else
-        {
-            cout << "male";
-        }
-        cout << "\t" << s.getYearOfBirth()<< "\t" << endl;
+        scrollFactor = holyScroll;
+        scroll = true;
     }
+    else
+    {
+        scrollFactor = v.size();
+        scroll = false;
+    }
+
+    do
+    {
+        for(; scrollBase < scrollFactor; scrollBase++)
+        {
+            scientist s = v.at(scrollBase);
+            cout.width(2);
+            cout << "\t" << scrollBase+1 << ")\t";
+            cout.width(30);
+            cout << s.getName();// << "\t";
+            if(s.getGender() == 0)
+            {
+                cout << "female";
+            }
+            else
+            {
+                cout << "male";
+            }
+            cout << "\t" << s.getYearOfBirth()<< "\t" << endl;
+        }
+        char input;
+
+        cout<<"scrollBase is: "<<scrollBase<<endl;
+        cout<<"scrollFactor is: "<<scrollFactor<<endl;
+
+        if (v.size() > holyScroll)
+        {
+            cout<<"Press U to scroll up, and D to scroll down, any other key to stop scrolling.";
+            cin>>input;
+            (toupper(input));
+            if (input == 'D')
+            {
+                scrollBase = holyScroll;
+                scrollFactor = scrollFactor + (v.size() - scrollFactor);
+                cout<<"scrollBase is: "<<scrollBase<<endl;
+                cout<<"scrollFactor is: "<<scrollFactor<<endl;
+
+
+            }
+            else if (input == 'U')
+            {
+                scrollBase = holyScroll - scrollBase;
+                if (scrollBase < 0)
+                {
+                    scrollBase = 0;
+                }
+                scrollFactor = scrollFactor - holyScroll;
+                if (scrollFactor < 0)
+                {
+                    scrollFactor = 0;
+                }
+                else if (scrollFactor < 20)
+                {
+                    scrollFactor = 20;
+                }
+                cout<<"scrollBase is: "<<scrollBase<<endl;
+                cout<<"scrollFactor is: "<<scrollFactor<<endl;
+
+            }
+            else
+            {
+                cout<<"Nothing selected! "<<endl;
+                scroll = false;
+            }
+        }
+    }
+    while(scroll == true);
+
     cout << "\t-----------------------------------------------------" << endl;
 }
+
 int infoDisplay::moreInfoOnScientist(vector<scientist>& v)
 {
     int sel;
@@ -95,15 +166,44 @@ void infoDisplay::displayOneScientist(scientist& s)
     cout << "\tGender: ";
     if(s.getGender()== 0)
     {
-        cout << "female" << endl;
+        cout << "Female" << endl;
+    }
+    else if (s.getGender()== 1)
+    {
+        cout << "male" << endl;
+    }
+    else
+    {
+        cout << "Unspecified" <<endl;
     }
     cout << "\tDate of birth: " << s.getYearOfBirth() << endl;
-    cout << "\tDate of death: " << s.getYearOfDeath() << endl;
+
+    if (s.getYearOfDeath() != 0)
+    {
+        cout << "\tDate of death: " << s.getYearOfDeath() << endl;
+        int ageAtDeath = s.getYearOfDeath() - s.getYearOfBirth();
+        cout << "\tAge at death: "<<ageAtDeath<<endl;
+    }
+    else
+    {
+        cout<<"\tCurrent age: ";
+
+        int today = (getCurrentDate("year") * 365) + getCurrentDate("day");
+
+        int sciAge = today - (s.getYearOfBirth() * 365);
+
+        sciAge = sciAge / 365;
+
+        cout<<sciAge<<endl;
+
+    }
+
+
     if(s.getDescription().size() > 60)
     {
         string less;
         less = s.getDescription().substr(0,80);
-        cout << "\tDecsription: " << less << endl;
+        cout << "\tDescription: " << less << endl;
         for(unsigned int i = 0; i*100+80 < s.getDescription().size(); i++)
         {
 
@@ -111,8 +211,16 @@ void infoDisplay::displayOneScientist(scientist& s)
             cout << "\t\t" << less << endl;
         }
     }
-    //cout << "\t Decsription: " << s.getDescription() << endl;
-    cout << "\tLink: " << s.getLink() << endl;
+    else if (s.getDescription().size() > 1)
+    {
+        cout << "\tDecsription: " << s.getDescription() << endl;
+    }
+
+    if (s.getLink().size() > 1)
+    {
+        cout << "\tLink: " << s.getLink() << endl;
+    }
+
     addEmtyLines(1);
     cout << "\t-------------------------------------------------------------" << endl;
     cout << "\tEnter any character to continue ";
@@ -172,29 +280,27 @@ void infoDisplay::displayRemoveScientist()
 
 void infoDisplay::displayChangeScientist()
 {
-    string name; //, age, yob, yod, descr, link;
-    int choice = 0;
+    service serviceobject;
 
-    cout << "Enter the name of the scientist you would like to edit: ";
-    cin >> name;
+    serviceobject.editScientistDisplayService();
 
-    cout << "Which part of " << name <<"'s profile would you like to edit? \n";
-    cout << endl;
-    cout << "1) The name. \n";
-    cout << "2) Year of birth. \n";
-    cout << "3) Year of untimely demise(Should it apply). \n";
-    cout << "4) Description. \n";
-    cout << "5) Change the link. \n";
-    cout << "Any other entrie returns to the main menu. \n";
-    cin >> choice;
+    int i = 0;
+    string name;
 
-    switch(choice)
-    {
-        default:
-            clearScreen();
-            mainMenu();
-            break;
-    }
+    cout << "Enter the number of the scientist you would like to edit: ";
+    cin >> i;
+    serviceobject.editScientistService(i);
+
+//    cout << "Which part of " << name <<"'s profile would you like to edit? \n";
+//    cout << endl;
+//    cout << "1) The name. \n";
+//    cout << "2) Year of birth. \n";
+//    cout << "3) Year of untimely demise(Should it apply). \n";
+//    cout << "4) Description. \n";
+//    cout << "5) Change the link. \n";
+//    cout << "Any other entrie returns to the main menu. \n";
+
+
 }
 
 void infoDisplay::displaySearchScientist()

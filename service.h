@@ -19,8 +19,9 @@ public:
     int selection();
     void searchSelection(int select);
     void chooseSortion(int choice);
+    void editScientistDisplayService();
+    void editScientistService(int i); //(int selection, int scientist);
     workingclass workingobject;
-
 
 
 };

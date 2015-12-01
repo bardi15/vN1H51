@@ -152,6 +152,60 @@ int service::selection()
     return select;
 }
 
+void service::editScientistDisplayService()
+{
+    infoDisplay display;
+    workingobject.readFile();
+    vector<scientist> tempVector = workingobject.getVector();
+    display.displayList(tempVector);
+    cout<<"finished"<<endl;
+
+}
+
+void service::editScientistService(int i) //(int selection, int scientist)
+{
+    infoDisplay display;
+    workingobject.readFile();
+
+    scientist sO;
+
+    vector<scientist> v;
+    v = workingobject.getVector();
+
+    string name, gender, descr, link;
+    int selectedGender, yob, yod;
+
+    name = v.at(i).getName();
+    selectedGender = v.at(i).getGender();
+    descr = v.at(i).getDescription();
+    link = v.at(i).getLink();
+    yob = v.at(i).getYearOfBirth();
+    yod = v.at(i).getYearOfDeath();
+
+
+    //(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender)
+    workingobject.addScientistChange(name,gender,yob,yod,descr,link,selectedGender);
+
+    sO.setName(name);
+    sO.setGender(selectedGender);
+    sO.setDescription(descr);
+    sO.setLink(link);
+    sO.setYearOfBirth(yob);
+    sO.setYearOfDeath(yod);
+
+    v.at(i) = sO;
+
+    v.at(i).getName();
+
+    //workingobject.VectorToFile(v,'O');
+
+    cout<<"in editScientistService: "<<endl;
+    cout<<name<<" "<<gender<<" "<<yob<<" "<<yod<<" "<<descr<<" "<<link<<endl;
+
+
+
+}
+
 void service::searchSelection(int select)
 {
     //workingclass work;

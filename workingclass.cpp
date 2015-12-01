@@ -453,7 +453,7 @@ void workingclass::AddScientist()
 
         while (addEvenMore == true)
         {
-            addEvenMore = addScientistMore(yod, descr, link);
+            addEvenMore = addScientistMore(yob, yod, descr, link);
         }
 
         bool changeInput = false;
@@ -559,7 +559,7 @@ int workingclass::addScientistYearOfBirth()
 
     return temp;
 }
-bool workingclass::addScientistMore(int &yod, string &descr, string &link)
+bool workingclass::addScientistMore(int yob, int &yod, string &descr, string &link)
 {
     //workingclass workingobject;
     infoDisplay display;
@@ -571,37 +571,47 @@ bool workingclass::addScientistMore(int &yod, string &descr, string &link)
     cin>>choice;
     cin.ignore();
 
-    switch(choice)
+    bool addAnother = true;
+
+    if ((choice < 0)&&(choice > 3))
     {
-        case '1':
-        yod = addScientistYearOfDeath();
-        break;
-
-        case '2':
-        descr = addScientistDescription(descr);
-        break;
-
-        case '3':
-        link = addScientistLink(link);
-        break;
-
-        default:
         cout<<"Nothing selected. "<<endl;
-        sleep(1);
+        addAnother = false;
+    }
+    else
+    {
+        switch(choice)
+        {
+            case '1':
+            yod = addScientistYearOfDeath(yob);
+            break;
+
+            case '2':
+            descr = addScientistDescription(descr);
+            break;
+
+            case '3':
+            link = addScientistLink(link);
+            break;
+
+            default:
+            cout<<"Nothing selected. "<<endl;
+            addAnother = false;
+            sleep(1);
+        }
+
     }
 
-
-    bool addAnother;
-
-    if ((choice >=1)&&(choice <=3))
+    if (addAnother == true)
     {
         cout<<"Add more fields? Y/N? ";
         addAnother = display.loopFunction();
     }
 
     return addAnother;
+
 }
-int workingclass::addScientistYearOfDeath()
+int workingclass::addScientistYearOfDeath(int yob)
 {
     bool errorInYear = false;
 
@@ -620,9 +630,17 @@ int workingclass::addScientistYearOfDeath()
 
         temp = yearCorrection(temp, errorInYear);
 
+
+
         if (errorInYear == true)
         {
             cout<<"Incorrect year format!"<<endl;
+        }
+
+        if (temp < yob)
+        {
+            errorInYear = true;
+            cout<<"You can not die, before you have lived!"<<endl;
         }
     }
     while (errorInYear == true);
@@ -676,6 +694,9 @@ void workingclass::addScientistChange(string &name, string gender, int &yob, int
     infoDisplay display;
     display.clearScreen();
     int input = 0;
+
+    int yOBirth = yob;
+
     display.addEmtyLines(5);
     cout<<"What would you like to change? Choose: "<<endl;
     cout<<"1. Name, 2. Gender, 3. Year of Birth, 4. "
@@ -696,7 +717,7 @@ void workingclass::addScientistChange(string &name, string gender, int &yob, int
         yob = addScientistYearOfBirth();
         break;
     case 4:
-        yod = addScientistYearOfDeath();
+        yod = addScientistYearOfDeath(yOBirth);
         break;
     case 5:
         desc = addScientistDescription(desc);

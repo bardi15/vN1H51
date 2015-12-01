@@ -36,12 +36,12 @@ public:
     void createScientist(string& line, int& oldfind);
 
     void AddScientist();
-        int addScientistYearOfDeath(int &yod);
+        //int addScientistYearOfDeath(int &yod);
         string addScientistName(string &name);
         int addScientistGender(string &gender);
         int addScientistYearOfBirth();
-        bool addScientistMore(int &yod, string &descr, string &link);
-        int addScientistYearOfDeath();
+        bool addScientistMore(int yob, int &yod, string &descr, string &link);
+        int addScientistYearOfDeath(int yob);
         string addScientistDescription(string &descr);
         string addScientistLink(string &link);
         bool addScientistCheck(string name, int gender, int yob, int yod, string desc, string link);
