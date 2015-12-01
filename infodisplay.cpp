@@ -2,13 +2,9 @@
 
 using namespace std;
 
-void infoDisplay::displayList(vector<scientist>& v)
+void infoDisplay::listheader()
 {
-    //workingclass workingobject;
-
-    //vector<scientist> vs = workingobject.getVector();
-
-
+    clearScreen();
     //Header á listann
     addEmtyLines(5);
     cout.setf(ios::left);
@@ -17,16 +13,16 @@ void infoDisplay::displayList(vector<scientist>& v)
     cout << "\tName";
     cout << "Gender\tBorn" << endl;
     cout << "\t-----------------------------------------------------" << endl;
+}
 
-    int scrollFactor = 0;
-    int scrollBase = 0;
-    int holyScroll = 20;
+void infoDisplay::displayList(vector<scientist>& v)
+{
+    unsigned int scrollFactor = 0;
+    unsigned int scrollBase = 0;
+    unsigned int holyScroll = 15;
+    int scientistSelection = 0;
     bool scroll = false;
-
-
-
-    cout<<"scrollBase is: "<<scrollBase<<endl;
-    cout<<"scrollFactor is: "<<scrollFactor<<endl;
+    char input;
 
     if (v.size() > holyScroll)
     {
@@ -38,17 +34,17 @@ void infoDisplay::displayList(vector<scientist>& v)
         scrollFactor = v.size();
         scroll = false;
     }
-    int scrollCount = 0;
+    int scrollCount = 1;
 
     do
     {
-        scrollCount++;
+        listheader();
 
-        for(; scrollBase < scrollFactor; scrollBase++)
+        for(unsigned int i = scrollBase; i < scrollFactor; i++)
         {
-            scientist s = v.at(scrollBase);
+            scientist s = v.at(i);
             cout.width(2);
-            cout << "\t" << scrollBase+1 << ")\t";
+            cout << "\t" << i+1 << ")\t";
             cout.width(30);
             cout << s.getName();// << "\t";
             if(s.getGender() == 0)
@@ -61,52 +57,44 @@ void infoDisplay::displayList(vector<scientist>& v)
             }
             cout << "\t" << s.getYearOfBirth()<< "\t" << endl;
         }
-        char input;
-
-        cout<<"scrollBase is: "<<scrollBase<<endl;
-        cout<<"scrollFactor is: "<<scrollFactor<<endl;
-
 
         if (v.size() > holyScroll)
         {
-            cout<<"scrollCount is: "<<scrollCount<<endl;
-            cout<<"Press U to scroll up, and D to scroll down, any other key to stop scrolling.";
-            cin>>input;
-            (toupper(input));
-            if (input == 'D')
+            if (scrollFactor >= v.size())
             {
-                scrollBase = scrollCount * holyScroll;
-                scrollFactor = scrollBase + holyScroll;
-                cout<<"scrollBase is: "<<scrollBase<<endl;
-                cout<<"scrollFactor is: "<<scrollFactor<<endl;
-            }
-            else if (input == 'U')
-            {
-                scrollBase = holyScroll - scrollBase;
-                if (scrollBase < 0)
-                {
-                    scrollBase = 0;
-                }
-                scrollFactor = scrollFactor - holyScroll;
-                if (scrollFactor < 0)
-                {
-                    scrollFactor = 0;
-                }
-                else if (scrollFactor > 20)
-                {
-                    scrollFactor = 20;
-                }
-                cout<<"scrollBase is: "<<scrollBase<<endl;
-                cout<<"scrollFactor is: "<<scrollFactor<<endl;
-
+                addEmtyLines(1);
+                cout<<"\tAny key continues.";
             }
             else
             {
-                cout<<"Nothing selected! "<<endl;
+                addEmtyLines(1);
+                cout<<"\tPress D to scroll down, any other key continues.";
+            }
+            cin>>input;
+
+            if ((input == 'D')||(input == 'd'))
+            {
+                ++scrollCount;
+
+                scrollBase = scrollFactor;
+                if (scrollBase >= v.size())
+                {
+                    scrollBase = v.size() - holyScroll;
+                }
+                scrollFactor = scrollBase + holyScroll;
+                if (scrollFactor >= v.size())
+                {
+                    scrollFactor = v.size();
+                }
+            }
+            else
+            {
                 scroll = false;
             }
+
+            }
         }
-    }
+
     while(scroll == true);
 
     cout << "\t-----------------------------------------------------" << endl;
@@ -256,7 +244,7 @@ void infoDisplay::displayOneScientist(scientist& s)
         cout << "\tLink: " << s.getLink() << endl;
     }
 
-    addEmtyLines(1);
+    //addEmtyLines(1);
     cout << "\t-------------------------------------------------------------" << endl;
     cout << "\tEnter any character to continue ";
     cin >> ans;
@@ -264,7 +252,7 @@ void infoDisplay::displayOneScientist(scientist& s)
 
 void infoDisplay::clearScreen()
 {
-    //system("cls");
+    system("cls");
 }
 
 void infoDisplay::mainMenu()
@@ -285,14 +273,10 @@ void infoDisplay::mainMenu()
     cout << "\t 1) Add a new computer scientist. \n";
     cout << "\t 2) Delete existing information. \n";
     cout << "\t 3) Edit existing information. \n";
-    //cout << "\t 4) Browse the list of computer scientists. \n";
     cout << "\t 4) Search for a computer scientists. \n";
     cout << "\t 5) Print list of computer scientists. \n";
     cout << "\t 6) Play greeting. \n";
-    cout << "\t All other entries exit the program. \n";
-//    cin >> sel;
-//    cin.ignore();
-//    serviceobject.selectAction(sel);
+    cout << "\t All other entries exit the program: ";
 }
 
 infoDisplay::infoDisplay()
@@ -304,8 +288,7 @@ void infoDisplay::splashScreen()
 {
     opengreeting greet;
 
-    //greet.greetingPost();
-    mainMenu();
+    greet.greetingPost();
 }
 
 void infoDisplay::displayRemoveScientist()
@@ -317,14 +300,27 @@ void infoDisplay::displayChangeScientist()
 {
     service serviceobject;
 
-    serviceobject.editScientistDisplayService();
+    bool continueP = true;
 
-    int i = 0;
-    string name;
+    while(continueP == true)
+    {
+        clearScreen();
 
-    cout << "Enter the number of the scientist you would like to edit: ";
-    cin >> i;
-    serviceobject.editScientistService(i);
+        workingclass workingobject;
+        serviceobject.editScientistDisplayService();
+
+        int i = 0;
+        string name;
+
+        cout << "\tEnter the number of the scientist you would like to edit: ";
+        cin >> i;
+        i -= 1;
+        serviceobject.editScientistService(i);
+        clearScreen();
+        continueP = workingobject.addScientistContinue();
+
+    }
+
 
 //    cout << "Which part of " << name <<"'s profile would you like to edit? \n";
 //    cout << endl;

@@ -78,16 +78,16 @@ void service::setWCVector(vector<scientist>& v)
 
 void service::selectAction()
 {
-    workingobject.readFile();
-    vector<scientist> v;
-    v = workingobject.getVector();
+    infoDisplay display;
+
+    display.splashScreen();
 
         do
         {
-
-//           workingobject.readFile();
-            //v = workingobject.getVector();
-            infoDisplay display;
+            workingobject.eraseVector();
+            workingobject.readFile();
+            vector<scientist> v;
+            v = workingobject.getVector();
 
             display.mainMenu();
             int sel = selection();
@@ -108,6 +108,7 @@ void service::selectAction()
                 case 3:
                     display.clearScreen();
                     display.displayChangeScientist();
+                    //workingobject.readFile();
                     break;
                 case 4:
                     display.clearScreen();
@@ -118,7 +119,8 @@ void service::selectAction()
                     do
                     {
                         display.clearScreen();
-                        v = workingobject.getVector();
+                        //workingobject.readFile();
+                        //v = workingobject.getVector();
                         display.displayList(v);
                         sel = display.moreInfoOnScientist(v);
                         if(sel > 0 && sel <= v.size())
@@ -162,19 +164,16 @@ void service::editScientistDisplayService()
     workingobject.readFile();
     vector<scientist> tempVector = workingobject.getVector();
     display.displayList(tempVector);
-    cout<<"finished"<<endl;
-
 }
 
 void service::editScientistService(int i) //(int selection, int scientist)
 {
+    vector<scientist> v;
+    v = workingobject.getVector();
     infoDisplay display;
     workingobject.readFile();
 
     scientist sO;
-
-    vector<scientist> v;
-    v = workingobject.getVector();
 
     string name, gender, descr, link;
     int selectedGender, yob, yod;
@@ -186,9 +185,14 @@ void service::editScientistService(int i) //(int selection, int scientist)
     yob = v.at(i).getYearOfBirth();
     yod = v.at(i).getYearOfDeath();
 
-
     //(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender)
-    workingobject.addScientistChange(name,gender,yob,yod,descr,link,selectedGender);
+    bool continueP = false;
+
+    while (continueP == false)
+    {
+        workingobject.addScientistChange(name,gender,yob,yod,descr,link,selectedGender);
+        continueP = workingobject.addScientistCheck(name,selectedGender,yob,yod,descr,link);
+    }
 
     sO.setName(name);
     sO.setGender(selectedGender);
@@ -199,19 +203,10 @@ void service::editScientistService(int i) //(int selection, int scientist)
 
     v.at(i) = sO;
 
-    v.at(i+1).getName();
-
-    for (unsigned int i = 0; i < v.size(); i++ )
-    {
-        cout<<v.at(i).getName()<<endl;
-    }
-
     workingobject.VectorToFile(v,'O');
 
-    cout<<"in editScientistService: "<<endl;
-    cout<<name<<" "<<gender<<" "<<yob<<" "<<yod<<" "<<descr<<" "<<link<<endl;
-
-
+    //cout<<"in editScientistService: "<<endl;
+    //cout<<name<<" "<<gender<<" "<<yob<<" "<<yod<<" "<<descr<<" "<<link<<endl;
 
 }
 

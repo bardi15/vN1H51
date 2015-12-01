@@ -38,10 +38,19 @@ void workingclass::VectorToFile(vector<scientist>& v, char AppOver) const
         }
         else
         {
-            addLineToFile(v.at(i), 'O');
+
+            if(i == 0)
+            {
+                addLineToFile(v.at(i), 'O');
+            }
+            else
+            {
+                addLineToFile(v.at(i), 'A');
+            }
         }
     }
 }
+
 void workingclass::addLineToFile(scientist& s, char AppOver) const
 {
 
@@ -451,8 +460,9 @@ void workingclass::AddScientist()
     while(wYLTContinue == true)
     {
         display.clearScreen();
-        cout<<"Creating a new Scientist: "<<endl;
-        cout<<"======================================"<<endl;
+        display.addEmtyLines(5);
+        cout<<"\tCreating a new Scientist: "<<endl;
+        cout<<"\t======================================"<<endl;
 
         string name = " ", gender = " ", descr = " ", link = " ";
         int yob = 0, yod = 0;
@@ -504,7 +514,7 @@ void workingclass::AddScientist()
 
     };
 
-    //cout<<"output out of vector: "<<endl<<endl;
+    //cout<<"\toutput out of vector: "<<endl<<endl;
     //workingobject.printVector();
     //printVector();
 
@@ -518,12 +528,12 @@ string workingclass::addScientistName(string &name)
 
     do
     {
-        cout<<"Enter name: ";
+        cout<<"\tEnter name: ";
         getline(cin, name);
         name = nameCorrection(name, badName);
         if (badName == true)
         {
-            cout<<"Incorrect name format!"<<endl;
+            cout<<"\tIncorrect name format!"<<endl;
         }
     }
     while(badName == true);
@@ -534,7 +544,7 @@ int workingclass::addScientistGender(string &gender)
 {
     //workingclass workingobject;
     int selectedGender;
-    cout<<"Enter gender: ";
+    cout<<"\tEnter gender: ";
     cin>>gender;
 
     for(unsigned int i = 0; i < gender.length(); ++i)
@@ -556,7 +566,7 @@ int workingclass::addScientistYearOfBirth()
 
     do
     {
-        cout<<"Enter year of birth: ";
+        cout<<"\tEnter year of birth: ";
         cin>>tempInput;
 
         stringstream stringToInt (tempInput);
@@ -566,7 +576,7 @@ int workingclass::addScientistYearOfBirth()
 
         if (errorInYear == true)
         {
-            cout<<"Incorrect year format!"<<endl;
+            cout<<"\tIncorrect year format!"<<endl;
         }
     }
     while (errorInYear == true);
@@ -577,9 +587,9 @@ bool workingclass::addScientistMore(int yob, int &yod, string &descr, string &li
 {
     //workingclass workingobject;
     infoDisplay display;
-    display.addEmtyLines(2);
-    cout<<"1. Add year of Death, 2. Description, 3. "
-          "Website link, any other key skips."<<endl;
+    display.addEmtyLines(5);
+    cout<<"\t1. Add year of Death, 2. Description, 3. "
+          "Website link, any other key skips: ";
 
     char choice;
     cin>>choice;
@@ -589,7 +599,7 @@ bool workingclass::addScientistMore(int yob, int &yod, string &descr, string &li
 
     if ((choice < 0)&&(choice > 3))
     {
-        cout<<"Nothing selected. "<<endl;
+        cout<<"\tNothing selected. "<<endl;
         addAnother = false;
     }
     else
@@ -609,7 +619,7 @@ bool workingclass::addScientistMore(int yob, int &yod, string &descr, string &li
             break;
 
             default:
-            cout<<"Nothing selected. "<<endl;
+            cout<<"\tNothing selected. "<<endl;
             addAnother = false;
             sleep(1);
         }
@@ -618,7 +628,7 @@ bool workingclass::addScientistMore(int yob, int &yod, string &descr, string &li
 
     if (addAnother == true)
     {
-        cout<<"Add more fields? Y/N? ";
+        cout<<"\tAdd more fields? Y/N? ";
         addAnother = display.loopFunction();
     }
 
@@ -636,7 +646,7 @@ int workingclass::addScientistYearOfDeath(int yob)
 
     do
     {
-        cout<<"Year of Death: ";
+        cout<<"\tYear of Death: ";
         cin>>tempInput;
 
         stringstream stringToInt (tempInput);
@@ -648,13 +658,13 @@ int workingclass::addScientistYearOfDeath(int yob)
 
         if (errorInYear == true)
         {
-            cout<<"Incorrect year format!"<<endl;
+            cout<<"\tIncorrect year format!"<<endl;
         }
 
         if (temp < yob)
         {
             errorInYear = true;
-            cout<<"You can not die, before you have lived!"<<endl;
+            cout<<"\tYou can not die, before you have lived!"<<endl;
         }
     }
     while (errorInYear == true);
@@ -662,13 +672,13 @@ int workingclass::addScientistYearOfDeath(int yob)
 }
 string workingclass::addScientistDescription(string &descr)
 {
-    cout<<"Description: ";
+    cout<<"\tDescription: ";
     getline(cin, descr);
     return descr;
 }
 string workingclass::addScientistLink(string &link)
 {
-    cout<<"Website Link:";
+    cout<<"\tWebsite Link:";
     getline(cin, link);
     return link;
 }
@@ -676,28 +686,29 @@ bool workingclass::addScientistCheck(string name, int gender, int yob, int yod, 
 {
     infoDisplay display;
     display.clearScreen();
+    display.addEmtyLines(5);
     //char input;
-    cout<<"Current entry: "<<endl;
-    cout<<"======================================"<<endl;
-    cout<<"Name: "<<name<<endl;
+    cout<<"\tCurrent entry: "<<endl;
+    cout<<"\t======================================"<<endl;
+    cout<<"\tName: "<<name<<endl;
     if (gender == 1)
     {
-        cout<<"Gender: Male"<<endl;
+        cout<<"\tGender: Male"<<endl;
     }
     else if (gender == 0)
     {
-        cout<<"Gender: Female"<<endl;
+        cout<<"\tGender: Female"<<endl;
     }
     else
     {
-        cout<<"Gender: Unspecified"<<endl;
+        cout<<"\tGender: Unspecified"<<endl;
     }
-    cout<<"Year of Birth: "<<yob<<endl;
-    cout<<"Year of Death: "<<yod<<endl;
-    cout<<"Description: "<<desc<<endl;
-    cout<<"Link: "<<link<<endl<<endl;
+    cout<<"\tYear of Birth: "<<yob<<endl;
+    cout<<"\tYear of Death: "<<yod<<endl;
+    cout<<"\tDescription: "<<desc<<endl;
+    cout<<"\tLink: "<<link<<endl<<endl;
 
-    cout<<"Are you happy with this input ? Y/N:";
+    cout<<"\tAre you happy with this input ? Y/N:";
 
     bool cont = display.loopFunction();
 
@@ -712,9 +723,9 @@ void workingclass::addScientistChange(string &name, string gender, int &yob, int
     int yOBirth = yob;
 
     display.addEmtyLines(5);
-    cout<<"What would you like to change? Choose: "<<endl;
-    cout<<"1. Name, 2. Gender, 3. Year of Birth, 4. "
-          "Year of Death, 5. Description, 6. Link"<<endl;
+    cout<<"\tWhat would you like to change? Choose: "<<endl;
+    cout<<"\t1. Name, 2. Gender, 3. Year of Birth, 4. "
+          "Year of Death, 5. Description, 6. Link: ";
     cin>>input;
     cin.ignore();
 
@@ -747,7 +758,7 @@ bool workingclass::addScientistContinue()
 
     //char input;
     display.addEmtyLines(1);
-    cout<<"Would you like to add more Scientists? Y/N: ";
+    cout<<"\tWould you like to continue? Y/N: ";
 
     bool input = display.loopFunction();
     return input;

@@ -25,6 +25,7 @@ public:
     void mainMenu();
     void clearScreen();
     void splashScreen();
+    void listheader();
     void displayOneScientist(scientist& s);
     //  Precondition:   Takes in one scientist to display as a parameter.
     //  Postcondition:  Displays all information about the scientist on screen
