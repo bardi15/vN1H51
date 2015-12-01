@@ -6,5 +6,78 @@ John Vincent Atanasoff;1;1903;1995;Bulgarian-American physicist and inventor. Be
 George Boole;1;1815;1864;English mathematician, educator, philosopher and logician. Chiefly known for formalizing Boolean algebra, the basis for digital logic and computer science.;https://en.wikipedia.org/wiki/George_Boole
 Timothy John Berners-Lee;1;1955;0;English computer scientist. Best known as the inventor of the world wide web alongside Robert Cailliau, he was the first to send HTTP communication between client and server.;https://en.wikipedia.org/wiki/Tim_Berners-Lee
 Blaise Pascal;1;1623;1662;French mathematician, physicist, inventor, writer and Christian philosopher. Known for inventing the mechanical calculator.;https://en.wikipedia.org/wiki/Blaise_Pascal
+Richard Stallman;1;1953;0;American software freedom activist and computer programmer. Known for Free software movement, GNU, Emacs and GCC;https://en.wikipedia.org/wiki/Richard_Stallman
 Saul Rosen;1;1922;1991;American computer science pioneer. Chiefly known for designing the software of the first transistor-based computer.;https://en.wikipedia.org/wiki/Saul_Rosen
 Margeret Heafield Hamilton;0;1936;0;Computer scientist, system engineer and buisiness owner. She is credited with coining the phrase "Software engineering" and developed the concepts of asynchronous software, priority scheduling, end-to-end testing, and human-in-the-loop decision capability, such as priority displays which then became the foundation for ultra reliable software design.;https://en.wikipedia.org/wiki/Margaret_Hamilton_(scientist)
+Mark Zuckerberg;1;1984;0;American computer programmer, Internet entrepreneur. Best known as one of five cofounders of the social networking website Facebook.;https://en.wikipedia.org/wiki/Mark_Zuckerberg
+Larry Page;1;1973;0;American Computer scientist, Internet entrepreneur. Known for being the Co-founder of Google Inc. and CEO of Alphabet Inc.;https://en.wikipedia.org/wiki/Larry_Page
+Bill Gates;1;1955;0; American business magnate, philanthropist, investor, and computer programmer. Gates is one of the best-known entrepreneurs of the personal computer revolution. Gates is currently the richest man in the world;https://en.wikipedia.org/wiki/Bill_Gates
+Linus Benedict Torvalds;1;1969;0; Finnish, American software engineer. Best know for Linux kernel, git;https://en.wikipedia.org/wiki/Linus_Torvalds
+Margaret Hamilton;0;1936;0;American computer scientist, systems engineer and business owner. Known for being the Director of the Software Engineering Division of the MIT Instrumentation Laboratory, which developed on-board flight software for the Apollo space program.;https://en.wikipedia.org/wiki/Margaret_Hamilton_(scientist)
+Sophie Wilson;0;1957;0;British computer scientist and software engineer. She designed the Acorn Micro-Computer, the first of a long line of computers sold by Acorn Computers Ltd, including its programming language BBC BASIC.She later designed the instruction set of the ARM processor, which became the de facto model used in 21st century smartphones.;https://en.wikipedia.org/wiki/Sophie_Wilson
+Sergey Brin;1;1973;0;Russian-born American computer scientist and internet entrepreneur who, together with Larry Page, co-founded Google. Also known for directing Google X.;https://en.wikipedia.org/wiki/Sergey_Brin
+John Backus;1;1924;2007;American computer scientist. He directed the team that invented the first widely used high-level programming language (FORTRAN) and was the inventor of the Backus-Naur form (BNF), a widely used notation to define formal language syntax. He also did research in function-level programming and helped to popularize it.;https://en.wikipedia.org/wiki/John_Backus
+Alan Kay;1;1940;0;American computer scientist. He has been elected a Fellow of the American Academy of Arts and Sciences, the National Academy of Engineering, and the Royal Society of Arts.[2] He is best known for his pioneering work on object-oriented programming and windowing graphical user interface design.;https://en.wikipedia.org/wiki/Alan_Kay
+Wesley Allison Clark;1;1927;0;American computer designer. He is one of the main participant in the creation of the LINC computer,  which was the first mini-computer and shares with a number of other computers (such as the PDP-1) the claim to be the inspiration for the personal computer.;https://en.wikipedia.org/wiki/Wesley_A._Clark
+Herman Hollerith;1;1860;1929;American inventor who developed an electromechanical punched card tabulator to assist in summarizing information and, later, accounting. He was the founder of The Tabulating Machine Company that was consolidated in 1911 with three other companies to form the Computing-Tabulating-Recording Company, later renamed IBM.;https://en.wikipedia.org/wiki/Herman_Hollerith
+Donald Knuth;1;1938;0;American computer scientist, mathematician, and professor emeritus at Stanford University.Known for The Art of Computer Programming TeX, METAFONT, Knuth–Morris–Pratt algorithm, Knuth–Bendix completion algorithm, MMIX, Robinson–Schensted–Knuth correspondence.;https://en.wikipedia.org/wiki/Donald_Knuth
+Dennis Ritchie;1;1941;2011;American computer scientist.He created the C programming language and, with long-time colleague Ken Thompson, the Unix operating system.;https://en.wikipedia.org/wiki/Dennis_Ritchie
+Herbert A. Simon;1;1916;2001;American political scientist, economist, sociologist, psychologist, and computer scientist. Known for Logic Theory Machine, General Problem Solver, Bounded rationality, Satisficing.;https://en.wikipedia.org/wiki/Herbert_A._Simon
+Ivan Edward Sutherland;1;1938;0;American computer scientist and Internet pioneer. Known for inventing the Sketchpad and considered by many to be the creator of Computer Graphics.;https://en.wikipedia.org/wiki/Ivan_Sutherland
+Willis H. Ware;1;1920;2013;American computer pioneer, privacy pioneer, social critic of technology policy, and a founder in the field of computer security.;https://en.wikipedia.org/wiki/Willis_Ware
+Sir Maurice Wilkes;1;1913;2010;British computer scientist credited with several important developments in computing. Known for EDSAC and Microprogramming.;https://en.wikipedia.org/wiki/Maurice_Wilkes
+Stephen Arthur Cook;1;1939;0;American-Canadian computer scientist and mathematician who has made major contributions to the fields of complexity theory and proof complexity. Known for NP-sompleteness, Propositional proof complexity, Cook-Levin theorem.;https://en.wikipedia.org/wiki/Stephen_Cook
+Edgar F. Codd;1;1923;2003;English computer scientist who, while working for IBM, invented the relational model for database management, the theoretical basis for relational databases.;https://en.wikipedia.org/wiki/Edgar_F._Codd
+Charles W. Bachman;1;1924;0;American computer scientist, who spent his entire career as an industrial researcher, developer, and manager rather than in academia. He is particularly known for his work in the early development of database management systems. His techniques of layered architecture include his namesake Bachman diagrams.;https://en.wikipedia.org/wiki/Charles_Bachman
+Boris A. Babaian;1;1933;0; Armenian supercomputer architect, notable as the pioneering creator of supercomputers in the Soviet Union.;https://en.wikipedia.org/wiki/Boris_Babaian
+John V. Atanasoff;1;1903;1995;Bulgarian-American physicist and inventor, best known for inventing the first electronic digital computer.;https://en.wikipedia.org/wiki/John_Vincent_Atanasoff
+Seymour Cray;1;1925;1996;American electrical engineer and supercomputer architect who designed a series of computers that were the fastest in the world for decades, and founded Cray Research which built many of these machines. Called "the father of supercomputing".;https://en.wikipedia.org/wiki/Seymour_Cray
+Donald Davies;1;1924;2000;Welsh computer scientist who independently developed the concept of packet switching in computer networking.;https://en.wikipedia.org/wiki/Donald_Davies
+Kristen Nygaard;1;1926;2002; Norwegian computer scientist, programming language pioneer and politician. Known for Object-oriented programming and Simula.;https://en.wikipedia.org/wiki/Kristen_Nygaard
+David Parnas;1;1941;0;Canadian early pioneer of software engineering, who developed the concept of information hiding in modular programming, which is an important element of object-oriented programming today. He is also noted for his advocacy of precise documentation.;https://en.wikipedia.org/wiki/David_Parnas
+Ted Nelson;1;1937;0;American pioneer of information technology, philosopher, and sociologist.He coined the terms "hypertext" and "hypermedia" in 1963, and published them in 1965. Nelson has also been credited as being the first person to use the words transclusion, virtuality, intertwingularity, and teledildonics.;https://en.wikipedia.org/wiki/Ted_Nelson
+Peter Landin;1;1930;2009;British computer scientist. He was one of the first to realize that the lambda calculus could be used to model a programming language, an insight that is essential to development of both functional programming and denotational semantics.;https://en.wikipedia.org/wiki/Peter_Landin
+Andrei P. Ershov;1;1931;1988;Russian Soviet computer scientist, notable as a pioneer in systems programming and programming language. He was responsible for the languages ALPHA and Rapira, AIST-0 the first Soviet time-sharing system, electronic publishing system RUBIN, and MRAMOR.;https://en.wikipedia.org/wiki/Andrey_Ershov
+Douglas C. Engelbart;1;1925;2013;American engineer and inventor, and an early computer and Internet pioneer. He is best known for his work on founding the field of human–computer interaction.;https://en.wikipedia.org/wiki/Douglas_Engelbart
+Augusta Ada Lovelace;0;1815;1852
+Scott Aaronson;1;1941;1999
+Hal Abelson;1;1941;1999
+Jacques Herbrand;1;1908;1931
+Serge Abiteboul;1;1941;1999
+Samson Abramsky;1;1941;1999
+Leonard Adleman;1;1941;1999
+Manindra Agrawal;1;1941;1999
+Alfred Aho;1;1941;1999
+Frances E. Allen;0;1941;1999
+Gene Amdahl;1;1941;1999
+David P. Anderson;1;1941;1999
+Andrew Appel;1;1941;1999
+Bruce Arden;1;1941;1999
+Sanjeev Arora;1;1941;1999
+Ahmed Albarwary;1;1941;1999
+Anita Borg;0;1941;1999
+Roland Carl Backhouse;1;1941;1999
+David A. Bader;1;1941;1999
+Victor Bahl;1;1941;1999
+Anthony James Barr;1;1941;1999
+Jean Bartik;0;1941;1999
+Andrew Barto;1;1941;1999
+Rudolf Bayer;1;1941;1999
+James C. Beatty;1;1941;1999
+Gordon Bell;1;1941;1999
+Steven M. Bellovin;1;1941;1999
+Tim Berners-Lee;1;1955;0;
+Peter Bernus;1;1941;1999
+Dines Bjarner;1;1941;1999
+Gerrit Blaauw;0;1941;1999
+David Blei;1;1941;1999
+Manuel Blum;1;1941;1999
+Barry Boehm;1;1941;1999
+Corrado Bohm;1;1941;1999
+Kurt Bollacker;1;1941;1999
+Grady Booch;0;1941;1999
+Bert Bos;1;1941;1999
+Jonathan Bowen;1;1941;1999
+Harry Bouwman;1;1941;1999
+Robert S. Boyer;1;1941;1999
+Jack E. Bresenham;1;1941;1999
