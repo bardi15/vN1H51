@@ -189,7 +189,8 @@ void service::searchSelection(int select)
             bool found = false;
             vector<scientist> v;
             display.clearScreen();
-            cout << "\tPlease enter the gender you would like to see: " << endl;
+            display.addEmtyLines(5);
+            cout << "\tPlease enter the gender you would like to see: ";
             cin >> tempGender;
             v = workingobject.searchByGender(tempGender, found);
             if( found == true)
@@ -226,7 +227,8 @@ void service::searchSelection(int select)
             bool found = false;
 
             display.clearScreen();
-            cout << "\tPlease enter the year you would like to search for: " << endl;
+            display.addEmtyLines(5);
+            cout << "\tPlease enter the year you would like to search for: ";
             cin >> yr;
             vector<scientist> v;
             v = workingobject.searchByYear(yr, 'b', found);
@@ -265,7 +267,8 @@ void service::searchSelection(int select)
             bool found = false;
 
             display.clearScreen();
-            cout << "\tPlease enter the year you would like to search for: " << endl;
+            display.addEmtyLines(5);
+            cout << "\tPlease enter the year you would like to search for: ";
             cin >> yr;
             vector<scientist> v;
             v = workingobject.searchByYear(yr, 'd', found);

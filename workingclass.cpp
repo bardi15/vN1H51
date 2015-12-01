@@ -264,6 +264,7 @@ string workingclass::nameCorrection(string name, bool& badName)
         name[i] = (tolower(name[i]));
 
 
+
         if ((i < MAXNAMELENGTH) && (i > 1))
         {
            spaceCount = (name.find(" ", i));
@@ -299,12 +300,17 @@ string workingclass::nameCorrection(string name, bool& badName)
 int workingclass::genderCorrection(string gender)
 {
 
-    string male[14] = {"karlmadur", "karlkyns", "karl", "kk", "male", "man", "guy", "bro",
+    for(unsigned int i = 0; i < gender.length(); ++i)
+    {
+        gender[i] = tolower(gender[i]);
+    }
+
+    string male[15] = {"m","karlmadur", "karlkyns", "karl", "kk", "male", "man", "guy", "bro",
                       "kall", "gaur", "dude", "sjomli", "strakur", "piltur"};
 
     vector<string> maleVector (male, male + sizeof(male) / sizeof(male[0]));
 
-    string female[12] = {"kona", "kvenmadur", "kvenkyns", "kvk", "stelpa", "female", "stulka",
+    string female[13] = {"f", "kona", "kvenmadur", "kvenkyns", "kvk", "stelpa", "female", "stulka",
                         "kerling", "lady", "woman", "girl", "gal"};
 
     vector<string> femaleVector (female, female + sizeof(female) / sizeof(female[0]));
@@ -355,6 +361,7 @@ vector<scientist> workingclass::searchByName(string subName, bool& isFound)
 {
     vector<scientist> returnVector;
     scientist s;
+
     for(unsigned int i = 0; i < scientistVector.size(); i++)
     {
         if( scientistVector.at(i).getName().find( subName) < 30 )
@@ -547,10 +554,7 @@ int workingclass::addScientistGender(string &gender)
     cout<<"\tEnter gender: ";
     cin>>gender;
 
-    for(unsigned int i = 0; i < gender.length(); ++i)
-    {
-        gender[i] = tolower(gender[i]);
-    }
+
 
     selectedGender = genderCorrection(gender);
 
