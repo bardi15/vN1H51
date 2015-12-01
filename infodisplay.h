@@ -34,23 +34,6 @@ public:
     void dispScientistToEdit(vector<scientist>& v);
     void dispSelectScientistToDelete(vector<scientist>& v);
     bool dispSureToRemove(int gender);
-//    void screenSelection();
-
-//    void AddScientist();
-//        int addScientistYearOfDeath(int &yod);
-//        void searchSelection(int select);
-//        string addScientistName(string &name);
-//        int addScientistGender(string &gender);
-//        int addScientistYearOfBirth();
-//        bool addScientistMore(int &yod, string &descr, string &link);
-//        int addScientistYearOfDeath();
-//        string addScientistDescription(string &descr);
-//        string addScientistLink(string &link);
-//        bool addScientistCheck(string name, int gender, int yob, int yod, string desc, string link);
-//        void addScientistPushToVector(workingclass &workingobject, scientist sO);
-//        bool addScientistContinue();
-//        void addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender);
-    void displayRemoveScientist();
     void displayChangeScientist();
     void displaySearchScientist();
     void displayListOfScientists();

@@ -12,9 +12,6 @@ class service
 {
 public:
     service();
-    vector<scientist> getWCVector();
-    void setWCVector(vector<scientist>& v);
-    //void screenSelection();
     void selectAction();
     int selection();
     void searchSelection(int select);

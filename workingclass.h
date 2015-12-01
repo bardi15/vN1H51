@@ -36,7 +36,6 @@ public:
     void createScientist(string& line, int& oldfind);
 
     void AddScientist();
-        //int addScientistYearOfDeath(int &yod);
         string addScientistName(string &name);
         int addScientistGender(string &gender);
         int addScientistYearOfBirth();

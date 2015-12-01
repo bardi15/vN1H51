@@ -340,7 +340,7 @@ int workingclass::yearCorrection(int year, bool &errorInYear)
         tempYear += 2000;
     }
 
-    if ((tempYear > 0) && (tempYear < CURRENTYEAR))
+    if ((tempYear > 0) && (tempYear <= CURRENTYEAR))
     {
         errorInYear = false;
     }

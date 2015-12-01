@@ -8,7 +8,7 @@ void infoDisplay::listheader()
     //Header á listann
     addEmtyLines(5);
     cout.setf(ios::left);
-    cout << "\t Nr.";
+    cout << "\tNr.";
     cout.width(30);
     cout << "\tName";
     cout << "Gender\tBorn" << endl;
@@ -20,7 +20,6 @@ void infoDisplay::displayList(vector<scientist>& v)
     unsigned int scrollFactor = 0;
     unsigned int scrollBase = 0;
     unsigned int holyScroll = 15;
-    int scientistSelection = 0;
     bool scroll = false;
     char input;
 
@@ -102,7 +101,7 @@ void infoDisplay::displayList(vector<scientist>& v)
 
 int infoDisplay::moreInfoOnScientist(vector<scientist>& v)
 {
-    int sel;
+    unsigned int sel;
     if(v.size() > 0)
     {
         cout << "\tWould you like more info on any of the scientist?" << endl;
@@ -113,11 +112,17 @@ int infoDisplay::moreInfoOnScientist(vector<scientist>& v)
         {
             mainMenu();
         }
-        else
+        else if ((sel > 0)&&(sel <= v.size()))
         {
             displayOneScientist(v.at(sel-1));
         }
+        else
+        {
+            cout<<"Incorrect selection!"<<endl;
+        }
     }
+
+    return sel;
 }
 
 void infoDisplay::dispSelectScientistToDelete(vector<scientist>& v)
@@ -264,19 +269,19 @@ void infoDisplay::mainMenu()
     clearScreen();
     addEmtyLines(5);
 
-    cout <<"\t Today is: ";
+    cout <<"\tToday is: ";
     cout <<getCurrentDate("day")<<"."<<getCurrentDate("month")<<"."<<getCurrentDate("year")<<endl;
 
-    cout << "\t Welcome to the computer scientist database! \n";
-    cout << "\t What would you like to do? \n";
+    cout << "\tWelcome to the computer scientist database! \n";
+    cout << "\tWhat would you like to do? \n";
     cout << endl;
-    cout << "\t 1) Add a new computer scientist. \n";
-    cout << "\t 2) Delete existing information. \n";
-    cout << "\t 3) Edit existing information. \n";
-    cout << "\t 4) Search for a computer scientists. \n";
-    cout << "\t 5) Print list of computer scientists. \n";
-    cout << "\t 6) Play greeting. \n";
-    cout << "\t All other entries exit the program: ";
+    cout << "\t1) Add a new computer scientist. \n";
+    cout << "\t2) Delete existing information. \n";
+    cout << "\t3) Edit existing information. \n";
+    cout << "\t4) Search for a computer scientists. \n";
+    cout << "\t5) Print list of computer scientists. \n";
+    cout << "\t6) Play greeting. \n";
+    cout << "\tAll other entries exit the program: ";
 }
 
 infoDisplay::infoDisplay()
@@ -288,12 +293,7 @@ void infoDisplay::splashScreen()
 {
     opengreeting greet;
 
-    greet.greetingPost();
-}
-
-void infoDisplay::displayRemoveScientist()
-{
-
+    //greet.greetingPost();
 }
 
 void infoDisplay::displayChangeScientist()
@@ -320,18 +320,6 @@ void infoDisplay::displayChangeScientist()
         continueP = workingobject.addScientistContinue();
 
     }
-
-
-//    cout << "Which part of " << name <<"'s profile would you like to edit? \n";
-//    cout << endl;
-//    cout << "1) The name. \n";
-//    cout << "2) Year of birth. \n";
-//    cout << "3) Year of untimely demise(Should it apply). \n";
-//    cout << "4) Description. \n";
-//    cout << "5) Change the link. \n";
-//    cout << "Any other entrie returns to the main menu. \n";
-
-
 }
 
 void infoDisplay::displaySearchScientist()
@@ -341,20 +329,21 @@ void infoDisplay::displaySearchScientist()
 
     int sel;
     addEmtyLines(5);
-    cout << "= = = = = M e n u  f o r  S e a r c h = = = = = " << endl;
-    cout << "Enter \"1\" to search by name or part of name." << endl;
-    addEmtyLines(1);
-    cout << "Enter \"2\" to search by gender." << endl;
-    addEmtyLines(1);
-    cout << "Enter \"3\" to search by year of birth." << endl;
-    addEmtyLines(1);
-    cout << "Enter \"4\" to search by year of death." << endl;
-    addEmtyLines(1);
-    cout << "Enter \"5\" to return to main menu." << endl;
-    addEmtyLines(1);
-    cout << "= = = = = = = = = = = = = = = = = = = = = = = ";
-    addEmtyLines(2);
-    cout << "Enter your selection: ";
+    cout << "\tMenu for Search " << endl;
+    cout<<"\t======================================"<<endl;
+    cout << "\t1) Search by name or part of name." << endl;
+    //addEmtyLines(1);
+    cout << "\t2) Search by gender." << endl;
+    //addEmtyLines(1);
+    cout << "\t3) Search by year of birth." << endl;
+    //addEmtyLines(1);
+    cout << "\t4) Search by year of death." << endl;
+    //addEmtyLines(1);
+    cout << "\t5) Return to main menu." << endl;
+    //addEmtyLines(1);
+    //cout << "\t======================================";
+    //addEmtyLines(2);
+    cout << "\tEnter your selection: ";
     cin >> sel;
     serviceobject.searchSelection(sel);
     mainMenu();
