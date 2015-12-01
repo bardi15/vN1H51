@@ -61,8 +61,11 @@ void workingclass::addLineToFile(scientist& s, char AppOver) const
         cout << "error opening addToFile file";
         exit(1);
     }
-    outstring = scientistToString(s);
-    file_out << outstring;
+    cout << outstring << endl;
+    file_out  << endl << s.getName() << ";" <<
+                s.getGender() << ";" << s.getYearOfBirth() << ";" <<
+                s.getYearOfDeath() << ";" << s.getDescription() << ";" <<
+                s.getLink();
     file_out.close();
 
 }
@@ -72,16 +75,21 @@ string workingclass::scientistToString(scientist& s) const
     string nextline;
     nextline += s.getName();
     nextline += ";";
-    nextline += s.getGender();
+    stringstream ss;
+    ss << s.getGender();
+    nextline += ss.str();
     nextline += ";";
-    nextline += s.getYearOfBirth();
+    ss << s.getYearOfBirth();
+    nextline += ss.str();
     nextline += ";";
-    nextline += s.getYearOfDeath();
+    ss << s.getYearOfDeath();
+    nextline += ss.str();
     nextline += ";";
     nextline += s.getDescription();
     nextline += ";";
     nextline += s.getLink();
     nextline += ";";
+    nextline += "\n";
 
     return nextline;
 }
@@ -127,7 +135,8 @@ void workingclass::createScientist(string& line, int& oldfind)
         pushToVector(s);
     }
 }
-void workingclass::removeScientist(string s){
+void workingclass::removeScientist(string s)
+{
     readFile();
     for(unsigned int j = 0; j < scientistVector.size(); j++){
         if(scientistVector[j].getName() == s){
@@ -136,12 +145,20 @@ void workingclass::removeScientist(string s){
               ofstream newFile("Scientistinfo.txt");
               if(newFile.is_open()){
                   for(unsigned int i = 0; i < scientistVector.size()-1; i++){
-                      newFile << scientistVector[i].getName() << ";" <<
-                                 scientistVector[i].getGender() << ";" <<
-                                 scientistVector[i].getYearOfBirth() << ";" <<
-                                 scientistVector[i].getYearOfDeath() << ";" <<
-                                 scientistVector[i].getDescription() << ";" <<
-                                 scientistVector[i].getLink() << endl;
+                      if(i == 0)
+                      {
+                        addLineToFile(scientistVector[i], 'O');
+                      }
+                      else
+                      {
+                          addLineToFile(scientistVector[i], 'A');
+                      }
+//                      newFile << scientistVector[i].getName() << ";" <<
+//                                 scientistVector[i].getGender() << ";" <<
+//                                 scientistVector[i].getYearOfBirth() << ";" <<
+//                                 scientistVector[i].getYearOfDeath() << ";" <<
+//                                 scientistVector[i].getDescription() << ";" <<
+//                                 scientistVector[i].getLink() << endl;
                   }
               }else {
                   cout << "can't open file";
@@ -458,23 +475,25 @@ void workingclass::AddScientist()
 
         sO.setName(name);
         sO.setGender(selectedGender);
+
         sO.setYearOfBirth(yob);
         sO.setYearOfDeath(yod);
         sO.setDescription(descr);
         sO.setLink(link);
-
+        workingclass wO;
         vector<scientist> tempVector;
         //tempVector = returnVector();
         tempVector = returnVector();
         tempVector.push_back(sO);
         //workingobject.pushToVector(sO);
         pushToVector(sO);
+        wO.addLineToFile(sO, 'A');
 
     };
 
-    cout<<"output out of vector: "<<endl<<endl;
+    //cout<<"output out of vector: "<<endl<<endl;
     //workingobject.printVector();
-    printVector();
+    //printVector();
 
     display.mainMenu();
 
@@ -569,10 +588,18 @@ bool workingclass::addScientistMore(int &yod, string &descr, string &link)
 
         default:
         cout<<"Nothing selected. "<<endl;
+        sleep(1);
     }
 
-    cout<<"Add more fields? Y/N? ";
-    bool addAnother = display.loopFunction();
+
+    bool addAnother;
+
+    if ((choice >=1)&&(choice <=3))
+    {
+        cout<<"Add more fields? Y/N? ";
+        addAnother = display.loopFunction();
+    }
+
     return addAnother;
 }
 int workingclass::addScientistYearOfDeath()

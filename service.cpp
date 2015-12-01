@@ -17,67 +17,145 @@ void service::setWCVector(vector<scientist>& v)
     workingclass wc;
     wc.setVector(v);
 }
-void service::selectAction(int sel)
+//void service::selectAction(int sel)
+//{
+//    vector<scientist> v;
+//    workingclass workingobject;
+//    workingobject.readFile();
+//    infoDisplay display;
+
+//    switch(sel)
+//        {
+//        case 1:
+//            display.clearScreen();
+//            workingobject.AddScientist();
+//            break;
+//        case 2:
+//            display.clearScreen();
+//            display.displayRemoveScientist();
+//            break;
+//        case 3:
+//            display.clearScreen();
+//            display.displayChangeScientist();
+//            break;
+//        case 4:
+//            display.clearScreen();
+//            display.displaySearchScientist();
+//            break;
+//        case 5:
+//            unsigned int sel;
+//            do
+//            {
+//                display.clearScreen();
+//                v = workingobject.getVector();
+//                display.displayList(v);
+//                sel = display.moreInfoOnScientist(v);
+//                if(sel > 0 && sel <= v.size())
+//                {
+//                    display.displayOneScientist(v.at(sel-1));
+//                }
+//                else
+//                {
+//                    break;
+//                }
+//            }while(sel > 0);
+//                break;
+//        case 6:
+//            display.clearScreen();
+//            display.splashScreen();
+//            break;
+
+//        default:
+//            display.clearScreen();
+//            display.addEmtyLines(10);
+//            cout << "Thank you, come again!." << endl;
+//            display.addEmtyLines(10);
+//            exit(0);
+//            break;
+//       }
+//}
+
+
+void service::selectAction()
 {
-    vector<scientist> v;
-    workingclass workingobject;
     workingobject.readFile();
-    infoDisplay display;
+    vector<scientist> v;
+    v = workingobject.getVector();
 
-    switch(sel)
+        do
         {
-        case 1:
-            display.clearScreen();
-            workingobject.AddScientist();
-            break;
-        case 2:
-            display.clearScreen();
-            display.displayRemoveScientist();
-            break;
-        case 3:
-            display.clearScreen();
-            display.displayChangeScientist();
-            break;
-        case 4:
-            display.clearScreen();
-            display.displaySearchScientist();
-            break;
-        case 5:
-            unsigned int sel;
-            do
-            {
-                display.clearScreen();
-                v = workingobject.getVector();
-                display.displayList(v);
-                sel = display.moreInfoOnScientist(v);
-                if(sel > 0 && sel <= v.size())
-                {
-                    display.displayOneScientist(v.at(sel-1));
-                }
-                else
-                {
-                    break;
-                }
-            }while(sel > 0);
-                break;
-        case 6:
-            display.clearScreen();
-            display.splashScreen();
-            break;
 
-        default:
-            display.clearScreen();
-            display.addEmtyLines(10);
-            cout << "Thank you, come again!." << endl;
-            display.addEmtyLines(10);
-            exit(0);
-            break;
-       }
+//           workingobject.readFile();
+            //v = workingobject.getVector();
+            infoDisplay display;
+
+            display.mainMenu();
+            int sel = selection();
+            switch(sel)
+                {
+                case 1:
+                    display.clearScreen();
+                    workingobject.AddScientist();
+                    break;
+                case 2:
+                    display.clearScreen();
+                    display.displayRemoveScientist();
+                    break;
+                case 3:
+                    display.clearScreen();
+                    display.displayChangeScientist();
+                    break;
+                case 4:
+                    display.clearScreen();
+                    display.displaySearchScientist();
+                    break;
+                case 5:
+                    unsigned int sel;
+                    do
+                    {
+                        display.clearScreen();
+                        v = workingobject.getVector();
+                        display.displayList(v);
+                        sel = display.moreInfoOnScientist(v);
+                        if(sel > 0 && sel <= v.size())
+                        {
+                            display.displayOneScientist(v.at(sel-1));
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }while(sel > 0);
+                        break;
+                case 6:
+                    display.clearScreen();
+                    display.splashScreen();
+                    break;
+
+                default:
+                    display.clearScreen();
+                    display.addEmtyLines(10);
+                    cout << "Thank you, come again!." << endl;
+                    display.addEmtyLines(10);
+                    exit(0);
+                    break;
+               }
+            }
+            while(true);
 }
+
+int service::selection()
+{
+    int select;
+    cin>>select;
+    cin.ignore();
+    return select;
+}
+
 void service::searchSelection(int select)
 {
-    workingclass work;
-    work.readFile();
+    //workingclass work;
+    workingobject.readFile();
     infoDisplay display;
     //infoDisplay disp;
     char cont;
@@ -95,7 +173,7 @@ void service::searchSelection(int select)
             display.addEmtyLines(5);
             cout << "\tPlease enter a part of the name you would like to find: " << endl;
             cin >> tempName;
-            v = work.searchByName(tempName, found);
+            v = workingobject.searchByName(tempName, found);
             if( found == true)
             {
                 unsigned int sel;
@@ -113,7 +191,7 @@ void service::searchSelection(int select)
                         break;
                     }
                 }while(sel > 0);
-                //work.printVector();
+                //workingobject.printVector();
                 cont = 'N';
             }
             else
@@ -132,7 +210,7 @@ void service::searchSelection(int select)
             display.clearScreen();
             cout << "Please enter the gender you would like to see: " << endl;
             cin >> tempGender;
-            v = work.searchByGender(tempGender, found);
+            v = workingobject.searchByGender(tempGender, found);
             if( found == true)
             {
                 unsigned int sel;
@@ -170,7 +248,7 @@ void service::searchSelection(int select)
             cout << "Please enter the year you would like to search for: " << endl;
             cin >> yr;
             vector<scientist> v;
-            v = work.searchByYear(yr, 'b', found);
+            v = workingobject.searchByYear(yr, 'b', found);
 
             if( found == true)
             {
@@ -209,7 +287,7 @@ void service::searchSelection(int select)
             cout << "Please enter the year you would like to search for: " << endl;
             cin >> yr;
             vector<scientist> v;
-            v = work.searchByYear(yr, 'd', found);
+            v = workingobject.searchByYear(yr, 'd', found);
             if( found == true)
             {
                 unsigned int sel;
@@ -250,31 +328,32 @@ void service::searchSelection(int select)
         break;
     }
 }
+
 void service::chooseSortion(int choice)
 {
-    workingclass Wobj;
+    //workingclass Wobj;
     infoDisplay display;
 
     switch(choice)
     {
         case 1:
             display.clearScreen();
-            Wobj.sortAlph();
+            workingobject.sortAlph();
             break;
         case 2:
             display.clearScreen();
-            Wobj.sortRevAlph();
+            workingobject.sortRevAlph();
             break;
         case 3:
             display.clearScreen();
-            Wobj.sortYOB();
+            workingobject.sortYOB();
             break;
         case 4:
             display.clearScreen();
-            Wobj.sortYOD();
+            workingobject.sortYOD();
         default:
             display.clearScreen();
-            display.mainMenu();
+            //display.mainMenu();
             break;
     }
 

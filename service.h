@@ -15,9 +15,11 @@ public:
     vector<scientist> getWCVector();
     void setWCVector(vector<scientist>& v);
     //void screenSelection();
-    void selectAction(int sel);
+    void selectAction();
+    int selection();
     void searchSelection(int select);
     void chooseSortion(int choice);
+    workingclass workingobject;
 
 
 

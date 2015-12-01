@@ -128,10 +128,10 @@ void infoDisplay::clearScreen()
 
 void infoDisplay::mainMenu()
 {
-    service serviceobject;
+    //service serviceobject;
 
     //clearScreen();
-    int sel;
+    //int sel;
     clearScreen();
     addEmtyLines(5);
 
@@ -149,9 +149,9 @@ void infoDisplay::mainMenu()
     cout << "\t 5) Print list of computer scientists. \n";
     cout << "\t 6) Play greeting. \n";
     cout << "\t All other entries exit the program. \n";
-    cin >> sel;
-    cin.ignore();
-    serviceobject.selectAction(sel);
+//    cin >> sel;
+//    cin.ignore();
+//    serviceobject.selectAction(sel);
 }
 
 infoDisplay::infoDisplay()
