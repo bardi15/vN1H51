@@ -122,7 +122,7 @@ void workingclass::readLinesFromFile(ifstream& fileWithLines)
 
     }
 }
-void workingclass::pushToVector(scientist s)
+void workingclass::pushToVector(const scientist& s)
 {
     scientistVector.push_back(s);
 }
@@ -175,12 +175,6 @@ void workingclass::removeScientist(scientist& s)
                       {
                           addLineToFile(scientistVector[i], 'A');
                       }
-//                      newFile << scientistVector[i].getName() << ";" <<
-//                                 scientistVector[i].getGender() << ";" <<
-//                                 scientistVector[i].getYearOfBirth() << ";" <<
-//                                 scientistVector[i].getYearOfDeath() << ";" <<
-//                                 scientistVector[i].getDescription() << ";" <<
-//                                 scientistVector[i].getLink() << endl;
                   }
               }else {
                   cout << "can't open file";
@@ -190,69 +184,35 @@ void workingclass::removeScientist(scientist& s)
    }
 
 }
-void workingclass::printVector() const
-{
-//    infoDisplay disp;
-//    vector<scientist> v = scientistVector;
-//    disp.displayList(v);
-    //disp.moreInfoOnScientist(v);
-    // disp.displayList(scientistVector);
-    // This shoul not be hear!! - display fall - Jón
-//    for(unsigned int i = 0; i < scientistVector.size(); i++)
-//    {
-//        //scientist s = scientistVector.at(i);
-//        cout << "Nafn: " << scientistVector[i].getName() << endl;
-//        cout << "kyn: " << scientistVector[i].getGender() << endl;
-//        cout << "fd: " << scientistVector[i].getYearOfBirth() << endl;
-//        cout << "dd: " << scientistVector[i].getYearOfDeath() << endl;
-//        cout << "descr: " << scientistVector[i].getDescription() << endl;
-//        cout << "url: " << scientistVector[i].getLink() << endl;
-//        cout << endl;
 
-        //s.getName() << endl;
-    //}
-}
-void workingclass::fillScientist(string text, scientist& s, const int field)
+void workingclass::fillScientist(const string& text, scientist& s, const int& field)
 {
     switch (field)
     {
     case 1:
         s.setName(text);
-        //cout << "Nafn: " << text << endl;
         break;
     case 2:
         s.setGender(atoi(text.c_str()));
-        //cout << "Gender: " << atoi(text.c_str()) << endl;
         break;
     case 3:
         s.setYearOfBirth(atoi(text.c_str()));
-        //cout << "YOB: " << atoi(text.c_str()) << endl;
         break;
     case 4:
         s.setYearOfDeath(atoi(text.c_str()));
-        //cout << "YOD: " << atoi(text.c_str()) << endl;
         break;
     case 5:
         s.setDescription(text);
-        //cout << "Descr: " << text << endl;;
         break;
     case 6:
         s.setLink(text);
-        //cout << "Link: " << text << endl;
         break;
     default:
         cout << "error" << endl << endl;
         break;
     }
 }
-vector<scientist> workingclass::returnVector ()
-{
-    return scientistVector;
-}
-void workingclass::modifyVector(vector<scientist> mVector)
-{
-    scientistVector = mVector;
-}
+
 string workingclass::nameCorrection(string name, bool& badName)
 {
     int spaceCount = 0;
@@ -364,7 +324,18 @@ vector<scientist> workingclass::searchByName(string subName, bool& isFound)
 
     for(unsigned int i = 0; i < scientistVector.size(); i++)
     {
-        if( scientistVector.at(i).getName().find( subName) < 30 )
+        string searchstring = scientistVector.at(i).getName();
+        for (unsigned int j = 0; j < searchstring.size(); j++)
+        {
+            searchstring[j] = tolower(searchstring[j]);
+        }
+        for (unsigned int j = 0; j < subName.size(); j++)
+        {
+            subName[j] = tolower(subName[j]);
+        }
+
+        //  Kemur einhver furðuleg villa þegar reynt er að breyta í lovercase :(
+        if( searchstring.find( subName) < 30 )
        {
             s = scientistVector.at(i);
             returnVector.push_back(s);
@@ -463,8 +434,6 @@ void workingclass::AddScientist()
 
     scientist sO;
 
-    //workingclass workingobject;
-
     infoDisplay display;
 
     while(wYLTContinue == true)
@@ -515,25 +484,17 @@ void workingclass::AddScientist()
         sO.setLink(link);
         workingclass wO;
         vector<scientist> tempVector;
-        //tempVector = returnVector();
-        tempVector = returnVector();
+        tempVector = getVector();
         tempVector.push_back(sO);
-        //workingobject.pushToVector(sO);
         pushToVector(sO);
         wO.addLineToFile(sO, 'A');
 
     };
-
-    //cout<<"\toutput out of vector: "<<endl<<endl;
-    //workingobject.printVector();
-    //printVector();
-
     display.mainMenu();
 
 }
 string workingclass::addScientistName(string &name)
 {
-    //workingclass workingobject;
     bool badName = false;
 
     do
@@ -552,7 +513,6 @@ string workingclass::addScientistName(string &name)
 }
 int workingclass::addScientistGender(string &gender)
 {
-    //workingclass workingobject;
     int selectedGender;
     cout<<"\tEnter gender: ";
     cin>>gender;
@@ -569,8 +529,6 @@ int workingclass::addScientistYearOfBirth()
     int temp;
 
     bool errorInYear = false;
-    //workingclass workingobject;
-
     do
     {
         cout<<"\tEnter year of birth: ";
@@ -592,7 +550,6 @@ int workingclass::addScientistYearOfBirth()
 }
 bool workingclass::addScientistMore(int yob, int &yod, string &descr, string &link)
 {
-    //workingclass workingobject;
     infoDisplay display;
     display.addEmtyLines(5);
     cout<<"\t1. Add year of Death, 2. Description, "<<endl<<"\t3. Website link, any other key skips: ";
@@ -725,7 +682,6 @@ void workingclass::addScientistChange(string &name, string gender, int &yob, int
     infoDisplay display;
     display.clearScreen();
     int input = 0;
-    //bool badSelection = false;
     int yOBirth = yob;
 
     display.addEmtyLines(5);
@@ -743,7 +699,6 @@ void workingclass::addScientistChange(string &name, string gender, int &yob, int
         selectedGender = addScientistGender(gender);
         break;
     case 3:
-        //yob = addScientistYearOfBirth(yob);
         yob = addScientistYearOfBirth();
         break;
     case 4:
@@ -765,7 +720,6 @@ bool workingclass::addScientistContinue()
 {
     infoDisplay display;
 
-    //char input;
     display.addEmtyLines(1);
     cout<<"\tWould you like to continue? Y/N: ";
 
@@ -799,14 +753,4 @@ int workingclass::inputNumberToFunction()
     while (badInput == true);
 
     return temp;
-
-//    if ((ia >= 0)&&(ia <= 9))
-//    {
-//        return ia;
-//        badSelection = true;
-//    }
-//    else
-//    {
-//        return 0;
-//    }
 }

@@ -51,8 +51,6 @@ void service::selectAction()
                     do
                     {
                         display.clearScreen();
-                        //workingobject.readFile();
-                        //v = workingobject.getVector();
                         display.displayList(v);
                         sel = display.moreInfoOnScientist(v);
                         if(sel > 0 && sel <= v.size())
@@ -65,10 +63,10 @@ void service::selectAction()
                         }
                     }while(sel > 0);
                         break;
-                case 6:
-                    display.clearScreen();
-                    display.splashScreen();
-                    break;
+//                case 6:
+//                    display.clearScreen();
+//                    display.splashScreen();
+//                    break;
 
                 default:
                     display.clearScreen();
@@ -98,7 +96,7 @@ void service::editScientistDisplayService()
     display.displayList(tempVector);
 }
 
-void service::editScientistService(int i) //(int selection, int scientist)
+void service::editScientistService(int i)
 {
     vector<scientist> v;
     v = workingobject.getVector();

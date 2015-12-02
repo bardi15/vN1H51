@@ -5,7 +5,6 @@ using namespace std;
 void infoDisplay::listheader()
 {
     clearScreen();
-    //Header á listann
     addEmtyLines(5);
     cout.setf(ios::left);
     cout << "\tNr.";
@@ -261,10 +260,6 @@ void infoDisplay::clearScreen()
 
 void infoDisplay::mainMenu()
 {
-    //service serviceobject;
-
-    //clearScreen();
-    //int sel;
     clearScreen();
     addEmtyLines(5);
 
@@ -279,7 +274,7 @@ void infoDisplay::mainMenu()
     cout << "\t3) Edit existing information. \n";
     cout << "\t4) Search for a computer scientists. \n";
     cout << "\t5) Display list of computer scientists. \n";
-    cout << "\t6) Play greeting. \n";
+    //cout << "\t6) Play greeting. \n";
     cout << "\tAll other entries exit the program: ";
 }
 
@@ -290,9 +285,9 @@ infoDisplay::infoDisplay()
 
 void infoDisplay::splashScreen()
 {
-    opengreeting greet;
+//    opengreeting greet;
 
-    //greet.greetingPost();
+//    greet.greetingPost();
 }
 
 void infoDisplay::displayChangeScientist()
@@ -313,7 +308,6 @@ void infoDisplay::displayChangeScientist()
         string name;
 
         cout << "\tEnter the number of the scientist you would like to edit: ";
-        //cin >> i;
         i = workingobject.inputNumberToFunction() - 1;
         serviceobject.editScientistService(i);
         clearScreen();
@@ -332,17 +326,11 @@ void infoDisplay::displaySearchScientist()
     cout << "\tMenu for Search " << endl;
     cout<<"\t======================================"<<endl;
     cout << "\t1) Search by name or part of name." << endl;
-    //addEmtyLines(1);
     cout << "\t2) Search by gender." << endl;
-    //addEmtyLines(1);
     cout << "\t3) Search by year of birth." << endl;
-    //addEmtyLines(1);
     cout << "\t4) Search by year of death." << endl;
-    //addEmtyLines(1);
     cout << "\t5) Return to main menu." << endl;
-    //addEmtyLines(1);
-    //cout << "\t======================================";
-    //addEmtyLines(2);
+    cout << "\t======================================" << endl;
     cout << "\tEnter your selection: ";
     cin >> sel;
     serviceobject.searchSelection(sel);
@@ -368,7 +356,6 @@ int infoDisplay::displaySortOptions()
     cout << "\tInput choice here: ";
     choice = workingobject.inputNumberToFunction();
     return choice;
-//    servant.chooseSortion(choice);
 
 }
 
@@ -380,20 +367,6 @@ void infoDisplay::addEmtyLines(int numLines)
         numLines--;
     }while(numLines>0);
 }
-
-//Gerir væntanlega það sama og displayList
-//void infoDisplay::displayListOfScientists()
-//{
-//    workingclass workingobject;
-
-//    vector<scientist> tempVector;
-
-//    cout<<"output out of vector: "<<endl<<endl;
-
-//    cout<<tempVector.size();
-
-//    workingobject.printVector();
-//}
 
 void infoDisplay::quitProgram()
 {
@@ -420,7 +393,7 @@ bool infoDisplay::loopFunction()
     {
         return true;
     }
-    else //if (input == 'N')
+    else
     {
         return false;
     }
