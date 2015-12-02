@@ -1,3 +1,4 @@
+
 Charles Babbage;1;1791;1871;English polymath.[1] A mathematician, philosopher, inventor and mechanical engineer, Babbage is best remembered for originating the concept of a programmable computer.;https://en.wikipedia.org/wiki/Charles_Babbage
 Ada Lovelace;0;1815;1852;British mathematician and writer, chiefly known for her work on Charles Babbage's early mechanical general-purpose computer, the Analytical Engine. Her notes on the engine include what is recognised as the first algorithm intended to be carried out by a machine. Because of this, she is often regarded as the first computer programmer.;https://en.wikipedia.org/wiki/Ada_Lovelace
 Alan Turing;1;1912;1954;British pioneering computer scientist, mathematician, logician, cryptanalyst and theoretical biologist. He was highly influential in the development of computer science, providing a formalisation of the concepts of algorithm and computation with the Turing machine, which can be considered a model of a general purpose computer.;https://en.wikipedia.org/wiki/Alan_Turing
@@ -39,45 +40,46 @@ Ted Nelson;1;1937;0;American pioneer of information technology, philosopher, and
 Peter Landin;1;1930;2009;British computer scientist. He was one of the first to realize that the lambda calculus could be used to model a programming language, an insight that is essential to development of both functional programming and denotational semantics.;https://en.wikipedia.org/wiki/Peter_Landin
 Andrei P. Ershov;1;1931;1988;Russian Soviet computer scientist, notable as a pioneer in systems programming and programming language. He was responsible for the languages ALPHA and Rapira, AIST-0 the first Soviet time-sharing system, electronic publishing system RUBIN, and MRAMOR.;https://en.wikipedia.org/wiki/Andrey_Ershov
 Douglas C. Engelbart;1;1925;2013;American engineer and inventor, and an early computer and Internet pioneer. He is best known for his work on founding the field of human–computer interaction.;https://en.wikipedia.org/wiki/Douglas_Engelbart
-Augusta Ada Lovelace;0;1815;1852
-Scott Aaronson;1;1941;1999
-Hal Abelson;1;1941;1999
-Jacques Herbrand;1;1908;1931
-Serge Abiteboul;1;1941;1999
-Samson Abramsky;1;1941;1999
-Leonard Adleman;1;1941;1999
-Manindra Agrawal;1;1941;1999
-Alfred Aho;1;1941;1999
-Frances E. Allen;0;1941;1999
-Gene Amdahl;1;1941;1999
-David P. Anderson;1;1941;1999
-Andrew Appel;1;1941;1999
-Bruce Arden;1;1941;1999
-Sanjeev Arora;1;1941;1999
-Ahmed Albarwary;1;1941;1999
-Anita Borg;0;1941;1999
-Roland Carl Backhouse;1;1941;1999
-David A. Bader;1;1941;1999
-Victor Bahl;1;1941;1999
-Anthony James Barr;1;1941;1999
-Jean Bartik;0;1941;1999
-Andrew Barto;1;1941;1999
-Rudolf Bayer;1;1941;1999
-James C. Beatty;1;1941;1999
-Gordon Bell;1;1941;1999
-Steven M. Bellovin;1;1941;1999
-Tim Berners-Lee;1;1955;0;
-Peter Bernus;1;1941;1999
-Dines Bjarner;1;1941;1999
-Gerrit Blaauw;0;1941;1999
-David Blei;1;1941;1999
-Manuel Blum;1;1941;1999
-Barry Boehm;1;1941;1999
-Corrado Bohm;1;1941;1999
-Kurt Bollacker;1;1941;1999
-Grady Booch;0;1941;1999
-Bert Bos;1;1941;1999
-Jonathan Bowen;1;1941;1999
-Harry Bouwman;1;1941;1999
-Robert S. Boyer;1;1941;1999
-Jack E. Bresenham;1;1941;1999
+Augusta Ada Lovelace;0;1815;1852;;
+Scott Aaronson;1;1941;1999;;
+Hal Abelson;1;1941;1999;;
+Jacques Herbrand;1;1908;1931;;
+Serge Abiteboul;1;1941;1999;;
+Samson Abramsky;1;1941;1999;;
+Leonard Adleman;1;1941;1999;;
+Manindra Agrawal;1;1941;1999;;
+Alfred Aho;1;1941;1999;;
+Frances E. Allen;0;1941;1999;;
+Gene Amdahl;1;1941;1999;;
+David P. Anderson;1;1941;1999;;
+Andrew Appel;1;1941;1999;;
+Bruce Arden;1;1941;1999;;
+Sanjeev Arora;1;1941;1999;;
+Ahmed Albarwary;1;1941;1999;;
+Anita Borg;0;1941;1999;;
+Roland Carl Backhouse;1;1941;1999;;
+David A. Bader;1;1941;1999;;
+Victor Bahl;1;1941;1999;;
+Anthony James Barr;1;1941;1999;;
+Jean Bartik;0;1941;1999;;
+Andrew Barto;1;1941;1999;;
+Rudolf Bayer;1;1941;1999;;
+James C. Beatty;1;1941;1999;;
+Gordon Bell;1;1941;1999;;
+Steven M. Bellovin;1;1941;1999;;
+Tim Berners-Lee;1;1955;0;;
+Peter Bernus;1;1941;1999;;
+Dines Bjarner;1;1941;1999;;
+Gerrit Blaauw;0;1941;1999;;
+David Blei;1;1941;1999;;
+Manuel Blum;1;1941;1999;;
+Barry Boehm;1;1941;1999;;
+Corrado Bohm;1;1941;1999;;
+Kurt Bollacker;1;1941;1999;;
+Grady Booch;0;1941;1999;;
+Bert Bos;1;1941;1999;;
+Jonathan Bowen;1;1941;1999;;
+Harry Bouwman;1;1941;1999;;
+Robert S. Boyer;1;1941;1999;;
+Jack E. Bresenham;1;1941;1999;;
+Siggi Bakari;0;1809;1872; ; 
