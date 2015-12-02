@@ -79,29 +79,6 @@ void workingclass::addLineToFile(scientist& s, char AppOver) const
 
 }
 
-string workingclass::scientistToString(scientist& s) const
-{
-    string nextline;
-    nextline += s.getName();
-    nextline += ";";
-    stringstream ss;
-    ss << s.getGender();
-    nextline += ss.str();
-    nextline += ";";
-    ss << s.getYearOfBirth();
-    nextline += ss.str();
-    nextline += ";";
-    ss << s.getYearOfDeath();
-    nextline += ss.str();
-    nextline += ";";
-    nextline += s.getDescription();
-    nextline += ";";
-    nextline += s.getLink();
-    nextline += ";";
-    nextline += "\n";
-
-    return nextline;
-}
 void workingclass::readLinesFromFile(ifstream& fileWithLines)
 {
     while(!fileWithLines.eof())

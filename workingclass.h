@@ -151,9 +151,7 @@ public:
     //  Precondition:   A number is about to be entered as an input
     //  Postcondition:  Returns a integer if correctly entered, or reiterate the input.
 private:
-    string scientistToString(scientist& s) const;
-    //  Precondition:   Takes in a scientist s.
-    //  Postcondition:  Returns a string ready to be written to file
+
     vector<scientist> scientistVector;
 };
 

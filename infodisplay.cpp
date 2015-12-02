@@ -285,9 +285,9 @@ infoDisplay::infoDisplay()
 
 void infoDisplay::splashScreen()
 {
-//    opengreeting greet;
+    opengreeting greet;
 
-//    greet.greetingPost();
+    greet.greetingPost();
 }
 
 void infoDisplay::displayChangeScientist()
