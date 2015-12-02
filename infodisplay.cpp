@@ -91,9 +91,8 @@ void infoDisplay::displayList(vector<scientist>& v)
                 scroll = false;
             }
 
-            }
         }
-
+    }
     while(scroll == true);
 
     cout << "\t-----------------------------------------------------" << endl;
@@ -105,7 +104,7 @@ int infoDisplay::moreInfoOnScientist(vector<scientist>& v)
     if(v.size() > 0)
     {
         cout << "\tWould you like more info on any of the scientist?" << endl;
-        cout << "\tPlease enter your choise, or 0 (zero) to quit: ";
+        cout << "\tPlease enter your choice, or 0 (zero) to quit: ";
         cin >> sel;
         return sel;
         if(sel == 0)
@@ -226,22 +225,22 @@ void infoDisplay::displayOneScientist(scientist& s)
 
     }
 
-
-    if(s.getDescription().size() > 60)
+    if(s.getDescription().size() > 48)
     {
+        int jumpLength = 53;
+        int firstLine = 48;
         string less;
-        less = s.getDescription().substr(0,80);
+        less = s.getDescription().substr(0,firstLine);
         cout << "\tDescription: " << less << endl;
-        for(unsigned int i = 0; i*100+80 < s.getDescription().size(); i++)
+        for(unsigned int i = 0; i * jumpLength + firstLine < s.getDescription().size(); i++)
         {
-
-            less = s.getDescription().substr(i*100+80,100);
+            less = s.getDescription().substr(firstLine + i * jumpLength,jumpLength);
             cout << "\t\t" << less << endl;
         }
     }
-    else if (s.getDescription().size() > 1)
+    else if ((s.getDescription().size() > 1)&&(s.getDescription().size() < 48))
     {
-        cout << "\tDecsription: " << s.getDescription() << endl;
+        cout << "\tDescription: " << s.getDescription() << endl;
     }
 
     if (s.getLink().size() > 1)
@@ -299,6 +298,7 @@ void infoDisplay::splashScreen()
 void infoDisplay::displayChangeScientist()
 {
     service serviceobject;
+    workingclass workingobject;
 
     bool continueP = true;
 
@@ -313,8 +313,8 @@ void infoDisplay::displayChangeScientist()
         string name;
 
         cout << "\tEnter the number of the scientist you would like to edit: ";
-        cin >> i;
-        i -= 1;
+        //cin >> i;
+        i = workingobject.inputNumberToFunction() - 1;
         serviceobject.editScientistService(i);
         clearScreen();
         continueP = workingobject.addScientistContinue();
@@ -352,19 +352,21 @@ void infoDisplay::displaySearchScientist()
 
 int infoDisplay::displaySortOptions()
 {
+    workingclass workingobject;
     service servant;
     int choice;
-
-    cout << "How would you like the list to be sorted? \n";
+    clearScreen();
+    addEmtyLines(5);
+    cout << "\tHow would you like the list to be sorted? \n";
     addEmtyLines(1);
-    cout << "1) In alphabetical order. \n";
-    cout << "2) In reverse alphabetical order. \n";
-    cout << "3) By year of birth. \n";
-    cout << "4) By year of death. \n";
-    cout << "Enter any other key to return to the main menu. \n";
+    cout << "\t1) In alphabetical order. \n";
+    cout << "\t2) In reverse alphabetical order. \n";
+    cout << "\t3) By year of birth. \n";
+    cout << "\t4) By year of death. \n";
+    cout << "\tEnter any other key to return to the main menu. \n";
     addEmtyLines(1);
-    cout << "Input choice here: ";
-    cin >> choice;
+    cout << "\tInput choice here: ";
+    choice = workingobject.inputNumberToFunction();
     return choice;
 //    servant.chooseSortion(choice);
 

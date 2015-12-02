@@ -107,6 +107,11 @@ void service::editScientistService(int i) //(int selection, int scientist)
 
     scientist sO;
 
+    if (i < 0)
+    {
+        i = 0;
+    }
+
     string name, gender, descr, link;
     int selectedGender, yob, yod;
 

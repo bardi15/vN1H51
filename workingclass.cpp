@@ -595,14 +595,16 @@ bool workingclass::addScientistMore(int yob, int &yod, string &descr, string &li
     //workingclass workingobject;
     infoDisplay display;
     display.addEmtyLines(5);
-    cout<<"\t1. Add year of Death, 2. Description, 3. "
-          "Website link, any other key skips: ";
-
-    char choice;
-    cin>>choice;
-    cin.ignore();
+    cout<<"\t1. Add year of Death, 2. Description, "<<endl<<"\t3Website link, any other key skips: ";
 
     bool addAnother = true;
+
+
+    char choice;
+    //cin>>choice;
+    choice = inputNumberToFunction();
+    cin.ignore();
+
 
     if ((choice < 0)&&(choice > 3))
     {
@@ -712,7 +714,15 @@ bool workingclass::addScientistCheck(string name, int gender, int yob, int yod, 
     }
     cout<<"\tYear of Birth: "<<yob<<endl;
     cout<<"\tYear of Death: "<<yod<<endl;
-    cout<<"\tDescription: "<<desc<<endl;
+
+    if (desc.size() > 40)
+    {
+        cout<<"\tDescription: "<<desc.substr(0,40)<<"..."<<endl;
+    }
+    else
+    {
+        cout<<"\tDescription: "<<desc<<endl;
+    }
     cout<<"\tLink: "<<link<<endl<<endl;
 
     cout<<"\tAre you happy with this input ? Y/N:";
@@ -726,14 +736,13 @@ void workingclass::addScientistChange(string &name, string gender, int &yob, int
     infoDisplay display;
     display.clearScreen();
     int input = 0;
-
+    //bool badSelection = false;
     int yOBirth = yob;
 
     display.addEmtyLines(5);
     cout<<"\tWhat would you like to change? Choose: "<<endl;
-    cout<<"\t1. Name, 2. Gender, 3. Year of Birth, 4. "
-          "Year of Death, 5. Description, 6. Link: ";
-    cin>>input;
+    cout<<"\t1. Name, 2. Gender, 3. Year of Birth, "<<endl<<"\t4. Year of Death, 5. Description, 6. Link: ";
+    input = inputNumberToFunction();
     cin.ignore();
 
     switch (input)
@@ -757,6 +766,10 @@ void workingclass::addScientistChange(string &name, string gender, int &yob, int
     case 6:
         link = addScientistLink(link);
         break;
+
+    default:
+        cout<<"Bad selection."<<endl;
+        break;
     }
 }
 bool workingclass::addScientistContinue()
@@ -769,4 +782,42 @@ bool workingclass::addScientistContinue()
 
     bool input = display.loopFunction();
     return input;
+}
+
+int workingclass::inputNumberToFunction()
+{
+    string input;
+    bool badInput = false;
+    int temp;
+
+    do
+    {
+        cin>>input;
+
+        stringstream stringToInt (input);
+        stringToInt >> temp;
+        if (temp == 0)
+        {
+            cout<<endl;
+            cout<<"\tBad input, please try again: ";
+            badInput = true;
+        }
+        else
+        {
+            badInput = false;
+        }
+    }
+    while (badInput == true);
+
+    return temp;
+
+//    if ((ia >= 0)&&(ia <= 9))
+//    {
+//        return ia;
+//        badSelection = true;
+//    }
+//    else
+//    {
+//        return 0;
+//    }
 }

@@ -68,6 +68,8 @@ public:
     vector<scientist> searchByGender(string sex, bool& isFound);
     vector<scientist> searchByYear(int& yr, char bORd, bool& isFound);
     int yearCorrection(int year, bool &errorInYear);
+    int inputNumberToFunction();
+
 
 private:
     string scientistToString(scientist& s) const;
