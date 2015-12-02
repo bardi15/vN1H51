@@ -341,7 +341,7 @@ int workingclass::yearCorrection(int year, bool &errorInYear)
     {
         tempYear += 1900;
     }
-    else if ((tempYear > 0) && (tempYear < 20))
+    else if ((tempYear >= 0) && (tempYear < 20))
     {
         tempYear += 2000;
     }
@@ -595,44 +595,33 @@ bool workingclass::addScientistMore(int yob, int &yod, string &descr, string &li
     //workingclass workingobject;
     infoDisplay display;
     display.addEmtyLines(5);
-    cout<<"\t1. Add year of Death, 2. Description, "<<endl<<"\t3Website link, any other key skips: ";
+    cout<<"\t1. Add year of Death, 2. Description, "<<endl<<"\t3. Website link, any other key skips: ";
 
     bool addAnother = true;
 
 
-    char choice;
-    //cin>>choice;
+    int choice;
     choice = inputNumberToFunction();
     cin.ignore();
 
-
-    if ((choice < 0)&&(choice > 3))
+    switch(choice)
     {
-        cout<<"\tNothing selected. "<<endl;
+        case 1:
+        yod = addScientistYearOfDeath(yob);
+        break;
+
+        case 2:
+        descr = addScientistDescription(descr);
+        break;
+
+        case 3:
+        link = addScientistLink(link);
+        break;
+
+        default:
+        cout<<"\tNothing selected."<<endl;
         addAnother = false;
-    }
-    else
-    {
-        switch(choice)
-        {
-            case '1':
-            yod = addScientistYearOfDeath(yob);
-            break;
-
-            case '2':
-            descr = addScientistDescription(descr);
-            break;
-
-            case '3':
-            link = addScientistLink(link);
-            break;
-
-            default:
-            cout<<"\tNothing selected. "<<endl;
-            addAnother = false;
-            sleep(1);
-        }
-
+        sleep(1);
     }
 
     if (addAnother == true)

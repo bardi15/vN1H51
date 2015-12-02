@@ -292,7 +292,7 @@ void infoDisplay::splashScreen()
 {
     opengreeting greet;
 
-    greet.greetingPost();
+    //greet.greetingPost();
 }
 
 void infoDisplay::displayChangeScientist()

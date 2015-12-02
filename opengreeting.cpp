@@ -34,7 +34,6 @@ void opengreeting::printscreen (char ascii [][80])
 
     for (int i = 0; i < 20; i++)
     {
-        //cout<<endl;
         for (int y = 0; y < 80; y++)
         {
             cout<<ascii[i][y];
