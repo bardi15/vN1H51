@@ -287,7 +287,7 @@ void infoDisplay::splashScreen()
 {
     opengreeting greet;
 
-    greet.greetingPost();
+ //   greet.greetingPost();
 }
 
 void infoDisplay::displayChangeScientist()
@@ -431,6 +431,7 @@ void infoDisplay::selectAction()
         {
             serviceObject.servEraseVector();
             serviceObject.servReadFile();
+
             vector<scientist> v;
             v = serviceObject.servGetVector();
 

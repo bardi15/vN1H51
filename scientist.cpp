@@ -9,9 +9,9 @@ scientist::scientist()
     description = "";
     link = "";
 }
-scientist::scientist(string name, int sex, int yoBirth,int yoDeath, string desc, string link)
+scientist::scientist(string nam, int sex, int yoBirth,int yoDeath, string desc, string link)
 {
-    name = name;
+    name = nam;
     gender = sex;
     yearOfBirth = yoBirth;
     yearOfDeath = yoDeath;

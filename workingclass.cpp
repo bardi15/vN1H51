@@ -1,6 +1,7 @@
 //#include "scientist.h"
 //#include "infodisplay.h"
 #include "workingclass.h"
+#include <unistd.h>
 
 workingclass::workingclass()
 {
@@ -15,17 +16,44 @@ void workingclass::setVector(vector<scientist>& v)
     scientistVector = v;
 }
 
-void workingclass::readFile()
+QSqlDatabase workingclass::readFile()
 {
-    ifstream skra_inn;
-    skra_inn.open(WORKFILE.c_str());
-    if(skra_inn.fail())
+    QSqlDatabase db;
+    db = QSqlDatabase::addDatabase("QSQLITE");
+   // QString dbName = "../vN1H51/Group51_verklegt_1.sqlite";
+    QString dbName = "Group51_verklegt_1.sqlite";
+        db.setDatabaseName(dbName);
+    db.open();
+
+    QSqlQuery query(db);
+
+    query.exec("SELECT * FROM scientists");
+
+    while(query.next())
     {
-        cout << "error opening readFile file";
-        exit(1);
-    }
-    readLinesFromFile(skra_inn);
-    skra_inn.close();
+
+        int id = query.value("id").toUInt();
+        string nam = query.value("name").toString().toStdString();
+        nam.substr(0, 30);
+        int gen = query.value("gender").toUInt();
+        int yob = query.value("yob").toUInt();
+        int yod = query.value("yod").toUInt();
+        string desc = query.value("description").toString().toStdString();
+        string url = query.value("link").toString().toStdString();
+
+        scientist s(nam,gen,yob,yod,desc,url);
+        scientistVector.push_back(s);
+        }
+    return db;
+//    ifstream skra_inn;
+//    skra_inn.open(WORKFILE.c_str());
+//    if(skra_inn.fail())
+//    {
+//        cout << "error opening readFile file";
+//        exit(1);
+//    }
+//    readLinesFromFile(skra_inn);
+//    skra_inn.close();
 
 }
 void workingclass::VectorToFile(vector<scientist>& v, char AppOver) const

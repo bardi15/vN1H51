@@ -2,6 +2,7 @@
 #define WORKINGCLASS_H
 
 #include "scientist.h"
+#include <QtSql>
 
 #include <fstream>
 #include <cstring>
@@ -33,7 +34,7 @@ public:
     void selectAction(int sel);
     //  Precondition:
     //  Postcondition:
-    void readFile();
+    QSqlDatabase readFile();
     //  Precondition:   The file to be read in is located in the build folder of
     //      the program.
     //  Postcondition:  If file is available, it has been read into the private vector.

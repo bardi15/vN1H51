@@ -12,7 +12,7 @@ public:
     scientist();
     // Precondition:    An instance of the class has been created.
     // Postcondition:   Initialises all string variablaes with a space, integer and boolean variables as 0.
-    scientist(string name, int sex, int yoBirth,int yoDeath, string desc, string link);
+    scientist(string nam, int sex, int yoBirth,int yoDeath, string desc, string link);
     // Precondition:    All variables have been set with leagal values.
     // Postcondition:   Initialises all variables according to parameters.
     string getName() const;
