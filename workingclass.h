@@ -2,6 +2,7 @@
 #define WORKINGCLASS_H
 
 #include "scientist.h"
+
 #include <fstream>
 #include <cstring>
 #include <cstdlib>
@@ -16,6 +17,8 @@ const string WORKFILE = "Scientistinfo.txt";
 const int MAXFIELDS = 6;
 const int MAXNAMELENGTH = 30;
 const int CURRENTYEAR = 2015;
+
+
 
 class workingclass
 {

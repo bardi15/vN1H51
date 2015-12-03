@@ -1,5 +1,5 @@
-#include "scientist.h"
-#include "infodisplay.h"
+//#include "scientist.h"
+//#include "infodisplay.h"
 #include "workingclass.h"
 
 workingclass::workingclass()
@@ -239,7 +239,7 @@ vector<scientist> workingclass::searchByYear(int& yr, char bORd, bool& isFound)
 {
     vector<scientist> tempReturn;
     scientist s;
-    bool error;
+    bool error = false;
     if (error)
     {
         tempReturn.resize(0);
