@@ -66,11 +66,11 @@ void infoDisplay::displayList(vector<scientist>& v)
             else
             {
                 addEmtyLines(1);
-                cout<<"\tPress D to scroll down, any other key continues.";
+                cout<<"\tPress D to scroll down, any other letter continues.";
             }
-            cin>>input;
+            input = inputCharacterToFunction();
 
-            if ((input == 'D')||(input == 'd'))
+            if (input == 'D')
             {
                 ++scrollCount;
 
@@ -104,7 +104,7 @@ int infoDisplay::moreInfoOnScientist(vector<scientist>& v)
     {
         cout << "\tWould you like more info on any of the scientist?" << endl;
         cout << "\tPlease enter your choice, or 0 (zero) to quit: ";
-        cin >> sel;
+        sel = inputNumberToFunction();
         return sel;
         if(sel == 0)
         {
@@ -129,7 +129,7 @@ void infoDisplay::dispSelectScientistToDelete(vector<scientist>& v)
 
     cout << "\tWhich scientist would you like delete?" << endl;
     cout << "\tPlease enter your choise, or 0 (zero) to quit: ";
-    cin >> sel;
+    sel = inputNumberToFunction();
     if(sel > 0)
     {
         displayOneScientist(v.at(sel-1));
@@ -144,7 +144,7 @@ void infoDisplay::dispSelectScientistToDelete(vector<scientist>& v)
 }
 bool infoDisplay::dispSureToRemove(int gender)
 {
-    char ans;
+    //char ans;
     addEmtyLines(2);
     if(gender == 0)
     {
@@ -160,19 +160,22 @@ bool infoDisplay::dispSureToRemove(int gender)
     }
     addEmtyLines(1);
     cout << "\tEnter (Y/N):";
-    cin >> ans;
-    if(toupper(ans) == 'Y')
-    {
-        return true;
-    }
-    return false;
+    bool continueF = yesOrNo();
+//    ans = inputCharacterToFunction();
+//    if(ans == 'Y')
+//    {
+//        return true;
+//    }
+//    return false;
+
+    return continueF;
 }
 void infoDisplay::dispScientistToEdit(vector<scientist>& v)
 {
     int sel;
     cout << "\tWhich scientist would you like edit?" << endl;
     cout << "\tPlease enter your choise, or 0 (zero) to quit: ";
-    cin >> sel;
+    sel = inputNumberToFunction();
     if(sel == 0)
     {
         mainMenu();
@@ -250,12 +253,12 @@ void infoDisplay::displayOneScientist(scientist& s)
     //addEmtyLines(1);
     cout << "\t-------------------------------------------------------------" << endl;
     cout << "\tEnter any character to continue ";
-    cin >> ans;
+    ans = inputCharacterToFunction();
 }
 
 void infoDisplay::clearScreen()
 {
-    system("cls");
+    //system("cls");
 }
 
 void infoDisplay::mainMenu()
@@ -287,7 +290,7 @@ void infoDisplay::splashScreen()
 {
     opengreeting greet;
 
-    greet.greetingPost();
+    //greet.greetingPost();
 }
 
 void infoDisplay::displayChangeScientist()
@@ -329,7 +332,7 @@ void infoDisplay::displaySearchScientist()
     cout << "\t5) Return to main menu." << endl;
     cout << "\t======================================" << endl;
     cout << "\tEnter your selection: ";
-    cin >> sel;
+    sel = inputNumberToFunction();
     searchSelection(sel);
     mainMenu();
 
@@ -365,10 +368,10 @@ void infoDisplay::addEmtyLines(int numLines)
 
 void infoDisplay::quitProgram()
 {
-    char ans;
     cout << "Are you sure you want to quit?  (Y/N): ";
-    cin >> ans;
-    if (toupper(ans) == 'Y')
+    bool continueF = yesOrNo();
+    //ans = inputCharacterToFunction();
+    if (continueF == true)
     {
         cout << "Thank you, come again!." << endl;
         exit(0);
@@ -376,24 +379,21 @@ void infoDisplay::quitProgram()
     mainMenu();
 }
 
-bool infoDisplay::loopFunction()
-{
-    char input;
-    cin>>input;
-    cin.ignore();
+//bool infoDisplay::loopFunction()
+//{
+//    char input;
+//    input = inputCharacterToFunction();
+//    cin.ignore();
 
-
-    input = (toupper(input));
-
-    if (input == 'Y')
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
+//    if (input == 'Y')
+//    {
+//        return true;
+//    }
+//    else
+//    {
+//        return false;
+//    }
+//}
 
 int infoDisplay::getCurrentDate (string date)
 {
@@ -575,7 +575,7 @@ void infoDisplay::editScientistService(int i)
 void infoDisplay::searchSelection(int select)
 {
     serviceObject.servReadFile();
-
+    bool continueF = false;
     char cont;
 
     switch (select)
@@ -614,9 +614,10 @@ void infoDisplay::searchSelection(int select)
             else
             {
                 cout << "\tNothing found! - Do you want to try again? (Y/N): ";
-                cin >> cont;
+                continueF = yesOrNo();
             }
-        }while(toupper(cont) == 'Y');
+        }
+        while(continueF == true);
         break;
     case 2:
         do
@@ -651,9 +652,11 @@ void infoDisplay::searchSelection(int select)
             else
             {
                 cout << "\tNothing found! - Do you want to try again? (Y/N): ";
-                cin >> cont;
+                //cont = inputCharacterToFunction();
+                continueF = yesOrNo();
             }
-        }while(toupper(cont) == 'Y');
+        }
+        while(continueF == true);
 
         break;
     case 3:
@@ -665,7 +668,7 @@ void infoDisplay::searchSelection(int select)
             clearScreen();
             addEmtyLines(5);
             cout << "\tPlease enter the year you would like to search for: ";
-            cin >> yr;
+            yr = inputNumberToFunction();
             vector<scientist> v;
             v = serviceObject.servSearchByYear(yr, 'b', found);
 
@@ -691,10 +694,12 @@ void infoDisplay::searchSelection(int select)
             else
             {
                 cout << "\tNothing found! - Do you want to try again? (Y/N): ";
-                cin >> cont;
+                //cont = inputCharacterToFunction();
+                continueF = yesOrNo();
             }
 
-        }while(toupper(cont) == 'Y');
+        }
+        while(continueF == true);
         break;
     case 4:
         do
@@ -730,10 +735,11 @@ void infoDisplay::searchSelection(int select)
             else
             {
                 cout << "\tNothing found! - Do you want to try again? (Y/N): ";
-                cin >> cont;
+                continueF = yesOrNo();
             }
 
-        }while(toupper(cont) == 'Y');
+        }
+        while(continueF == true);
         break;
     case 5:
         clearScreen();
@@ -754,7 +760,8 @@ bool infoDisplay::addScientistContinue()
     addEmtyLines(1);
     cout<<"\tWould you like to continue? Y/N: ";
 
-    bool input = loopFunction();
+    bool input = yesOrNo();
+    cin.ignore();
     return input;
 }
 void infoDisplay::addScientist()
@@ -823,7 +830,7 @@ void infoDisplay::addScientist()
 bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &link)
 {
     addEmtyLines(5);
-    cout<<"\t1. Add year of Death, 2. Description, "<<endl<<"\t3. Website link, any other key skips: ";
+    cout<<"\t1. Add year of Death, 2. Description, "<<endl<<"\t3. Website link, any other digit continues: ";
 
     bool addAnother = true;
 
@@ -855,7 +862,7 @@ bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &lin
     if (addAnother == true)
     {
         cout<<"\tAdd more fields? Y/N? ";
-        addAnother = loopFunction();
+        addAnother = yesOrNo();
     }
 
     return addAnother;
@@ -864,21 +871,14 @@ bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &lin
 int infoDisplay::addScientistYearOfDeath(int yob)
 {
     bool errorInYear = false;
-
-    string tempInput;
     int temp;
 
     do
     {
         cout<<"\tYear of Death: ";
-        cin>>tempInput;
-
-        stringstream stringToInt (tempInput);
-        stringToInt >> temp;
+        temp = inputNumberToFunction();
 
         temp = serviceObject.yearCorrection(temp, errorInYear);
-
-
 
         if (errorInYear == true)
         {
@@ -941,7 +941,7 @@ bool infoDisplay::addScientistCheck(string name, int gender, int yob, int yod, s
 
     cout<<"\tAre you happy with this input ? Y/N:";
 
-    bool cont = loopFunction();
+    bool cont = yesOrNo();
 
     return cont;
 }
@@ -1017,17 +1017,13 @@ int infoDisplay::addScientistGender(string &gender)
 }
 int infoDisplay::addScientistYearOfBirth()
 {
-    string tempInput;
     int temp;
 
     bool errorInYear = false;
     do
     {
         cout<<"\tEnter year of birth: ";
-        cin>>tempInput;
-
-        stringstream stringToInt (tempInput);
-        stringToInt >> temp;
+        temp = inputNumberToFunction();
 
         temp = serviceObject.yearCorrection(temp, errorInYear);
 
@@ -1044,15 +1040,23 @@ int infoDisplay::inputNumberToFunction()
 {
     string input;
     bool badInput = false;
-    int temp;
-
+    unsigned int temp;
+    unsigned int digitCounter = 0;
     do
     {
         cin>>input;
 
+        for (unsigned int i = 0; i < input.size(); i++)
+        {
+            if (isdigit(input[i]))
+            {
+                digitCounter++;
+            }
+        }
+
         stringstream stringToInt (input);
         stringToInt >> temp;
-        if (temp == 0)
+        if (digitCounter < input.size())
         {
             cout<<endl;
             cout<<"\tBad input, please try again: ";
@@ -1067,3 +1071,61 @@ int infoDisplay::inputNumberToFunction()
 
     return temp;
 }
+
+char infoDisplay::inputCharacterToFunction()
+{
+    char input;
+    bool badInput = false;
+    char returnInput;
+    do
+    {
+        cin>>input;
+
+        if (isdigit(input))
+        {
+            cout<<endl;
+            cout<<"\tBad input, please try again: ";
+            badInput = true;
+        }
+        else
+        {
+            badInput = false;
+            //input = returnInput;
+            returnInput = toupper(input);
+        }
+    }
+    while(badInput == true);
+
+    return returnInput;
+}
+
+bool infoDisplay::yesOrNo()
+{
+
+    bool repeatF = false;
+    bool sendBack = false;
+
+    do
+    {
+        repeatF = false;
+        char input = inputCharacterToFunction();
+
+        if (input == 'Y')
+        {
+            sendBack = true;
+        }
+        else if (input == 'N')
+        {
+            sendBack = false;
+        }
+        else
+        {
+            cout<<"\tBad input, please try again: ";
+            repeatF = true;
+        }
+    }
+    while(repeatF == true);
+
+    return sendBack;
+}
+
