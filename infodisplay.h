@@ -62,6 +62,8 @@ public:
     //  Precondition:   The vector of scientist is populated and ready to be
     //      searched in.
     //  Postcondition:  Selected searchoption is carried out.
+    void displaySearchScientistMenu();
+    //  prints out text.
     int displaySortOptions();
     //  Precondition:   A list of scientist is to be displayed.
     //  Postcondition:  Displays the sorting options available and returns the selection.
@@ -72,7 +74,7 @@ public:
 //    bool loopFunction();
     //  Precondition:   A need for Y/N answer is present.
     //  Postcondition:  Returns true if input is 'Y', false otherwise.
-    void addEmtyLines(int numLines);
+    void addEmptyLines(int numLines);
     //  Precondition:   None.
     //  Postcondition:  Adds empty lines to the screen output according to
     //      the numLines parameter.
@@ -145,6 +147,8 @@ public:
     bool yesOrNo();
     //  Precondition:   A character is about to be entered to continue or quit.
     //  Postcondition:  Returns true if you should continue or false if not.
+    void printLines(int lines, string thickness);
+    //  prints lines
 
 
     service serviceObject;

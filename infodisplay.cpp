@@ -5,13 +5,14 @@ using namespace std;
 void infoDisplay::listheader()
 {
     clearScreen();
-    addEmtyLines(5);
+    addEmptyLines(5);
     cout.setf(ios::left);
     cout << "\tNr.";
     cout.width(30);
     cout << "\tName";
     cout << "Gender\tBorn" << endl;
-    cout << "\t-----------------------------------------------------" << endl;
+    //cout << "\t-----------------------------------------------------" << endl;
+    printLines(1,"thin");
 }
 
 void infoDisplay::displayList(vector<scientist>& v)
@@ -60,12 +61,12 @@ void infoDisplay::displayList(vector<scientist>& v)
         {
             if (scrollFactor >= v.size())
             {
-                addEmtyLines(1);
+                addEmptyLines(1);
                 cout<<"\tAny key continues.";
             }
             else
             {
-                addEmtyLines(1);
+                addEmptyLines(1);
                 cout<<"\tPress D to scroll down, any other letter continues.";
             }
             input = inputCharacterToFunction();
@@ -94,7 +95,8 @@ void infoDisplay::displayList(vector<scientist>& v)
     }
     while(scroll == true);
 
-    cout << "\t-----------------------------------------------------" << endl;
+    //cout << "\t-----------------------------------------------------" << endl;
+    printLines(1, "thin");
 }
 
 int infoDisplay::moreInfoOnScientist(vector<scientist>& v)
@@ -145,7 +147,7 @@ void infoDisplay::dispSelectScientistToDelete(vector<scientist>& v)
 bool infoDisplay::dispSureToRemove(int gender)
 {
     //char ans;
-    addEmtyLines(2);
+    addEmptyLines(2);
     if(gender == 0)
     {
         cout << "\tAre you sure you would like to delete her: " << endl;
@@ -158,7 +160,7 @@ bool infoDisplay::dispSureToRemove(int gender)
     {
         cout << "\tAre you sure you would like to delete it: " << endl;
     }
-    addEmtyLines(1);
+    addEmptyLines(1);
     cout << "\tEnter (Y/N):";
     bool continueF = yesOrNo();
 //    ans = inputCharacterToFunction();
@@ -190,7 +192,7 @@ void infoDisplay::displayOneScientist(scientist& s)
 {
     char ans;
     clearScreen();
-    addEmtyLines(5);
+    addEmptyLines(5);
     cout << "\tNafn: " << s.getName() << endl;
     cout << "\tGender: ";
     if(s.getGender()== 0)
@@ -250,21 +252,22 @@ void infoDisplay::displayOneScientist(scientist& s)
         cout << "\tLink: " << s.getLink() << endl;
     }
 
-    //addEmtyLines(1);
-    cout << "\t-------------------------------------------------------------" << endl;
+    //addEmptyLines(1);
+    //cout << "\t-------------------------------------------------------------" << endl;
+    printLines(1,"thin");
     cout << "\tEnter any character to continue ";
     ans = inputCharacterToFunction();
 }
 
 void infoDisplay::clearScreen()
 {
-    //system("cls");
+    system("cls");
 }
 
 void infoDisplay::mainMenu()
 {
     clearScreen();
-    addEmtyLines(5);
+    addEmptyLines(5);
 
     cout <<"\tToday is: ";
     cout <<getCurrentDate("day")<<"."<<getCurrentDate("month")<<"."<<getCurrentDate("year")<<endl;
@@ -322,19 +325,49 @@ void infoDisplay::displaySearchScientist()
     service serviceobject;
 
     int sel;
-    addEmtyLines(5);
+    displaySearchScientistMenu();
+    sel = inputNumberToFunction();
+    searchSelection(sel);
+    mainMenu();
+
+}
+
+void infoDisplay::displaySearchScientistMenu()
+{
+    addEmptyLines(5);
     cout << "\tMenu for Search " << endl;
-    cout<<"\t======================================"<<endl;
+    printLines(1, "thick");
     cout << "\t1) Search by name or part of name." << endl;
     cout << "\t2) Search by gender." << endl;
     cout << "\t3) Search by year of birth." << endl;
     cout << "\t4) Search by year of death." << endl;
     cout << "\t5) Return to main menu." << endl;
-    cout << "\t======================================" << endl;
+    printLines(1, "thick");
     cout << "\tEnter your selection: ";
-    sel = inputNumberToFunction();
-    searchSelection(sel);
-    mainMenu();
+}
+
+
+void infoDisplay::printLines(int lines, string thickness)
+{
+
+    if (thickness == "thick")
+    {
+        for (int i = 0; i < lines; i++)
+        {
+            cout<<"\t================================================="<<endl;
+        }
+    }
+    else if (thickness == "thin")
+    {
+        for (int i = 0; i < lines; i++)
+        {
+            cout<<"\t--------------------------------------------------"<<endl;
+        }
+    }
+    else
+    {
+        cout<<"Error in printLines..."<<endl;
+    }
 
 }
 
@@ -343,21 +376,21 @@ int infoDisplay::displaySortOptions()
     service servant;
     int choice;
     clearScreen();
-    addEmtyLines(5);
+    addEmptyLines(5);
     cout << "\tHow would you like the list to be sorted? \n";
-    addEmtyLines(1);
+    addEmptyLines(1);
     cout << "\t1) In alphabetical order. \n";
     cout << "\t2) In reverse alphabetical order. \n";
     cout << "\t3) By year of birth. \n";
     cout << "\t4) By year of death. \n";
-    addEmtyLines(1);
+    addEmptyLines(1);
     cout << "\tInput choice here: ";
     choice = inputNumberToFunction();
     return choice;
 
 }
 
-void infoDisplay::addEmtyLines(int numLines)
+void infoDisplay::addEmptyLines(int numLines)
 {
     do
     {
@@ -483,10 +516,10 @@ void infoDisplay::selectAction()
 
                 default:
                     clearScreen();
-                    addEmtyLines(10);
+                    addEmptyLines(10);
                     quitProgram();
 
-                    addEmtyLines(10);
+                    addEmptyLines(10);
                     exit(0);
                     break;
                }
@@ -588,7 +621,7 @@ void infoDisplay::searchSelection(int select)
             bool found = false;
             vector<scientist> v;
             clearScreen();
-            addEmtyLines(5);
+            addEmptyLines(5);
             cout << "\tPlease enter a part of the name you would like to find: ";
             cin >> tempName;
             v = serviceObject.servSearchByName(tempName, found);
@@ -626,7 +659,7 @@ void infoDisplay::searchSelection(int select)
             bool found = false;
             vector<scientist> v;
             clearScreen();
-            addEmtyLines(5);
+            addEmptyLines(5);
             cout << "\tPlease enter the gender you would like to see: ";
             cin >> tempGender;
             v = serviceObject.servSearchByGender(serviceObject.genderCorrection(tempGender), found);
@@ -666,7 +699,7 @@ void infoDisplay::searchSelection(int select)
             bool found = false;
 
             clearScreen();
-            addEmtyLines(5);
+            addEmptyLines(5);
             cout << "\tPlease enter the year you would like to search for: ";
             yr = inputNumberToFunction();
             vector<scientist> v;
@@ -708,7 +741,7 @@ void infoDisplay::searchSelection(int select)
             bool found = false;
 
             clearScreen();
-            addEmtyLines(5);
+            addEmptyLines(5);
             cout << "\tPlease enter the year you would like to search for: ";
             cin >> yr;
             vector<scientist> v;
@@ -746,7 +779,7 @@ void infoDisplay::searchSelection(int select)
         mainMenu();
         break;
     default:
-        addEmtyLines(5);
+        addEmptyLines(5);
         cout << "\tIlligal selection!!" << endl;
         cout << "\tReturning to Search menu" << endl;
         sleep(3);
@@ -757,7 +790,7 @@ void infoDisplay::searchSelection(int select)
 bool infoDisplay::addScientistContinue()
 {
 
-    addEmtyLines(1);
+    addEmptyLines(1);
     cout<<"\tWould you like to continue? Y/N: ";
 
     bool input = yesOrNo();
@@ -774,10 +807,10 @@ void infoDisplay::addScientist()
     while(wYLTContinue == true)
     {
         clearScreen();
-        addEmtyLines(5);
+        addEmptyLines(5);
         cout<<"\tCreating a new Scientist: "<<endl;
-        cout<<"\t======================================"<<endl;
-
+        //cout<<"\t======================================"<<endl;
+        printLines(1, "thick");
         string name = " ", gender = " ", descr = " ", link = " ";
         int yob = 0, yod = 0;
 
@@ -829,7 +862,7 @@ void infoDisplay::addScientist()
 }
 bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &link)
 {
-    addEmtyLines(5);
+    addEmptyLines(5);
     cout<<"\t1. Add year of Death, 2. Description, "<<endl<<"\t3. Website link, any other digit continues: ";
 
     bool addAnother = true;
@@ -909,10 +942,11 @@ string infoDisplay::addScientistLink(string &link)
 bool infoDisplay::addScientistCheck(string name, int gender, int yob, int yod, string desc, string link)
 {
     clearScreen();
-    addEmtyLines(5);
+    addEmptyLines(5);
     //char input;
     cout<<"\tCurrent entry: "<<endl;
-    cout<<"\t======================================"<<endl;
+    //cout<<"\t======================================"<<endl;
+    printLines(1, "thick");
     cout<<"\tName: "<<name<<endl;
     if (gender == 1)
     {
@@ -952,7 +986,7 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
     int yOBirth = yob;
 
     clearScreen();
-    addEmtyLines(5);
+    addEmptyLines(5);
     cout<<"\tWhat would you like to change? Choose: "<<endl;
     cout<<"\t1. Name, 2. Gender, 3. Year of Birth, "<<endl<<"\t4. Year of Death, 5. Description, 6. Link: ";
     input = inputNumberToFunction();
