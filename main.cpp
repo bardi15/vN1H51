@@ -10,10 +10,7 @@ using namespace std;
 int main()
 {    
 //    infoDisplay display;
-    QSqlDatabase db;
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbName = "../vN1H51/Group51_verklegt_1.sqlite";
-        db.setDatabaseName(dbName);
+
 
     infoDisplay display;
     display.selectAction();
