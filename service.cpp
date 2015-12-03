@@ -160,8 +160,8 @@ int service::genderCorrection(string gender)
 
     vector<string> maleVector (male, male + sizeof(male) / sizeof(male[0]));
 
-    string female[13] = {"f", "kona", "kvenmadur", "kvenkyns", "kvk", "stelpa", "female", "stulka",
-                        "kerling", "lady", "woman", "girl", "gal"};
+    string female[14] = {"f", "kona", "kvenmadur", "kvenkyns", "kvk", "stelpa", "female", "stulka",
+                        "kerling", "kelling", "lady", "woman", "girl", "gal"};
 
     vector<string> femaleVector (female, female + sizeof(female) / sizeof(female[0]));
 
