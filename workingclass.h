@@ -1,8 +1,6 @@
 #ifndef WORKINGCLASS_H
 #define WORKINGCLASS_H
 
-//#include "infodisplay.h"
-//#include "workingclass.h"
 #include "scientist.h"
 #include <fstream>
 #include <cstring>
@@ -63,46 +61,6 @@ public:
     //      the line splitter ';' is available.
     //  Postcondition:  The line has been splitted into fields and the created
     //      scientist been inserted into the private vector.
-    void AddScientist();
-    //  Precondition:   The option to add scientist has been selected on the main mainu.
-    //  Postcondition:  One or more scientists have been added to the privat vector.
-    string addScientistName(string &name);
-    //  Precondition:   A name for a scientist is to be entered.
-    //  Postcondition:  The name entered has been corrected or an error message has been
-    //      displayed on screen.
-    int addScientistGender(string &gender);
-    //  Precondition:   The gender for a scientist is to be entered.
-    //  Postcondition:  The gender has been corrected or an error message has been
-    //      displayed on screen.
-    int addScientistYearOfBirth();
-    //  Precondition:   The year of birth for a scientist is to be entered.
-    //  Postcondition:  The year of birth has been corrected or an error message has been
-    //      displayed on screen.
-    bool addScientistMore(int yob, int &yod, string &descr, string &link);
-    //  Precondition:   The necessary data for a new scientist is to be entered.
-    //  Postcondition:  If required the new scientist has the field for year of death,
-    //      description and link have been populated.
-    int addScientistYearOfDeath(int yob);
-    //  Precondition:   The year of death for a scientist is to be entered.
-    //  Postcondition:  The year of death has been corrected or an error message has been
-    //      displayed on screen.
-    string addScientistDescription(string &descr);
-    //  Precondition:   The description for a scientist is to be entered.
-    //  Postcondition:  The description for a scientist has been entered.
-    string addScientistLink(string &link);
-    //  Precondition:   The link for a scientist is to be entered.
-    //  Postcondition:  The link for a scientist has been entered.
-    bool addScientistCheck(string name, int gender, int yob, int yod, string desc, string link);
-    //  Precondition:   All data for a new scientist has been entered.
-    //  Postcondition:  If approved scientist is added to private vector, else modified.
-    bool addScientistContinue();
-    //  Precondition:   A new scientist has been entered into the vector and the user is
-    //      asked if he wants to add more scientest.
-    //  Postcondition:  Returns true if answered 'Y', false otherwise.
-    void addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender);
-    //  Precondition:   Data for a new scientist have been entered. Asks if any of the
-    //      inserted data is to be changed.
-    //  Postcondition:  Entered data for a new scientist has been corrected.
     void sortAlph(vector<scientist>& v);
     //  Precondition:   The vector v that is to be sorted is populated.
     //  Postcondition:  The vector is sorted in alphabetical order.
@@ -121,21 +79,12 @@ public:
     void eraseVector();
     //  Precondition:   A new or changed vector is about to be created.
     //  Postcondition:  The privat vector is clear of all scientists.
-    string nameCorrection(string name, bool& badName);
-    //  Precondition:   A name has been entered into the parameter name.
-    //  Postcondition:  Returns the corrected string and the badName variable is false
-    //      if the name is ok, true otherwise.
-    int genderCorrection(string gender);
-    //  Precondition: Takes in a string for the gender correction process.
-    //  Postcondition: Returns 0 if female, 1 if male, 2 otherwise.
-    int yearCorrection(int year);
-    //  Precondition:   Takes in the year as integer, in two or four digit format.
-    //  Postcondition:  Returns the corrected year as integer.
+
     vector<scientist> searchByName(string subName, bool& isFound);
     //  Precondition:   Takes in the parameter subName to be searched for and a boolean
     //      variable to indicate if found.
     //  Postcondition:  Returns a vector of the scientist matching the criteria.
-    vector<scientist> searchByGender(string sex, bool& isFound);
+    vector<scientist> searchByGender(int sex, bool& isFound);
     //  Precondition:   Takes in the parameter sex to be searched for and a boolean
     //      variable to indicate if found.
     //  Postcondition:  Returns a vector of the scientist matching the criteria.
@@ -144,12 +93,6 @@ public:
     //      whether to look for the year of birth or year of death and a boolean
     //      variable to indicate if found.
     //  Postcondition:  Returns a vector of the scientist matching the criteria.
-    int yearCorrection(int year, bool &errorInYear);
-    //  Precondition: Takes in an integer for the year correction process.
-    //  Postcondition: Returns a corrected year.
-    int inputNumberToFunction();
-    //  Precondition:   A number is about to be entered as an input
-    //  Postcondition:  Returns a integer if correctly entered, or reiterate the input.
 private:
 
     vector<scientist> scientistVector;

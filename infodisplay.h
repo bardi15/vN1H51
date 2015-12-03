@@ -1,5 +1,6 @@
 #ifndef INFODISPLAY_H
 #define INFODISPLAY_H
+
 #include <iostream>
 #include <cstdlib>
 #include <vector>
@@ -11,7 +12,6 @@
 #include <unistd.h>
 #include "opengreeting.h"
 #include "scientist.h"
-//#include "workingclass.h"
 #include "service.h"
 #include <iomanip>
 
@@ -79,6 +79,69 @@ public:
     int getCurrentDate (string date);
     //  Precondition:   A string with a date is sent as a parameter.
     //  Postcondition:  Returns the integer for the date sent in.
+    void selectAction();
+    //  Precondition:   The program is running.
+    //  Postcondition:  Displays the main menu and takes in the selection from made.
+    void chooseSortion(vector<scientist>& v);
+    //  Precondition:   A list of scientist is about to be displayed on screen.  Takes
+    //      in a reference to the vector about to be sorted.
+    //  Postcondition:  The vector is now sorted correctly according to the selection.
+    void editScientistDisplayService();
+    //  Precondition:
+    //  Postcondition:
+    void editScientistService(int i);
+    //  Precondition:   A scientist is about to be edited.
+    //  Postcondition:  The scientist has been edited and file updated.
+    void searchSelection(int select);
+    //  Precondition:   A specific search option has been selected. Takes in the
+    //      selection as an integer.
+    //  Postcondition:  A vector of the correct scientist/s is displayed.
+    bool addScientistContinue();
+    //  Precondition:   A new scientist has been entered into the vector and the user is
+    //      asked if he wants to add more scientest.
+    //  Postcondition:  Returns true if answered 'Y', false otherwise.
+    void addScientist();
+    //  Precondition:   The option to add scientist has been selected on the main mainu.
+    //  Postcondition:  One or more scientists have been added to the privat vector.
+    string addScientistName(string &name);
+    //  Precondition:   A name for a scientist is to be entered.
+    //  Postcondition:  The name entered has been corrected or an error message has been
+    //      displayed on screen.
+    int addScientistGender(string &gender);
+    //  Precondition:   The gender for a scientist is to be entered.
+    //  Postcondition:  The gender has been corrected or an error message has been
+    //      displayed on screen.
+    int addScientistYearOfBirth();
+    //  Precondition:   The year of birth for a scientist is to be entered.
+    //  Postcondition:  The year of birth has been corrected or an error message has been
+    //      displayed on screen.
+    bool addScientistMore(int yob, int &yod, string &descr, string &link);
+    //  Precondition:   The necessary data for a new scientist is to be entered.
+    //  Postcondition:  If required the new scientist has the field for year of death,
+    //      description and link have been populated.
+    int addScientistYearOfDeath(int yob);
+    //  Precondition:   The year of death for a scientist is to be entered.
+    //  Postcondition:  The year of death has been corrected or an error message has been
+    //      displayed on screen.
+    string addScientistDescription(string &descr);
+    //  Precondition:   The description for a scientist is to be entered.
+    //  Postcondition:  The description for a scientist has been entered.
+    string addScientistLink(string &link);
+    //  Precondition:   The link for a scientist is to be entered.
+    //  Postcondition:  The link for a scientist has been entered.
+    bool addScientistCheck(string name, int gender, int yob, int yod, string desc, string link);
+    //  Precondition:   All data for a new scientist has been entered.
+    //  Postcondition:  If approved scientist is added to private vector, else modified.
+    void addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender);
+    //  Precondition:   Data for a new scientist have been entered. Asks if any of the
+    //      inserted data is to be changed.
+    //  Postcondition:  Entered data for a new scientist has been corrected.
+    int inputNumberToFunction();
+    //  Precondition:   A number is about to be entered as an input
+    //  Postcondition:  Returns a integer if correctly entered, or reiterate the input.
+
+    service serviceObject;
+    // A object of the service layer class.  To be used in good computing :)
 };
 
 #endif // INFODISPLAY_H

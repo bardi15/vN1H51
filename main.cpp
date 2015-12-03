@@ -10,7 +10,7 @@ int main()
 {    
 //    infoDisplay display;
 
-    service service;
-    service.selectAction();
+    infoDisplay display;
+    display.selectAction();
     return 0;
 }
