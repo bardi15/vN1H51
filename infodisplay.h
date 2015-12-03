@@ -69,7 +69,7 @@ public:
     //  Precondition:   The program is about to be terminated.  User is asked if
     //      he/she/it is sure.
     //  Postcondition:  The program has stopped running.
-    bool loopFunction();
+//    bool loopFunction();
     //  Precondition:   A need for Y/N answer is present.
     //  Postcondition:  Returns true if input is 'Y', false otherwise.
     void addEmtyLines(int numLines);
@@ -139,6 +139,13 @@ public:
     int inputNumberToFunction();
     //  Precondition:   A number is about to be entered as an input
     //  Postcondition:  Returns a integer if correctly entered, or reiterate the input.
+    char inputCharacterToFunction();
+    //  Precondition:   A character is about to be entered as an input
+    //  Postcondition:  Returns a character if correctly entered, or reiterate the input.
+    bool yesOrNo();
+    //  Precondition:   A character is about to be entered to continue or quit.
+    //  Postcondition:  Returns true if you should continue or false if not.
+
 
     service serviceObject;
     // A object of the service layer class.  To be used in good computing :)
