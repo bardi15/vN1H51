@@ -126,7 +126,7 @@ int infoDisplay::moreInfoOnScientist(vector<scientist>& v)
 void infoDisplay::dispSelectScientistToDelete(vector<scientist>& v)
 {
     int sel;
-    workingclass workobj;
+
     cout << "\tWhich scientist would you like delete?" << endl;
     cout << "\tPlease enter your choise, or 0 (zero) to quit: ";
     cin >> sel;
@@ -135,8 +135,8 @@ void infoDisplay::dispSelectScientistToDelete(vector<scientist>& v)
         displayOneScientist(v.at(sel-1));
         if(dispSureToRemove(v.at(sel-1).getGender()))
         {
-            workobj.removeScientist(v.at(sel-1));
-            workobj.readFile();
+            serviceObject.servRemoveScientist(v.at(sel-1));
+            serviceObject.servReadFile();
         }
     }
 
@@ -293,15 +293,13 @@ void infoDisplay::splashScreen()
 void infoDisplay::displayChangeScientist()
 {
     service serviceobject;
-    workingclass workingobject;
+
 
     bool continueP = true;
 
     while(continueP == true)
     {
         clearScreen();
-
-        workingclass workingobject;
         editScientistDisplayService();
 
         int i = 0;
@@ -318,7 +316,6 @@ void infoDisplay::displayChangeScientist()
 
 void infoDisplay::displaySearchScientist()
 {
-    workingclass workingobject;
     service serviceobject;
 
     int sel;
@@ -340,7 +337,6 @@ void infoDisplay::displaySearchScientist()
 
 int infoDisplay::displaySortOptions()
 {
-    workingclass workingobject;
     service servant;
     int choice;
     clearScreen();
@@ -537,7 +533,7 @@ void infoDisplay::editScientistService(int i)
 {
     vector<scientist> v;
     v = serviceObject.servGetVector();
-    //workingObject.readFile();  Af hverju í ósköpunum er þessi lína hér?
+
 
     scientist sO;
 
@@ -814,12 +810,11 @@ void infoDisplay::addScientist()
         sO.setYearOfDeath(yod);
         sO.setDescription(descr);
         sO.setLink(link);
-        workingclass wO;
         vector<scientist> tempVector;
         tempVector = serviceObject.servGetVector();
         tempVector.push_back(sO);
         serviceObject.servPushToVector(sO);
-        wO.addLineToFile(sO, 'A');
+        serviceObject.servAddLineToFile(sO, 'A');
 
     };
     mainMenu();
@@ -872,8 +867,6 @@ int infoDisplay::addScientistYearOfDeath(int yob)
 
     string tempInput;
     int temp;
-
-    //workingclass workingobject;
 
     do
     {

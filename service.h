@@ -62,6 +62,10 @@ public:
     //  Calls the searchByYear function in workingclass.
     void servPushToVector(const scientist& s);
     //  Calls the pushToVector function in workingclass.
+    void servRemoveScientist(scientist& s);
+    //  Calls the removeScientist function in workingclass.
+    void servAddLineToFile(scientist& s, char AppOver) const;
+    //  Calls the addLineToFile function in workingclass.
     workingclass workingObject;
     // A object of the data layer class.  To be used in good computing :)
 
