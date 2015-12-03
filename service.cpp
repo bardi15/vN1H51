@@ -8,77 +8,6 @@ service::service()
 
 }
 
-void service::selectAction()
-{
-    infoDisplay display;
-
-    display.splashScreen();
-
-        do
-        {
-            workingobject.eraseVector();
-            workingobject.readFile();
-            vector<scientist> v;
-            v = workingobject.getVector();
-
-            display.mainMenu();
-            int sel = selection();
-            switch(sel)
-                {
-                case 1:
-                    display.clearScreen();
-                    workingobject.AddScientist();
-                    break;
-                case 2:
-                    display.clearScreen();
-                    v = workingobject.getVector();
-                    display.displayList(v);
-                    display.dispSelectScientistToDelete(v);
-                    workingobject.eraseVector();
-                    workingobject.readFile();
-                    break;
-                case 3:
-                    display.clearScreen();
-                    display.displayChangeScientist();
-                    break;
-                case 4:
-                    display.clearScreen();
-                    display.displaySearchScientist();
-                    break;
-                case 5:
-                    unsigned int sel;
-                    chooseSortion(v);
-                    do
-                    {
-                        display.clearScreen();
-                        display.displayList(v);
-                        sel = display.moreInfoOnScientist(v);
-                        if(sel > 0 && sel <= v.size())
-                        {
-                            display.displayOneScientist(v.at(sel-1));
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }while(sel > 0);
-                        break;
-//                case 6:
-//                    display.clearScreen();
-//                    display.splashScreen();
-//                    break;
-
-                default:
-                    display.clearScreen();
-                    display.addEmtyLines(10);
-                    cout << "Thank you, come again!." << endl;
-                    display.addEmtyLines(10);
-                    exit(0);
-                    break;
-               }
-            }
-            while(true);
-}
 
 int service::selection()
 {
@@ -88,259 +17,169 @@ int service::selection()
     return select;
 }
 
-void service::editScientistDisplayService()
+
+
+void service::servEraseVector()
 {
-    infoDisplay display;
-    workingobject.readFile();
-    vector<scientist> tempVector = workingobject.getVector();
-    display.displayList(tempVector);
+    workingObject.eraseVector();
 }
-
-void service::editScientistService(int i)
+void service::servReadFile()
 {
-    vector<scientist> v;
-    v = workingobject.getVector();
-    infoDisplay display;
-    workingobject.readFile();
+    workingObject.readFile();
+}
+vector<scientist> service::servGetVector()
+{
+    return workingObject.getVector();
+}
+void service::servSortAlph(vector<scientist>& v)
+{
+    workingObject.sortAlph(v);
+}
+void service::servSortRevAlph(vector<scientist>& v)
+{
+    workingObject.sortRevAlph(v);
+}
+void service::servSortYOB(vector<scientist>& v)
+{
+    workingObject.sortYOB(v);
+}
+void service::servSortYOD(vector<scientist>& v)
+{
+    workingObject.sortYOD(v);
+}
+//void service::servAddScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender)
+//{
+//    workingObject.addScientistChange(name, gender, yob, yod, desc, link, selectedGender);
+//}
 
-    scientist sO;
+// bool service::servAddScientistCheck(string name, int gender, int yob, int yod, string desc, string link)
+// {
+//     return workingObject.addScientistCheck(name, gender, yob, yod, desc, link);
+// }
 
-    if (i < 0)
+void service::servVectorToFile(vector<scientist>& v, char AppOver) const
+{
+    workingObject.VectorToFile(v, AppOver);
+}
+vector<scientist> service::servSearchByName(string subName, bool& isFound)
+{
+    return workingObject.searchByName(subName, isFound);
+}
+vector<scientist> service::servSearchByGender(int sex, bool& isFound)
+{
+    return workingObject.searchByGender(sex, isFound);
+}
+vector<scientist> service::servSearchByYear(int& yr, char bORd, bool& isFound)
+{
+    yr = yearCorrection(yr,isFound);
+    return workingObject.searchByYear(yr, bORd, isFound);
+}
+void service::servPushToVector(const scientist& s)
+{
+    workingObject.pushToVector(s);
+}
+int service::yearCorrection(int year, bool &errorInYear)
+{
+
+    int tempYear = year;
+
+    if ((tempYear >= 20) && (tempYear < 100))
     {
-        i = 0;
+        tempYear += 1900;
+    }
+    else if ((tempYear >= 0) && (tempYear < 20))
+    {
+        tempYear += 2000;
     }
 
-    string name, gender, descr, link;
-    int selectedGender, yob, yod;
-
-    name = v.at(i).getName();
-    selectedGender = v.at(i).getGender();
-    descr = v.at(i).getDescription();
-    link = v.at(i).getLink();
-    yob = v.at(i).getYearOfBirth();
-    yod = v.at(i).getYearOfDeath();
-
-    bool continueP = false;
-
-    while (continueP == false)
+    if ((tempYear > 0) && (tempYear <= CURRENTYEAR))
     {
-        workingobject.addScientistChange(name,gender,yob,yod,descr,link,selectedGender);
-        continueP = workingobject.addScientistCheck(name,selectedGender,yob,yod,descr,link);
+        errorInYear = false;
+    }
+    else
+    {
+        errorInYear = true;
     }
 
-    sO.setName(name);
-    sO.setGender(selectedGender);
-    sO.setDescription(descr);
-    sO.setLink(link);
-    sO.setYearOfBirth(yob);
-    sO.setYearOfDeath(yod);
-
-    v.at(i) = sO;
-
-    workingobject.VectorToFile(v,'O');
+    return tempYear;
 }
-
-void service::searchSelection(int select)
+string service::nameCorrection(string name, bool& badName)
 {
-    workingobject.readFile();
-    infoDisplay display;
-    char cont;
+    int spaceCount = 0;
+    vector<int> spacePositions;
+    badName = false;
 
-    switch (select)
+    for (unsigned int i = 0; i < name.length(); i++)
     {
-    case 1:
+        name[i] = (tolower(name[i]));
 
-        do
+
+
+        if ((i < MAXNAMELENGTH) && (i > 1))
         {
-            string tempName;
-            bool found = false;
-            vector<scientist> v;
-            display.clearScreen();
-            display.addEmtyLines(5);
-            cout << "\tPlease enter a part of the name you would like to find: ";
-            cin >> tempName;
-            v = workingobject.searchByName(tempName, found);
-            if( found == true)
-            {
-                unsigned int sel;
-                do
-                {
-                    display.clearScreen();
-                    display.displayList(v);
-                    sel = display.moreInfoOnScientist(v);
-                    if(sel > 0 && sel <= v.size())
-                    {
-                        display.displayOneScientist(v.at(sel-1));
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }while(sel > 0);
-                cont = 'N';
-            }
-            else
-            {
-                cout << "\tNothing found! - Do you want to try again? (Y/N): ";
-                cin >> cont;
-            }
-        }while(toupper(cont) == 'Y');
-        break;
-    case 2:
-        do
+           spaceCount = (name.find(" ", i));
+        }
+
+        if (find(spacePositions.begin(), spacePositions.end(), spaceCount) ==
+                spacePositions.end())
         {
-            string tempGender;
-            bool found = false;
-            vector<scientist> v;
-            display.clearScreen();
-            display.addEmtyLines(5);
-            cout << "\tPlease enter the gender you would like to see: ";
-            cin >> tempGender;
-            v = workingobject.searchByGender(tempGender, found);
-            if( found == true)
+            if (spaceCount != 0)
             {
-                unsigned int sel;
-                do
-                {
-                    display.clearScreen();
-                    display.displayList(v);
-                    sel = display.moreInfoOnScientist(v);
-                    if(sel > 0 && sel <= v.size())
-                    {
-                        display.displayOneScientist(v.at(sel-1));
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }while(sel > 0);
-                cont = 'N';
+                spacePositions.push_back(spaceCount);
             }
-            else
-            {
-                cout << "\tNothing found! - Do you want to try again? (Y/N): ";
-                cin >> cont;
-            }
-        }while(toupper(cont) == 'Y');
+        }
 
-        break;
-    case 3:
-        do
+        if (string::npos != name.find_first_of("0123456789"))
         {
-            int yr;
-            bool found = false;
-
-            display.clearScreen();
-            display.addEmtyLines(5);
-            cout << "\tPlease enter the year you would like to search for: ";
-            cin >> yr;
-            vector<scientist> v;
-            v = workingobject.searchByYear(yr, 'b', found);
-
-            if( found == true)
-            {
-                unsigned int sel;
-                do
-                {
-                    display.clearScreen();
-                    display.displayList(v);
-                    sel = display.moreInfoOnScientist(v);
-                    if(sel > 0 && sel <= v.size())
-                    {
-                        display.displayOneScientist(v.at(sel-1));
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }while(sel > 0);
-                cont = 'N';
-            }
-            else
-            {
-                cout << "\tNothing found! - Do you want to try again? (Y/N): ";
-                cin >> cont;
-            }
-
-        }while(toupper(cont) == 'Y');
-        break;
-    case 4:
-        do
+            badName = true;
+        }
+        else
         {
-            int yr;
-            bool found = false;
+            badName = false;
+        }
+    }
 
-            display.clearScreen();
-            display.addEmtyLines(5);
-            cout << "\tPlease enter the year you would like to search for: ";
-            cin >> yr;
-            vector<scientist> v;
-            v = workingobject.searchByYear(yr, 'd', found);
-            if( found == true)
-            {
-                unsigned int sel;
-                do
-                {
-                    display.clearScreen();
-                    display.displayList(v);
-                    sel = display.moreInfoOnScientist(v);
-                    if(sel > 0 && sel <= v.size())
-                    {
-                        display.displayOneScientist(v.at(sel-1));
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }while(sel > 0);
-                cont = 'N';
-            }
-            else
-            {
-                cout << "\tNothing found! - Do you want to try again? (Y/N): ";
-                cin >> cont;
-            }
+    for (unsigned int i = 0; i < spacePositions.size(); i++)
+    {
+        int spacePos = spacePositions.at(i) + 1;
+        name[spacePos] = toupper(name[spacePos]);
+    }
 
-        }while(toupper(cont) == 'Y');
-        break;
-    case 5:
-        display.clearScreen();
-        display.mainMenu();
-        break;
-    default:
-        display.addEmtyLines(5);
-        cout << "\tIlligal selection!!" << endl;
-        cout << "\tReturning to Search menu" << endl;
-        sleep(3);
-        display.displaySearchScientist();
-        break;
+    return name;
+}
+int service::genderCorrection(string gender)
+{
+
+    for(unsigned int i = 0; i < gender.length(); ++i)
+    {
+        gender[i] = tolower(gender[i]);
+    }
+
+    string male[15] = {"m","karlmadur", "karlkyns", "karl", "kk", "male", "man", "guy", "bro",
+                      "kall", "gaur", "dude", "sjomli", "strakur", "piltur"};
+
+    vector<string> maleVector (male, male + sizeof(male) / sizeof(male[0]));
+
+    string female[13] = {"f", "kona", "kvenmadur", "kvenkyns", "kvk", "stelpa", "female", "stulka",
+                        "kerling", "lady", "woman", "girl", "gal"};
+
+    vector<string> femaleVector (female, female + sizeof(female) / sizeof(female[0]));
+
+    bool isMale = find(maleVector.begin(), maleVector.end(), gender) != maleVector.end();
+    bool isFemale = find(femaleVector.begin(), femaleVector.end(), gender) != femaleVector.end();
+
+    if (isMale == true)
+    {
+        return 1;
+    }
+
+    else if (isFemale == true)
+    {
+        return 0;
+    }
+    else
+    {
+        return 2;
     }
 }
 
-void service::chooseSortion(vector<scientist>& v)
-{
-    infoDisplay display;
-    int choice = display.displaySortOptions();
-
-    switch(choice)
-    {
-        case 1:
-            display.clearScreen();
-            workingobject.sortAlph(v);
-            break;
-        case 2:
-            display.clearScreen();
-            workingobject.sortRevAlph(v);
-            break;
-        case 3:
-            display.clearScreen();
-            workingobject.sortYOB(v);
-            break;
-        case 4:
-            display.clearScreen();
-            workingobject.sortYOD(v);
-        default:
-            display.clearScreen();
-            break;
-    }
-}
