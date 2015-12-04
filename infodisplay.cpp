@@ -237,7 +237,7 @@ void infoDisplay::dispSelectScientistToDelete(vector<scientist>& v)
         displayOneScientist(v.at(sel-1));
         if(dispSureToRemove(v.at(sel-1).getGender()))
         {
-            serviceObject.servRemoveScientist(v.at(sel-1));
+//            serviceObject.servRemoveScientist(v.at(sel-1));
             serviceObject.servReadSqlScientists();
         }
     }
