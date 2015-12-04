@@ -54,7 +54,8 @@ void workingclass::readSqlScientists(string sorting)
 
 //    cout << s << endl;
 
-    sleep(1);
+//    sleep(1);
+
 
 
     while(query.next())
@@ -68,7 +69,6 @@ void workingclass::readSqlScientists(string sorting)
         int yod = query.value("yod").toUInt();
         string desc = query.value("description").toString().toStdString();
         string url = query.value("link").toString().toStdString();
-        sleep(2);
 
         scientist s(id,nam,gen,yob,yod,desc,url);
         scientistVector.push_back(s);
@@ -109,7 +109,36 @@ void workingclass::readSqlComputers(string sorting)
 //        usleep(50000);
         }
 }
+void workingclass::readSqlCompTypes()
+{
+    QSqlDatabase db;
+    //db.open();
 
+    QSqlQuery query(db);
+
+    query.prepare("SELECT * FROM computer_types "
+                  "ORDER BY name ASC");
+    query.exec();
+//    string s =  query.executedQuery().toStdString();
+//    cout << s << endl;
+//    sleep(1);
+
+
+
+    while(query.next())
+    {
+        int ctId = query.value("id").toUInt();
+        string ctName = query.value("name").toString().toStdString();
+        string ctDesc = query.value("description").toString().toStdString();
+
+        computertype ct(ctId,ctName,ctDesc);
+        compTypeVector.push_back(ct);
+//        cout << nam << " " << s.getName() << endl;
+//        usleep(50000);
+    }
+    //return db;
+
+}
 
 bool workingclass::addscientist(scientist& s)
 {

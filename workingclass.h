@@ -3,6 +3,7 @@
 
 #include "scientist.h"
 #include "computer.h"
+#include "computertype.h"
 #include <QtSql>
 
 #include <fstream>
@@ -53,6 +54,9 @@ public:
     void readSqlComputers(string sorting = "name ASC");
     //  Precondition:   The database is open.
     //  Postcondition:  If data available, it is read into the private vector for computers.
+    void readSqlCompTypes();
+    //  Precondition:   The database is open.
+    //  Postcondition:  If data available, it is read into the private vector for computertypes.
     void addToFile();
     //  Precondition:
     //  Postcondition:
@@ -123,6 +127,7 @@ private:
 
     vector<scientist> scientistVector;
     vector<computer> computerVector;
+    vector<computertype> compTypeVector;
 };
 
 #endif // WORKINGCLASS_H
