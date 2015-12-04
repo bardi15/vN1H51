@@ -23,14 +23,15 @@ void service::servEraseVector()
 {
     workingObject.eraseVector();
 }
-void service::servReadSqlScientists()
+void service::servReadSqlScientists(int sorting)
 {
     workingObject.readSqlScientists();
 }
-vector<scientist> service::servGetVector()
+vector<scientist> service::servGetSciVector()
 {
-    return workingObject.getVector();
+    return workingObject.getSciVector();
 }
+<<<<<<< HEAD
 void service::servSortScientists(int choice)
 {
     string sort;
@@ -74,6 +75,39 @@ void service::servSortScientists(int choice)
 //{
 //    workingObject.sortYOD(v);
 //}
+=======
+vector<computer> service::servGetComVector()
+{
+    return workingObject.getComVector();
+}
+
+void service::servSortAlph(vector<scientist>& v)
+{
+    workingObject.sortAlph(v);
+}
+void service::servSortRevAlph(vector<scientist>& v)
+{
+    workingObject.sortRevAlph(v);
+}
+void service::servSortYOB(vector<scientist>& v)
+{
+    workingObject.sortYOB(v);
+}
+void service::servSortYOD(vector<scientist>& v)
+{
+    workingObject.sortYOD(v);
+}
+bool service::servAddscientist(scientist& s) const
+{
+
+}
+bool service::servAddcomputer(computer& c) const
+{
+
+}
+
+
+>>>>>>> 5ffdc49055be7ad3de31758e4b97f272d927ff4f
 //void service::servAddScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender)
 //{
 //    workingObject.addScientistChange(name, gender, yob, yod, desc, link, selectedGender);
@@ -209,14 +243,14 @@ int service::genderCorrection(string gender)
         return 2;
     }
 }
-void service::servRemoveScientist(scientist& s)
-{
-    workingObject.removeScientist(s);
-}
- void service::servAddLineToFile(scientist& s, char AppOver) const
- {
-     workingObject.addLineToFile(s, AppOver);
- }
+//void service::servRemoveScientist(scientist& s)
+//{
+//    workingObject.removeScientist(s);
+//}
+// void service::servAddLineToFile(scientist& s, char AppOver) const
+// {
+//     workingObject.addLineToFile(s, AppOver);
+// }
 void service::servStartDatabase()
 {
     workingObject.startDatabase();
