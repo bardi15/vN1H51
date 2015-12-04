@@ -142,9 +142,9 @@ bool workingclass::addscientist(scientist& s)
 {
     QSqlDatabase db;
     QSqlQuery query(db);
-    query.prepare("INSERT INTO :table (name, gender, yob, yod, description, link "
+    query.prepare("INSERT INTO scientists (name, gender, yob, yod, description, link "
                   "VALUES (:name, :sex, :yob, :yod, :desc, :link);");
-    query.bindValue(":table", QString::fromStdString(SCIENTISTTABLE.c_str()) );
+    //query.bindValue(":table", QString::fromStdString(SCIENTISTTABLE.c_str()) );
     query.bindValue(":name", QString::fromStdString(s.getName()));
     query.bindValue(":sex", s.getGender());
     query.bindValue(":yob", s.getYearOfBirth());
@@ -155,13 +155,13 @@ bool workingclass::addscientist(scientist& s)
     return 1;
 }
 
-bool addcomputer(computer& c)
+bool workingclass::addcomputer(computer& c)
 {
     QSqlDatabase db;
     QSqlQuery query(db);
-    query.prepare("INSERT INTO :table (name, , year, type, built, description "
+    query.prepare("INSERT INTO computers (name, , year, type, built, description "
                   "VALUES (:name, :year, :type, :built, :desc);");
-    query.bindValue(":table", QString::fromStdString(COMPUTERSTTABLE.c_str()) );
+    //query.bindValue(":table", QString::fromStdString(COMPUTERSTTABLE.c_str()) );
     query.bindValue(":name", QString::fromStdString(c.getComName()));
     query.bindValue(":year", c.getComYear());
     query.bindValue(":type", c.getComType());
@@ -169,7 +169,17 @@ bool addcomputer(computer& c)
     query.bindValue(":desc", QString::fromStdString(c.getComDescription()));
     return 1;
 }
-
+bool workingclass::addcomputerType(computertype & ct)
+{
+    QSqlDatabase db;
+    QSqlQuery query(db);
+    query.prepare("INSERT INTO computers_and_scientists (name, , year, type, built, description "
+                  "VALUES (:name, :year, :type, :built, :desc);");
+    //query.bindValue(":table", QString::fromStdString(COMPUTERSTTABLE.c_str()) );
+    query.bindValue(":name", QString::fromStdString(ct.getName()));
+    query.bindValue(":desc", QString::fromStdString(ct.getDesc()));
+    return 1;
+}
 
 
 

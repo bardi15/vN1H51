@@ -46,7 +46,8 @@ public:
     //  Postcondition:
     //QSqlDatabase
     bool addscientist(scientist& s);
-    bool addscientist(computer& c);
+    bool addcomputer(computer& c);
+    bool addcomputerType(computertype& ct);
 
     void readSqlScientists(string sorting = "name ASC");
     //  Precondition:   The database is open.

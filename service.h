@@ -21,6 +21,8 @@ public:
 
     bool servAddcomputer(computer& c) const;
 
+    bool servAddcomputerType(computertype& ct) const;
+
     void editScientistService(int i); //(int selection, int scientist);
     //  Precondition:   A scientist is about to be edited.
     //  Postcondition:  The scientist has been edited and file updated.

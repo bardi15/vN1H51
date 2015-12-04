@@ -103,13 +103,16 @@ vector<computer> service::servGetComVector()
 //}
 bool service::servAddscientist(scientist& s) const
 {
-
+    workingObject.addscientist(s);
 }
 bool service::servAddcomputer(computer& c) const
 {
-
+    workingObject.addcomputer(c);
 }
-
+bool service::servAddcomputerType(computertype& ct) const
+{
+    workingObject.addcomputerType(c);
+}
 
 //>>>>>>> 5ffdc49055be7ad3de31758e4b97f272d927ff4f
 //void service::servAddScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender)
