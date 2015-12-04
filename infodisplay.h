@@ -81,7 +81,7 @@ public:
 
     void displaySearchComputersMenu();
 
-    int displaySortOptions();
+    int displaySortOptions(int choice);
     //  Precondition:   A list of scientist is to be displayed.
     //  Postcondition:  Displays the sorting options available and returns the selection.
     void quitProgram();

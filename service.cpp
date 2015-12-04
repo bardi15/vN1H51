@@ -31,6 +31,51 @@ vector<scientist> service::servGetSciVector()
 {
     return workingObject.getSciVector();
 }
+<<<<<<< HEAD
+void service::servSortScientists(int choice)
+{
+    string sort;
+
+      switch(choice)
+      {
+            case 1:
+                sort = ("name ASC;");
+                readSqlScientists(sort);
+                break;
+            case 2:
+                sort = ("name DESC;");
+                readSqlScientists(sort);
+                break;
+            case 3:
+                sort = ("yob ASC;");
+                readSqlScientists(sort);
+                break;
+            case 4:
+                sort = ("yob DESC;");
+                readSqlScientists(sort);
+                break;
+            default:
+                exit(0);
+                break;
+      }
+}
+//void service::servSortAlph(vector<scientist>& v)
+//{
+//    workingObject.sortAlph(v);
+//}
+//void service::servSortRevAlph(vector<scientist>& v)
+//{
+//    workingObject.sortRevAlph(v);
+//}
+//void service::servSortYOB(vector<scientist>& v)
+//{
+//    workingObject.sortYOB(v);
+//}
+//void service::servSortYOD(vector<scientist>& v)
+//{
+//    workingObject.sortYOD(v);
+//}
+=======
 vector<computer> service::servGetComVector()
 {
     return workingObject.getComVector();
@@ -62,6 +107,7 @@ bool service::servAddcomputer(computer& c) const
 }
 
 
+>>>>>>> 5ffdc49055be7ad3de31758e4b97f272d927ff4f
 //void service::servAddScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender)
 //{
 //    workingObject.addScientistChange(name, gender, yob, yod, desc, link, selectedGender);
@@ -212,4 +258,10 @@ void service::servStartDatabase()
 void service::servCloseDatabase()
 {
     workingObject.closeDatabase();
+}
+
+void service::henda()
+{
+    //workingObject.readSqlComputers();
+    workingObject.readSqlScientists();
 }

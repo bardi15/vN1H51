@@ -45,6 +45,8 @@ public:
     //  Calls the getVector function in workingclass.
     vector<computer> servGetComVector();
     //  Calls the getVector function in workingclass.
+    void servSortScientists(int choice);
+
     void servSortAlph(vector<scientist>& v);
     //  Calls the sortAlph function in workingclass.
     void servSortRevAlph(vector<scientist>& v);
@@ -75,9 +77,11 @@ public:
     //  Calls the startDatabase function in workingclass.
     void servCloseDatabase();
     //  Calls the CloseDatabase function in workingclass.
+    void henda();
     workingclass workingObject;
     // A object of the data layer class.  To be used in good computing :)
 
 };
+
 
 #endif // SERVICE_H
