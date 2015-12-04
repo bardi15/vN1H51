@@ -7,7 +7,7 @@ infoDisplay::infoDisplay()
 
 }
 
-void infoDisplay::listheader()
+void infoDisplay::listheaderSci()
 {
     clearScreen();
     addEmptyLines(5);
@@ -20,8 +20,23 @@ void infoDisplay::listheader()
     printLines(1,"thin");
 }
 
+void infoDisplay::listheaderCom()
+{
+    clearScreen();
+    addEmptyLines(5);
+    cout.setf(ios::left);
+    cout << "\tNr.";
+    cout.width(30);
+    cout << "\tName";
+    cout << "Type\tBuilt" << endl;
+    //cout << "\t-----------------------------------------------------" << endl;
+    printLines(1,"thin");
+}
+
+
 void infoDisplay::displaySciList(vector<scientist>& v)
 {
+
     int vSize = v.size();
     unsigned int scrollFactor;
     if (vSize > holyScroll)
@@ -46,7 +61,7 @@ void infoDisplay::displaySciList(vector<scientist>& v)
 
     do
     {
-        listheader();
+        listheaderSci();
         for(unsigned int i = scrollBase; i < scrollFactor; i++)
         {
             scientist s = v.at(i);
@@ -74,6 +89,62 @@ void infoDisplay::displaySciList(vector<scientist>& v)
     while (continueF == true);
 
     cout<<"vSize3: "<<vSize<<" scrollBase3: "<<scrollBase<<" scrollFactor3: "<<scrollFactor<<endl;
+
+
+    //cout << "\t-----------------------------------------------------" << endl;
+    printLines(1, "thin");
+}
+
+void infoDisplay::displayComList(vector<computer>& c)
+{
+    int cSize = c.size();
+    unsigned int scrollFactor;
+    if (cSize > holyScroll)
+    {
+         scrollFactor = holyScroll;
+    }
+    else
+    {
+        scrollFactor = cSize;
+    }
+    unsigned int scrollBase = 0;
+    bool continueF;
+    if (cSize < holyScroll)
+    {
+         continueF = false;
+    }
+    else
+    {
+        continueF = true;
+    }
+    //cout<<"vSize1: "<<vSize<<" scrollBase1: "<<scrollBase<<" scrollFactor1: "<<scrollFactor<<endl;
+
+
+
+    do
+    {
+
+        listheaderCom();
+        for(unsigned int i = scrollBase; i < scrollFactor; i++)
+        {
+            computer s = c.at(i);
+            cout.width(2);
+            cout << "\t" << i+1 << ")\t";
+            cout.width(30);
+            cout << s.getComName();// << "\t";
+            cout<< s.getComType();
+            cout << "\t" << s.getComBuilt()<< "\t" << endl;
+        }
+
+        if (continueF == true)
+        {
+            continueF = scrollFunction(cSize, scrollBase, scrollFactor);
+            //cout<<"vSize2: "<<vSize<<" scrollBase2: "<<scrollBase<<" scrollFactor2: "<<scrollFactor<<endl;
+        }
+    }
+    while (continueF == true);
+
+    //cout<<"vSize3: "<<vSize<<" scrollBase3: "<<scrollBase<<" scrollFactor3: "<<scrollFactor<<endl;
 
 
     //cout << "\t-----------------------------------------------------" << endl;
@@ -698,7 +769,7 @@ void infoDisplay::selectAction()
                     {
                         //  Hér þarf að lesa inn úr grunni eftir að ákv. hefur verið hvaða sort er í gangi.  Þ.e. sortið þarf að kalla á innlesturinn.
                         clearScreen();
-                        //displaySciList(cV);
+                        displayComList(cV);
                         sel = moreInfoOnScientist(sV);
                         if(sel > 0 && sel <= sV.size())
                         {

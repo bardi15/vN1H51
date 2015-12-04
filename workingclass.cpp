@@ -53,12 +53,10 @@ void workingclass::readSqlScientists(string sorting)
 //    string s =  query.executedQuery().toStdString();
 
 //    cout << s << endl;
-
 //    sleep(1);
 
 
-
-    while(query.next())
+   while(query.next())
     {
 
 
