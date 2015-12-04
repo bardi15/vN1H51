@@ -19,8 +19,8 @@ using namespace std;
 const string DBASE = "../vN1H51/Group51_verklegt_1.sqlite";
 const string SCIENTISTTABLE = "scientists";
 const string COMPUTERSTTABLE = "computers";
-const string COMPTYPESTABLE = "computer_types"
-const string LINKTABLE = "scientists_and_computers"
+const string COMPTYPESTABLE = "computer_types";
+const string LINKTABLE = "scientists_and_computers";
 const int MAXFIELDS = 6;
 const int MAXNAMELENGTH = 30;
 const int CURRENTYEAR = 2015;
