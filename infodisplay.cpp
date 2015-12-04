@@ -294,28 +294,34 @@ void infoDisplay::mainMenu()
 
 void infoDisplay::menuForScientists()
 {
+    clearScreen();
+    addEmptyLines(5);
     cout << "\tMenu for Scientists " << endl;
     printLines(1, "thin");
     cout << "\t1) Add a new computer scientist. \n";
     cout << "\t2) Delete existing information. \n";
     cout << "\t3) Edit existing information. \n";
     printLines(1, "thin");
-    cout << "\t   All other digits for main menu. \n";
+    cout << "\tAll other digits for main menu. \n";
     printLines(1, "thick");
     cout << "\tEnter your selection: ";
+    sleep(2);
 }
 
 void infoDisplay::menuForComputers()
 {
+    clearScreen();
+    addEmptyLines(5);
     cout << "\tMenu for Computers " << endl;
     printLines(1, "thin");
     cout << "\t1) Add a new computer. \n";
     cout << "\t2) Delete existing information. \n";
     cout << "\t3) Edit existing information. \n";
     printLines(1, "thin");
-    cout << "\t   All other digits for main menu. \n";
+    cout << "\tAll other digits for main menu. \n";
     printLines(1, "thick");
     cout << "\tEnter your selection: ";
+    sleep(2);
 }
 
 void infoDisplay::SelectScientistAction()
