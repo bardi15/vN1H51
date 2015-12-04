@@ -70,8 +70,8 @@ void workingclass::readSqlScientists(string sorting)
 
         scientist s(id,nam,gen,yob,yod,desc,url);
         scientistVector.push_back(s);
-//        cout << nam << " " << s.getName() << endl;
-//        usleep(50000);
+        cout << nam << " " << s.getName() << endl;
+        usleep(50000);
     }
     //return db;
 
@@ -103,8 +103,8 @@ void workingclass::readSqlComputers(string sorting)
         computer c(id, cName, cYear, cType, cBuilt, cDescr);
         computerVector.push_back(c);
 
-//        cout << cName << " " << c.getComName() << endl;
-//        usleep(50000);
+        cout << cName << " " << c.getComName() << endl;
+        usleep(50000);
         }
 }
 void workingclass::readSqlCompTypes()
@@ -131,8 +131,8 @@ void workingclass::readSqlCompTypes()
 
         computertype ct(ctId,ctName,ctDesc);
         compTypeVector.push_back(ct);
-//        cout << nam << " " << s.getName() << endl;
-//        usleep(50000);
+        cout << ctName << " " << ct.getName() << endl;
+        usleep(50000);
     }
     //return db;
 
