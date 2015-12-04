@@ -101,17 +101,18 @@ vector<computer> service::servGetComVector()
 //{
 //    workingObject.sortYOD(v);
 //}
-bool service::servAddscientist(scientist& s) const
+
+bool service::servAddscientist(scientist& s)
 {
-    workingObject.addscientist(s);
+    return workingObject.addscientist(s);
 }
-bool service::servAddcomputer(computer& c) const
+bool service::servAddcomputer(computer& c)
 {
-    workingObject.addcomputer(c);
+    return workingObject.addcomputer(c);
 }
-bool service::servAddcomputerType(computertype& ct) const
+bool service::servAddcomputerType(computertype& ct)
 {
-    workingObject.addcomputerType(c);
+    return workingObject.addcomputerType(ct);
 }
 
 //>>>>>>> 5ffdc49055be7ad3de31758e4b97f272d927ff4f

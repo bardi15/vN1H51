@@ -17,11 +17,11 @@ public:
     int selection();
     //  Precondition:   A need for a selection is present.
     //  Postcondition:  Returns a integer corresponding to the selection made.
-    bool servAddscientist(scientist& s) const;
+    bool servAddscientist(scientist& s) ;
 
-    bool servAddcomputer(computer& c) const;
+    bool servAddcomputer(computer& c) ;
 
-    bool servAddcomputerType(computertype& ct) const;
+    bool servAddcomputerType(computertype& ct) ;
 
     void editScientistService(int i); //(int selection, int scientist);
     //  Precondition:   A scientist is about to be edited.
