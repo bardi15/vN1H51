@@ -19,8 +19,8 @@ using namespace std;
 const string DBASE = "../vN1H51/Group51_verklegt_1.sqlite";
 const string SCIENTISTTABLE = "scientists";
 const string COMPUTERSTTABLE = "computers";
-const string COMPTYPESTABLE = "computer_types"
-const string LINKTABLE = "scientists_and_computers"
+const string COMPTYPESTABLE = "computer_types";
+const string LINKTABLE = "scientists_and_computers";
 const int MAXFIELDS = 6;
 const int MAXNAMELENGTH = 30;
 const int CURRENTYEAR = 2015;
@@ -115,7 +115,7 @@ public:
     QSqlDatabase startDatabase();
     //  Precondition:   The database is present in the build directory of the program.
     //  Postconditinon: A link to the database has been established.
-    QSqlDatabase closeDatabase();
+    void closeDatabase();
     //  Precondition:   The database is open.
     //  Postconditinon: The database has been closed.
 

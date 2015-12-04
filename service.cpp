@@ -197,14 +197,14 @@ int service::genderCorrection(string gender)
         return 2;
     }
 }
-void service::servRemoveScientist(scientist& s)
-{
-    workingObject.removeScientist(s);
-}
- void service::servAddLineToFile(scientist& s, char AppOver) const
- {
-     workingObject.addLineToFile(s, AppOver);
- }
+//void service::servRemoveScientist(scientist& s)
+//{
+//    workingObject.removeScientist(s);
+//}
+// void service::servAddLineToFile(scientist& s, char AppOver) const
+// {
+//     workingObject.addLineToFile(s, AppOver);
+// }
 void service::servStartDatabase()
 {
     workingObject.startDatabase();

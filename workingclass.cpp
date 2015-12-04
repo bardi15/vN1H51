@@ -32,10 +32,11 @@ QSqlDatabase workingclass::startDatabase()
     db.open();
     return db;
 }
-QSqlDatabase workingclass::closeDatabase()
+void workingclass::closeDatabase()
 {
     QSqlDatabase db;
     db.close();
+
 }
 
 //QSqlDatabase
@@ -56,8 +57,8 @@ void workingclass::readSqlScientists(string sorting)
 
         //int id = query.value("id").toUInt();
         int id = query.value("id").toUInt();
-        //string nam = query.value("name").toString().toStdString();
-        nam.substr(0, 30);
+        string nam = query.value("name").toString().toStdString();
+        //nam.substr(0, 30);
         int gen = query.value("gender").toUInt();
         int yob = query.value("yob").toUInt();
         int yod = query.value("yod").toUInt();
@@ -88,14 +89,14 @@ void workingclass::readSqlComputers(string sorting)
     {
 
         int id = query.value("id").toUInt();
-        string cName = query.value("name").toString().toStdString();
-        nam.substr(0, 40);
+        string cNam = query.value("name").toString().toStdString();
+        //nam.substr(0, 40);
         int cYear = query.value("year").toUInt();
         int cType = query.value("type").toUInt();
         bool cBuit = query.value("built").toUInt();
         string cDesc = query.value("description").toString().toStdString();
 
-        computers c(cNam, cYear, cType, cBuit, cDesc);
+        computer c(id, cNam, cYear, cType, cBuit, cDesc);
         computerVector.push_back(c);
         }
     //return db;
@@ -109,10 +110,10 @@ bool workingclass::addscientist(scientist& s)
     query.prepare("INSERT INTO :table (name, gender, yob, yod, description, link "
                   "VALUES (:name, :sex, :yob, :yod, :desc, :link);");
     query.bindValue(":table", QString::fromStdString(SCIENTISTTABLE.c_str()) );
-    query.bindValue(":name", QString::fromStdString(s.getName());
-    query.bindValue(":sex", QString::toUInt(s.getGender());
-    query.bindValue(":yob", QString::toUInt(s.getYearOfBirth());
-    query.bindValue(":yod", QString::toUInt(s.getYearOfDeath());
+    query.bindValue(":name", QString::fromStdString(s.getName()));
+    query.bindValue(":sex", s.getGender());
+    query.bindValue(":yob", s.getYearOfBirth());
+    query.bindValue(":yod", s.getYearOfDeath());
     query.bindValue(":desc", QString::fromStdString(s.getDescription()));
     query.bindValue(":link", QString::fromStdString(s.getLink()));
     return 1;
@@ -120,17 +121,16 @@ bool workingclass::addscientist(scientist& s)
 
 bool addcomputer(computer& c)
 {
-    id,nam,yr,type,built,desc
     QSqlDatabase db;
     QSqlQuery query(db);
     query.prepare("INSERT INTO :table (name, , year, type, built, description "
                   "VALUES (:name, :year, :type, :built, :desc);");
     query.bindValue(":table", QString::fromStdString(COMPUTERSTTABLE.c_str()) );
-    query.bindValue(":name", QString::fromStdString(c.getName());
-    query.bindValue(":year", QString::toUInt(c.getYear());
-    query.bindValue(":type", QString::toUInt(c.getType());
-    query.bindValue(":built", QString::toUInt(c.getBuilt());
-    query.bindValue(":desc", QString::fromStdString(c.getDescription()));
+    query.bindValue(":name", QString::fromStdString(c.getComName()));
+    query.bindValue(":year", c.getComYear());
+    query.bindValue(":type", c.getComType());
+    query.bindValue(":built", c.getComBuilt());
+    query.bindValue(":desc", QString::fromStdString(c.getComDescription()));
     return 1;
 }
 

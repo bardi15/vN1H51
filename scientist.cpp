@@ -9,14 +9,24 @@ scientist::scientist()
     description = "";
     link = "";
 }
-scientist::scientist(string nam, int sex, int yoBirth,int yoDeath, string desc, string link)
+scientist::scientist(int sid, string sname, int sgender, int syoBirth,int syoDeath, string sdesc, string slink)
 {
-    name = nam;
-    gender = sex;
-    yearOfBirth = yoBirth;
-    yearOfDeath = yoDeath;
-    description = desc;
-    link = link;
+    id = sid;
+    name = sname;
+    gender = sgender;
+    yearOfBirth = syoBirth;
+    yearOfDeath = syoDeath;
+    description = sdesc;
+    link = slink;
+}
+scientist::scientist(string sname, int sgender, int syoBirth,int syoDeath, string sdesc, string slink)
+{
+    name = sname;
+    gender = sgender;
+    yearOfBirth = syoBirth;
+    yearOfDeath = syoDeath;
+    description = sdesc;
+    link = slink;
 }
 
 

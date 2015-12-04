@@ -17,7 +17,20 @@ computer::computer(string cName, int cYear, int cType, bool cBuilt, string cDesc
     comBuilt = cBuilt;
     comDescr = cDescr;
 }
+computer::computer(int cid, string cName, int cYear, int cType, bool cBuilt, string cDescr)
+{
+    comId = cid;
+    comName = cName;
+    comYear = cYear;
+    comType = cType;
+    comBuilt = cBuilt;
+    comDescr = cDescr;
+}
 
+int computer::getId() const
+{
+    return comId;
+}
 string computer::getComName() const
 {
     return comName;
