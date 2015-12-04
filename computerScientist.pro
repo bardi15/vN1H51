@@ -14,7 +14,8 @@ SOURCES += main.cpp \
     scientist.cpp \
     opengreeting.cpp \
     service.cpp \
-    computer.cpp
+    computer.cpp \
+    computertype.cpp
     infodisplay.cpp
 
 HEADERS += \
@@ -23,5 +24,6 @@ HEADERS += \
     scientist.h \
     opengreeting.h \
     service.h \
-    computer.h
+    computer.h \
+    computertype.h
     infodisplay.h
