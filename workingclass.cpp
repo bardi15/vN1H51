@@ -120,6 +120,7 @@ bool workingclass::addscientist(scientist& s)
     query.bindValue(":yod", s.getYearOfDeath());
     query.bindValue(":desc", QString::fromStdString(s.getDescription()));
     query.bindValue(":link", QString::fromStdString(s.getLink()));
+    query.exec();
     return 1;
 }
 

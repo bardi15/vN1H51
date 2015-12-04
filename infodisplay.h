@@ -46,7 +46,7 @@ public:
     void displayOneScientist(scientist& s);
     //  Precondition:   Takes in one scientist to display as a parameter.
     //  Postcondition:  Displays all information about the scientist on screen
-    void displayList(vector<scientist>& v);
+    void displaySciList(vector<scientist>& v);
     //  Precondition:   The vector v has been populated with scientist.
     //  Postcondition:  Displays all scientist according to condition on screen.
     bool scrollFunction(unsigned int vSize, unsigned int &scrollBase, unsigned int &scrollFactor);
@@ -181,6 +181,8 @@ public:
     //  Postcondition:  Returns true if you should continue or false if not.
     void printLines(int lines, string thickness);
     //  prints lines
+
+    const unsigned int holyScroll = 15;
 
 
     service serviceObject;

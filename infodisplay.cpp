@@ -20,92 +20,33 @@ void infoDisplay::listheader()
     printLines(1,"thin");
 }
 
-void infoDisplay::displayList(vector<scientist>& v)
+void infoDisplay::displaySciList(vector<scientist>& v)
 {
-//    unsigned int scrollFactor = 0;
-//    unsigned int scrollBase = 0;
-//    unsigned int holyScroll = 15;
-//    bool scroll = false;
-//    char input;
-
-//    if (serviceObject.servGetVector().size() > holyScroll)
-//    {
-//        scrollFactor = holyScroll;
-//        scroll = true;
-//    }
-//    else
-//    {
-//        scrollFactor = serviceObject.servGetVector().size();
-//        scroll = false;
-//    }
-//    int scrollCount = 1;
-
-//    do
-//    {
-//        listheader();
-
-//        for(unsigned int i = scrollBase; i < scrollFactor; i++)
-//        {
-//            scientist s = serviceObject.servGetVector().at(i);
-//            cout.width(2);
-//            cout << "\t" << i+1 << ")\t";
-//            cout.width(30);
-//            cout << s.getName();// << "\t";
-//            if(s.getGender() == 0)
-//            {
-//                cout << "female";
-//            }
-//            else
-//            {
-//                cout << "male";
-//            }
-//            cout << "\t" << s.getYearOfBirth()<< "\t" << endl;
-//        }
-
-//        if (serviceObject.servGetVector().size() > holyScroll)
-//        {
-//            if (scrollFactor >= serviceObject.servGetVector().size())
-//            {
-//                addEmptyLines(1);
-//                cout<<"\tAny key continues.";
-//            }
-//            else
-//            {
-//                addEmptyLines(1);
-//                cout<<"\tPress D to scroll down, any other letter continues.";
-//            }
-//            input = inputCharacterToFunction();
-
-//            if (input == 'D')
-//            {
-//                ++scrollCount;
-
-//                scrollBase = scrollFactor;
-//                if (scrollBase >= serviceObject.servGetVector().size())
-//                {
-//                    scrollBase = serviceObject.servGetVector().size() - holyScroll;
-//                }
-//                scrollFactor = scrollBase + holyScroll;
-//                if (scrollFactor >= serviceObject.servGetVector().size())
-//                {
-//                    scrollFactor = serviceObject.servGetVector().size();
-//                }
-//            }
-//            else
-//            {
-//                scroll = false;
-//            }
-
-//        }
-//    }
-//    while(scroll == true);
     int vSize = v.size();
-    unsigned int scrollFactor = 0;
+    unsigned int scrollFactor;
+    if (vSize > holyScroll)
+    {
+         scrollFactor = holyScroll;
+    }
+    else
+    {
+        scrollFactor = vSize;
+    }
     unsigned int scrollBase = 0;
-    bool continueF = false;
+    bool continueF;
+    if (vSize < holyScroll)
+    {
+         continueF = false;
+    }
+    else
+    {
+        continueF = true;
+    }
+    cout<<"vSize1: "<<vSize<<" scrollBase1: "<<scrollBase<<" scrollFactor1: "<<scrollFactor<<endl;
 
     do
     {
+        listheader();
         for(unsigned int i = scrollBase; i < scrollFactor; i++)
         {
             scientist s = v.at(i);
@@ -123,9 +64,17 @@ void infoDisplay::displayList(vector<scientist>& v)
             }
             cout << "\t" << s.getYearOfBirth()<< "\t" << endl;
         }
-        scrollFunction(vSize, scrollBase, scrollFactor);
+
+        if (continueF == true)
+        {
+            continueF = scrollFunction(vSize, scrollBase, scrollFactor);
+            cout<<"vSize2: "<<vSize<<" scrollBase2: "<<scrollBase<<" scrollFactor2: "<<scrollFactor<<endl;
+        }
     }
     while (continueF == true);
+
+    cout<<"vSize3: "<<vSize<<" scrollBase3: "<<scrollBase<<" scrollFactor3: "<<scrollFactor<<endl;
+
 
     //cout << "\t-----------------------------------------------------" << endl;
     printLines(1, "thin");
@@ -135,25 +84,24 @@ bool infoDisplay::scrollFunction(unsigned int vSize, unsigned int &scrollBase, u
 {
 
     //int size = vSize;
-    const unsigned int holyScroll = 15;
     bool scroll = false;
     char input;
 
-    if (vSize > holyScroll)
-    {
-        scrollFactor = holyScroll;
-        scroll = true;
-    }
-    else
-    {
-        scrollFactor = vSize;
-        scroll = false;
-    }
+//    if (vSize > holyScroll)
+//    {
+//        scrollFactor = holyScroll;
+//        scroll = true;
+//    }
+//    else
+//    {
+//        scrollFactor = vSize;
+//        scroll = false;
+//    }
     int scrollCount = 1;
 
    // do
    // {
-        listheader();
+        //listheader();
 
 
 
@@ -173,6 +121,8 @@ bool infoDisplay::scrollFunction(unsigned int vSize, unsigned int &scrollBase, u
 
             if (input == 'D')
             {
+                scroll = true;
+
                 ++scrollCount;
 
                 scrollBase = scrollFactor;
@@ -418,7 +368,7 @@ void infoDisplay::menuForScientistsSwitch(vector<scientist> &v)
         addScientist();
         break;
     case 2:
-        displayList(v);
+        displaySciList(v);
         dispSelectScientistToDelete(v);
         serviceObject.servEraseVector();
         //serviceObject.servReadFile();
@@ -576,14 +526,15 @@ void infoDisplay::printLines(int lines, string thickness)
     {
         for (int i = 0; i < lines; i++)
         {
-            cout<<"\t================================================="<<endl;
+            cout<<"\t===================================================="<<endl;
         }
     }
     else if (thickness == "thin")
     {
         for (int i = 0; i < lines; i++)
         {
-            cout<<"\t--------------------------------------------------"<<endl;
+            cout<<"\t----------------------------------------------------"<<endl;
+
         }
     }
     else
@@ -689,10 +640,12 @@ void infoDisplay::selectAction()
         {
             //  Þetta þarf að fara inn í hverja undirvalmynd eftir því hvað við erum að fara að gera.
             serviceObject.servEraseVector();
-            //serviceObject.servReadSqlScientists();
+            serviceObject.servReadSqlScientists();
 
             vector<scientist> sV;
             sV = serviceObject.servGetSciVector();
+            cout<<"vector:::::"<<endl;
+            cout<<sV.at(0).getName()<<endl;
 
             vector<computer> cV;
             cV = serviceObject.servGetComVector();
@@ -725,7 +678,7 @@ void infoDisplay::selectAction()
                     {
                         //  Hér þarf að lesa inn úr grunni eftir að ákv. hefur verið hvaða sort er í gangi.  Þ.e. sortið þarf að kalla á innlesturinn.
                         clearScreen();
-                        displayList(sV);
+                        displaySciList(sV);
                         sel = moreInfoOnScientist(sV);
                         if(sel > 0 && sel <= sV.size())
                         {
@@ -739,12 +692,12 @@ void infoDisplay::selectAction()
                         break;
                 case 6:
                     sel;
-                    chooseSortion(sV);
+                    //chooseSortion(cV);
                     do
                     {
                         //  Hér þarf að lesa inn úr grunni eftir að ákv. hefur verið hvaða sort er í gangi.  Þ.e. sortið þarf að kalla á innlesturinn.
                         clearScreen();
-                        displayList(sV);
+                        //displaySciList(cV);
                         sel = moreInfoOnScientist(sV);
                         if(sel > 0 && sel <= sV.size())
                         {
@@ -795,7 +748,7 @@ void infoDisplay::selectAction()
 //                case 2:
 //                    clearScreen();
 //                    //v = serviceObject.servGetVector();
-//                    displayList(v);
+//                    displaySciList(v);
 //                    dispSelectScientistToDelete(v);
 //                    serviceObject.servEraseVector();
 //                    serviceObject.servReadSqlScientists();
@@ -815,7 +768,7 @@ void infoDisplay::selectAction()
 //                    {
 //                        //  Hér þarf að lesa inn úr grunni eftir að ákv. hefur verið hvaða sort er í gangi.  Þ.e. sortið þarf að kalla á innlesturinn.
 //                        clearScreen();
-//                        displayList(v);
+//                        displaySciList(v);
 //                        sel = moreInfoOnScientist(v);
 //                        if(sel > 0 && sel <= v.size())
 //                        {
@@ -879,7 +832,7 @@ void infoDisplay::editScientistDisplayService()
 {
     serviceObject.servReadSqlScientists();
     vector<scientist> tempVector = serviceObject.servGetSciVector();
-    displayList(tempVector);
+    displaySciList(tempVector);
 }
 void infoDisplay::editScientistService(int i)
 {
@@ -952,7 +905,7 @@ void infoDisplay::searchSelection(int select)
                 do
                 {
                     clearScreen();
-                    displayList(v);
+                    displaySciList(v);
                     sel = moreInfoOnScientist(v);
                     if(sel > 0 && sel <= v.size())
                     {
@@ -990,7 +943,7 @@ void infoDisplay::searchSelection(int select)
                 do
                 {
                     clearScreen();
-                    displayList(v);
+                    displaySciList(v);
                     sel = moreInfoOnScientist(v);
                     if(sel > 0 && sel <= v.size())
                     {
@@ -1032,7 +985,7 @@ void infoDisplay::searchSelection(int select)
                 do
                 {
                     clearScreen();
-                    displayList(v);
+                    displaySciList(v);
                     sel = moreInfoOnScientist(v);
                     if(sel > 0 && sel <= v.size())
                     {
@@ -1073,7 +1026,7 @@ void infoDisplay::searchSelection(int select)
                 do
                 {
                     clearScreen();
-                    displayList(v);
+                    displaySciList(v);
                     sel = moreInfoOnScientist(v);
                     if(sel > 0 && sel <= v.size())
                     {
@@ -1135,6 +1088,7 @@ void infoDisplay::addScientist()
         int yob = 0, yod = 0;
 
         name = (addScientistName(name));
+        //cin.ignore();
         selectedGender = addScientistGender(gender);
 
         yob = (addScientistYearOfBirth());
@@ -1347,7 +1301,9 @@ string infoDisplay::addScientistName(string &name)
     do
     {
         cout<<"\tEnter name: ";
-        getline(cin, name);
+        //getline(cin, name);
+        cin>>name;
+        //cin.ignore();
         name = serviceObject.nameCorrection(name, badName);
         if (badName == true)
         {
@@ -1355,30 +1311,34 @@ string infoDisplay::addScientistName(string &name)
         }
     }
     while(badName == true);
+    //cin.ignore();
 
     return name;
 }
 int infoDisplay::addScientistGender(string &gender)
 {
     int selectedGender;
+    //cin.ignore();
+
     cout<<"\tEnter gender: ";
+
     cin>>gender;
 
 
 
     selectedGender = serviceObject.genderCorrection(gender);
-
     return selectedGender;
 }
 int infoDisplay::addScientistYearOfBirth()
 {
     int temp;
-
     bool errorInYear = false;
     do
     {
         cout<<"\tEnter year of birth: ";
+
         temp = inputNumberToFunction();
+        cin.ignore();
 
         temp = serviceObject.yearCorrection(temp, errorInYear);
 
@@ -1530,6 +1490,7 @@ int infoDisplay::inputNumberToFunction()
     do
     {
         cin>>input;
+        //cin.ignore();
 
         for (unsigned int i = 0; i < input.size(); i++)
         {
