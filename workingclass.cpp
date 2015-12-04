@@ -91,7 +91,7 @@ void workingclass::readSqlComputers(string sorting)
     {
 
 
-        //int id = query.value("id").toUInt();
+        int id = query.value("id").toUInt();
         string cName = query.value("name").toString().toStdString();
         cName.substr(0, 40);
         int cYear = query.value("year").toUInt();
@@ -99,10 +99,7 @@ void workingclass::readSqlComputers(string sorting)
         bool cBuilt = query.value("built").toUInt();
         string cDescr = query.value("description").toString().toStdString();
 
-        computer c(cName, cYear, cType, cBuilt, cDescr);
-
-
-        computer c(id, cNam, cYear, cType, cBuit, cDesc);
+        computer c(id, cName, cYear, cType, cBuilt, cDescr);
         computerVector.push_back(c);
 
         }
