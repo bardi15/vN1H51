@@ -40,15 +40,19 @@ public:
     void splashScreen();
     //  Precondition:   None.
     //  Postcondition:  Displays the startup greeting when program is started.
-    void listheader();
+    void listheaderSci();
     //  Precondition:   None.
     //  Postcondition:  Prints a header on the list of scientist.
+    void listheaderCom();
+
     void displayOneScientist(scientist& s);
     //  Precondition:   Takes in one scientist to display as a parameter.
     //  Postcondition:  Displays all information about the scientist on screen
     void displaySciList(vector<scientist>& v);
     //  Precondition:   The vector v has been populated with scientist.
     //  Postcondition:  Displays all scientist according to condition on screen.
+    void displayComList(vector<computer> &c);
+
     bool scrollFunction(unsigned int vSize, unsigned int &scrollBase, unsigned int &scrollFactor);
     int moreInfoOnScientist(vector<scientist>& v);
     //  Precondition:   A list of scientist has been displayed.

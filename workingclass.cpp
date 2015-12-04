@@ -54,7 +54,7 @@ void workingclass::readSqlScientists(string sorting)
 
 //    cout << s << endl;
 
-    sleep(1);
+    //sleep(1);
 
 
     while(query.next())
@@ -68,7 +68,7 @@ void workingclass::readSqlScientists(string sorting)
         int yod = query.value("yod").toUInt();
         string desc = query.value("description").toString().toStdString();
         string url = query.value("link").toString().toStdString();
-        sleep(2);
+        //sleep(2);
 
         scientist s(id,nam,gen,yob,yod,desc,url);
         scientistVector.push_back(s);
