@@ -16,7 +16,7 @@ public:
     int selection();
     //  Precondition:   A need for a selection is present.
     //  Postcondition:  Returns a integer corresponding to the selection made.
-    bool servAddscientist(string nafn, int sex, int yob, int yod, string desc, string link);
+    bool servAddscientist(scientist& s) const;
 
     void editScientistService(int i); //(int selection, int scientist);
     //  Precondition:   A scientist is about to be edited.
@@ -37,7 +37,7 @@ public:
 
     void servEraseVector();
     //  Calls the EraseVector function in workingclass.
-    void servReadSqlScientists();
+    void servReadSqlScientists(int sorting =0);
     //  Calls the readSqlScientists function in workingclass.
     vector<scientist> servGetVector();
     //  Calls the getVector function in workingclass.

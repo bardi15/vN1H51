@@ -2,6 +2,7 @@
 #define WORKINGCLASS_H
 
 #include "scientist.h"
+#include "computer.h"
 #include <QtSql>
 
 #include <fstream>
@@ -14,10 +15,16 @@
 
 using namespace std;
 
-const string WORKFILE = "Scientistinfo.txt";
+//const string WORKFILE = "Scientistinfo.txt";
+const string DBASE = "../vN1H51/Group51_verklegt_1.sqlite";
+const string SCIENTISTTABLE = "scientists";
+const string COMPUTERSTTABLE = "computers";
+const string COMPTYPESTABLE = "computer_types"
+const string LINKTABLE = "scientists_and_computers"
 const int MAXFIELDS = 6;
 const int MAXNAMELENGTH = 30;
 const int CURRENTYEAR = 2015;
+
 
 
 
@@ -35,12 +42,15 @@ public:
     //  Precondition:
     //  Postcondition:
     //QSqlDatabase
-    bool addscientist(string nafn, int sex, int yob, int yod, string desc, string link);
+    bool addscientist(scientist& s);
+    bool addscientist(computer& c);
 
-    void readSqlScientists();
-    //  Precondition:   The file to be read in is located in the build folder of
-    //      the program.
-    //  Postcondition:  If file is available, it has been read into the private vector.
+    void readSqlScientists(string sorting = "ASC name");
+    //  Precondition:   The database is open.
+    //  Postcondition:  If data available, it is read into the private vector for scientist.
+    void readSqlComputers(string sorting = "ASC name");
+    //  Precondition:   The database is open.
+    //  Postcondition:  If data available, it is read into the private vector for computers.
     void addToFile();
     //  Precondition:
     //  Postcondition:
@@ -110,6 +120,7 @@ public:
 private:
 
     vector<scientist> scientistVector;
+    vector<computer> computerVector;
 };
 
 #endif // WORKINGCLASS_H

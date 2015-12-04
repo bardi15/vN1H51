@@ -23,7 +23,7 @@ void service::servEraseVector()
 {
     workingObject.eraseVector();
 }
-void service::servReadSqlScientists()
+void service::servReadSqlScientists(int sorting)
 {
     workingObject.readSqlScientists();
 }

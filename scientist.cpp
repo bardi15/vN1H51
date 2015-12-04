@@ -20,7 +20,10 @@ scientist::scientist(string nam, int sex, int yoBirth,int yoDeath, string desc, 
 }
 
 
-
+int scientist::getID() const
+{
+    return id;
+}
 string scientist::getName() const
 {
     return name;

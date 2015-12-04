@@ -15,6 +15,8 @@ public:
     scientist(string nam, int sex, int yoBirth,int yoDeath, string desc, string link);
     // Precondition:    All variables have been set with leagal values.
     // Postcondition:   Initialises all variables according to parameters.
+    int getID() const;
+    // Postcondition:   Returns an integer with the id of the famous scientist.
     string getName() const;
     // Precondition:    The class has been initialised with a legal name.
     // Postcondition:   Returns a string with the name of the famous scientist.
@@ -54,6 +56,7 @@ public:
     // Postcondition:   The link has been set to parameter url.
 
 private:
+    int id;
     string name;
     int gender; //0. is Male, 1. is Female, 2 is Bad INPUT.
     int yearOfBirth;
