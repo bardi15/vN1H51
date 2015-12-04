@@ -56,6 +56,12 @@ bool service::servAddscientist(scientist& s) const
 {
 
 }
+bool service::servAddcomputer(computer& c) const
+{
+
+}
+
+
 //void service::servAddScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender)
 //{
 //    workingObject.addScientistChange(name, gender, yob, yod, desc, link, selectedGender);

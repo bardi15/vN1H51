@@ -38,6 +38,10 @@ string computer::getComDescription() const
     return comDescr;
 }
 
+bool computer::getComBuilt() const
+{
+    return comBuilt;
+}
 
 void computer::setComName(string coName)
 {
@@ -58,3 +62,9 @@ void computer::setComDescription(string coDesc)
 {
     comDescr = coDesc;
 }
+
+void computer::setComBuilt(bool coBuilt)
+{
+    comBuilt = coBuilt;
+}
+

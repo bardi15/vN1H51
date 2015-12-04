@@ -28,6 +28,8 @@ public:
     string getComDescription() const;
     // Precondition:    The class has been initialised with a legal description.
     // Postcondition:   Returns a string with the description.
+    bool getComBuilt() const;
+
 
     void setComName(string coName);
     // Precondition:    The parameter is of a legal type and value.
@@ -41,6 +43,7 @@ public:
     void setComDescription(string coDesc);
     // Precondition:    The parameter is of a legal type and value.
     // Postcondition:   The description has been set to parameter desc.
+    void setComBuilt(bool coBuilt);
 
 
 private:
