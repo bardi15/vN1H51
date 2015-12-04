@@ -33,7 +33,9 @@ class workingclass
 public:
     workingclass();
     //  Default constructor for class.
-    vector<scientist> getVector();
+    vector<scientist> getSciVector();
+    //  Postcondition:  Returns the private vector.
+    vector<computer> getComVector();
     //  Postcondition:  Returns the private vector.
     void setVector(vector<scientist>& v);
     //  Precondition:   The vecor v has been filled with scientist.

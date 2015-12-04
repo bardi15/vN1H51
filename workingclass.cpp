@@ -7,10 +7,16 @@ workingclass::workingclass()
 {
 
 }
-vector<scientist> workingclass::getVector()
+vector<scientist> workingclass::getSciVector()
 {
     return scientistVector;
 }
+vector<computer> workingclass::getComVector()
+{
+    return computerVector;
+}
+
+
 void workingclass::setVector(vector<scientist>& v)
 {
     scientistVector = v;
@@ -99,6 +105,7 @@ bool addcomputer(computer& c)
     query.bindValue(":desc", QString::fromStdString(c.getDescription()));
     return 1;
 }
+
 
 
 

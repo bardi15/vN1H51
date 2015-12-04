@@ -18,6 +18,8 @@ public:
     //  Postcondition:  Returns a integer corresponding to the selection made.
     bool servAddscientist(scientist& s) const;
 
+    bool servAddcomputer(computer& c) const;
+
     void editScientistService(int i); //(int selection, int scientist);
     //  Precondition:   A scientist is about to be edited.
     //  Postcondition:  The scientist has been edited and file updated.
@@ -39,7 +41,9 @@ public:
     //  Calls the EraseVector function in workingclass.
     void servReadSqlScientists(int sorting =0);
     //  Calls the readSqlScientists function in workingclass.
-    vector<scientist> servGetVector();
+    vector<scientist> servGetSciVector();
+    //  Calls the getVector function in workingclass.
+    vector<computer> servGetComVector();
     //  Calls the getVector function in workingclass.
     void servSortAlph(vector<scientist>& v);
     //  Calls the sortAlph function in workingclass.

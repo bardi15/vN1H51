@@ -27,10 +27,15 @@ void service::servReadSqlScientists(int sorting)
 {
     workingObject.readSqlScientists();
 }
-vector<scientist> service::servGetVector()
+vector<scientist> service::servGetSciVector()
 {
-    return workingObject.getVector();
+    return workingObject.getSciVector();
 }
+vector<computer> service::servGetComVector()
+{
+    return workingObject.getComVector();
+}
+
 void service::servSortAlph(vector<scientist>& v)
 {
     workingObject.sortAlph(v);
@@ -47,6 +52,16 @@ void service::servSortYOD(vector<scientist>& v)
 {
     workingObject.sortYOD(v);
 }
+bool service::servAddscientist(scientist& s) const
+{
+
+}
+bool service::servAddcomputer(computer& c) const
+{
+
+}
+
+
 //void service::servAddScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender)
 //{
 //    workingObject.addScientistChange(name, gender, yob, yod, desc, link, selectedGender);
