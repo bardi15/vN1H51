@@ -77,9 +77,11 @@ public:
     //  Calls the startDatabase function in workingclass.
     void servCloseDatabase();
     //  Calls the CloseDatabase function in workingclass.
+    void henda();
     workingclass workingObject;
     // A object of the data layer class.  To be used in good computing :)
 
 };
+
 
 #endif // SERVICE_H

@@ -14,9 +14,9 @@
 #include <algorithm>
 
 using namespace std;
-
+//../vN1H51/
 //const string WORKFILE = "Scientistinfo.txt";
-const string DBASE = "../vN1H51/Group51_verklegt_1.sqlite";
+const string DBASE = "Group51_verklegt_1.sqlite";
 const string SCIENTISTTABLE = "scientists";
 const string COMPUTERSTTABLE = "computers";
 const string COMPTYPESTABLE = "computer_types";
@@ -47,10 +47,10 @@ public:
     bool addscientist(scientist& s);
     bool addscientist(computer& c);
 
-    void readSqlScientists(string sorting = "ASC name");
+    void readSqlScientists(string sorting = "name ASC");
     //  Precondition:   The database is open.
     //  Postcondition:  If data available, it is read into the private vector for scientist.
-    void readSqlComputers(string sorting = "ASC name");
+    void readSqlComputers(string sorting = "name ASC");
     //  Precondition:   The database is open.
     //  Postcondition:  If data available, it is read into the private vector for computers.
     void addToFile();

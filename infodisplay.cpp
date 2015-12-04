@@ -683,6 +683,8 @@ void infoDisplay::selectAction()
 {
     splashScreen();
     serviceObject.servStartDatabase();
+    serviceObject.henda();
+
 
         do
         {

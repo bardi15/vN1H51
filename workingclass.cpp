@@ -48,27 +48,32 @@ void workingclass::readSqlScientists(string sorting)
     QSqlQuery query(db);
 
     query.prepare("SELECT * FROM scientists "
-                  "ORDER BY :sort" );
-    query.bindValue(":sort", QString::fromStdString(sorting));
+                  "ORDER BY " + QString::fromStdString(sorting));
     query.exec();
+//    string s =  query.executedQuery().toStdString();
+
+//    cout << s << endl;
+
+    sleep(1);
+
 
     while(query.next())
     {
 
-        //int id = query.value("id").toUInt();
+
         int id = query.value("id").toUInt();
         string nam = query.value("name").toString().toStdString();
-        //nam.substr(0, 30);
         int gen = query.value("gender").toUInt();
         int yob = query.value("yob").toUInt();
         int yod = query.value("yod").toUInt();
         string desc = query.value("description").toString().toStdString();
         string url = query.value("link").toString().toStdString();
+        sleep(2);
 
         scientist s(id,nam,gen,yob,yod,desc,url);
         scientistVector.push_back(s);
-        cout << nam << endl;
-        usleep(5000);
+//        cout << nam << " " << s.getName() << endl;
+//        usleep(50000);
     }
     //return db;
 
@@ -78,13 +83,12 @@ void workingclass::readSqlComputers(string sorting)
     QSqlDatabase db;
     db.open();
 
-    computer cO;
+    computer c;
 
     QSqlQuery query(db);
 
     query.prepare("SELECT * FROM computers "
-                  "ORDER BY :sort" );
-    query.bindValue(":sort", QString::fromStdString(sorting));
+                  "ORDER BY " + QString::fromStdString(sorting));
     query.exec();
 
     while(query.next())
@@ -93,7 +97,6 @@ void workingclass::readSqlComputers(string sorting)
 
         int id = query.value("id").toUInt();
         string cName = query.value("name").toString().toStdString();
-        cName.substr(0, 40);
         int cYear = query.value("year").toUInt();
         int cType = query.value("type").toUInt();
         bool cBuilt = query.value("built").toUInt();
@@ -102,8 +105,9 @@ void workingclass::readSqlComputers(string sorting)
         computer c(id, cName, cYear, cType, cBuilt, cDescr);
         computerVector.push_back(c);
 
+//        cout << cName << " " << c.getComName() << endl;
+//        usleep(50000);
         }
-    //return db;
 }
 
 
