@@ -34,7 +34,8 @@ public:
     void selectAction(int sel);
     //  Precondition:
     //  Postcondition:
-    QSqlDatabase readFile();
+    //QSqlDatabase
+    void readSqlScientists();
     //  Precondition:   The file to be read in is located in the build folder of
     //      the program.
     //  Postcondition:  If file is available, it has been read into the private vector.
@@ -97,6 +98,13 @@ public:
     //      whether to look for the year of birth or year of death and a boolean
     //      variable to indicate if found.
     //  Postcondition:  Returns a vector of the scientist matching the criteria.
+    QSqlDatabase startDatabase();
+    //  Precondition:   The database is present in the build directory of the program.
+    //  Postconditinon: A link to the database has been established.
+    QSqlDatabase closeDatabase();
+    //  Precondition:   The database is open.
+    //  Postconditinon: The database has been closed.
+
 private:
 
     vector<scientist> scientistVector;

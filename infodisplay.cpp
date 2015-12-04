@@ -2,6 +2,11 @@
 
 using namespace std;
 
+infoDisplay::infoDisplay()
+{
+
+}
+
 void infoDisplay::listheader()
 {
     clearScreen();
@@ -23,14 +28,14 @@ void infoDisplay::displayList(vector<scientist>& v)
     bool scroll = false;
     char input;
 
-    if (v.size() > holyScroll)
+    if (serviceObject.servGetVector().size() > holyScroll)
     {
         scrollFactor = holyScroll;
         scroll = true;
     }
     else
     {
-        scrollFactor = v.size();
+        scrollFactor = serviceObject.servGetVector().size();
         scroll = false;
     }
     int scrollCount = 1;
@@ -41,7 +46,7 @@ void infoDisplay::displayList(vector<scientist>& v)
 
         for(unsigned int i = scrollBase; i < scrollFactor; i++)
         {
-            scientist s = v.at(i);
+            scientist s = serviceObject.servGetVector().at(i);
             cout.width(2);
             cout << "\t" << i+1 << ")\t";
             cout.width(30);
@@ -57,9 +62,9 @@ void infoDisplay::displayList(vector<scientist>& v)
             cout << "\t" << s.getYearOfBirth()<< "\t" << endl;
         }
 
-        if (v.size() > holyScroll)
+        if (serviceObject.servGetVector().size() > holyScroll)
         {
-            if (scrollFactor >= v.size())
+            if (scrollFactor >= serviceObject.servGetVector().size())
             {
                 addEmptyLines(1);
                 cout<<"\tAny key continues.";
@@ -76,14 +81,14 @@ void infoDisplay::displayList(vector<scientist>& v)
                 ++scrollCount;
 
                 scrollBase = scrollFactor;
-                if (scrollBase >= v.size())
+                if (scrollBase >= serviceObject.servGetVector().size())
                 {
-                    scrollBase = v.size() - holyScroll;
+                    scrollBase = serviceObject.servGetVector().size() - holyScroll;
                 }
                 scrollFactor = scrollBase + holyScroll;
-                if (scrollFactor >= v.size())
+                if (scrollFactor >= serviceObject.servGetVector().size())
                 {
-                    scrollFactor = v.size();
+                    scrollFactor = serviceObject.servGetVector().size();
                 }
             }
             else
@@ -108,21 +113,22 @@ int infoDisplay::moreInfoOnScientist(vector<scientist>& v)
         cout << "\tPlease enter your choice, or 0 (zero) to quit: ";
         sel = inputNumberToFunction();
         return sel;
-        if(sel == 0)
-        {
-            mainMenu();
-        }
-        else if ((sel > 0)&&(sel <= v.size()))
-        {
-            displayOneScientist(v.at(sel-1));
-        }
-        else
-        {
-            cout<<"Incorrect selection!"<<endl;
-        }
-    }
+//        if(sel == 0)
+//        {
+//            mainMenu();
+//        }
+//        else if ((sel > 0)&&(sel <= v.size()))
+//        {
+//            displayOneScientist(v.at(sel-1));
+//        }
+//        else
+//        {
+//            cout<<"Incorrect selection!"<<endl;
+//        }
+//    }
 
-    return sel;
+//    return sel;
+    }
 }
 
 void infoDisplay::dispSelectScientistToDelete(vector<scientist>& v)
@@ -138,7 +144,7 @@ void infoDisplay::dispSelectScientistToDelete(vector<scientist>& v)
         if(dispSureToRemove(v.at(sel-1).getGender()))
         {
             serviceObject.servRemoveScientist(v.at(sel-1));
-            serviceObject.servReadFile();
+            serviceObject.servReadSqlScientists();
         }
     }
 
@@ -272,22 +278,56 @@ void infoDisplay::mainMenu()
     cout <<"\tToday is: ";
     cout <<getCurrentDate("day")<<"."<<getCurrentDate("month")<<"."<<getCurrentDate("year")<<endl;
 
-    cout << "\tWelcome to the computer scientist database! \n";
+    cout << "\tWelcome to the computers and scientists database! \n";
+    printLines(1, "thin");
     cout << "\tWhat would you like to do? \n";
     cout << endl;
-    cout << "\t1) Add a new computer scientist. \n";
-    cout << "\t2) Delete existing information. \n";
-    cout << "\t3) Edit existing information. \n";
-    cout << "\t4) Search for a computer scientists. \n";
-    cout << "\t5) Display list of computer scientists. \n";
-    //cout << "\t6) Play greeting. \n";
+    cout << "\t1) Work on the scientists information. \n";
+    cout << "\t2) Work on the computers information. \n";
+    cout << "\t3) Search for a computer scientists. \n";
+    cout << "\t4) Search for a famous computer \n";
+    cout << "\t5) Display a list of computer scientists. \n";
+    cout << "\t6) Display a list of famous computers. \n";
+    printLines(1, "thick");
     cout << "\tAll other entries exit the program: ";
 }
 
-infoDisplay::infoDisplay()
+void infoDisplay::menuForScientists()
 {
+    cout << "\tMenu for Scientists " << endl;
+    printLines(1, "thin");
+    cout << "\t1) Add a new computer scientist. \n";
+    cout << "\t2) Delete existing information. \n";
+    cout << "\t3) Edit existing information. \n";
+    printLines(1, "thin");
+    cout << "\t   All other digits for main menu. \n";
+    printLines(1, "thick");
+    cout << "\tEnter your selection: ";
+}
+
+void infoDisplay::menuForComputers()
+{
+    cout << "\tMenu for Computers " << endl;
+    printLines(1, "thin");
+    cout << "\t1) Add a new computer. \n";
+    cout << "\t2) Delete existing information. \n";
+    cout << "\t3) Edit existing information. \n";
+    printLines(1, "thin");
+    cout << "\t   All other digits for main menu. \n";
+    printLines(1, "thick");
+    cout << "\tEnter your selection: ";
+}
+
+void infoDisplay::SelectScientistAction()
+{
+   // ok, hér á að koma switch í samræmi við menuForScientist
 
 }
+void infoDisplay::SelectComputerAction()
+{
+   // ok, hér á að koma switch í samræmi við menuForComputer
+}
+
 
 void infoDisplay::splashScreen()
 {
@@ -322,15 +362,20 @@ void infoDisplay::displayChangeScientist()
 
 void infoDisplay::displaySearchScientist()
 {
-    service serviceobject;
-
     int sel;
     displaySearchScientistMenu();
     sel = inputNumberToFunction();
     searchSelection(sel);
-    mainMenu();
 
 }
+void infoDisplay::displaySearchComputer()
+{
+    int sel;
+    displaySearchComputersMenu();
+    sel = inputNumberToFunction();
+    searchSelection(sel);
+}
+
 
 void infoDisplay::displaySearchScientistMenu()
 {
@@ -341,6 +386,18 @@ void infoDisplay::displaySearchScientistMenu()
     cout << "\t2) Search by gender." << endl;
     cout << "\t3) Search by year of birth." << endl;
     cout << "\t4) Search by year of death." << endl;
+    cout << "\t5) Return to main menu." << endl;
+    printLines(1, "thick");
+    cout << "\tEnter your selection: ";
+}
+void infoDisplay::displaySearchComputersMenu()
+{
+    addEmptyLines(5);
+    cout << "\tMenu for Search " << endl;
+    printLines(1, "thick");
+    cout << "\t1) Search by name or part of name." << endl;
+    cout << "\t2) Search by type." << endl;
+    cout << "\t3) Search by the building year." << endl;
     cout << "\t5) Return to main menu." << endl;
     printLines(1, "thick");
     cout << "\tEnter your selection: ";
@@ -373,6 +430,7 @@ void infoDisplay::printLines(int lines, string thickness)
 
 int infoDisplay::displaySortOptions()
 {
+    //  Þessi menu getur gengið fyrir bæði tölvur og scientista, ef aðeins breytt.
     service servant;
     int choice;
     clearScreen();
@@ -407,6 +465,7 @@ void infoDisplay::quitProgram()
     if (continueF == true)
     {
         cout << "Thank you, come again!." << endl;
+        serviceObject.servCloseDatabase();  // To close the database before quitting.
         exit(0);
     }
     mainMenu();
@@ -459,11 +518,13 @@ int infoDisplay::getCurrentDate (string date)
 void infoDisplay::selectAction()
 {
     splashScreen();
+    serviceObject.servStartDatabase();
 
         do
         {
+            //  Þetta þarf að fara inn í hverja undirvalmynd eftir því hvað við erum að fara að gera.
             serviceObject.servEraseVector();
-            serviceObject.servReadFile();
+            serviceObject.servReadSqlScientists();
 
             vector<scientist> v;
             v = serviceObject.servGetVector();
@@ -474,29 +535,27 @@ void infoDisplay::selectAction()
                 {
                 case 1:
                     clearScreen();
-                    addScientist();
+                    menuForScientists();
                     break;
                 case 2:
                     clearScreen();
                     //v = serviceObject.servGetVector();
-                    displayList(v);
-                    dispSelectScientistToDelete(v);
-                    serviceObject.servEraseVector();
-                    serviceObject.servReadFile();
+                    menuForComputers();
                     break;
                 case 3:
                     clearScreen();
-                    displayChangeScientist();
+                    displaySearchScientist();
                     break;
                 case 4:
                     clearScreen();
-                    displaySearchScientist();
+                    displaySearchComputer();
                     break;
                 case 5:
                     unsigned int sel;
                     chooseSortion(v);
                     do
                     {
+                        //  Hér þarf að lesa inn úr grunni eftir að ákv. hefur verið hvaða sort er í gangi.  Þ.e. sortið þarf að kalla á innlesturinn.
                         clearScreen();
                         displayList(v);
                         sel = moreInfoOnScientist(v);
@@ -511,9 +570,24 @@ void infoDisplay::selectAction()
                     }while(sel > 0);
                         break;
                 case 6:
-                    clearScreen();
-                    splashScreen();
-                    break;
+                    sel;
+                    chooseSortion(v);
+                    do
+                    {
+                        //  Hér þarf að lesa inn úr grunni eftir að ákv. hefur verið hvaða sort er í gangi.  Þ.e. sortið þarf að kalla á innlesturinn.
+                        clearScreen();
+                        displayList(v);
+                        sel = moreInfoOnScientist(v);
+                        if(sel > 0 && sel <= v.size())
+                        {
+                            displayOneScientist(v.at(sel-1));
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }while(sel > 0);
+                        break;
 
                 default:
                     clearScreen();
@@ -526,7 +600,83 @@ void infoDisplay::selectAction()
                }
             }
             while(true);
+
 }
+//void infoDisplay::selectAction()
+//{
+//    splashScreen();
+//    serviceObject.servStartDatabase();
+
+//        do
+//        {
+//            //  Þetta þarf að fara inn í hverja undirvalmynd eftir því hvað við erum að fara að gera.
+//            serviceObject.servEraseVector();
+//            serviceObject.servReadSqlScientists();
+
+//            vector<scientist> v;
+//            v = serviceObject.servGetVector();
+
+//            mainMenu();
+//            int sel = serviceObject.selection();
+//            switch(sel)
+//                {
+//                case 1:
+//                    clearScreen();
+//                    addScientist();
+//                    break;
+//                case 2:
+//                    clearScreen();
+//                    //v = serviceObject.servGetVector();
+//                    displayList(v);
+//                    dispSelectScientistToDelete(v);
+//                    serviceObject.servEraseVector();
+//                    serviceObject.servReadSqlScientists();
+//                    break;
+//                case 3:
+//                    clearScreen();
+//                    displayChangeScientist();
+//                    break;
+//                case 4:
+//                    clearScreen();
+//                    displaySearchScientist();
+//                    break;
+//                case 5:
+//                    unsigned int sel;
+//                    chooseSortion(v);
+//                    do
+//                    {
+//                        //  Hér þarf að lesa inn úr grunni eftir að ákv. hefur verið hvaða sort er í gangi.  Þ.e. sortið þarf að kalla á innlesturinn.
+//                        clearScreen();
+//                        displayList(v);
+//                        sel = moreInfoOnScientist(v);
+//                        if(sel > 0 && sel <= v.size())
+//                        {
+//                            displayOneScientist(v.at(sel-1));
+//                        }
+//                        else
+//                        {
+//                            break;
+//                        }
+//                    }while(sel > 0);
+//                        break;
+//                case 6:
+//                    clearScreen();
+//                    splashScreen();
+//                    break;
+
+//                default:
+//                    clearScreen();
+//                    addEmptyLines(10);
+//                    quitProgram();
+
+//                    addEmptyLines(10);
+//                    exit(0);
+//                    break;
+//               }
+//            }
+//            while(true);
+
+//}
 
 void infoDisplay::chooseSortion(vector<scientist>& v)
 {
@@ -559,14 +709,14 @@ void infoDisplay::chooseSortion(vector<scientist>& v)
 }
 void infoDisplay::editScientistDisplayService()
 {
-    serviceObject.servReadFile();
+    serviceObject.servReadSqlScientists();
     vector<scientist> tempVector = serviceObject.servGetVector();
     displayList(tempVector);
 }
 void infoDisplay::editScientistService(int i)
 {
-    vector<scientist> v;
-    v = serviceObject.servGetVector();
+    //vector<scientist> v;
+    //v = serviceObject.servGetVector();
 
 
     scientist sO;
@@ -579,12 +729,12 @@ void infoDisplay::editScientistService(int i)
     string name, gender, descr, link;
     int selectedGender, yob, yod;
 
-    name = v.at(i).getName();
-    selectedGender = v.at(i).getGender();
-    descr = v.at(i).getDescription();
-    link = v.at(i).getLink();
-    yob = v.at(i).getYearOfBirth();
-    yod = v.at(i).getYearOfDeath();
+    name = serviceObject.servGetVector().at(i).getName();
+    selectedGender = serviceObject.servGetVector().at(i).getGender();
+    descr = serviceObject.servGetVector().at(i).getDescription();
+    link = serviceObject.servGetVector().at(i).getLink();
+    yob = serviceObject.servGetVector().at(i).getYearOfBirth();
+    yod = serviceObject.servGetVector().at(i).getYearOfDeath();
 
     bool continueP = false;
 
@@ -601,14 +751,16 @@ void infoDisplay::editScientistService(int i)
     sO.setYearOfBirth(yob);
     sO.setYearOfDeath(yod);
 
-    v.at(i) = sO;
+    serviceObject.servGetVector().at(i) = sO;
 
-    serviceObject.servVectorToFile(v,'O');
+    // hér þarf að setja inn set fall til að setja viðkomandi scientist eftir breytingar.
+
+    //serviceObject.servVectorToFile(v,'O');
 }
 
 void infoDisplay::searchSelection(int select)
 {
-    serviceObject.servReadFile();
+    serviceObject.servReadSqlScientists();
     bool continueF = false;
     char cont;
 

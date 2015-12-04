@@ -24,6 +24,12 @@ public:
     void mainMenu();
     //  Precondition:   None.
     //  Postcondition:  Displays the main menu on screen.
+    void menuForScientists();
+    //  Precondition:   On main menu working on scientist was selected.
+    //  Postcondition:  Displays the menu to work on scientists on screen.
+    void menuForComputers();
+    //  Precondition:   On main menu working on computers was selected.
+    //  Postcondition:  Displays the menu to work on computers on screen.
     void clearScreen();
     //  Precondition:   None.
     //  Postcondition:  Screen is blank.
@@ -61,9 +67,15 @@ public:
     void displaySearchScientist();
     //  Precondition:   The vector of scientist is populated and ready to be
     //      searched in.
-    //  Postcondition:  Selected searchoption is carried out.
+    //  Postcondition:  Selected search option is carried out.
+    void displaySearchComputer();
+    //  Precondition:   The vector of computers is populated and ready to be
+    //      searched in.
+    //  Postcondition:  Selected search option is carried out.
     void displaySearchScientistMenu();
-    //  prints out text.
+
+    void displaySearchComputersMenu();
+
     int displaySortOptions();
     //  Precondition:   A list of scientist is to be displayed.
     //  Postcondition:  Displays the sorting options available and returns the selection.
@@ -84,6 +96,12 @@ public:
     void selectAction();
     //  Precondition:   The program is running.
     //  Postcondition:  Displays the main menu and takes in the selection from made.
+    void SelectScientistAction();
+    //  Precondition:   A selection is made from the scientist menu.
+    //  Postcondition:  Selects which action to take based on input.
+    void SelectComputerAction();
+    //  Precondition:   A selection is made from the computer menu.
+    //  Postcondition:  Selects which action to take based on input.
     void chooseSortion(vector<scientist>& v);
     //  Precondition:   A list of scientist is about to be displayed on screen.  Takes
     //      in a reference to the vector about to be sorted.

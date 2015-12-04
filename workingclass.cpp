@@ -16,14 +16,27 @@ void workingclass::setVector(vector<scientist>& v)
     scientistVector = v;
 }
 
-QSqlDatabase workingclass::readFile()
+QSqlDatabase workingclass::startDatabase()
 {
     QSqlDatabase db;
     db = QSqlDatabase::addDatabase("QSQLITE");
-   // QString dbName = "../vN1H51/Group51_verklegt_1.sqlite";
+    // QString dbName = "../vN1H51/Group51_verklegt_1.sqlite";
     QString dbName = "Group51_verklegt_1.sqlite";
-        db.setDatabaseName(dbName);
+    db.setDatabaseName(dbName);
     db.open();
+    return db;
+}
+QSqlDatabase workingclass::closeDatabase()
+{
+    QSqlDatabase db;
+    db.close();
+}
+
+//QSqlDatabase
+void workingclass::readSqlScientists()
+{
+    QSqlDatabase db;
+    //db.open();
 
     QSqlQuery query(db);
 
@@ -32,7 +45,7 @@ QSqlDatabase workingclass::readFile()
     while(query.next())
     {
 
-        int id = query.value("id").toUInt();
+        //int id = query.value("id").toUInt();
         string nam = query.value("name").toString().toStdString();
         nam.substr(0, 30);
         int gen = query.value("gender").toUInt();
@@ -43,41 +56,35 @@ QSqlDatabase workingclass::readFile()
 
         scientist s(nam,gen,yob,yod,desc,url);
         scientistVector.push_back(s);
+        cout << nam << endl;
+        usleep(5000);
         }
-    return db;
-//    ifstream skra_inn;
-//    skra_inn.open(WORKFILE.c_str());
-//    if(skra_inn.fail())
+    //return db;
+
+}
+//  VectorToFile er ekki notað í SQL verkefninu.
+//void workingclass::VectorToFile(vector<scientist>& v, char AppOver) const
+//{
+//    for(unsigned int i = 0; i < v.size(); i++)
 //    {
-//        cout << "error opening readFile file";
-//        exit(1);
+//        if(toupper(AppOver) == 'A')
+//        {
+//            addLineToFile(v.at(i), 'A');
+//        }
+//        else
+//        {
+
+//            if(i == 0)
+//            {
+//                addLineToFile(v.at(i), 'O');
+//            }
+//            else
+//            {
+//                addLineToFile(v.at(i), 'A');
+//            }
+//        }
 //    }
-//    readLinesFromFile(skra_inn);
-//    skra_inn.close();
-
-}
-void workingclass::VectorToFile(vector<scientist>& v, char AppOver) const
-{
-    for(unsigned int i = 0; i < v.size(); i++)
-    {
-        if(toupper(AppOver) == 'A')
-        {
-            addLineToFile(v.at(i), 'A');
-        }
-        else
-        {
-
-            if(i == 0)
-            {
-                addLineToFile(v.at(i), 'O');
-            }
-            else
-            {
-                addLineToFile(v.at(i), 'A');
-            }
-        }
-    }
-}
+//}
 
 void workingclass::addLineToFile(scientist& s, char AppOver) const
 {
@@ -160,7 +167,7 @@ void workingclass::createScientist(string& line, int& oldfind)
 }
 void workingclass::removeScientist(scientist& s)
 {
-    readFile();
+    readSqlScientists();
     for(unsigned int j = 0; j < scientistVector.size(); j++)
     {
         if(scientistVector[j].getName() == s.getName())

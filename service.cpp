@@ -23,9 +23,9 @@ void service::servEraseVector()
 {
     workingObject.eraseVector();
 }
-void service::servReadFile()
+void service::servReadSqlScientists()
 {
-    workingObject.readFile();
+    workingObject.readSqlScientists();
 }
 vector<scientist> service::servGetVector()
 {
@@ -57,10 +57,10 @@ void service::servSortYOD(vector<scientist>& v)
 //     return workingObject.addScientistCheck(name, gender, yob, yod, desc, link);
 // }
 
-void service::servVectorToFile(vector<scientist>& v, char AppOver) const
-{
-    workingObject.VectorToFile(v, AppOver);
-}
+//void service::servVectorToFile(vector<scientist>& v, char AppOver) const
+//{
+//    workingObject.VectorToFile(v, AppOver);
+//}
 vector<scientist> service::servSearchByName(string subName, bool& isFound)
 {
     return workingObject.searchByName(subName, isFound);
@@ -190,4 +190,11 @@ void service::servRemoveScientist(scientist& s)
  {
      workingObject.addLineToFile(s, AppOver);
  }
-
+void service::servStartDatabase()
+{
+    workingObject.startDatabase();
+}
+void service::servCloseDatabase()
+{
+    workingObject.closeDatabase();
+}

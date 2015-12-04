@@ -36,8 +36,8 @@ public:
 
     void servEraseVector();
     //  Calls the EraseVector function in workingclass.
-    void servReadFile();
-    //  Calls the readfile function in workingclass.
+    void servReadSqlScientists();
+    //  Calls the readSqlScientists function in workingclass.
     vector<scientist> servGetVector();
     //  Calls the getVector function in workingclass.
     void servSortAlph(vector<scientist>& v);
@@ -66,6 +66,10 @@ public:
     //  Calls the removeScientist function in workingclass.
     void servAddLineToFile(scientist& s, char AppOver) const;
     //  Calls the addLineToFile function in workingclass.
+    void servStartDatabase();
+    //  Calls the startDatabase function in workingclass.
+    void servCloseDatabase();
+    //  Calls the CloseDatabase function in workingclass.
     workingclass workingObject;
     // A object of the data layer class.  To be used in good computing :)
 
