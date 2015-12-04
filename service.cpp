@@ -31,7 +31,7 @@ vector<scientist> service::servGetSciVector()
 {
     return workingObject.getSciVector();
 }
-<<<<<<< HEAD
+//<<<<<<< HEAD
 void service::servSortScientists(int choice)
 {
     string sort;
@@ -40,19 +40,23 @@ void service::servSortScientists(int choice)
       {
             case 1:
                 sort = ("name ASC;");
-                readSqlScientists(sort);
+                //servReadSqlScientists(sort);
+                workingObject.readSqlScientists("name ASC;");
                 break;
             case 2:
-                sort = ("name DESC;");
-                readSqlScientists(sort);
+                //sort = ("name DESC;");
+                //servReadSqlScientists(sort);
+                workingObject.readSqlScientists("name DESC;");
                 break;
             case 3:
-                sort = ("yob ASC;");
-                readSqlScientists(sort);
+                //sort = ("yob ASC;");
+                //servReadSqlScientists(sort);
+                workingObject.readSqlScientists("yob ASC;");
                 break;
             case 4:
-                sort = ("yob DESC;");
-                readSqlScientists(sort);
+                //sort = ("yob DESC;");
+                workingObject.readSqlScientists("yob DESC;");
+                //servReadSqlScientists(sort);
                 break;
             default:
                 exit(0);
@@ -75,28 +79,28 @@ void service::servSortScientists(int choice)
 //{
 //    workingObject.sortYOD(v);
 //}
-=======
+//=======
 vector<computer> service::servGetComVector()
 {
     return workingObject.getComVector();
 }
 
-void service::servSortAlph(vector<scientist>& v)
-{
-    workingObject.sortAlph(v);
-}
-void service::servSortRevAlph(vector<scientist>& v)
-{
-    workingObject.sortRevAlph(v);
-}
-void service::servSortYOB(vector<scientist>& v)
-{
-    workingObject.sortYOB(v);
-}
-void service::servSortYOD(vector<scientist>& v)
-{
-    workingObject.sortYOD(v);
-}
+//void service::servSortAlph(vector<scientist>& v)
+//{
+//    workingObject.sortAlph(v);
+//}
+//void service::servSortRevAlph(vector<scientist>& v)
+//{
+//    workingObject.sortRevAlph(v);
+//}
+//void service::servSortYOB(vector<scientist>& v)
+//{
+//    workingObject.sortYOB(v);
+//}
+//void service::servSortYOD(vector<scientist>& v)
+//{
+//    workingObject.sortYOD(v);
+//}
 bool service::servAddscientist(scientist& s) const
 {
 
@@ -107,7 +111,7 @@ bool service::servAddcomputer(computer& c) const
 }
 
 
->>>>>>> 5ffdc49055be7ad3de31758e4b97f272d927ff4f
+//>>>>>>> 5ffdc49055be7ad3de31758e4b97f272d927ff4f
 //void service::servAddScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender)
 //{
 //    workingObject.addScientistChange(name, gender, yob, yod, desc, link, selectedGender);

@@ -634,7 +634,7 @@ void infoDisplay::selectAction()
 {
     splashScreen();
     serviceObject.servStartDatabase();
-    serviceObject.henda();
+    //serviceObject.henda();
 
 
         do
@@ -645,8 +645,8 @@ void infoDisplay::selectAction()
 
             vector<scientist> sV;
             sV = serviceObject.servGetSciVector();
-            cout<<"vector:::::"<<endl;
-            cout<<sV.at(0).getName()<<endl;
+            //cout<<"vector:::::"<<endl;
+            //cout<<sV.at(0).getName()<<endl;
 
             vector<computer> cV;
             cV = serviceObject.servGetComVector();
@@ -674,7 +674,7 @@ void infoDisplay::selectAction()
                     break;
                 case 5:
                     unsigned int sel;
-                    chooseSortion(sV);
+                    //chooseSortion(sV);
                     do
                     {
                         //  Hér þarf að lesa inn úr grunni eftir að ákv. hefur verið hvaða sort er í gangi.  Þ.e. sortið þarf að kalla á innlesturinn.
