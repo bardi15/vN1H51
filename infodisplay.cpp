@@ -1137,7 +1137,7 @@ bool infoDisplay::addScientistContinue()
     cout<<"\tWould you like to continue? Y/N: ";
 
     bool input = yesOrNo();
-    cin.ignore();
+    //cin.ignore();
     return input;
 }
 void infoDisplay::addScientist()
@@ -1156,12 +1156,11 @@ void infoDisplay::addScientist()
         string name = " ", gender = " ", descr = " ", link = " ";
         int yob = 0, yod = 0;
 
-        name = (addScientistName(name));
+        name = (addScientistName());
         //cin.ignore();
         selectedGender = addScientistGender(gender);
 
         yob = (addScientistYearOfBirth());
-
 
         bool addEvenMore = true;
 
@@ -1182,8 +1181,6 @@ void infoDisplay::addScientist()
             }
         }
         while (changeInput == false);
-
-
         wYLTContinue = addScientistContinue();
 
         sO.setName(name);
@@ -1201,7 +1198,7 @@ void infoDisplay::addScientist()
         serviceObject.servAddscientist(sO);
 
     };
-    mainMenu();
+    //mainMenu();
 
 }
 bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &link)
@@ -1214,7 +1211,7 @@ bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &lin
 
     int choice;
     choice = inputNumberToFunction();
-    cin.ignore();
+    //cin.ignore();
 
     switch(choice)
     {
@@ -1273,12 +1270,14 @@ int infoDisplay::addScientistYearOfDeath(int yob)
 }
 string infoDisplay::addScientistDescription(string &descr)
 {
+    cin.ignore();
     cout<<"\tDescription: ";
     getline(cin, descr);
     return descr;
 }
 string infoDisplay::addScientistLink(string &link)
 {
+    cin.ignore();
     cout<<"\tWebsite Link:";
     getline(cin, link);
     return link;
@@ -1382,12 +1381,12 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
     cout<<"\tWhat would you like to change? Choose: "<<endl;
     cout<<"\t1. Name, 2. Gender, 3. Year of Birth, "<<endl<<"\t4. Year of Death, 5. Description, 6. Link: ";
     input = inputNumberToFunction();
-    cin.ignore();
+    //cin.ignore();
 
     switch (input)
     {
     case 1:
-        name = addScientistName(name);
+        name = addScientistName();
         break;
     case 2:
         selectedGender = addScientistGender(gender);
@@ -1411,16 +1410,15 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
     }
 }
 
-string infoDisplay::addScientistName(string &name)
+string infoDisplay::addScientistName()
 {
+    cin.ignore();
+    string name;
     bool badName = false;
-
     do
     {
         cout<<"\tEnter name: ";
-        //getline(cin, name);
-        cin>>name;
-        //cin.ignore();
+        getline(cin, name);
         name = serviceObject.nameCorrection(name, badName);
         if (badName == true)
         {
@@ -1435,19 +1433,18 @@ string infoDisplay::addScientistName(string &name)
 int infoDisplay::addScientistGender(string &gender)
 {
     int selectedGender;
-    //cin.ignore();
-
     cout<<"\tEnter gender: ";
 
+    //getline(cin, gender, '\n');
     cin>>gender;
-
-
 
     selectedGender = serviceObject.genderCorrection(gender);
     return selectedGender;
 }
 int infoDisplay::addScientistYearOfBirth()
 {
+    //cin.ignore();
+
     int temp;
     bool errorInYear = false;
     do
@@ -1455,7 +1452,7 @@ int infoDisplay::addScientistYearOfBirth()
         cout<<"\tEnter year of birth: ";
 
         temp = inputNumberToFunction();
-        cin.ignore();
+        //cin.ignore();
 
         temp = serviceObject.yearCorrection(temp, errorInYear);
 
@@ -1489,8 +1486,6 @@ void infoDisplay::addComputer()
         int compYear = 0, compType = 0;
         bool compBuilt;
 
-
-
         compName = (addComputerName());
 
         compYear = (addComputerYear());
@@ -1500,8 +1495,6 @@ void infoDisplay::addComputer()
         compBuilt = (addComputerBuilt());
 
         compDescr = (addComputerDescr());
-
-
 
         do
         {
@@ -1527,27 +1520,20 @@ void infoDisplay::addComputer()
         serviceObject.servAddcomputer(cO);
 
     };
-    mainMenu();
+    //mainMenu();
 }
 string infoDisplay::addComputerName()
 {
-    bool badName = false;
+    cin.ignore();
+    //bool badName = false;
     string compName;
 
     //ATH LAGA FYRIR TÖLVU SÉRSTAKLEGA!!!!!
 
-    do
-    {
+//    do
+//    {
         cout<<"\tEnter name: ";
-        //getline(cin, compName);
-        cin>>compName;
-        compName = serviceObject.nameCorrection(compName, badName);
-        if (badName == true)
-        {
-            cout<<"\tIncorrect name format!"<<endl;
-        }
-    }
-    while(badName == true);
+        getline(cin, compName);
 
     return compName;
 }
@@ -1562,7 +1548,7 @@ int infoDisplay::addComputerYear()
         cout<<"\tEnter year of creation: ";
 
         temp = inputNumberToFunction();
-        cin.ignore();
+        //cin.ignore();
 
         temp = serviceObject.yearCorrection(temp, errorInYear);
 
@@ -1610,9 +1596,10 @@ bool infoDisplay::addComputerBuilt()
 
 string infoDisplay::addComputerDescr()
 {
+    cin.ignore();
     string descr;
     cout<<"\tDescription: ";
-    cin>>descr;
+    getline(cin, descr);
     return descr;
 }
 
@@ -1624,7 +1611,7 @@ void infoDisplay::addComputerChange(string &cName, int &cYear, int &cType, bool 
     cout<<"\tWhat would you like to change? Choose: "<<endl;
     cout<<"\t1. Name, 2. Year of Creation, 3. Type, "<<endl<<"\t4. Built, 5. Description: ";
     input = inputNumberToFunction();
-    cin.ignore();
+    //cin.ignore();
 
     switch (input)
     {
@@ -1649,14 +1636,9 @@ void infoDisplay::addComputerChange(string &cName, int &cYear, int &cType, bool 
     }
 }
 
-
-
-
-
 void infoDisplay::displayChangeComputer()
 {
     cout<<"Change computer!"<<endl;
-
 }
 
 void infoDisplay::displayRemoveComputer()
@@ -1730,7 +1712,6 @@ char infoDisplay::inputCharacterToFunction()
 
 bool infoDisplay::yesOrNo()
 {
-
     bool repeatF = false;
     bool sendBack = false;
 
@@ -1757,4 +1738,3 @@ bool infoDisplay::yesOrNo()
 
     return sendBack;
 }
-

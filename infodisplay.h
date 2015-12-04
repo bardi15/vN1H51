@@ -132,7 +132,7 @@ public:
     void addScientist();
     //  Precondition:   The option to add scientist has been selected on the main mainu.
     //  Postcondition:  One or more scientists have been added to the privat vector.
-    string addScientistName(string &name);
+    string addScientistName();
     //  Precondition:   A name for a scientist is to be entered.
     //  Postcondition:  The name entered has been corrected or an error message has been
     //      displayed on screen.
@@ -176,8 +176,6 @@ public:
     bool addComputerCheck(string cName, int cYear, int cType, bool cBuilt, string cDescr);
     void addComputerChange(string &cName, int &cYear, int &cType, bool &cBuilt, string &cDescr);
 
-
-
     int inputNumberToFunction();
     //  Precondition:   A number is about to be entered as an input
     //  Postcondition:  Returns a integer if correctly entered, or reiterate the input.
@@ -191,7 +189,6 @@ public:
     //  prints lines
 
     const unsigned int holyScroll = 15;
-
 
     service serviceObject;
     // A object of the service layer class.  To be used in good computing :)
