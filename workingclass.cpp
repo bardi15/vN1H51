@@ -77,6 +77,8 @@ void workingclass::readSqlComputers(string sorting)
     QSqlDatabase db;
     db.open();
 
+    computer cO;
+
     QSqlQuery query(db);
 
     query.prepare("SELECT * FROM computers "
@@ -87,16 +89,23 @@ void workingclass::readSqlComputers(string sorting)
     while(query.next())
     {
 
-        int id = query.value("id").toUInt();
+        //int id = query.value("id").toUInt();
         string cName = query.value("name").toString().toStdString();
-        nam.substr(0, 40);
+        cName.substr(0, 40);
         int cYear = query.value("year").toUInt();
         int cType = query.value("type").toUInt();
-        bool cBuit = query.value("built").toUInt();
-        string cDesc = query.value("description").toString().toStdString();
+        bool cBuilt = query.value("built").toUInt();
+        string cDescr = query.value("description").toString().toStdString();
 
-        computers c(cNam, cYear, cType, cBuit, cDesc);
-        computerVector.push_back(c);
+        //computer c(cName, cYear, cType, cBuilt, cDescr);
+
+        cO.setComName(cName);
+        cO.setComYear(cYear);
+        cO.setComType(cType);
+        cO.setComBuilt(cBuilt);
+        cO.setComDescription(cDescr);
+
+        computerVector.push_back(cO);
         }
     //return db;
 }
