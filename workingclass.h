@@ -44,6 +44,9 @@ public:
     //  Precondition:   The file to be read in is located in the build folder of
     //      the program.
     //  Postcondition:  If file is available, it has been read into the private vector.
+    void readSqlComputers();
+    // Precondition:    The file to be read and is located in the build folder of the program
+    // Postcondition:   If file is available, it has been read into the private vector.
     void addToFile();
     //  Precondition:
     //  Postcondition:

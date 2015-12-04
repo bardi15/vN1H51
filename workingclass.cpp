@@ -68,6 +68,34 @@ void workingclass::readSqlScientists()
     //return db;
 
 }
+
+
+void workingclass::readSqlComputers()
+{
+    QSqlDatabase db;
+    //db.open();
+
+    QSqlQuery query(db);
+
+    query.exec("SELECT * FROM computers");
+
+    while(query.next())
+    {
+
+       // int id = query.value("id").toUInt();
+        string cName = query.value("name").toString().toStdString();
+        cName.substr(0, 40);
+        int cYear = query.value("year").toUInt();
+        int cType = query.value("type").toUInt();
+        bool cBuilt = query.value("built").toUInt();
+        string cDescr = query.value("description").toString().toStdString();
+
+        computer c(cName, cYear, cType, cBuilt, cDescr);
+        computerVector.push_back(c);
+        }
+    //return db;
+}
+
 //  VectorToFile er ekki notað í SQL verkefninu.
 //void workingclass::VectorToFile(vector<scientist>& v, char AppOver) const
 //{
