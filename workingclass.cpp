@@ -300,41 +300,43 @@ vector<scientist> workingclass::searchByYear(int& yr, char bORd, bool& isFound)
     }
     return tempReturn;
 }
-bool AlphComp(scientist a, scientist b)
-{
-    return a.getName() < b.getName();
+//bool AlphComp(scientist a, scientist b)
+//{
+//    return a.getName() < b.getName();
 
-}
-bool RevAlphComp(scientist a, scientist b)
-{
-    return a.getName() > b.getName();
+//}
+//bool RevAlphComp(scientist a, scientist b)
+//{
+//    return a.getName() > b.getName();
 
-}
-bool DB_Comp(scientist a, scientist b)
-{
-    return a.getYearOfBirth() > b.getYearOfBirth();
-}
-bool DD_Comp(scientist a, scientist b)
-{
-    return a.getYearOfDeath() > b.getYearOfDeath();
-}
-void workingclass::sortAlph(vector<scientist>& v)
-{
+//}
+//bool DB_Comp(scientist a, scientist b)
+//{
+//    return a.getYearOfBirth() > b.getYearOfBirth();
+//}
+//bool DD_Comp(scientist a, scientist b)
+//{
+//    return a.getYearOfDeath() > b.getYearOfDeath();
+//}
+//void workingclass::sortAlph(vector<scientist>& v)
+//{
 
-    sort(v.begin(), v.end(), AlphComp);
-}
-void workingclass::sortRevAlph(vector<scientist>& v)
-{
-    sort(v.begin(), v.end(), RevAlphComp);
-}
-void workingclass::sortYOB(vector<scientist>& v)
-{
-   sort(v.begin(), v.end(), DB_Comp);
-}
-void workingclass::sortYOD(vector<scientist>& v)
-{
-    sort(v.begin(), v.end(), DD_Comp);
-}
+//    sort(v.begin(), v.end(), AlphComp);
+//}
+//void workingclass::sortRevAlph(vector<scientist>& v)
+//{
+//    sort(v.begin(), v.end(), RevAlphComp);
+//}
+//void workingclass::sortYOB(vector<scientist>& v)
+//{
+//   sort(v.begin(), v.end(), DB_Comp);
+//}
+//void workingclass::sortYOD(vector<scientist>& v)
+//{
+//    sort(v.begin(), v.end(), DD_Comp);
+//}
+
+
 
 
 

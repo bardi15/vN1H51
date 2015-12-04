@@ -434,11 +434,10 @@ void infoDisplay::printLines(int lines, string thickness)
 
 }
 
-int infoDisplay::displaySortOptions()
+int infoDisplay::displaySortOptions(int choice)
 {
     //  Þessi menu getur gengið fyrir bæði tölvur og scientista, ef aðeins breytt.
-    service servant;
-    int choice;
+    serviceObject.servSortScientists(choice);
     clearScreen();
     addEmptyLines(5);
     cout << "\tHow would you like the list to be sorted? \n";
@@ -684,35 +683,35 @@ void infoDisplay::selectAction()
 
 //}
 
-void infoDisplay::chooseSortion(vector<scientist>& v)
-{
+//void infoDisplay::chooseSortion(vector<scientist>& v)
+//{
 
-    int choice = displaySortOptions();
+//    int choice = displaySortOptions();
 
-    switch(choice)
-    {
-        case 1:
-            clearScreen();
-            serviceObject.servSortAlph(v);
-            break;
-        case 2:
-            clearScreen();
-            serviceObject.servSortRevAlph(v);
-            break;
-        case 3:
-            clearScreen();
-            serviceObject.servSortYOB(v);
-            break;
-        case 4:
-            clearScreen();
-            serviceObject.servSortYOD(v);
-        case 5:
-            clearScreen();
-        default:
-            clearScreen();
-            break;
-    }
-}
+//    switch(choice)
+//    {
+//        case 1:
+//            clearScreen();
+//            serviceObject.servSortAlph(v);
+//            break;
+//        case 2:
+//            clearScreen();
+//            serviceObject.servSortRevAlph(v);
+//            break;
+//        case 3:
+//            clearScreen();
+//            serviceObject.servSortYOB(v);
+//            break;
+//        case 4:
+//            clearScreen();
+//            serviceObject.servSortYOD(v);
+//        case 5:
+//            clearScreen();
+//        default:
+//            clearScreen();
+//            break;
+//    }
+//}
 void infoDisplay::editScientistDisplayService()
 {
     serviceObject.servReadSqlScientists();

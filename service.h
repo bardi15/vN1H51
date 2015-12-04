@@ -41,6 +41,8 @@ public:
     //  Calls the readSqlScientists function in workingclass.
     vector<scientist> servGetVector();
     //  Calls the getVector function in workingclass.
+    void servSortScientists(int choice);
+
     void servSortAlph(vector<scientist>& v);
     //  Calls the sortAlph function in workingclass.
     void servSortRevAlph(vector<scientist>& v);
