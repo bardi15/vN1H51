@@ -168,11 +168,15 @@ public:
     void addComputer();
     void displayChangeComputer();
     void displayRemoveComputer();
-    string addComputerName(string &compName);
-    int addComputerYear(int &compYear);
-    int addComputerType(int &compType);
-    bool addComputerBuilt(bool &compBuilt);
-    string addComputerDescr(string &compDescr);
+    string addComputerName();
+    int addComputerYear();
+    int addComputerType();
+    bool addComputerBuilt();
+    string addComputerDescr();
+    bool addComputerCheck(string cName, int cYear, int cType, bool cBuilt, string cDescr);
+    void addComputerChange(string &cName, int &cYear, int &cType, bool &cBuilt, string &cDescr);
+
+
 
     int inputNumberToFunction();
     //  Precondition:   A number is about to be entered as an input

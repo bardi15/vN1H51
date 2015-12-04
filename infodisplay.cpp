@@ -37,7 +37,7 @@ void infoDisplay::listheaderCom()
 void infoDisplay::displaySciList(vector<scientist>& v)
 {
 
-    int vSize = v.size();
+    unsigned int vSize = v.size();
     unsigned int scrollFactor;
     if (vSize > holyScroll)
     {
@@ -97,7 +97,7 @@ void infoDisplay::displaySciList(vector<scientist>& v)
 
 void infoDisplay::displayComList(vector<computer>& c)
 {
-    int cSize = c.size();
+    unsigned int cSize = c.size();
     unsigned int scrollFactor;
     if (cSize > holyScroll)
     {
@@ -170,10 +170,6 @@ bool infoDisplay::scrollFunction(unsigned int vSize, unsigned int &scrollBase, u
 //    }
     int scrollCount = 1;
 
-   // do
-   // {
-        //listheader();
-
 
 
         if (vSize > holyScroll)
@@ -227,7 +223,6 @@ int infoDisplay::moreInfoOnScientist(vector<scientist>& v)
         cout << "\tWould you like more info on any of the scientist?" << endl;
         cout << "\tPlease enter your choice, or 0 (zero) to quit: ";
         sel = inputNumberToFunction();
-        return sel;
 //        if(sel == 0)
 //        {
 //            mainMenu();
@@ -244,6 +239,8 @@ int infoDisplay::moreInfoOnScientist(vector<scientist>& v)
 
 //    return sel;
     }
+    return sel;
+
 }
 
 void infoDisplay::dispSelectScientistToDelete(vector<scientist>& v)
@@ -458,11 +455,8 @@ void infoDisplay::menuForScientistsSwitch(vector<scientist> &v)
 
 void infoDisplay::menuForComputers(vector<computer> &c)
 {
-
-
     menuForComputersDisplay();
     menuForComputersSwitch(c);
-
 }
 
 void infoDisplay::menuForComputersDisplay()
@@ -721,6 +715,9 @@ void infoDisplay::selectAction()
 
             vector<computer> cV;
             cV = serviceObject.servGetComVector();
+
+            //cout<<"vector:::::"<<endl;
+            //cout<<cV.at(0).getComName()<<endl;
 
             mainMenu();
             int sel = serviceObject.selection();
@@ -1326,6 +1323,54 @@ bool infoDisplay::addScientistCheck(string name, int gender, int yob, int yod, s
 
     return cont;
 }
+
+bool infoDisplay::addComputerCheck(string cName, int cYear, int cType, bool cBuilt, string cDescr)
+{
+    clearScreen();
+    addEmptyLines(5);
+    //char input;
+    cout<<"\tCurrent entry: "<<endl;
+    //cout<<"\t======================================"<<endl;
+    printLines(1, "thick");
+    cout<<"\tName: "<<cName<<endl;
+    cout<<"\tYear of Creation: "<<cYear<<endl;
+    if (cType == 1)
+    {
+        cout<<"\tComputer Type: Electronic"<<endl;
+    }
+    else if (cType == 2)
+    {
+        cout<<"\tComputer Type: Mechanic"<<endl;
+    }
+    else if (cType == 3)
+    {
+        cout<<"\tComputer Type: Ternary"<<endl;
+    }
+    cout<<"\tWas the Computer built?: ";
+    if (cBuilt == true)
+    {
+        cout<<"Yes"<<endl;
+    }
+    else
+    {
+        cout<<"No"<<endl;
+    }
+
+    if (cDescr.size() > 40)
+    {
+        cout<<"\tDescription: "<<cDescr.substr(0,40)<<"..."<<endl;
+    }
+    else
+    {
+        cout<<"\tDescription: "<<cDescr<<endl;
+    }
+    cout<<"\tAre you happy with this input ? Y/N:";
+
+    bool cont = yesOrNo();
+
+    return cont;
+}
+
 void infoDisplay::addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender)
 {
 
@@ -1428,6 +1473,7 @@ void infoDisplay::addComputer()
 {
     //int selectedGender;
     bool wYLTContinue = true;
+    bool changeInput = false;
 
     computer cO;
 
@@ -1445,38 +1491,30 @@ void infoDisplay::addComputer()
 
 
 
-        compName = (addComputerName(compName));
+        compName = (addComputerName());
 
-        compYear = (addComputerYear(compYear));
+        compYear = (addComputerYear());
 
-        compType = (addComputerType(compType));
+        compType = (addComputerType());
 
-        compBuilt = (addComputerBuilt(compBuilt));
+        compBuilt = (addComputerBuilt());
 
-        compDescr = (addComputerDescr(compDescr));
+        compDescr = (addComputerDescr());
 
 
-//        bool addEvenMore = true;
 
-//        while (addEvenMore == true)
-//        {
-//            addEvenMore = addScientistMore(yob, yod, descr, link);
-//        }
+        do
+        {
+            changeInput = addComputerCheck(compName, compYear, compType, compBuilt, compDescr);
 
-//        bool changeInput = false;
+            if (changeInput == false)
+            {
+                addComputerChange(compName,compYear,compType,compBuilt,compDescr);
+            }
+        }
+        while (changeInput == false);
 
-//        do
-//        {
-//            changeInput = addScientistCheck(name,selectedGender,yob,yod,descr,link);
-
-//            if (changeInput == false)
-//            {
-//                addScientistChange(name,gender,yob,yod,descr,link,selectedGender);
-//            }
-//        }
-//        while (changeInput == false);
-
-        cout<<"Would you like to continue? Y/N: ";
+        cout<<"\tWould you like to continue? Y/N: ";
         wYLTContinue = yesOrNo();
         //        computer::computer(string cName, int cYear, int cType, bool cBuilt, string cDescr)
 
@@ -1486,27 +1524,23 @@ void infoDisplay::addComputer()
         cO.setComBuilt(compBuilt);
         cO.setComDescription(compDescr);
 
-
-//        vector<scientist> tempVector;
-//        tempVector = serviceObject.servGetVector();
-//        tempVector.push_back(sO);
-//        serviceObject.servPushToVector(sO);
-//        serviceObject.servAddLineToFile(sO, 'A');
         serviceObject.servAddcomputer(cO);
 
     };
     mainMenu();
 }
-string infoDisplay::addComputerName(string &compName)
+string infoDisplay::addComputerName()
 {
     bool badName = false;
+    string compName;
 
     //ATH LAGA FYRIR TÖLVU SÉRSTAKLEGA!!!!!
 
     do
     {
         cout<<"\tEnter name: ";
-        getline(cin, compName);
+        //getline(cin, compName);
+        cin>>compName;
         compName = serviceObject.nameCorrection(compName, badName);
         if (badName == true)
         {
@@ -1519,25 +1553,102 @@ string infoDisplay::addComputerName(string &compName)
 }
 //        computer::computer(string cName, int cYear, int cType, bool cBuilt, string cDescr)
 
-int infoDisplay::addComputerYear(int &compYear)
+int infoDisplay::addComputerYear()
 {
-    return 1984;
+    int temp;
+    bool errorInYear = false;
+    do
+    {
+        cout<<"\tEnter year of creation: ";
+
+        temp = inputNumberToFunction();
+        cin.ignore();
+
+        temp = serviceObject.yearCorrection(temp, errorInYear);
+
+        if (errorInYear == true)
+        {
+            cout<<"\tIncorrect year format!"<<endl;
+        }
+    }
+    while (errorInYear == true);
+
+    return temp;
 }
 
-int infoDisplay::addComputerType(int &compType)
+int infoDisplay::addComputerType()
 {
-    return 6;
+    int selection = 0;
+    bool continueF = false;
+    cout<<"\tSelect computer type: "<<endl;
+    cout<<"\t1) Electronic\n\t2) Mechanical\n\t3) Ternary\n\t";
+
+    do
+    {
+        continueF = false;
+
+        selection = inputNumberToFunction();
+        if ((selection < 1)||(selection > 3))
+        {
+            cout<<"Bad selection, try again: ";
+            continueF = true;
+        }
+    }
+    while(continueF == true);
+
+    return selection;
+
 }
 
-bool infoDisplay::addComputerBuilt(bool &compBuilt)
+bool infoDisplay::addComputerBuilt()
 {
-    return true;
+    cout<<"\tWas the computer built? Y/N: ";
+    bool built = yesOrNo();
+
+    return built;
 }
 
-string infoDisplay::addComputerDescr(string &compDescr)
+string infoDisplay::addComputerDescr()
 {
-    return "cool description";
+    string descr;
+    cout<<"\tDescription: ";
+    cin>>descr;
+    return descr;
 }
+
+void infoDisplay::addComputerChange(string &cName, int &cYear, int &cType, bool &cBuilt, string &cDescr)
+{
+    int input = 0;
+    clearScreen();
+    addEmptyLines(5);
+    cout<<"\tWhat would you like to change? Choose: "<<endl;
+    cout<<"\t1. Name, 2. Year of Creation, 3. Type, "<<endl<<"\t4. Built, 5. Description: ";
+    input = inputNumberToFunction();
+    cin.ignore();
+
+    switch (input)
+    {
+    case 1:
+        cName = addComputerName();
+        break;
+    case 2:
+        cYear = addComputerYear();
+        break;
+    case 3:
+        cType = addComputerType();
+        break;
+    case 4:
+        cBuilt = addComputerBuilt();
+        break;
+    case 5:
+        cDescr = addComputerDescr();
+        break;
+    default:
+        cout<<"Bad selection."<<endl;
+        break;
+    }
+}
+
 
 
 
