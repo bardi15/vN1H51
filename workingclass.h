@@ -2,6 +2,7 @@
 #define WORKINGCLASS_H
 
 #include "scientist.h"
+#include "computer.h"
 #include <QtSql>
 
 #include <fstream>
@@ -26,7 +27,9 @@ class workingclass
 public:
     workingclass();
     //  Default constructor for class.
-    vector<scientist> getVector();
+    vector<scientist> getSciVector();
+    //  Postcondition:  Returns the private vector.
+    vector<computer> getComVector();
     //  Postcondition:  Returns the private vector.
     void setVector(vector<scientist>& v);
     //  Precondition:   The vecor v has been filled with scientist.
@@ -110,6 +113,7 @@ public:
 private:
 
     vector<scientist> scientistVector;
+    vector<computer> computerVector;
 };
 
 #endif // WORKINGCLASS_H

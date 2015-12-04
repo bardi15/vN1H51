@@ -24,12 +24,16 @@ public:
     void mainMenu();
     //  Precondition:   None.
     //  Postcondition:  Displays the main menu on screen.
-    void menuForScientists();
+    void menuForScientists(vector<scientist> &v);
     //  Precondition:   On main menu working on scientist was selected.
     //  Postcondition:  Displays the menu to work on scientists on screen.
-    void menuForComputers();
+    void menuForScientistsDisplay();
+    void menuForScientistsSwitch(vector<scientist> &c);
+    void menuForComputers(vector<computer> &c);
     //  Precondition:   On main menu working on computers was selected.
     //  Postcondition:  Displays the menu to work on computers on screen.
+    void menuForComputersDisplay();
+    void menuForComputersSwitch(vector<computer> &c);
     void clearScreen();
     //  Precondition:   None.
     //  Postcondition:  Screen is blank.
@@ -45,6 +49,7 @@ public:
     void displayList(vector<scientist>& v);
     //  Precondition:   The vector v has been populated with scientist.
     //  Postcondition:  Displays all scientist according to condition on screen.
+    bool scrollFunction(unsigned int vSize, unsigned int &scrollBase, unsigned int &scrollFactor);
     int moreInfoOnScientist(vector<scientist>& v);
     //  Precondition:   A list of scientist has been displayed.
     //  Postcondition:  Ask for which if any scientist you want more information on.
@@ -156,6 +161,10 @@ public:
     //  Precondition:   Data for a new scientist have been entered. Asks if any of the
     //      inserted data is to be changed.
     //  Postcondition:  Entered data for a new scientist has been corrected.
+    void addComputer();
+    void displayChangeComputer();
+    void displayRemoveComputer();
+
     int inputNumberToFunction();
     //  Precondition:   A number is about to be entered as an input
     //  Postcondition:  Returns a integer if correctly entered, or reiterate the input.
