@@ -72,6 +72,34 @@ void workingclass::readSqlScientists(string sorting)
     //return db;
 
 }
+void workingclass::readSqlComputers(string sorting)
+{
+    QSqlDatabase db;
+    db.open();
+
+    QSqlQuery query(db);
+
+    query.prepare("SELECT * FROM computers "
+                  "ORDER BY :sort" );
+    query.bindValue(":sort", QString::fromStdString(sorting));
+    query.exec();
+
+    while(query.next())
+    {
+
+        int id = query.value("id").toUInt();
+        string cName = query.value("name").toString().toStdString();
+        nam.substr(0, 40);
+        int cYear = query.value("year").toUInt();
+        int cType = query.value("type").toUInt();
+        bool cBuit = query.value("built").toUInt();
+        string cDesc = query.value("description").toString().toStdString();
+
+        computers c(cNam, cYear, cType, cBuit, cDesc);
+        computerVector.push_back(c);
+        }
+    //return db;
+}
 
 
 bool workingclass::addscientist(scientist& s)
