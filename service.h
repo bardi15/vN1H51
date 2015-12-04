@@ -16,6 +16,7 @@ public:
     int selection();
     //  Precondition:   A need for a selection is present.
     //  Postcondition:  Returns a integer corresponding to the selection made.
+    bool servAddscientist(string nafn, int sex, int yob, int yod, string desc, string link);
 
     void editScientistService(int i); //(int selection, int scientist);
     //  Precondition:   A scientist is about to be edited.

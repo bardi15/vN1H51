@@ -35,6 +35,8 @@ public:
     //  Precondition:
     //  Postcondition:
     //QSqlDatabase
+    bool addscientist(string nafn, int sex, int yob, int yod, string desc, string link);
+
     void readSqlScientists();
     //  Precondition:   The file to be read in is located in the build folder of
     //      the program.
