@@ -362,7 +362,7 @@ int infoDisplay::moreInfoOnScientist()
 
 void infoDisplay::dispSelectScientistToDelete()
 {
-    int sel;
+    unsigned int sel;
 
     cout << "\tWhich scientist would you like delete?" << endl;
     cout << "\tPlease enter your choise, or 0 (zero) to quit: ";
@@ -916,7 +916,7 @@ void infoDisplay::selectAction()
                     }while(sel > 0);
                         break;
                 case 6:     //  Displaying computers
-                    sel;
+
                     //chooseSortion(cV);
                     do
                     {
@@ -1362,7 +1362,8 @@ void infoDisplay::addScientist()
 bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &link)
 {
     addEmptyLines(5);
-    cout<<"\t1. Add year of Death, 2. Description, "<<endl<<"\t3. Website link, any other digit continues: ";
+    cout<<"\t1. Add year of Death, 2. Description, "<<endl<<"\t3. Website link; \n";
+    cout << "any other digit continues: ";
 
     bool addAnother = true;
 
@@ -1767,7 +1768,9 @@ void infoDisplay::addComputerChange(string &cName, int &cYear, int &cType, bool 
     clearScreen();
     addEmptyLines(5);
     cout<<"\tWhat would you like to change? Choose: "<<endl;
-    cout<<"\t1. Name, 2. Year of Creation, 3. Type, "<<endl<<"\t4. Built, 5. Description: ";
+    cout<<"\t1. Name, 2. Year of Creation, 3. Type, "<<endl;
+    cout << "\t4. Built, 5. Description \n";
+    cout << "\tAny other digit to go back.";
     input = inputNumberToFunction();
     //cin.ignore();
 
@@ -1789,7 +1792,7 @@ void infoDisplay::addComputerChange(string &cName, int &cYear, int &cType, bool 
         cDescr = addComputerDescr();
         break;
     default:
-        cout<<"Bad selection."<<endl;
+        //cout<<"Bad selection."<<endl;
         break;
     }
 }

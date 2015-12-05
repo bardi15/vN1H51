@@ -101,15 +101,15 @@ vector<computer> service::servGetComVector()
 //{
 //    workingObject.sortYOD(v);
 //}
-bool service::servAddscientist(scientist& s)
+void service::servAddscientist(scientist& s)
 {
     workingObject.addscientist(s);
 }   
-bool service::servAddcomputer(computer& c)
+void service::servAddcomputer(computer& c)
 {
     workingObject.addcomputer(c);
 }
-bool service::servAddcomputerType(computertype& ct)
+void service::servAddcomputerType(computertype& ct)
 {
     workingObject.addcomputerType(ct);
 }
@@ -265,12 +265,39 @@ void service::servCloseDatabase()
 {
     workingObject.closeDatabase();
 }
+void service::servDeleteScientist(int sciID)
+{
+    workingObject.deleteScientist(sciID);
+}
+void service::servDeleteComputer(int compID)
+{
+    workingObject.deleteComputer(compID);
+}
+
+void service::servUpdateSqlScientist(scientist& s)
+{
+    workingObject.updateSqlScientist(s);
+}
+
+void service::servUpdateSqlComputer(computer& c)
+{
+    workingObject.updateSqlComputer(c);
+}
+
+
+
+
+
 
 void service::henda()
 {
-    workingObject.readSqlComputers();
-    sleep(3);
-    workingObject.readSqlScientists();
-    sleep(3);
-    workingObject.readSqlCompTypes();
+
+//    workingObject.readSqlComputers();
+//    sleep(3);
+//    workingObject.readSqlScientists();
+//    sleep(3);
+//    workingObject.readSqlCompTypes();
+//    workingObject.HENDA();
+//    workingObject.HENDA1();
+//    sleep(3);
 }

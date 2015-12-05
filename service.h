@@ -18,11 +18,11 @@ public:
     int selection();
     //  Precondition:   A need for a selection is present.
     //  Postcondition:  Returns a integer corresponding to the selection made.
-    bool servAddscientist(scientist& s) ;
+    void servAddscientist(scientist& s) ;
 
-    bool servAddcomputer(computer& c) ;
+    void servAddcomputer(computer& c) ;
 
-    bool servAddcomputerType(computertype& ct) ;
+    void servAddcomputerType(computertype& ct) ;
 
     void editScientistService(int i); //(int selection, int scientist);
     //  Precondition:   A scientist is about to be edited.
@@ -81,6 +81,14 @@ public:
     //  Calls the startDatabase function in workingclass.
     void servCloseDatabase();
     //  Calls the CloseDatabase function in workingclass.
+    void servDeleteComputer(int compID);
+    //  Calls the deleteComputer function in workingclass.
+    void servDeleteScientist(int sciID);
+    //  Calls the deleteScientist function in workingclass.
+    void servUpdateSqlComputer(computer& c);
+    //  Calls the updateScientist function in workingclass.
+    void servUpdateSqlScientist(scientist& s);
+    //  Calls the updateComputer function in workingclass.
     void henda();
     workingclass workingObject;
     // A object of the data layer class.  To be used in good computing :)

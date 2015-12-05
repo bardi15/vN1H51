@@ -44,11 +44,27 @@ public:
     void selectAction(int sel);
     //  Precondition:
     //  Postcondition:
-    //QSqlDatabase
     bool addscientist(scientist& s);
+    //  Precondition:   The parameter s is a new scientist.
+    //  Postcondition:  The scientist s is now added to the database.
     bool addcomputer(computer& c);
+    //  Precondition:   The parameter c is a new computer.
+    //  Postcondition:  The computer c is now added the database.
+    void updateSqlComputer(computer& c);
+    //  Precondition:   The parameter c is a computer that has changes to it.
+    //  Postcondition:  The computer c is now updated with new information.
+    void updateSqlScientist(scientist& s);
+    //  Precondition:   The parameter s is a scientist that has changes to it.
+    //  Postcondition:  The scientist s is now updated with new information.
     bool addcomputerType(computertype& ct);
-
+    //  Precondition:   The parameter ct is a new computer type.
+    //  Postcondition:  The computer type ct is now added to the database.
+    void deleteScientist(int sciID);
+    //  Precondition:   The parameter sciID is the ID of a scientist to be deleted.
+    //  Postcondition:  The scientist sciID has been deleted from the database.
+    void deleteComputer(int compID);
+    //  Precondition:   The parameter compID is the ID of a computer to be deleted.
+    //  Postcondition:  The computer compID has been deleted from the database.
     void readSqlScientists(string sorting = "name ASC");
     //  Precondition:   The database is open.
     //  Postcondition:  If data available, it is read into the private vector for scientist.
@@ -58,6 +74,12 @@ public:
     void readSqlCompTypes();
     //  Precondition:   The database is open.
     //  Postcondition:  If data available, it is read into the private vector for computertypes.
+    vector<scientist> getScientistsLinkedToComputer(int compID);
+    //  Precondition:   A computer is selected and its ID sent in as compID.
+    //  Postcondition:  Returns a vector of scientist related to the computer.
+    vector<computer> getComputersLinkedToScientists(int sciID);
+    //  Precondition:   A scientist is selected and its ID sent in as sciID.
+    //  Postcondition:  Returns a vector of computers related to the scientist.
     void addToFile();
     //  Precondition:
     //  Postcondition:
@@ -123,6 +145,8 @@ public:
     void closeDatabase();
     //  Precondition:   The database is open.
     //  Postconditinon: The database has been closed.
+    void HENDA();
+    void HENDA1();
 
 private:
 
