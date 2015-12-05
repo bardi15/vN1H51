@@ -24,16 +24,16 @@ public:
     void mainMenu();
     //  Precondition:   None.
     //  Postcondition:  Displays the main menu on screen.
-    void menuForScientists(vector<scientist> &v);
+    void menuForScientists();
     //  Precondition:   On main menu working on scientist was selected.
     //  Postcondition:  Displays the menu to work on scientists on screen.
     void menuForScientistsDisplay();
-    void menuForScientistsSwitch(vector<scientist> &c);
-    void menuForComputers(vector<computer> &c);
+    void menuForScientistsSwitch();
+    void menuForComputers();
     //  Precondition:   On main menu working on computers was selected.
     //  Postcondition:  Displays the menu to work on computers on screen.
     void menuForComputersDisplay();
-    void menuForComputersSwitch(vector<computer> &c);
+    void menuForComputersSwitch();
     void clearScreen();
     //  Precondition:   None.
     //  Postcondition:  Screen is blank.
@@ -48,20 +48,30 @@ public:
     void displayOneScientist(scientist& s);
     //  Precondition:   Takes in one scientist to display as a parameter.
     //  Postcondition:  Displays all information about the scientist on screen
+    void displayOneComputer(computer& c);
+    //  Precondition:   Takes in one computer to display as a parameter.
+    //  Postcondition:  Displays all information about the computer on screen
     void displaySciList(vector<scientist>& v);
     //  Precondition:   The vector v has been populated with scientist.
     //  Postcondition:  Displays all scientist according to condition on screen.
-    void displayComList(vector<computer> &c);
-
+    void displaySciList();
+    //  Precondition:   The scientist have been read from the database.
+    //  Postcondition:  Displays all scientist according to condition on screen.
+    void displayComList(vector<computer> &v);
+    //  Precondition:   The vector v has been populated with computers.
+    //  Postcondition:  Displays all computers according to condition on screen.
+    void displayComList();
+    //  Precondition:   The computers have been read from the database.
+    //  Postcondition:  Displays all computers according to condition on screen.
     bool scrollFunction(unsigned int vSize, unsigned int &scrollBase, unsigned int &scrollFactor);
-    int moreInfoOnScientist(vector<scientist>& v);
+    int moreInfoOnScientist();
     //  Precondition:   A list of scientist has been displayed.
     //  Postcondition:  Ask for which if any scientist you want more information on.
     //      Returns the selection.
     void dispScientistToEdit(vector<scientist>& v);
     //  Precondition:   The vector v has been populated with scientist.
     //  Postcondition:  Selected scientist has is displayed on screen.
-    void dispSelectScientistToDelete(vector<scientist>& v);
+    void dispSelectScientistToDelete();
     //  Precondition:   The vector v has been populated with scientist.
     //  Postcondition:  Selected scientist has been removed from the file.
     bool dispSureToRemove(int gender);
