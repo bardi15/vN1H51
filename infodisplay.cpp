@@ -763,22 +763,22 @@ void infoDisplay::printLines(int lines, string thickness)
 
 }
 
-int infoDisplay::displaySortOptions(int choice)
+void infoDisplay::displaySortOptions()
 {
-    //  Þessi menu getur gengið fyrir bæði tölvur og scientista, ef aðeins breytt.
-    serviceObject.servSortScientists(choice);
+
+    int choice = 1;
     clearScreen();
     addEmptyLines(5);
     cout << "\tHow would you like the list to be sorted? \n";
-    addEmptyLines(1);
+    printLines(1, "thin");
     cout << "\t1) In alphabetical order. \n";
     cout << "\t2) In reverse alphabetical order. \n";
-    cout << "\t3) By year of birth. \n";
-    cout << "\t4) By year of death. \n";
-    addEmptyLines(1);
+    cout << "\t3) By year of birth ascending. \n";
+    cout << "\t4) By year of birth descending. \n";
+    printLines(1, "thick");
     cout << "\tInput choice here: ";
     choice = inputNumberToFunction();
-    return choice;
+    serviceObject.servSortScientists(choice);
 
 }
 

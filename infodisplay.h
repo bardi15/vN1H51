@@ -95,7 +95,7 @@ public:
 
     void displaySearchComputersMenu();
 
-    int displaySortOptions(int choice);
+    void displaySortOptions();
     //  Precondition:   A list of scientist is to be displayed.
     //  Postcondition:  Displays the sorting options available and returns the selection.
     void quitProgram();
@@ -121,7 +121,7 @@ public:
     void SelectComputerAction();
     //  Precondition:   A selection is made from the computer menu.
     //  Postcondition:  Selects which action to take based on input.
-    void chooseSortion(vector<scientist>& v);
+//    void chooseSortion(vector<scientist>& v);
     //  Precondition:   A list of scientist is about to be displayed on screen.  Takes
     //      in a reference to the vector about to be sorted.
     //  Postcondition:  The vector is now sorted correctly according to the selection.

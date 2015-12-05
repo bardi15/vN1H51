@@ -140,9 +140,11 @@ void workingclass::readSqlCompTypes()
 
 bool workingclass::addscientist(scientist& s)
 {
-    QSqlDatabase db;
-    QSqlQuery query(db);
-    query.prepare("INSERT INTO scientists (name, gender, yob, yod, description, link "
+    //QSqlDatabase db;
+    //QSqlQuery query(db);
+    QSqlQuery query;
+
+    query.prepare("INSERT INTO scientists (name, gender, yob, yod, description, link) "
                   "VALUES (:name, :sex, :yob, :yod, :desc, :link);");
     //query.bindValue(":table", QString::fromStdString(SCIENTISTTABLE.c_str()) );
     query.bindValue(":name", QString::fromStdString(s.getName()));
@@ -173,8 +175,8 @@ bool workingclass::addcomputerType(computertype & ct)
 {
     QSqlDatabase db;
     QSqlQuery query(db);
-    query.prepare("INSERT INTO computers_and_scientists (name, , year, type, built, description "
-                  "VALUES (:name, :year, :type, :built, :desc);");
+    query.prepare("INSERT INTO computers_and_scientists (name, description) "
+                  "VALUES (:name, :desc);");
     //query.bindValue(":table", QString::fromStdString(COMPUTERSTTABLE.c_str()) );
     query.bindValue(":name", QString::fromStdString(ct.getName()));
     query.bindValue(":desc", QString::fromStdString(ct.getDesc()));

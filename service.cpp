@@ -31,7 +31,7 @@ vector<scientist> service::servGetSciVector()
 {
     return workingObject.getSciVector();
 }
-//<<<<<<< HEAD
+
 void service::servSortScientists(int choice)
 {
     string sort;
@@ -101,18 +101,17 @@ vector<computer> service::servGetComVector()
 //{
 //    workingObject.sortYOD(v);
 //}
-
-bool service::servAddscientist(scientist& s)
+bool service::servAddscientist(scientist& s) const
 {
-    return workingObject.addscientist(s);
+    workingObject.addscientist(s);
+}   
+bool service::servAddcomputer(computer& c) const
+{
+    workingObject.addcomputer(c);
 }
-bool service::servAddcomputer(computer& c)
+bool service::servAddcomputerType(computertype& ct) const
 {
-    return workingObject.addcomputer(c);
-}
-bool service::servAddcomputerType(computertype& ct)
-{
-    return workingObject.addcomputerType(ct);
+    workingObject.a .add(c);
 }
 
 //>>>>>>> 5ffdc49055be7ad3de31758e4b97f272d927ff4f
