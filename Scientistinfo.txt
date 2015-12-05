@@ -47,6 +47,9 @@ Trevor Pearcey;1;1919;1998;British-born Australian scientist, who created CSIRAC
 Samuel N. Alexander;1;1910;1967;American computer pioneer who developed SEAC, one of the earliest computers.;https://en.wikipedia.org/wiki/Samuel_N._Alexander
 Kenneth Harry Olsen;1;1926;2011;American engineer who co-founded Digital Equipment Corporation (DEC) in 1957 with colleague Harlan Anderson.;https://en.wikipedia.org/wiki/Ken_Olsen
 Harlan Anderson;1;1929;0;American engineer and entrepreneur, best known as the co-founder of Digital Equipment Corporation (DEC) which at one time was the second largest computer company in the world.;https://en.wikipedia.org/wiki/Harlan_Anderson
+Gladeon Marcus Barnes;1;1887;1961;He is best known for his involvement in the development of the M4 Sherman and the M26 Pershing tanks, as well as ENIAC computer.;https://en.wikipedia.org/wiki/Gladeon_M._Barnes
+Sergei Sobolev;1;1908;1989;Soviet mathematician working in mathematical analysis and partial differential equations.;https://en.wikipedia.org/wiki/Sergei_Sobolev
+Nikolay Brusentsov;1;1925;2014;Russian computer scientist, most famous for having built a (balanced) ternary computer, Setun, together with Sergei Sobolev in 1958.;https://en.wikipedia.org/wiki/Nikolay_Brusentsov
 Scott Aaronson;1;1941;1999;;
 Hal Abelson;1;1941;1999;;
 Jacques Herbrand;1;1908;1931;;
