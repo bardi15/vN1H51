@@ -103,8 +103,8 @@ void workingclass::readSqlComputers(string sorting)
         computer c(id, cName, cYear, cType, cBuilt, cDescr);
         computerVector.push_back(c);
 
-        cout << cName << " " << c.getComName() << endl;
-        usleep(50000);
+//        cout << cName << " " << c.getComName() << endl;
+//        usleep(50000);
         }
 }
 void workingclass::readSqlCompTypes()
@@ -131,8 +131,8 @@ void workingclass::readSqlCompTypes()
 
         computertype ct(ctId,ctName,ctDesc);
         compTypeVector.push_back(ct);
-        cout << ctName << " " << ct.getName() << endl;
-        usleep(50000);
+//        cout << ctName << " " << ct.getName() << endl;
+//        usleep(50000);
     }
     //return db;
 
@@ -140,13 +140,11 @@ void workingclass::readSqlCompTypes()
 
 bool workingclass::addscientist(scientist& s)
 {
-    //QSqlDatabase db;
-    //QSqlQuery query(db);
     QSqlQuery query;
 
     query.prepare("INSERT INTO scientists (name, gender, yob, yod, description, link) "
                   "VALUES (:name, :sex, :yob, :yod, :desc, :link);");
-    //query.bindValue(":table", QString::fromStdString(SCIENTISTTABLE.c_str()) );
+
     query.bindValue(":name", QString::fromStdString(s.getName()));
     query.bindValue(":sex", s.getGender());
     query.bindValue(":yob", s.getYearOfBirth());
@@ -159,11 +157,9 @@ bool workingclass::addscientist(scientist& s)
 
 bool workingclass::addcomputer(computer& c)
 {
-    QSqlDatabase db;
-    QSqlQuery query(db);
+    QSqlQuery query;
     query.prepare("INSERT INTO computers (name, , year, type, built, description "
                   "VALUES (:name, :year, :type, :built, :desc);");
-    //query.bindValue(":table", QString::fromStdString(COMPUTERSTTABLE.c_str()) );
     query.bindValue(":name", QString::fromStdString(c.getComName()));
     query.bindValue(":year", c.getComYear());
     query.bindValue(":type", c.getComType());
@@ -173,11 +169,9 @@ bool workingclass::addcomputer(computer& c)
 }
 bool workingclass::addcomputerType(computertype & ct)
 {
-    QSqlDatabase db;
-    QSqlQuery query(db);
+    QSqlQuery query;
     query.prepare("INSERT INTO computers_and_scientists (name, description) "
                   "VALUES (:name, :desc);");
-    //query.bindValue(":table", QString::fromStdString(COMPUTERSTTABLE.c_str()) );
     query.bindValue(":name", QString::fromStdString(ct.getName()));
     query.bindValue(":desc", QString::fromStdString(ct.getDesc()));
     return 1;
