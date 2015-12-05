@@ -901,7 +901,9 @@ void infoDisplay::selectAction()
                     {
                         //  Hér þarf að lesa inn úr grunni eftir að ákv. hefur verið hvaða sort er í gangi.  Þ.e. sortið þarf að kalla á innlesturinn.
                         clearScreen();
-                        displaySciList();
+                        vector<scientist> v;
+                        v = serviceObject.servGetSciVector();
+                        displaySciList(v);
                         sel = moreInfoOnScientist();
                         if(sel > 0 && sel <= serviceObject.servGetSciVector().size())
                         {

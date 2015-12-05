@@ -268,9 +268,9 @@ void service::servCloseDatabase()
 
 void service::henda()
 {
-//    workingObject.readSqlComputers();
-//    sleep(3);
-//    workingObject.readSqlScientists();
-//    sleep(3);
-//    workingObject.readSqlCompTypes();
+    workingObject.readSqlComputers();
+    sleep(3);
+    workingObject.readSqlScientists();
+    sleep(3);
+    workingObject.readSqlCompTypes();
 }

@@ -42,10 +42,10 @@ void workingclass::closeDatabase()
 //QSqlDatabase
 void workingclass::readSqlScientists(string sorting)
 {
-    QSqlDatabase db;
+    //QSqlDatabase db;
     //db.open();
 
-    QSqlQuery query(db);
+    QSqlQuery query;//(db);
 
     query.prepare("SELECT * FROM scientists "
                   "ORDER BY " + QString::fromStdString(sorting));
@@ -78,12 +78,9 @@ void workingclass::readSqlScientists(string sorting)
 }
 void workingclass::readSqlComputers(string sorting)
 {
-    QSqlDatabase db;
-    db.open();
-
     computer c;
 
-    QSqlQuery query(db);
+    QSqlQuery query;
 
     query.prepare("SELECT * FROM computers "
                   "ORDER BY " + QString::fromStdString(sorting));
