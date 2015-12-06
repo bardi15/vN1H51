@@ -13,11 +13,10 @@ vector<computer> workingclass::getComVector()
 {
     return computerVector;
 }
-vector<computertype> workingclass::getComTypeVector()
+vector<computertype> workingclass::getCompTypeVector()
 {
     return compTypeVector;
 }
-
 
 void workingclass::setVector(vector<scientist>& v)
 {
@@ -50,13 +49,9 @@ void workingclass::readSqlScientists(string sorting)
                   "WHERE deleted = 'FALSE'"
                   "ORDER BY " + QString::fromStdString(sorting));
     query.exec();
-//    string s =  query.executedQuery().toStdString();
 
-//    cout << s << endl;
-//    sleep(1);
-
-
-   while(query.next())
+    scientistVector.clear();
+    while(query.next())
     {
 
 
@@ -182,6 +177,7 @@ void workingclass::readSqlComputers(string sorting)
                   "WHERE deleted = 'FALSE'"
                   "ORDER BY " + QString::fromStdString(sorting));
     query.exec();
+    computerVector.clear();
     while(query.next())
     {
         computer c;
@@ -202,6 +198,7 @@ void workingclass::readSqlCompTypes()
                   "WHERE deleted = 'FALSE'"
                   "ORDER BY name ASC");
     query.exec();
+    compTypeVector.clear();
     while(query.next())
     {
         computertype ct;
@@ -350,7 +347,7 @@ void workingclass::fillScientist(const string& text, scientist& s, const int& fi
 }
 
 
-vector<scientist> workingclass::searchByName(string subName, bool& isFound)
+void workingclass::searchScientistByName(string subName, bool& isFound)
 {
     vector<scientist> returnVector;
     scientist s;
@@ -375,11 +372,12 @@ vector<scientist> workingclass::searchByName(string subName, bool& isFound)
             isFound = true;
        }
     }
-    return returnVector;
+    scientistVector.clear();
+    scientistVector = returnVector;
 }
-vector<scientist> workingclass::searchByGender(int sex, bool& isFound)
+void workingclass::searchScientistByGender(int sex, bool& isFound)
 {
-    vector<scientist> tempReturn;
+    vector<scientist> returnVector;
     scientist s;
 
 
@@ -388,22 +386,18 @@ vector<scientist> workingclass::searchByGender(int sex, bool& isFound)
         if(scientistVector.at(i).getGender() == sex)
        {
             s = scientistVector.at(i);
-            tempReturn.push_back(s);
+            returnVector.push_back(s);
             isFound = true;
        }
     }
-    return tempReturn;
+    scientistVector.clear();
+    scientistVector = returnVector;
 }
-vector<scientist> workingclass::searchByYear(int& yr, char bORd, bool& isFound)
+void workingclass::searchScientistByYear(int& yr, char bORd, bool& isFound)
 {
-    vector<scientist> tempReturn;
+    vector<scientist> returnVector;
     scientist s;
     bool error = false;
-    if (error)
-    {
-        tempReturn.resize(0);
-        return tempReturn;
-    }
     for(unsigned int i = 0; i < scientistVector.size(); i++)
     {
         if(bORd == 'b')
@@ -411,18 +405,91 @@ vector<scientist> workingclass::searchByYear(int& yr, char bORd, bool& isFound)
            if(scientistVector.at(i).getYearOfBirth() == yr)
            {
                s = scientistVector.at(i);
-               tempReturn.push_back(s);
+               returnVector.push_back(s);
                isFound = true;
            }
         }
         else if(scientistVector.at(i).getYearOfDeath() == yr)
         {
             s = scientistVector.at(i);
-            tempReturn.push_back(s);
+            returnVector.push_back(s);
             isFound = true;
         }
     }
-    return tempReturn;
+    scientistVector.clear();
+    scientistVector = returnVector;
+}
+void workingclass::searchComputerByName(string subName, bool& isFound)
+{
+    vector<computer> returnVector;
+    computer c;
+
+    for(unsigned int i = 0; i < computerVector.size(); i++)
+    {
+        string searchstring = computerVector.at(i).getComName();
+        for (unsigned int j = 0; j < searchstring.size(); j++)
+        {
+            searchstring[j] = tolower(searchstring[j]);
+        }
+        for (unsigned int j = 0; j < subName.size(); j++)
+        {
+            subName[j] = tolower(subName[j]);
+        }
+
+        //  Kemur einhver furðuleg villa þegar reynt er að breyta í lovercase :(
+        if( searchstring.find( subName) < 30 )
+       {
+            c = computerVector.at(i);
+            returnVector.push_back(c);
+            isFound = true;
+       }
+    }
+    computerVector.clear();
+    computerVector = returnVector;
+}
+void workingclass::searchComputerByType(string& type, bool& isFound)
+{
+    vector<computer> returnVector;
+    computer c;
+    readSqlCompTypes();
+    for(unsigned int i = 0; i < computerVector.size(); i++)
+    {
+        string searchstring = getCompTypeVector().at(computerVector.at(i).getComType()-1).getName();
+        for (unsigned int j = 0; j < searchstring.size(); j++)
+        {
+            searchstring[j] = tolower(searchstring[j]);
+        }
+        for (unsigned int j = 0; j < type.size(); j++)
+        {
+            type[j] = tolower(type[j]);
+        }
+
+        if( searchstring.find( type) < 30 )
+       {
+            c = computerVector.at(i);
+            returnVector.push_back(c);
+            isFound = true;
+       }
+    }
+    computerVector.clear();
+    computerVector = returnVector;
+//    return returnVector;
+}
+void workingclass::searchComputerByYear(int& yr, bool& isFound)
+{
+    vector<computer> returnVector;
+    computer c;
+    for(unsigned int i = 0; i < computerVector.size(); i++)
+    {
+        if(computerVector.at(i).getComYear() == yr)
+        {
+            c = computerVector.at(i);
+            returnVector.push_back(c);
+            isFound = true;
+        }
+    }
+    computerVector.clear();
+    computerVector = returnVector;
 }
 //bool AlphComp(scientist a, scientist b)
 //{

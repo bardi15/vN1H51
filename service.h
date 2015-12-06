@@ -78,12 +78,18 @@ public:
     //  Calls the addScientistCheck function in workingclass.
     void servVectorToFile(vector<scientist>& v, char AppOver) const;
     //  Calls the VectorToFile function in workingclass.
-    vector<scientist> servSearchByName(string subName, bool& isFound);
+    void servSearchScientistByName(string subName, bool& isFound);
     //  Calls the searchByName function in workingclass.
-    vector<scientist> servSearchByGender(int sex, bool& isFound);
+    void servSearchScientistByGender(int sex, bool& isFound);
     //  Calls the searchByGender function in workingclass.
-    vector<scientist> servSearchByYear(int& yr, char bORd, bool& isFound);
+    void servSearchScientistByYear(int& yr, char bORd, bool& isFound);
     //  Calls the searchByYear function in workingclass.
+    void servSearchComputerByName(string subName, bool& isFound);
+    //  Calls the searchComputerByName function in workingclass.
+    void servSearchComputerByType(string& type, bool& isFound);
+    //  Calls the searchComputerByName function in workingclass.
+    void servSearchComputerByYear(int& yr, bool& isFound);
+    //  Calls the searchComputerByYear function in workingclass.
     void servPushToVector(const scientist& s);
     //  Calls the pushToVector function in workingclass.
     void servRemoveScientist(scientist& s);

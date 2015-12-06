@@ -27,73 +27,13 @@ void infoDisplay::listheaderCom()
     cout.setf(ios::left);
     cout << "\tNr.";
     cout.width(30);
-    cout << "\tName\t\tYear";
-    cout << "\tType" << endl;
+    cout << "\tName";
+    cout << "\tYear\tType" << endl;
     //cout << "\t-----------------------------------------------------" << endl;
     printLines(1,"thin");
 }
 
 
-void infoDisplay::displaySciList(vector<scientist>& v)
-{
-
-    unsigned int vSize = v.size();
-    unsigned int scrollFactor;
-    if (vSize > HOLYSCROLL)
-    {
-         scrollFactor = HOLYSCROLL;
-    }
-    else
-    {
-        scrollFactor = vSize;
-    }
-    unsigned int scrollBase = 0;
-    bool continueF;
-    if (vSize < HOLYSCROLL)
-    {
-         continueF = false;
-    }
-    else
-    {
-        continueF = true;
-    }
-    cout<<"vSize1: "<<vSize<<" scrollBase1: "<<scrollBase<<" scrollFactor1: "<<scrollFactor<<endl;
-
-    do
-    {
-        listheaderSci();
-        for(unsigned int i = scrollBase; i < scrollFactor; i++)
-        {
-            scientist s = v.at(i);
-            cout.width(2);
-            cout << "\t" << i+1 << ")\t";
-            cout.width(30);
-            cout << s.getName();// << "\t";
-            if(s.getGender() == 0)
-            {
-                cout << "female";
-            }
-            else
-            {
-                cout << "male";
-            }
-            cout << "\t" << s.getYearOfBirth()<< "\t" << endl;
-        }
-
-        if (continueF == true)
-        {
-            continueF = scrollFunction(vSize, scrollBase, scrollFactor);
-            cout<<"vSize2: "<<vSize<<" scrollBase2: "<<scrollBase<<" scrollFactor2: "<<scrollFactor<<endl;
-        }
-    }
-    while (continueF == true);
-
-    cout<<"vSize3: "<<vSize<<" scrollBase3: "<<scrollBase<<" scrollFactor3: "<<scrollFactor<<endl;
-
-
-    //cout << "\t-----------------------------------------------------" << endl;
-    printLines(1, "thin");
-}
 
 void infoDisplay::displaySciList()
 {
@@ -156,63 +96,6 @@ void infoDisplay::displaySciList()
     printLines(1, "thin");
 }
 
-void infoDisplay::displayComList(vector<computer>& v)
-{
-    serviceObject.servReadSqlComputers();
-    unsigned int cSize = v.size();
-    unsigned int scrollFactor;
-    if (cSize > HOLYSCROLL)
-    {
-         scrollFactor = HOLYSCROLL;
-    }
-    else
-    {
-        scrollFactor = cSize;
-    }
-    unsigned int scrollBase = 0;
-    bool continueF;
-    if (cSize < HOLYSCROLL)
-    {
-         continueF = false;
-    }
-    else
-    {
-        continueF = true;
-    }
-    //cout<<"vSize1: "<<vSize<<" scrollBase1: "<<scrollBase<<" scrollFactor1: "<<scrollFactor<<endl;
-    do
-    {
-
-        listheaderCom();
-        serviceObject.servReadSqlCompTypes();
-        for(unsigned int i = scrollBase; i < scrollFactor; i++)
-        {
-            computer c = v.at(i);
-            computertype ct = serviceObject.servGetComTypeVector().at(c.getComType());
-            cout.width(2);
-            cout << "\t" << i+1 << ")\t";
-            cout.width(30);
-            cout << c.getComName();// << "\t";
-            cout<< ct.getName();
-            cout << "\t" << c.getComYear()<< "\t" << endl;
-        }
-
-        for(unsigned int i = scrollBase; i < scrollFactor; i++)
-        {
-            if (continueF == true)
-            {
-            continueF = scrollFunction(cSize, scrollBase, scrollFactor);
-            //cout<<"vSize2: "<<vSize<<" scrollBase2: "<<scrollBase<<" scrollFactor2: "<<scrollFactor<<endl;
-            }
-        }
-    }while (continueF == true);
-
-    //cout<<"vSize3: "<<vSize<<" scrollBase3: "<<scrollBase<<" scrollFactor3: "<<scrollFactor<<endl;
-
-
-    //cout << "\t-----------------------------------------------------" << endl;
-    printLines(1, "thin");
-}
 void infoDisplay::displayComList()
 {
     unsigned int cSize = serviceObject.servGetComVector().size();
@@ -357,11 +240,9 @@ void infoDisplay::dispSelectScientistToDelete()
         displayOneScientist(serviceObject.servGetSciVector().at(sel-1));
         if(dispSureToRemove(serviceObject.servGetSciVector().at(sel-1).getGender()))
         {
-            serviceObject.servReadSqlScientists();
+            serviceObject.servDeleteScientist(serviceObject.servGetSciVector().at(sel-1).getID());
         }
     }
-
-
 }
 bool infoDisplay::dispSureToRemove(int gender)
 {
@@ -556,6 +437,7 @@ void infoDisplay::mainMenu()
 
 void infoDisplay::menuForScientists()
 {    
+    serviceObject.servReadSqlScientists();
     menuForScientistsDisplay();
     menuForScientistsSwitch();
 }
@@ -588,9 +470,6 @@ void infoDisplay::menuForScientistsSwitch()
     case 2:     //  Delete scientist
         displaySciList();
         dispSelectScientistToDelete();
-        serviceObject.servEraseScientistVector();
-        //serviceObject.servReadFile();
-        serviceObject.servReadSqlScientists();
         break;
     case 3:     //  Change scientist
         displayChangeScientist();
@@ -605,6 +484,7 @@ void infoDisplay::menuForScientistsSwitch()
 
 void infoDisplay::menuForComputers()
 {
+    serviceObject.servReadSqlComputers();
     menuForComputersDisplay();
     menuForComputersSwitch();
 }
@@ -693,17 +573,20 @@ void infoDisplay::displayChangeScientist()
 void infoDisplay::displaySearchScientist()
 {
     int sel;
+    serviceObject.servReadSqlScientists();
     displaySearchScientistMenu();
     sel = inputNumberToFunction();
-    searchSelection(sel);
+    searchScientistSelection(sel);
 
 }
 void infoDisplay::displaySearchComputer()
 {
+
     int sel;
+    serviceObject.servReadSqlComputers();
     displaySearchComputersMenu();
     sel = inputNumberToFunction();
-    searchSelection(sel);
+    searchComputerSelection(sel);
 }
 
 
@@ -728,7 +611,7 @@ void infoDisplay::displaySearchComputersMenu()
     cout << "\t1) Search by name or part of name." << endl;
     cout << "\t2) Search by type." << endl;
     cout << "\t3) Search by the building year." << endl;
-    cout << "\t5) Return to main menu." << endl;
+    cout << "\t4) Return to main menu." << endl;
     printLines(1, "thick");
     cout << "\tEnter your selection: ";
 }
@@ -741,14 +624,14 @@ void infoDisplay::printLines(int lines, string thickness)
     {
         for (int i = 0; i < lines; i++)
         {
-            cout<<"\t===================================================="<<endl;
+            cout<<"\t========================================================"<<endl;
         }
     }
     else if (thickness == "thin")
     {
         for (int i = 0; i < lines; i++)
         {
-            cout<<"\t----------------------------------------------------"<<endl;
+            cout<<"\t--------------------------------------------------------"<<endl;
 
         }
     }
@@ -864,19 +747,22 @@ void infoDisplay::selectAction()
             {
             case 1:     //  Working with scientists
                 clearScreen();
+                serviceObject.servEraseScientistVector();
                 menuForScientists();
                 break;
             case 2:     //  Working with computers
                 clearScreen();
-                //v = serviceObject.servGetVector();
+                serviceObject.servEraseComputerVector();
                 menuForComputers();
                 break;
             case 3:     //  Searching for scientist
                 clearScreen();
+                serviceObject.servEraseScientistVector();
                 displaySearchScientist();
                 break;
             case 4:     //  Searching for computers
                 clearScreen();
+                serviceObject.servEraseComputerVector();
                 displaySearchComputer();
                 break;
             case 5:     //  Displaying scientists
@@ -925,8 +811,8 @@ void infoDisplay::selectAction()
 void infoDisplay::editScientistDisplayService()
 {
     serviceObject.servReadSqlScientists();
-    vector<scientist> tempVector = serviceObject.servGetSciVector();
-    displaySciList(tempVector);
+    //vector<scientist> tempVector = serviceObject.servGetSciVector();
+    displaySciList();
 }
 void infoDisplay::editScientistService(int i)
 {
@@ -969,12 +855,12 @@ void infoDisplay::editScientistService(int i)
     //serviceObject.servVectorToFile(v,'O');
 }
 
-void infoDisplay::searchSelection(int select)
+void infoDisplay::searchScientistSelection(int select)
 {
     serviceObject.servReadSqlScientists();
     bool continueF = false;
     char cont;
-    vector<scientist> tempvector;
+//    vector<scientist> tempvector;
 
     switch (select)
     {
@@ -989,25 +875,25 @@ void infoDisplay::searchSelection(int select)
             addEmptyLines(5);
             cout << "\tPlease enter a part of the name you would like to find: ";
             cin >> tempName;
-            tempvector.clear();
-            tempvector = serviceObject.servSearchByName(tempName, found);
+//            tempvector.clear();
+            serviceObject.servSearchScientistByName(tempName, found);
             if( found == true)
             {
                 unsigned int sel;
                 do
                 {
                     clearScreen();
-                    displaySciList(tempvector);
+                    displaySciList();
                     sel = moreInfoOnScientist();
-                    if(sel > 0 && sel <= tempvector.size())
+                    if(sel > 0 && sel <= serviceObject.servGetSciVector().size())
                     {
-                        displayOneScientist(tempvector.at(sel-1));
+                        displayOneScientist(serviceObject.servGetSciVector().at(sel-1));
                     }
                     else
                     {
                         break;
                     }
-                }while(sel > 0 && sel < tempvector.size());
+                }while(sel > 0 && sel < serviceObject.servGetSciVector().size());
                 cont = 'N';
             }
             else
@@ -1027,25 +913,24 @@ void infoDisplay::searchSelection(int select)
             addEmptyLines(5);
             cout << "\tPlease enter the gender you would like to see: ";
             cin >> tempGender;
-            tempvector.clear();
-            tempvector = serviceObject.servSearchByGender(serviceObject.genderCorrection(tempGender), found);
+            serviceObject.servSearchScientistByGender(serviceObject.genderCorrection(tempGender), found);
             if( found == true)
             {
                 unsigned int sel;
                 do
                 {
                     clearScreen();
-                    displaySciList(tempvector);
+                    displaySciList();
                     sel = moreInfoOnScientist();
-                    if(sel > 0 && sel <= tempvector.size())
+                    if(sel > 0 && sel <= serviceObject.servGetSciVector().size())
                     {
-                        displayOneScientist(tempvector.at(sel-1));
+                        displayOneScientist(serviceObject.servGetSciVector().at(sel-1));
                     }
                     else
                     {
                         break;
                     }
-                }while(sel > 0 && sel < tempvector.size());
+                }while(sel > 0 && sel < serviceObject.servGetSciVector().size());
                 cont = 'N';
             }
             else
@@ -1068,8 +953,7 @@ void infoDisplay::searchSelection(int select)
             addEmptyLines(5);
             cout << "\tPlease enter the year you would like to search for: ";
             yr = inputNumberToFunction();
-            tempvector.clear();
-            tempvector = serviceObject.servSearchByYear(yr, 'b', found);
+            serviceObject.servSearchScientistByYear(yr, 'b', found);
 
             if( found == true)
             {
@@ -1077,17 +961,17 @@ void infoDisplay::searchSelection(int select)
                 do
                 {
                     clearScreen();
-                    displaySciList(tempvector);
+                    displaySciList();
                     sel = moreInfoOnScientist();
-                    if(sel > 0 && sel <= tempvector.size())
+                    if(sel > 0 && sel <= serviceObject.servGetSciVector().size())
                     {
-                        displayOneScientist(tempvector.at(sel-1));
+                        displayOneScientist(serviceObject.servGetSciVector().at(sel-1));
                     }
                     else
                     {
                         break;
                     }
-                }while(sel > 0 && sel <= tempvector.size());
+                }while(sel > 0 && sel <= serviceObject.servGetSciVector().size());
                 cont = 'N';
             }
             else
@@ -1110,25 +994,24 @@ void infoDisplay::searchSelection(int select)
             addEmptyLines(5);
             cout << "\tPlease enter the year you would like to search for: ";
             cin >> yr;
-            tempvector.clear();
-            tempvector = serviceObject.servSearchByYear(yr, 'd', found);
+            serviceObject.servSearchScientistByYear(yr, 'd', found);
             if( found == true)
             {
                 unsigned int sel;
                 do
                 {
                     clearScreen();
-                    displaySciList(tempvector);
+                    displaySciList();
                     sel = moreInfoOnScientist();
-                    if(sel > 0 && sel < tempvector.size())
+                    if(sel > 0 && sel < serviceObject.servGetSciVector().size())
                     {
-                        displayOneScientist(tempvector.at(sel-1));
+                        displayOneScientist(serviceObject.servGetSciVector().at(sel-1));
                     }
                     else
                     {
                         break;
                     }
-                }while(sel > 0 && sel < tempvector.size());
+                }while(sel > 0 && sel < serviceObject.servGetSciVector().size());
                 cont = 'N';
             }
             else
@@ -1141,6 +1024,135 @@ void infoDisplay::searchSelection(int select)
         while(continueF == true);
         break;
     case 5:     //  Back to main menu
+        clearScreen();
+        //mainMenu();
+        break;
+    default:
+        addEmptyLines(5);
+        cout << "\tIlligal selection!!" << endl;
+        cout << "\tReturning to Search menu" << endl;
+        sleep(3);
+        displaySearchScientist();
+        break;
+    }
+}
+void infoDisplay::searchComputerSelection(int select)
+{
+    serviceObject.servReadSqlComputers();
+    bool continueF = false;
+    char cont;
+
+    switch (select)
+    {
+    case 1:     //  Search by name
+
+        do
+        {
+            string tempName;
+            bool found = false;
+
+            clearScreen();
+            addEmptyLines(5);
+            cout << "\tPlease enter a part of the name you would like to find: ";
+            cin >> tempName;
+            serviceObject.servSearchComputerByName(tempName, found);
+            if( found == true)
+            {
+                unsigned int sel;
+                do
+                {
+                    clearScreen();
+                    displayComList();
+                    sel = moreInfoOnComputer();
+                    if(sel > 0 && sel <= serviceObject.servGetComVector().size())
+                    {
+                        displayOneComputer(serviceObject.servGetComVector().at(sel-1));
+                    }
+
+                }while(sel > 0 && sel < serviceObject.servGetComVector().size());
+                cont = 'N';
+            }
+            else
+            {
+                cout << "\tNothing found! - Do you want to try again? (Y/N): ";
+                continueF = yesOrNo();
+            }
+        }
+        while(continueF == true);
+        break;
+    case 2:     //  Search by type
+        do
+        {
+            string tempType;
+            bool found = false;
+            clearScreen();
+            addEmptyLines(5);
+            cout << "\tPlease enter a part of the type you would like to see: ";
+            cin >> tempType;
+            serviceObject.servSearchComputerByType(tempType, found);
+            if( found == true)
+            {
+                unsigned int sel;
+                do
+                {
+                    clearScreen();
+                    displayComList();
+                    sel = moreInfoOnComputer();
+                    if(sel > 0 && sel <= serviceObject.servGetComVector().size())
+                    {
+                        displayOneComputer(serviceObject.servGetComVector().at(sel-1));
+                    }
+                }while(sel > 0 && sel < serviceObject.servGetComVector().size());
+                cont = 'N';
+            }
+            else
+            {
+                cout << "\tNothing found! - Do you want to try again? (Y/N): ";
+                continueF = yesOrNo();
+            }
+        }
+        while(continueF == true);
+
+        break;
+    case 3:     //  Search by year
+        do
+        {
+            int yr;
+            bool found = false;
+
+            clearScreen();
+            addEmptyLines(5);
+            cout << "\tPlease enter the year you would like to search for: ";
+            yr = inputNumberToFunction();
+            serviceObject.servSearchComputerByYear(yr, found);
+
+            if( found == true)
+            {
+                unsigned int sel;
+                do
+                {
+                    clearScreen();
+                    displayComList();
+                    sel = moreInfoOnComputer();
+                    if(sel > 0 && sel <= serviceObject.servGetComVector().size())
+                    {
+                        displayOneComputer(serviceObject.servGetComVector().at(sel-1));
+                    }
+
+                }while(sel > 0 && sel <= serviceObject.servGetComVector().size());
+                cont = 'N';
+            }
+            else
+            {
+                cout << "\tNothing found! - Do you want to try again? (Y/N): ";
+                //cont = inputCharacterToFunction();
+                continueF = yesOrNo();
+            }
+
+        }
+        while(continueF == true);
+        break;
+    case 4:     //  Back to main menu
         clearScreen();
         //mainMenu();
         break;
@@ -1880,4 +1892,65 @@ bool infoDisplay::yesOrNo()
 //            clearScreen();
 //            break;
 //    }
+//}
+
+//void infoDisplay::displaySciList(vector<scientist>& v)
+//{
+
+//    unsigned int vSize = v.size();
+//    unsigned int scrollFactor;
+//    if (vSize > HOLYSCROLL)
+//    {
+//         scrollFactor = HOLYSCROLL;
+//    }
+//    else
+//    {
+//        scrollFactor = vSize;
+//    }
+//    unsigned int scrollBase = 0;
+//    bool continueF;
+//    if (vSize < HOLYSCROLL)
+//    {
+//         continueF = false;
+//    }
+//    else
+//    {
+//        continueF = true;
+//    }
+//    cout<<"vSize1: "<<vSize<<" scrollBase1: "<<scrollBase<<" scrollFactor1: "<<scrollFactor<<endl;
+
+//    do
+//    {
+//        listheaderSci();
+//        for(unsigned int i = scrollBase; i < scrollFactor; i++)
+//        {
+//            scientist s = v.at(i);
+//            cout.width(2);
+//            cout << "\t" << i+1 << ")\t";
+//            cout.width(30);
+//            cout << s.getName();// << "\t";
+//            if(s.getGender() == 0)
+//            {
+//                cout << "female";
+//            }
+//            else
+//            {
+//                cout << "male";
+//            }
+//            cout << "\t" << s.getYearOfBirth()<< "\t" << endl;
+//        }
+
+//        if (continueF == true)
+//        {
+//            continueF = scrollFunction(vSize, scrollBase, scrollFactor);
+//            cout<<"vSize2: "<<vSize<<" scrollBase2: "<<scrollBase<<" scrollFactor2: "<<scrollFactor<<endl;
+//        }
+//    }
+//    while (continueF == true);
+
+//    cout<<"vSize3: "<<vSize<<" scrollBase3: "<<scrollBase<<" scrollFactor3: "<<scrollFactor<<endl;
+
+
+//    //cout << "\t-----------------------------------------------------" << endl;
+//    printLines(1, "thin");
 //}

@@ -103,7 +103,7 @@ vector<computer> service::servGetComVector()
 }
 vector<computertype> service::servGetComTypeVector()
 {
-    return workingObject.getComTypeVector();
+    return workingObject.getCompTypeVector();
 }
 
 
@@ -121,18 +121,18 @@ void service::servAddcomputerType(computertype& ct)
 }
 
 
-vector<scientist> service::servSearchByName(string subName, bool& isFound)
+void service::servSearchScientistByName(string subName, bool& isFound)
 {
-    return workingObject.searchByName(subName, isFound);
+    workingObject.searchScientistByName(subName, isFound);
 }
-vector<scientist> service::servSearchByGender(int sex, bool& isFound)
+void service::servSearchScientistByGender(int sex, bool& isFound)
 {
-    return workingObject.searchByGender(sex, isFound);
+    workingObject.searchScientistByGender(sex, isFound);
 }
-vector<scientist> service::servSearchByYear(int& yr, char bORd, bool& isFound)
+void service::servSearchScientistByYear(int& yr, char bORd, bool& isFound)
 {
     yr = yearCorrection(yr,isFound);
-    return workingObject.searchByYear(yr, bORd, isFound);
+    workingObject.searchScientistByYear(yr, bORd, isFound);
 }
 void service::servPushToVector(const scientist& s)
 {
@@ -278,8 +278,21 @@ vector<computer> service::servGetComputersLinkedToScientists(int sciID)
 {
     return workingObject.getComputersLinkedToScientists(sciID);
 }
+void service::servSearchComputerByName(string subName, bool& isFound)
+{
+    workingObject.searchComputerByName(subName, isFound);
+}
 
+void service::servSearchComputerByType(string& type, bool& isFound)
+{
+    workingObject.searchComputerByType(type, isFound);
+}
 
+void service::servSearchComputerByYear(int& yr, bool& isFound)
+{
+    yr = yearCorrection(yr,isFound);
+    workingObject.searchComputerByYear(yr, isFound);
+}
 
 
 void service::henda()

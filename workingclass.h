@@ -37,7 +37,7 @@ public:
     //  Postcondition:  Returns the private vector.
     vector<computer> getComVector();
     //  Postcondition:  Returns the private vector.
-    vector<computertype> getComTypeVector();
+    vector<computertype> getCompTypeVector();
     //  Postcondition:  Returns the private vector.
     void setVector(vector<scientist>& v);
     //  Precondition:   The vecor v has been filled with scientist.
@@ -135,19 +135,28 @@ public:
     void eraseCompTypeVector();
     //  Precondition:   A new or changed vector is about to be created.
     //  Postcondition:  The privat vector is clear of all computer types.
-    vector<scientist> searchByName(string subName, bool& isFound);
+    void searchScientistByName(string subName, bool& isFound);
     //  Precondition:   Takes in the parameter subName to be searched for and a boolean
     //      variable to indicate if found.
     //  Postcondition:  Returns a vector of the scientist matching the criteria.
-    vector<scientist> searchByGender(int sex, bool& isFound);
+    void searchScientistByGender(int sex, bool& isFound);
     //  Precondition:   Takes in the parameter sex to be searched for and a boolean
     //      variable to indicate if found.
     //  Postcondition:  Returns a vector of the scientist matching the criteria.
-    vector<scientist> searchByYear(int& yr, char bORd, bool& isFound);
+    void searchScientistByYear(int& yr, char bORd, bool& isFound);
     //  Precondition:   Takes in the parameter year to be searched for, a char indicating
     //      whether to look for the year of birth or year of death and a boolean
     //      variable to indicate if found.
     //  Postcondition:  Returns a vector of the scientist matching the criteria.
+    void searchComputerByName(string subName, bool& isFound);
+    //  Precondition:   Takes in the parameter subName to be searched for and a boolean variable to indicate if found.
+    //  Postcondition:  Returns a vector of the computers matching the criteria.
+    void searchComputerByType(string& type, bool& isFound);
+    //  Precondition:   Takes in the parameter type to be searched for and a boolean variable to indicate if found.
+    //  Postcondition:  Returns a vector of the computers matching the criteria.
+    void searchComputerByYear(int& yr, bool& isFound);
+    //  Precondition:   Takes in the parameter year to be searched for and a boolean variable to indicate if found.
+    //  Postcondition:  Returns a vector of the computers matching the criteria.
     QSqlDatabase startDatabase();
     //  Precondition:   The database is present in the build directory of the program.
     //  Postconditinon: A link to the database has been established.

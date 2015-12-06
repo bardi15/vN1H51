@@ -15,6 +15,7 @@
 #include "service.h"
 #include <iomanip>
 
+const unsigned int HOLYSCROLL = 15;
 
 class infoDisplay
 {
@@ -57,9 +58,6 @@ public:
     void displaySciList();
     //  Precondition:   The scientist have been read from the database.
     //  Postcondition:  Displays all scientist according to condition on screen.
-    void displayComList(vector<computer> &v);
-    //  Precondition:   The vector v has been populated with computers.
-    //  Postcondition:  Displays all computers according to condition on screen.
     void displayComList();
     //  Precondition:   The computers have been read from the database.
     //  Postcondition:  Displays all computers according to condition on screen.
@@ -138,10 +136,14 @@ public:
     void editScientistService(int i);
     //  Precondition:   A scientist is about to be edited.
     //  Postcondition:  The scientist has been edited and file updated.
-    void searchSelection(int select);
+    void searchScientistSelection(int select);
     //  Precondition:   A specific search option has been selected. Takes in the
     //      selection as an integer.
     //  Postcondition:  A vector of the correct scientist/s is displayed.
+    void searchComputerSelection(int select);
+    //  Precondition:   A specific search option has been selected. Takes in the
+    //      selection as an integer.
+    //  Postcondition:  A vector of the correct computer/s is displayed.
     bool addScientistContinue();
     //  Precondition:   A new scientist has been entered into the vector and the user is
     //      asked if he wants to add more scientest.
@@ -205,7 +207,6 @@ public:
     void printLines(int lines, string thickness);
     //  prints lines
 
-const unsigned int HOLYSCROLL = 15;
 
     service serviceObject;
     // A object of the service layer class.  To be used in good computing :)
