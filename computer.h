@@ -17,6 +17,9 @@ class computer
         int getComType() const;
         string getComDescription() const;
         bool getComBuilt() const;
+        void setComID(int coID);
+        // Precondition:    The parameter is of a legal type and value.
+        // Postcondition:   The id has been set to the parameter coID.
         void setComName(string coName);
         void setComYear(int coYear);
         void setComType(int coType);

@@ -41,16 +41,30 @@ public:
     //  Precondition:   Takes in the year as integer, in two or four digit format.
     //  Postcondition:  Returns the corrected year as integer.
 
-    void servEraseVector();
-    //  Calls the EraseVector function in workingclass.
-    void servReadSqlScientists(int sorting =0);
+    void servEraseScientistVector();
+    //  Calls the eraseScientistVector function in workingclass.
+    void servEraseComputerVector();
+    //  Calls the eraseComputerVector function in workingclass.
+    void servEraseCompTypeVector();
+    //  Calls the eraseCompTypeVector function in workingclass.
+    void servReadSqlScientists(string sorting="name");
     //  Calls the readSqlScientists function in workingclass.
+    void servReadSqlComputers(string sorting="name");
+    //  Calls the readSqlComputers function in workingclass.
+    void servReadSqlCompTypes();
+    //  Calls the readSqlCompTypes function in workingclass.
     vector<scientist> servGetSciVector();
     //  Calls the getVector function in workingclass.
     vector<computer> servGetComVector();
     //  Calls the getVector function in workingclass.
+    vector<computertype> servGetComTypeVector();
+    //  Calls the getComTypeVector function in workingclass.
     void servSortScientists(int choice);
-
+    //  Precondition: Takes in an interger to select sorting.
+    //  Postcondition: Reads scientists from database if selection is legal, returns to main menu otherwise.
+    void servSortComputers(int choice);
+    //  Precondition: Takes in an interger to select sorting.
+    //  Postcondition: Reads computers from database if selection is legal, returns to main menu otherwise.
     void servSortAlph(vector<scientist>& v);
     //  Calls the sortAlph function in workingclass.
     void servSortRevAlph(vector<scientist>& v);

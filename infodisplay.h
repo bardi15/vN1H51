@@ -66,7 +66,11 @@ public:
     bool scrollFunction(unsigned int vSize, unsigned int &scrollBase, unsigned int &scrollFactor);
     int moreInfoOnScientist();
     //  Precondition:   A list of scientist has been displayed.
-    //  Postcondition:  Ask for which if any scientist you want more information on.
+    //  Postcondition:  Ask for which if any scientist to display fuller information on.
+    //      Returns the selection.
+    int moreInfoOnComputer();
+    //  Precondition:   A list of computers has been displayed.
+    //  Postcondition:  Ask for which if any computer to display fuller information on.
     //      Returns the selection.
     void dispScientistToEdit(vector<scientist>& v);
     //  Precondition:   The vector v has been populated with scientist.
@@ -95,8 +99,11 @@ public:
 
     void displaySearchComputersMenu();
 
-    void displaySortOptions();
+    void displaySortScientistOptions();
     //  Precondition:   A list of scientist is to be displayed.
+    //  Postcondition:  Displays the sorting options available and returns the selection.
+    void displaySortComputersOptions();
+    //  Precondition:   A list of computers is to be displayed.
     //  Postcondition:  Displays the sorting options available and returns the selection.
     void quitProgram();
     //  Precondition:   The program is about to be terminated.  User is asked if

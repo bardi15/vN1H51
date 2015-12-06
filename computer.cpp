@@ -55,6 +55,10 @@ bool computer::getComBuilt() const
 {
     return comBuilt;
 }
+void computer::setComID(int coID)
+{
+    comId = coID;
+}
 
 void computer::setComName(string coName)
 {

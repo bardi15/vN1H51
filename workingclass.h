@@ -38,6 +38,8 @@ public:
     //  Postcondition:  Returns the private vector.
     vector<computer> getComVector();
     //  Postcondition:  Returns the private vector.
+    vector<computertype> getComTypeVector();
+    //  Postcondition:  Returns the private vector.
     void setVector(vector<scientist>& v);
     //  Precondition:   The vecor v has been filled with scientist.
     //  Postcondition:  The private vector has been set with the new scientist.
@@ -46,10 +48,12 @@ public:
     //  Postcondition:
     bool addscientist(scientist& s);
     //  Precondition:   The parameter s is a new scientist.
-    //  Postcondition:  The scientist s is now added to the database.
+    //  Postcondition:  The scientist s is now added to the database and
+    //      s has been updated with the correct id.
     bool addcomputer(computer& c);
     //  Precondition:   The parameter c is a new computer.
-    //  Postcondition:  The computer c is now added the database.
+    //  Postcondition:  The computer c is now added the database and
+    //      c has been updated with the correct id.
     void updateSqlComputer(computer& c);
     //  Precondition:   The parameter c is a computer that has changes to it.
     //  Postcondition:  The computer c is now updated with new information.
@@ -58,7 +62,8 @@ public:
     //  Postcondition:  The scientist s is now updated with new information.
     bool addcomputerType(computertype& ct);
     //  Precondition:   The parameter ct is a new computer type.
-    //  Postcondition:  The computer type ct is now added to the database.
+    //  Postcondition:  The computer type ct is now added to the database
+    //      and ct has been updated with the correct id.
     void deleteScientist(int sciID);
     //  Precondition:   The parameter sciID is the ID of a scientist to be deleted.
     //  Postcondition:  The scientist sciID has been deleted from the database.
@@ -74,10 +79,10 @@ public:
     void readSqlCompTypes();
     //  Precondition:   The database is open.
     //  Postcondition:  If data available, it is read into the private vector for computertypes.
-    vector<scientist> getScientistsLinkedToComputer(int compID);
+    vector<computer> getComputersLinkedToScientists(int compID);
     //  Precondition:   A computer is selected and its ID sent in as compID.
     //  Postcondition:  Returns a vector of scientist related to the computer.
-    vector<computer> getComputersLinkedToScientists(int sciID);
+    vector<scientist> getScientistsLinkedToComputer(int sciID);
     //  Precondition:   A scientist is selected and its ID sent in as sciID.
     //  Postcondition:  Returns a vector of computers related to the scientist.
     void addToFile();
@@ -122,10 +127,15 @@ public:
     void removeScientist(scientist& s);
     //  Precondition:   A scientist to be removed has been selected.
     //  Postcondition:  The scientist has been removed from the text file.
-    void eraseVector();
+    void eraseScientistVector();
     //  Precondition:   A new or changed vector is about to be created.
     //  Postcondition:  The privat vector is clear of all scientists.
-
+    void eraseComputerVector();
+    //  Precondition:   A new or changed vector is about to be created.
+    //  Postcondition:  The privat vector is clear of all computers.
+    void eraseCompTypeVector();
+    //  Precondition:   A new or changed vector is about to be created.
+    //  Postcondition:  The privat vector is clear of all computer types.
     vector<scientist> searchByName(string subName, bool& isFound);
     //  Precondition:   Takes in the parameter subName to be searched for and a boolean
     //      variable to indicate if found.
@@ -145,8 +155,7 @@ public:
     void closeDatabase();
     //  Precondition:   The database is open.
     //  Postconditinon: The database has been closed.
-    void HENDA();
-    void HENDA1();
+
 
 private:
 

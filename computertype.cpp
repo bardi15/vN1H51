@@ -2,6 +2,9 @@
 
 computertype::computertype()
 {
+    id = 0;
+    name = "";
+    desc = "";
 
 }
 computertype::computertype(int ctId, string ctName, string ctDesc)
@@ -16,7 +19,19 @@ computertype::computertype(string ctName, string ctDesc)
     name = ctName;
     desc = ctDesc;
 }
-int computertype::getid()
+void computertype::setID(int inID)
+{
+    id = inID;
+}
+void computertype::setName(string inName)
+{
+    name = inName;
+}
+void computertype::setDesc(string inDesc)
+{
+    desc = inDesc;
+}
+int computertype::computertype::getid()
 {
     return id;
 }

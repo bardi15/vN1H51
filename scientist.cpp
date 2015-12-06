@@ -59,6 +59,10 @@ string scientist::getLink() const
 {
     return link;
 }
+void scientist::setID(int inID)
+{
+    id = inID;
+}
 
 void scientist::setName(string inName)
 {

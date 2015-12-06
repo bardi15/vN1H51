@@ -19,47 +19,76 @@ int service::selection()
 
 
 
-void service::servEraseVector()
+void service::servEraseScientistVector()
 {
-    workingObject.eraseVector();
+    workingObject.eraseScientistVector();
 }
-void service::servReadSqlScientists(int sorting)
+void service::servEraseComputerVector()
+{
+    workingObject.eraseComputerVector();
+}
+void service::servEraseCompTypeVector()
+{
+    workingObject.eraseCompTypeVector();
+}
+
+
+
+
+void service::servReadSqlScientists(string sorting)
 {
     workingObject.readSqlScientists();
 }
-vector<scientist> service::servGetSciVector()
+void service::servReadSqlComputers(string sorting)
 {
-    return workingObject.getSciVector();
+    workingObject.readSqlComputers();
 }
+void service::servReadSqlCompTypes()
+{
+    workingObject.readSqlCompTypes();
+}
+
+
 
 void service::servSortScientists(int choice)
 {
-    string sort;
-
       switch(choice)
       {
             case 1:
-                sort = ("name ASC;");
-                //servReadSqlScientists(sort);
                 workingObject.readSqlScientists("name ASC;");
                 break;
             case 2:
-                //sort = ("name DESC;");
-                //servReadSqlScientists(sort);
                 workingObject.readSqlScientists("name DESC;");
                 break;
             case 3:
-                //sort = ("yob ASC;");
-                //servReadSqlScientists(sort);
                 workingObject.readSqlScientists("yob ASC;");
                 break;
             case 4:
-                //sort = ("yob DESC;");
                 workingObject.readSqlScientists("yob DESC;");
-                //servReadSqlScientists(sort);
                 break;
             default:
                 exit(0);
+                break;
+      }
+}
+void service::servSortComputers(int choice)
+{
+      switch(choice)
+      {
+            case 1:
+                workingObject.readSqlComputers("name;");
+                break;
+            case 2:
+                workingObject.readSqlComputers("name DESC;");
+                break;
+            case 3:
+                workingObject.readSqlComputers("year;");
+                break;
+            case 4:
+                workingObject.readSqlComputers("type, name;");
+                break;
+            default:
+                //  Þarf að detta til baka í mainmenu.
                 break;
       }
 }
@@ -80,9 +109,17 @@ void service::servSortScientists(int choice)
 //    workingObject.sortYOD(v);
 //}
 //=======
+vector<scientist> service::servGetSciVector()
+{
+    return workingObject.getSciVector();
+}
 vector<computer> service::servGetComVector()
 {
     return workingObject.getComVector();
+}
+vector<computertype> service::servGetComTypeVector()
+{
+    return workingObject.getComTypeVector();
 }
 
 //void service::servSortAlph(vector<scientist>& v)
@@ -297,7 +334,5 @@ void service::henda()
 //    workingObject.readSqlScientists();
 //    sleep(3);
 //    workingObject.readSqlCompTypes();
-//    workingObject.HENDA();
-//    workingObject.HENDA1();
 //    sleep(3);
 }

@@ -27,8 +27,8 @@ void infoDisplay::listheaderCom()
     cout.setf(ios::left);
     cout << "\tNr.";
     cout.width(30);
-    cout << "\tName";
-    cout << "Type\tBuilt" << endl;
+    cout << "\tName\t\tYear";
+    cout << "\tType" << endl;
     //cout << "\t-----------------------------------------------------" << endl;
     printLines(1,"thin");
 }
@@ -158,6 +158,7 @@ void infoDisplay::displaySciList()
 
 void infoDisplay::displayComList(vector<computer>& v)
 {
+    serviceObject.servReadSqlComputers();
     unsigned int cSize = v.size();
     unsigned int scrollFactor;
     if (cSize > holyScroll)
@@ -179,31 +180,32 @@ void infoDisplay::displayComList(vector<computer>& v)
         continueF = true;
     }
     //cout<<"vSize1: "<<vSize<<" scrollBase1: "<<scrollBase<<" scrollFactor1: "<<scrollFactor<<endl;
-
-
-
     do
     {
 
         listheaderCom();
+        serviceObject.servReadSqlCompTypes();
         for(unsigned int i = scrollBase; i < scrollFactor; i++)
         {
-            computer s = v.at(i);
+            computer c = v.at(i);
+            computertype ct = serviceObject.servGetComTypeVector().at(c.getComType());
             cout.width(2);
             cout << "\t" << i+1 << ")\t";
             cout.width(30);
-            cout << s.getComName();// << "\t";
-            cout<< s.getComType();
-            cout << "\t" << s.getComBuilt()<< "\t" << endl;
+            cout << c.getComName();// << "\t";
+            cout<< ct.getName();
+            cout << "\t" << c.getComYear()<< "\t" << endl;
         }
 
-        if (continueF == true)
+        for(unsigned int i = scrollBase; i < scrollFactor; i++)
         {
+            if (continueF == true)
+            {
             continueF = scrollFunction(cSize, scrollBase, scrollFactor);
             //cout<<"vSize2: "<<vSize<<" scrollBase2: "<<scrollBase<<" scrollFactor2: "<<scrollFactor<<endl;
+            }
         }
-    }
-    while (continueF == true);
+    }while (continueF == true);
 
     //cout<<"vSize3: "<<vSize<<" scrollBase3: "<<scrollBase<<" scrollFactor3: "<<scrollFactor<<endl;
 
@@ -211,7 +213,6 @@ void infoDisplay::displayComList(vector<computer>& v)
     //cout << "\t-----------------------------------------------------" << endl;
     printLines(1, "thin");
 }
-
 void infoDisplay::displayComList()
 {
     unsigned int cSize = serviceObject.servGetComVector().size();
@@ -234,7 +235,7 @@ void infoDisplay::displayComList()
     {
         continueF = true;
     }
-    //cout<<"vSize1: "<<vSize<<" scrollBase1: "<<scrollBase<<" scrollFactor1: "<<scrollFactor<<endl;
+//    cout<<"vSize1: "<<cSize<<" scrollBase1: "<<scrollBase<<" scrollFactor1: "<<scrollFactor<<endl;
 
 
 
@@ -242,26 +243,27 @@ void infoDisplay::displayComList()
     {
 
         listheaderCom();
+        serviceObject.servReadSqlCompTypes();
         for(unsigned int i = scrollBase; i < scrollFactor; i++)
         {
             computer c = serviceObject.servGetComVector().at(i);
+
             cout.width(2);
             cout << "\t" << i+1 << ")\t";
             cout.width(30);
             cout << c.getComName();// << "\t";
-            cout<< c.getComType();
-            cout << "\t" << c.getComBuilt()<< "\t" << endl;
+            cout << "\t" << c.getComYear()<< "\t";
+            computertype ct = serviceObject.servGetComTypeVector().at(c.getComType()-1);
+            cout<< ct.getName() << endl;
         }
-
         if (continueF == true)
         {
             continueF = scrollFunction(cSize, scrollBase, scrollFactor);
-            //cout<<"vSize2: "<<vSize<<" scrollBase2: "<<scrollBase<<" scrollFactor2: "<<scrollFactor<<endl;
+//            cout<<"vSize2: "<<cSize<<" scrollBase2: "<<scrollBase<<" scrollFactor2: "<<scrollFactor<<endl;
         }
-    }
-    while (continueF == true);
+    }while (continueF == true);
 
-    //cout<<"vSize3: "<<vSize<<" scrollBase3: "<<scrollBase<<" scrollFactor3: "<<scrollFactor<<endl;
+//    cout<<"vSize3: "<<cSize<<" scrollBase3: "<<scrollBase<<" scrollFactor3: "<<scrollFactor<<endl;
 
 
     //cout << "\t-----------------------------------------------------" << endl;
@@ -340,21 +342,18 @@ int infoDisplay::moreInfoOnScientist()
         cout << "\tWould you like more info on any of the scientist?" << endl;
         cout << "\tPlease enter your choice, or 0 (zero) to quit: ";
         sel = inputNumberToFunction();
-//        if(sel == 0)
-//        {
-//            mainMenu();
-//        }
-//        else if ((sel > 0)&&(sel <= v.size()))
-//        {
-//            displayOneScientist(v.at(sel-1));
-//        }
-//        else
-//        {
-//            cout<<"Incorrect selection!"<<endl;
-//        }
-//    }
+    }
+    return sel;
 
-//    return sel;
+}
+int infoDisplay::moreInfoOnComputer()
+{
+    unsigned int sel;
+    if(serviceObject.servGetComVector().size() > 0)
+    {
+        cout << "\tWould you like more info on any of the computers?" << endl;
+        cout << "\tPlease enter your choice, or 0 (zero) to quit: ";
+        sel = inputNumberToFunction();
     }
     return sel;
 
@@ -502,7 +501,7 @@ void infoDisplay::displayOneComputer(computer& c)
     clearScreen();
     addEmptyLines(5);
     cout << "\tNafn: " << c.getComName() << endl;
-    cout << "\type: ";
+    cout << "\tType: ";
     cout << "VANTAR ad setja upp sækingu i type grunninn" << endl;
     cout << "\tProduction year: " <<  c.getComYear() << endl;
 
@@ -592,7 +591,7 @@ void infoDisplay::menuForScientistsSwitch()
     case 2:     //  Delete scientist
         displaySciList();
         dispSelectScientistToDelete();
-        serviceObject.servEraseVector();
+        serviceObject.servEraseScientistVector();
         //serviceObject.servReadFile();
         serviceObject.servReadSqlScientists();
         break;
@@ -763,7 +762,7 @@ void infoDisplay::printLines(int lines, string thickness)
 
 }
 
-void infoDisplay::displaySortOptions()
+void infoDisplay::displaySortScientistOptions()
 {
 
     int choice = 1;
@@ -781,7 +780,24 @@ void infoDisplay::displaySortOptions()
     serviceObject.servSortScientists(choice);
 
 }
+void infoDisplay::displaySortComputersOptions()
+{
 
+    int choice = 1;
+    clearScreen();
+    addEmptyLines(5);
+    cout << "\tHow would you like the list to be sorted? \n";
+    printLines(1, "thin");
+    cout << "\t1) In alphabetical order. \n";
+    cout << "\t2) In reverse alphabetical order. \n";
+    cout << "\t3) By the building year\n";
+    cout << "\t4) By type and name. \n";
+    printLines(1, "thick");
+    cout << "\tInput choice here: ";
+    choice = inputNumberToFunction();
+    serviceObject.servSortComputers(choice);
+
+}
 void infoDisplay::addEmptyLines(int numLines)
 {
     do
@@ -856,96 +872,85 @@ void infoDisplay::selectAction()
     serviceObject.henda();
 
 
-        do
-        {
-            //  Þetta þarf að fara inn í hverja undirvalmynd eftir því hvað við erum að fara að gera.
-            serviceObject.servEraseVector();
-           // serviceObject.servReadSqlScientists();
+    do
+    {
+        //  Þetta þarf að fara inn í hverja undirvalmynd eftir því hvað við erum að fara að gera.
+//            serviceObject.servEraseVector();
+       // serviceObject.servReadSqlScientists();
 
-         //   vector<scientist> sV;
-          //  sV = serviceObject.servGetSciVector();
-            //cout<<"vector:::::"<<endl;
-            //cout<<sV.at(0).getName()<<endl;
+     //   vector<scientist> sV;
+      //  sV = serviceObject.servGetSciVector();
+        //cout<<"vector:::::"<<endl;
+        //cout<<sV.at(0).getName()<<endl;
 
-       //     vector<computer> cV;
-       //     cV = serviceObject.servGetComVector();
+   //     vector<computer> cV;
+   //     cV = serviceObject.servGetComVector();
 
-            //cout<<"vector:::::"<<endl;
-            //cout<<cV.at(0).getComName()<<endl;
+        //cout<<"vector:::::"<<endl;
+        //cout<<cV.at(0).getComName()<<endl;
 
-            mainMenu();
-            int sel = serviceObject.selection();
-            switch(sel)
+        mainMenu();
+        int sel = serviceObject.selection();
+        unsigned int choice = 0;
+        switch(sel)
+            {
+            case 1:     //  Working with scientists
+                clearScreen();
+                menuForScientists();
+                break;
+            case 2:     //  Working with computers
+                clearScreen();
+                //v = serviceObject.servGetVector();
+                menuForComputers();
+                break;
+            case 3:     //  Searching for scientist
+                clearScreen();
+                displaySearchScientist();
+                break;
+            case 4:     //  Searching for computers
+                clearScreen();
+                displaySearchComputer();
+                break;
+            case 5:     //  Displaying scientists
+                clearScreen();
+                serviceObject.servEraseScientistVector();
+                displaySortScientistOptions();
+                do
                 {
-                case 1:     //  Working with scientists
-                    clearScreen();
-                    menuForScientists();
-                    break;
-                case 2:     //  Working with computers
-                    clearScreen();
-                    //v = serviceObject.servGetVector();
-                    menuForComputers();
-                    break;
-                case 3:     //  Searching for scientist
-                    clearScreen();
-                    displaySearchScientist();
-                    break;
-                case 4:     //  Searching for computers
-                    clearScreen();
-                    displaySearchComputer();
-                    break;
-                case 5:     //  Displaying scientists
-                    unsigned int sel;
-                    //chooseSortion(sV);
-                    do
+                    displaySciList();
+                    choice = moreInfoOnScientist();
+                    if(choice > 0 && choice <= serviceObject.servGetSciVector().size())
                     {
-                        //  Hér þarf að lesa inn úr grunni eftir að ákv. hefur verið hvaða sort er í gangi.  Þ.e. sortið þarf að kalla á innlesturinn.
-                        clearScreen();
-                        vector<scientist> v;
-                        v = serviceObject.servGetSciVector();
-                        displaySciList(v);
-                        sel = moreInfoOnScientist();
-                        if(sel > 0 && sel <= serviceObject.servGetSciVector().size())
-                        {
-                            displayOneScientist(serviceObject.servGetSciVector().at(sel-1));
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }while(sel > 0);
-                        break;
-                case 6:     //  Displaying computers
-
-                    //chooseSortion(cV);
-                    do
-                    {
-                        //  Hér þarf að lesa inn úr grunni eftir að ákv. hefur verið hvaða sort er í gangi.  Þ.e. sortið þarf að kalla á innlesturinn.
-                        clearScreen();
-                        displayComList();
-                        sel = moreInfoOnScientist();
-                        if(sel > 0 && sel <= serviceObject.servGetComVector().size())
-                        {
-                            displayOneComputer(serviceObject.servGetComVector().at(sel-1));
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }while(sel > 0);
-                        break;
-
-                default:
-                    clearScreen();
-                    addEmptyLines(10);
-                    quitProgram();
-
-                    addEmptyLines(10);
-                    exit(0);
+                        displayOneScientist(serviceObject.servGetSciVector().at(choice-1));
+                    }
+                }while(choice > 0);
                     break;
-               }
-            }
-            while(true);
+            case 6:     //  Displaying computers
+                clearScreen();
+                serviceObject.servEraseComputerVector();
+                displaySortComputersOptions();
+                do
+                {
+                    displayComList();
+                    choice = moreInfoOnComputer();
+                    if(choice > 0 && choice <= serviceObject.servGetComVector().size())
+                    {
+                        displayOneComputer(serviceObject.servGetComVector().at(choice-1));
+                    }
+                }while(choice > 0);
+                break;
+
+            default:
+                clearScreen();
+                addEmptyLines(10);
+                quitProgram();
+
+                addEmptyLines(10);
+                exit(0);
+                break;
+           }
+        }
+        while(true);
 
 }
 //void infoDisplay::selectAction()

@@ -15,6 +15,10 @@ vector<computer> workingclass::getComVector()
 {
     return computerVector;
 }
+vector<computertype> workingclass::getComTypeVector()
+{
+    return compTypeVector;
+}
 
 
 void workingclass::setVector(vector<scientist>& v)
@@ -48,7 +52,7 @@ void workingclass::readSqlScientists(string sorting)
     QSqlQuery query;//(db);
 
     query.prepare("SELECT * FROM scientists "
-                  "WHERE deleted = FALSE"
+                  "WHERE deleted = 'FALSE'"
                   "ORDER BY " + QString::fromStdString(sorting));
     query.exec();
 //    string s =  query.executedQuery().toStdString();
@@ -71,8 +75,8 @@ void workingclass::readSqlScientists(string sorting)
 
         scientist s(id,nam,gen,yob,yod,desc,url);
         scientistVector.push_back(s);
-        cout << nam << " " << s.getName() << endl;
-        usleep(50000);
+//        cout << nam << " " << s.getName() << endl;
+//        usleep(50000);
     }
     //return db;
 
@@ -92,10 +96,10 @@ void workingclass::updateSqlComputer(computer& c)
     query.bindValue(":built", c.getComBuilt());
     query.bindValue(":desc", QString::fromStdString(c.getComDescription()));
     query.exec();
-    string qstr;
-    qstr = query.lastQuery().toStdString();
-    cout << qstr << endl;
-    sleep(3);
+//    string qstr;
+//    qstr = query.lastQuery().toStdString();
+//    cout << qstr << endl;
+//    sleep(3);
 }
 void workingclass::updateSqlScientist(scientist& s)
 {
@@ -113,43 +117,72 @@ void workingclass::updateSqlScientist(scientist& s)
     query.bindValue(":desc", QString::fromStdString(s.getDescription()));
     query.bindValue(":link", QString::fromStdString(s.getLink()));
     query.exec();
-    string str;
-    str = query.lastQuery().toStdString();
-    cout << str << endl;
-    sleep(3);
+//    string str;
+//    str = query.lastQuery().toStdString();
+//    cout << str << endl;
+//    sleep(3);
 }
 
-vector<scientist> workingclass::getScientistsLinkedToComputer(int compID)
+vector<computer> workingclass::getComputersLinkedToScientists(int compID)
 {
     QSqlQuery query;
 
     query.prepare("SELECT * FROM computers c"
                   "INNER JOIN scientists_and_computers sc"
                   "ON  c.id = sc.computer_id "
-                  "WHERE sc.scientist_id = :cid AND sc.deleted = FALSE;");
+                  "WHERE sc.scientist_id = :cid AND "
+                  "sc.deleted ='FALSE';");
     query.bindValue(":cid", compID );
     query.exec();
-    string s;
-    s = query.lastQuery().toStdString();
-    cout << s << endl;
-    sleep(3);
+//    string s;
+//    s = query.lastQuery().toStdString();
+//    cout << s << endl;
+//    sleep(3);
+    vector<computer> tempvector;
+    while(query.next())
+    {
+        computer c;
+        c.setComID(query.value("id").toUInt());
+        c.setComName(query.value("name").toString().toStdString());
+        c.setComYear(query.value("year").toUInt());
+        c.setComType(query.value("type").toUInt());
+        c.setComBuilt(query.value("built").toUInt());
+        c.setComDescription(query.value("description").toString().toStdString());
+        tempvector.push_back(c);
+    }
 
+    return tempvector;
 }
-vector<computer> workingclass::getComputersLinkedToScientists(int sciID)
+vector<scientist> workingclass::getScientistsLinkedToComputer(int sciID)
 {
     QSqlQuery query;
 
     query.prepare("SELECT * FROM scientists s"
                   "INNER JOIN scientists_and_computers sc"
                   "ON  s.id = sc.computer_id "
-                  "WHERE sc.scientist_id = :sid AND sc.deleted = FALSE;");
+                  "WHERE sc.scientist_id = :sid AND "
+                  "sc.deleted = 'FALSE';");
     query.bindValue(":sid", sciID );
     query.exec();
-    string s;
-    s = query.lastQuery().toStdString();
-    cout << s << endl;
-    sleep(3);
+//    string s;
+//    s = query.lastQuery().toStdString();
+//    cout << s << endl;
+//    sleep(3);
+    vector<scientist> tempvector;
+    while(query.next())
+    {
+        scientist s;
+        s.setID(query.value("id").toUInt());
+        s.setName(query.value("name").toString().toStdString());
+        s.setGender(query.value("gender").toUInt());
+        s.setYearOfBirth(query.value("yob").toUInt());
+        s.setYearOfDeath(query.value("yod").toUInt());
+        s.setDescription(query.value("description").toString().toStdString());
+        s.setLink(query.value("link").toString().toStdString());
+        tempvector.push_back(s);
+    }
 
+    return tempvector;
 }
 void workingclass::readSqlComputers(string sorting)
 {
@@ -158,22 +191,19 @@ void workingclass::readSqlComputers(string sorting)
     QSqlQuery query;
 
     query.prepare("SELECT * FROM computers "
-                  "WHERE deleted = FALSE"
+                  "WHERE deleted = 'FALSE'"
                   "ORDER BY " + QString::fromStdString(sorting));
     query.exec();
 
     while(query.next())
     {
-
-
-        int id = query.value("id").toUInt();
-        string cName = query.value("name").toString().toStdString();
-        int cYear = query.value("year").toUInt();
-        int cType = query.value("type").toUInt();
-        bool cBuilt = query.value("built").toUInt();
-        string cDescr = query.value("description").toString().toStdString();
-
-        computer c(id, cName, cYear, cType, cBuilt, cDescr);
+        computer c;
+        c.setComID(query.value("id").toUInt());
+        c.setComName(query.value("name").toString().toStdString());
+        c.setComYear(query.value("year").toUInt());
+        c.setComType(query.value("type").toUInt());
+        c.setComBuilt(query.value("built").toUInt());
+        c.setComDescription(query.value("description").toString().toStdString());
         computerVector.push_back(c);
 
 //        cout << cName << " " << c.getComName() << endl;
@@ -188,22 +218,19 @@ void workingclass::readSqlCompTypes()
     QSqlQuery query(db);
 
     query.prepare("SELECT * FROM computer_types "
-                  "WHERE deleted = FALSE"
+                  "WHERE deleted = 'FALSE'"
                   "ORDER BY name ASC");
     query.exec();
 //    string s =  query.executedQuery().toStdString();
 //    cout << s << endl;
 //    sleep(1);
-
-
-
     while(query.next())
     {
-        int ctId = query.value("id").toUInt();
-        string ctName = query.value("name").toString().toStdString();
-        string ctDesc = query.value("description").toString().toStdString();
-
-        computertype ct(ctId,ctName,ctDesc);
+        computertype ct;
+        int tid = query.value("id").toUInt();
+        ct.setID(tid);
+        ct.setName(query.value("name").toString().toStdString());
+        ct.setDesc(query.value("description").toString().toStdString());
         compTypeVector.push_back(ct);
 //        cout << ctName << " " << ct.getName() << endl;
 //        usleep(50000);
@@ -226,55 +253,27 @@ bool workingclass::addscientist(scientist& s)
     query.bindValue(":desc", QString::fromStdString(s.getDescription()));
     query.bindValue(":link", QString::fromStdString(s.getLink()));
     query.exec();
+    s.setID(query.lastInsertId().toUInt());
     return 1;
 }
-void workingclass::HENDA1()
-{
-    QSqlQuery query;
-    query.prepare("INSERT INTO scientists (name, gender, yob, yod, description, link) "
-              "VALUES (:name, :sex, :yob, :yod, :desc, :link);");
 
-    query.bindValue(":name", "jonornbesti");
-    query.bindValue(":sex", 1);
-    query.bindValue(":yob", 1897);
-    query.bindValue(":yod", 0);
-    query.bindValue(":desc", "This is me");
-    query.bindValue(":link", "Vefsidan min");
-    query.exec();
-    string s =  query.executedQuery().toStdString();
-    cout << s << endl;
-    sleep(2);
-}
 bool workingclass::addcomputer(computer& c)
-{
-    return 1;
-}
-void workingclass::HENDA()
 {
     QSqlQuery query;
     query.prepare("INSERT INTO computers (name, year, type, built, description )"
-                  "VALUES (?,?,?,?,?);");//(:name, :year, :type, :built, :desc);");
-//    query.bindValue(":name", QString::fromStdString(c.getComName()));
-//    query.bindValue(":year", c.getComYear());
-//    query.bindValue(":type", c.getComType());
-//    query.bindValue(":built", c.getComBuilt());
-//    query.bindValue(":desc", QString::fromStdString(c.getComDescription()));
-//        query.bindValue(":name", QString::fromStdString("jononononono"));
-//        query.bindValue(":year", 1983);
-//        query.bindValue(":type", 2);
-//        query.bindValue(":built", 1);
-//        query.bindValue(":desc", QString::fromStdString("MORE CRAP"));
-            query.bindValue("1", QString::fromStdString("jononononono"));
-            query.bindValue("2", 1983);
-            query.bindValue("3", 2);
-            query.bindValue("4", 1);
-            query.bindValue("5", QString::fromStdString("MORE CRAP"));
+                  "VALUES (:name, :year, :type, :built, :desc);");
+    query.bindValue(":name", QString::fromStdString(c.getComName()));
+    query.bindValue(":year", c.getComYear());
+    query.bindValue(":type", c.getComType());
+    query.bindValue(":built", c.getComBuilt());
+    query.bindValue(":desc", QString::fromStdString(c.getComDescription()));
     query.exec();
-        string s =  query.executedQuery().toStdString();
-        cout << s << endl;
-        sleep(2);
+    c.setComID(query.lastInsertId().toUInt());
+//        string s =  query.executedQuery().toStdString();
+//        cout << s << endl;
+//        sleep(2);
 
-   // return 1;
+    return 1;
 }
 bool workingclass::addcomputerType(computertype & ct)
 {
@@ -283,6 +282,9 @@ bool workingclass::addcomputerType(computertype & ct)
                   "VALUES (:name, :desc);");
     query.bindValue(":name", QString::fromStdString(ct.getName()));
     query.bindValue(":desc", QString::fromStdString(ct.getDesc()));
+    query.exec();
+    ct.setID(query.lastInsertId().toUInt());
+
     return 1;
 }
 void workingclass::deleteScientist(int sciID)
@@ -290,7 +292,7 @@ void workingclass::deleteScientist(int sciID)
     QSqlQuery query;
 
     query.prepare("UPDATE scientists "
-                  "SET deleted = TRUE"
+                  "SET deleted = 'TRUE'"
                   "WHERE id = :id");
     query.bindValue(":id", sciID);
     query.exec();
@@ -300,7 +302,7 @@ void workingclass::deleteComputer(int compID)
     QSqlQuery query;
 
     query.prepare("UPDATE computers "
-                  "SET deleted = TRUE"
+                  "SET deleted = 'TRUE'"
                   "WHERE id = :id");
     query.bindValue(":id", compID);
     query.exec();
@@ -383,9 +385,17 @@ void workingclass::pushToVector(const scientist& s)
 {
     scientistVector.push_back(s);
 }
-void workingclass::eraseVector()
+void workingclass::eraseScientistVector()
 {
     scientistVector.clear();
+}
+void workingclass::eraseComputerVector()
+{
+    computerVector.clear();
+}
+void workingclass::eraseCompTypeVector()
+{
+    compTypeVector.clear();
 }
 
 void workingclass::createScientist(string& line, int& oldfind)

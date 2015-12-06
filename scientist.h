@@ -39,7 +39,9 @@ class scientist
         string getLink() const;
         // Precondition:    The class has been initialised with a legal link.
         // Postcondition:   Returns a string with a link.
-
+        void setID(int inID);
+        // Precondition:    The parameter is of a legal type and value.
+        // Postcondition:   The id has been set to the parameter inID.
         void setName(string inName);
         // Precondition:    The parameter is of a legal type and value.
         // Postcondition:   The name has been set to the parameter name.
