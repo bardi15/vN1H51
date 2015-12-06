@@ -6,7 +6,6 @@
 #include "computertype.h"
 #include <QtSql>
 
-#include <fstream>
 #include <cstring>
 #include <cstdlib>
 #include <stdlib.h>
@@ -79,10 +78,10 @@ public:
     void readSqlCompTypes();
     //  Precondition:   The database is open.
     //  Postcondition:  If data available, it is read into the private vector for computertypes.
-    vector<computer> getComputersLinkedToScientists(int compID);
+    vector<computer> getComputersLinkedToScientists(int sciID);
     //  Precondition:   A computer is selected and its ID sent in as compID.
     //  Postcondition:  Returns a vector of scientist related to the computer.
-    vector<scientist> getScientistsLinkedToComputer(int sciID);
+    vector<scientist> getScientistsLinkedToComputer(int compID);
     //  Precondition:   A scientist is selected and its ID sent in as sciID.
     //  Postcondition:  Returns a vector of computers related to the scientist.
     void addToFile();

@@ -1,5 +1,3 @@
-//#include "scientist.h"
-//#include "infodisplay.h"
 #include "workingclass.h"
 #include <unistd.h>
 
@@ -30,7 +28,6 @@ QSqlDatabase workingclass::startDatabase()
 {
     QSqlDatabase db;
     db = QSqlDatabase::addDatabase("QSQLITE");
-    // QString dbName = "../vN1H51/Group51_verklegt_1.sqlite";
     QString dbName = "Group51_verklegt_1.sqlite";
     db.setDatabaseName(dbName);
     db.open();
@@ -40,10 +37,8 @@ void workingclass::closeDatabase()
 {
     QSqlDatabase db;
     db.close();
-
 }
 
-//QSqlDatabase
 void workingclass::readSqlScientists(string sorting)
 {
     //QSqlDatabase db;
@@ -123,21 +118,18 @@ void workingclass::updateSqlScientist(scientist& s)
 //    sleep(3);
 }
 
-vector<computer> workingclass::getComputersLinkedToScientists(int compID)
+vector<computer> workingclass::getComputersLinkedToScientists(int sciID)
 {
     QSqlQuery query;
 
-    query.prepare("SELECT * FROM computers c"
-                  "INNER JOIN scientists_and_computers sc"
+    query.prepare("SELECT c.* FROM computers c "
+                  "INNER JOIN scientists_and_computers sc "
                   "ON  c.id = sc.computer_id "
-                  "WHERE sc.scientist_id = :cid AND "
+                  "WHERE sc.scientist_id = :sid AND "
                   "sc.deleted ='FALSE';");
-    query.bindValue(":cid", compID );
+    query.bindValue(":sid", sciID );
     query.exec();
-//    string s;
-//    s = query.lastQuery().toStdString();
-//    cout << s << endl;
-//    sleep(3);
+
     vector<computer> tempvector;
     while(query.next())
     {
@@ -153,21 +145,18 @@ vector<computer> workingclass::getComputersLinkedToScientists(int compID)
 
     return tempvector;
 }
-vector<scientist> workingclass::getScientistsLinkedToComputer(int sciID)
+vector<scientist> workingclass::getScientistsLinkedToComputer(int compID)
 {
     QSqlQuery query;
 
-    query.prepare("SELECT * FROM scientists s"
-                  "INNER JOIN scientists_and_computers sc"
-                  "ON  s.id = sc.computer_id "
-                  "WHERE sc.scientist_id = :sid AND "
+    query.prepare("SELECT s.* FROM scientists s "
+                  "INNER JOIN scientists_and_computers sc "
+                  "ON  s.id = sc.scientist_id "
+                  "WHERE sc.computer_id = :cid AND "
                   "sc.deleted = 'FALSE';");
-    query.bindValue(":sid", sciID );
+    query.bindValue(":cid", compID );
     query.exec();
-//    string s;
-//    s = query.lastQuery().toStdString();
-//    cout << s << endl;
-//    sleep(3);
+
     vector<scientist> tempvector;
     while(query.next())
     {
@@ -187,14 +176,12 @@ vector<scientist> workingclass::getScientistsLinkedToComputer(int sciID)
 void workingclass::readSqlComputers(string sorting)
 {
     computer c;
-
     QSqlQuery query;
 
     query.prepare("SELECT * FROM computers "
                   "WHERE deleted = 'FALSE'"
                   "ORDER BY " + QString::fromStdString(sorting));
     query.exec();
-
     while(query.next())
     {
         computer c;
@@ -205,25 +192,16 @@ void workingclass::readSqlComputers(string sorting)
         c.setComBuilt(query.value("built").toUInt());
         c.setComDescription(query.value("description").toString().toStdString());
         computerVector.push_back(c);
-
-//        cout << cName << " " << c.getComName() << endl;
-//        usleep(50000);
         }
 }
 void workingclass::readSqlCompTypes()
 {
-    QSqlDatabase db;
-    //db.open();
-
-    QSqlQuery query(db);
+    QSqlQuery query;
 
     query.prepare("SELECT * FROM computer_types "
                   "WHERE deleted = 'FALSE'"
                   "ORDER BY name ASC");
     query.exec();
-//    string s =  query.executedQuery().toStdString();
-//    cout << s << endl;
-//    sleep(1);
     while(query.next())
     {
         computertype ct;
@@ -232,11 +210,7 @@ void workingclass::readSqlCompTypes()
         ct.setName(query.value("name").toString().toStdString());
         ct.setDesc(query.value("description").toString().toStdString());
         compTypeVector.push_back(ct);
-//        cout << ctName << " " << ct.getName() << endl;
-//        usleep(50000);
     }
-    //return db;
-
 }
 
 bool workingclass::addscientist(scientist& s)
@@ -269,10 +243,6 @@ bool workingclass::addcomputer(computer& c)
     query.bindValue(":desc", QString::fromStdString(c.getComDescription()));
     query.exec();
     c.setComID(query.lastInsertId().toUInt());
-//        string s =  query.executedQuery().toStdString();
-//        cout << s << endl;
-//        sleep(2);
-
     return 1;
 }
 bool workingclass::addcomputerType(computertype & ct)
@@ -309,78 +279,7 @@ void workingclass::deleteComputer(int compID)
 }
 
 
-//  VectorToFile er ekki notað í SQL verkefninu.
-//void workingclass::VectorToFile(vector<scientist>& v, char AppOver) const
-//{
-//    for(unsigned int i = 0; i < v.size(); i++)
-//    {
-//        if(toupper(AppOver) == 'A')
-//        {
-//            addLineToFile(v.at(i), 'A');
-//        }
-//        else
-//        {
 
-//            if(i == 0)
-//            {
-//                addLineToFile(v.at(i), 'O');
-//            }
-//            else
-//            {
-//                addLineToFile(v.at(i), 'A');
-//            }
-//        }
-//    }
-//}
-
-//void workingclass::addLineToFile(scientist& s, char AppOver) const
-//{
-
-
-//    string outstring;
-//    ofstream file_out;
-//    if (toupper(AppOver) == 'A')
-//    {
-//        file_out.open(WORKFILE.c_str(), ios::app);
-//    }
-//    else if (toupper(AppOver) == 'O')
-//    {
-//        file_out.open(WORKFILE.c_str());
-//    }
-//    if(file_out.fail())
-//    {
-//        cout << "error opening addToFile file";
-//        exit(1);
-//    }
-//    cout << outstring << endl;
-//    file_out  << endl << s.getName() << ";" <<
-//                s.getGender() << ";" << s.getYearOfBirth() << ";" <<
-//                s.getYearOfDeath() << ";" << s.getDescription() << ";" <<
-//                s.getLink();
-//    file_out.close();
-
-//}
-
-void workingclass::readLinesFromFile(ifstream& fileWithLines)
-{
-    while(!fileWithLines.eof())
-    {
-        int loc = 0;
-        string next= "";
-        char nextchar;
-        fileWithLines.get(nextchar);
-        while(!fileWithLines.eof() && nextchar != '\n')
-        {
-            next += nextchar;
-            fileWithLines.get(nextchar);
-        }
-        if( next.size() > 3)
-        {
-            createScientist(next, loc);
-        }
-
-    }
-}
 void workingclass::pushToVector(const scientist& s)
 {
     scientistVector.push_back(s);
@@ -420,37 +319,7 @@ void workingclass::createScientist(string& line, int& oldfind)
         pushToVector(s);
     }
 }
-//void workingclass::removeScientist(scientist& s)
-//{
-//    readSqlScientists();
-//    for(unsigned int j = 0; j < scientistVector.size(); j++)
-//    {
-//        if(scientistVector[j].getName() == s.getName())
-//        {
-//            scientistVector.erase(scientistVector.begin() + j);
 
-//              ofstream newFile(WORKFILE.c_str());
-//              if(newFile.is_open())
-//              {
-//                  for(unsigned int i = 0; i < scientistVector.size(); i++)
-//                  {
-//                      if(i == 0)
-//                      {
-//                        addLineToFile(scientistVector[i], 'O');
-//                      }
-//                      else
-//                      {
-//                          addLineToFile(scientistVector[i], 'A');
-//                      }
-//                  }
-//              }else {
-//                  cout << "can't open file";
-//              }
-//              break;
-//        }
-//   }
-
-//}
 
 void workingclass::fillScientist(const string& text, scientist& s, const int& field)
 {
@@ -590,8 +459,109 @@ vector<scientist> workingclass::searchByYear(int& yr, char bORd, bool& isFound)
 //{
 //    sort(v.begin(), v.end(), DD_Comp);
 //}
+//  VectorToFile er ekki notað í SQL verkefninu.
+//void workingclass::VectorToFile(vector<scientist>& v, char AppOver) const
+//{
+//    for(unsigned int i = 0; i < v.size(); i++)
+//    {
+//        if(toupper(AppOver) == 'A')
+//        {
+//            addLineToFile(v.at(i), 'A');
+//        }
+//        else
+//        {
+
+//            if(i == 0)
+//            {
+//                addLineToFile(v.at(i), 'O');
+//            }
+//            else
+//            {
+//                addLineToFile(v.at(i), 'A');
+//            }
+//        }
+//    }
+//}
+
+//void workingclass::addLineToFile(scientist& s, char AppOver) const
+//{
 
 
+//    string outstring;
+//    ofstream file_out;
+//    if (toupper(AppOver) == 'A')
+//    {
+//        file_out.open(WORKFILE.c_str(), ios::app);
+//    }
+//    else if (toupper(AppOver) == 'O')
+//    {
+//        file_out.open(WORKFILE.c_str());
+//    }
+//    if(file_out.fail())
+//    {
+//        cout << "error opening addToFile file";
+//        exit(1);
+//    }
+//    cout << outstring << endl;
+//    file_out  << endl << s.getName() << ";" <<
+//                s.getGender() << ";" << s.getYearOfBirth() << ";" <<
+//                s.getYearOfDeath() << ";" << s.getDescription() << ";" <<
+//                s.getLink();
+//    file_out.close();
+
+//}
+
+//void workingclass::readLinesFromFile(ifstream& fileWithLines)
+//{
+//    while(!fileWithLines.eof())
+//    {
+//        int loc = 0;
+//        string next= "";
+//        char nextchar;
+//        fileWithLines.get(nextchar);
+//        while(!fileWithLines.eof() && nextchar != '\n')
+//        {
+//            next += nextchar;
+//            fileWithLines.get(nextchar);
+//        }
+//        if( next.size() > 3)
+//        {
+//            createScientist(next, loc);
+//        }
+
+//    }
+//}
+//void workingclass::removeScientist(scientist& s)
+//{
+//    readSqlScientists();
+//    for(unsigned int j = 0; j < scientistVector.size(); j++)
+//    {
+//        if(scientistVector[j].getName() == s.getName())
+//        {
+//            scientistVector.erase(scientistVector.begin() + j);
+
+//              ofstream newFile(WORKFILE.c_str());
+//              if(newFile.is_open())
+//              {
+//                  for(unsigned int i = 0; i < scientistVector.size(); i++)
+//                  {
+//                      if(i == 0)
+//                      {
+//                        addLineToFile(scientistVector[i], 'O');
+//                      }
+//                      else
+//                      {
+//                          addLineToFile(scientistVector[i], 'A');
+//                      }
+//                  }
+//              }else {
+//                  cout << "can't open file";
+//              }
+//              break;
+//        }
+//   }
+
+//}
 
 
 

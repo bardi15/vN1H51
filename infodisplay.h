@@ -205,7 +205,7 @@ public:
     void printLines(int lines, string thickness);
     //  prints lines
 
-    const unsigned int holyScroll = 15;
+const unsigned int HOLYSCROLL = 15;
 
     service serviceObject;
     // A object of the service layer class.  To be used in good computing :)

@@ -39,9 +39,9 @@ void infoDisplay::displaySciList(vector<scientist>& v)
 
     unsigned int vSize = v.size();
     unsigned int scrollFactor;
-    if (vSize > holyScroll)
+    if (vSize > HOLYSCROLL)
     {
-         scrollFactor = holyScroll;
+         scrollFactor = HOLYSCROLL;
     }
     else
     {
@@ -49,7 +49,7 @@ void infoDisplay::displaySciList(vector<scientist>& v)
     }
     unsigned int scrollBase = 0;
     bool continueF;
-    if (vSize < holyScroll)
+    if (vSize < HOLYSCROLL)
     {
          continueF = false;
     }
@@ -100,9 +100,9 @@ void infoDisplay::displaySciList()
 
     unsigned int vSize = serviceObject.servGetSciVector().size();
     unsigned int scrollFactor;
-    if (vSize > holyScroll)
+    if (vSize > HOLYSCROLL)
     {
-         scrollFactor = holyScroll;
+         scrollFactor = HOLYSCROLL;
     }
     else
     {
@@ -110,7 +110,7 @@ void infoDisplay::displaySciList()
     }
     unsigned int scrollBase = 0;
     bool continueF;
-    if (vSize < holyScroll)
+    if (vSize < HOLYSCROLL)
     {
          continueF = false;
     }
@@ -161,9 +161,9 @@ void infoDisplay::displayComList(vector<computer>& v)
     serviceObject.servReadSqlComputers();
     unsigned int cSize = v.size();
     unsigned int scrollFactor;
-    if (cSize > holyScroll)
+    if (cSize > HOLYSCROLL)
     {
-         scrollFactor = holyScroll;
+         scrollFactor = HOLYSCROLL;
     }
     else
     {
@@ -171,7 +171,7 @@ void infoDisplay::displayComList(vector<computer>& v)
     }
     unsigned int scrollBase = 0;
     bool continueF;
-    if (cSize < holyScroll)
+    if (cSize < HOLYSCROLL)
     {
          continueF = false;
     }
@@ -217,9 +217,9 @@ void infoDisplay::displayComList()
 {
     unsigned int cSize = serviceObject.servGetComVector().size();
     unsigned int scrollFactor;
-    if (cSize > holyScroll)
+    if (cSize > HOLYSCROLL)
     {
-         scrollFactor = holyScroll;
+         scrollFactor = HOLYSCROLL;
     }
     else
     {
@@ -227,7 +227,7 @@ void infoDisplay::displayComList()
     }
     unsigned int scrollBase = 0;
     bool continueF;
-    if (cSize < holyScroll)
+    if (cSize < HOLYSCROLL)
     {
          continueF = false;
     }
@@ -276,22 +276,11 @@ bool infoDisplay::scrollFunction(unsigned int vSize, unsigned int &scrollBase, u
     //int size = vSize;
     bool scroll = false;
     char input;
-
-//    if (vSize > holyScroll)
-//    {
-//        scrollFactor = holyScroll;
-//        scroll = true;
-//    }
-//    else
-//    {
-//        scrollFactor = vSize;
-//        scroll = false;
-//    }
     int scrollCount = 1;
 
 
 
-        if (vSize > holyScroll)
+        if (vSize > HOLYSCROLL)
         {
             if (scrollFactor >= vSize)
             {
@@ -314,9 +303,9 @@ bool infoDisplay::scrollFunction(unsigned int vSize, unsigned int &scrollBase, u
                 scrollBase = scrollFactor;
                 if (scrollBase >= vSize)
                 {
-                    scrollBase = vSize - holyScroll;
+                    scrollBase = vSize - HOLYSCROLL;
                 }
-                scrollFactor = scrollBase + holyScroll;
+                scrollFactor = scrollBase + HOLYSCROLL;
                 if (scrollFactor >= vSize)
                 {
                     scrollFactor = vSize;
@@ -328,9 +317,6 @@ bool infoDisplay::scrollFunction(unsigned int vSize, unsigned int &scrollBase, u
             }
 
         }
-    //}
-    //while(scroll == true);
-
     return scroll;
 }
 
@@ -371,7 +357,6 @@ void infoDisplay::dispSelectScientistToDelete()
         displayOneScientist(serviceObject.servGetSciVector().at(sel-1));
         if(dispSureToRemove(serviceObject.servGetSciVector().at(sel-1).getGender()))
         {
-//            serviceObject.servRemoveScientist(serviceObject.servReadSqlScientists().at(sel-1));
             serviceObject.servReadSqlScientists();
         }
     }
@@ -397,12 +382,6 @@ bool infoDisplay::dispSureToRemove(int gender)
     addEmptyLines(1);
     cout << "\tEnter (Y/N):";
     bool continueF = yesOrNo();
-//    ans = inputCharacterToFunction();
-//    if(ans == 'Y')
-//    {
-//        return true;
-//    }
-//    return false;
 
     return continueF;
 }
@@ -485,24 +464,34 @@ void infoDisplay::displayOneScientist(scientist& s)
     {
         cout << "\tLink: " << s.getLink() << endl;
     }
-
-    //addEmptyLines(1);
-    //cout << "\t-------------------------------------------------------------" << endl;
-    printLines(1,"thin");
+    vector<computer> v;
+    v = serviceObject.servGetComputersLinkedToScientists(s.getID());
+    if(v.size() > 0)
+    {
+        addEmptyLines(1);
+        cout << "\tHe worked on the following computer/s:" << endl;
+        printLines(1,"thin");
+        for(unsigned i = 0; i < v.size(); i++)
+        {
+            cout << "\t" << v.at(i).getComName() << endl;
+        }
+        printLines(1,"thick");
+    }
     cout << "\tEnter any character to continue ";
     ans = inputCharacterToFunction();
 }
 
 void infoDisplay::displayOneComputer(computer& c)
 {
-    int jumpLength = 53;
-    int firstLine = 48;
+    unsigned int jumpLength = 53;
+    unsigned int firstLine = 48;
     char ans;
     clearScreen();
     addEmptyLines(5);
+    printLines(1, "thin");
     cout << "\tNafn: " << c.getComName() << endl;
     cout << "\tType: ";
-    cout << "VANTAR ad setja upp sækingu i type grunninn" << endl;
+    cout << serviceObject.servGetComTypeVector().at(c.getComType()-1).getName() << endl;
     cout << "\tProduction year: " <<  c.getComYear() << endl;
 
     if(c.getComDescription().size() > firstLine)
@@ -520,19 +509,27 @@ void infoDisplay::displayOneComputer(computer& c)
     {
         cout << "\tDescription: " << c.getComDescription() << endl;
     }
+    vector<scientist> v;
+    v = serviceObject.servGetScientistsLinkedToComputer(c.getId());
+    if(v.size() > 0)
+    {
+        addEmptyLines(1);
+        cout << "\tThe following scientist/s worked on this computer:" << endl;
+        printLines(1,"thin");
+        for(unsigned i = 0; i < v.size(); i++)
+        {
+            cout << "\t" << v.at(i).getName() << endl;
+        }
+        printLines(1,"thick");
+    }
 
-    cout << "VANTAR ad prenta ut upplysingar um scientista sem unnu ad henni" << endl;
-
-    //addEmptyLines(1);
-    //cout << "\t-------------------------------------------------------------" << endl;
-    printLines(1,"thin");
     cout << "\tEnter any character to continue ";
     ans = inputCharacterToFunction();
 }
 
 void infoDisplay::clearScreen()
 {
-    //system("cls");
+    system("cls");
 }
 
 void infoDisplay::mainMenu()
@@ -821,21 +818,6 @@ void infoDisplay::quitProgram()
     mainMenu();
 }
 
-//bool infoDisplay::loopFunction()
-//{
-//    char input;
-//    input = inputCharacterToFunction();
-//    cin.ignore();
-
-//    if (input == 'Y')
-//    {
-//        return true;
-//    }
-//    else
-//    {
-//        return false;
-//    }
-//}
 
 int infoDisplay::getCurrentDate (string date)
 {
@@ -874,21 +856,7 @@ void infoDisplay::selectAction()
 
     do
     {
-        //  Þetta þarf að fara inn í hverja undirvalmynd eftir því hvað við erum að fara að gera.
-//            serviceObject.servEraseVector();
-       // serviceObject.servReadSqlScientists();
-
-     //   vector<scientist> sV;
-      //  sV = serviceObject.servGetSciVector();
-        //cout<<"vector:::::"<<endl;
-        //cout<<sV.at(0).getName()<<endl;
-
-   //     vector<computer> cV;
-   //     cV = serviceObject.servGetComVector();
-
-        //cout<<"vector:::::"<<endl;
-        //cout<<cV.at(0).getComName()<<endl;
-
+        clearScreen();
         mainMenu();
         int sel = serviceObject.selection();
         unsigned int choice = 0;
@@ -953,111 +921,7 @@ void infoDisplay::selectAction()
         while(true);
 
 }
-//void infoDisplay::selectAction()
-//{
-//    splashScreen();
-//    serviceObject.servStartDatabase();
 
-//        do
-//        {
-//            //  Þetta þarf að fara inn í hverja undirvalmynd eftir því hvað við erum að fara að gera.
-//            serviceObject.servEraseVector();
-//            serviceObject.servReadSqlScientists();
-
-//            vector<scientist> v;
-//            v = serviceObject.servGetVector();
-
-//            mainMenu();
-//            int sel = serviceObject.selection();
-//            switch(sel)
-//                {
-//                case 1:
-//                    clearScreen();
-//                    addScientist();
-//                    break;
-//                case 2:
-//                    clearScreen();
-//                    //v = serviceObject.servGetVector();
-//                    displaySciList(v);
-//                    dispSelectScientistToDelete(v);
-//                    serviceObject.servEraseVector();
-//                    serviceObject.servReadSqlScientists();
-//                    break;
-//                case 3:
-//                    clearScreen();
-//                    displayChangeScientist();
-//                    break;
-//                case 4:
-//                    clearScreen();
-//                    displaySearchScientist();
-//                    break;
-//                case 5:
-//                    unsigned int sel;
-//                    chooseSortion(v);
-//                    do
-//                    {
-//                        //  Hér þarf að lesa inn úr grunni eftir að ákv. hefur verið hvaða sort er í gangi.  Þ.e. sortið þarf að kalla á innlesturinn.
-//                        clearScreen();
-//                        displaySciList(v);
-//                        sel = moreInfoOnScientist(v);
-//                        if(sel > 0 && sel <= v.size())
-//                        {
-//                            displayOneScientist(v.at(sel-1));
-//                        }
-//                        else
-//                        {
-//                            break;
-//                        }
-//                    }while(sel > 0);
-//                        break;
-//                case 6:
-//                    clearScreen();
-//                    splashScreen();
-//                    break;
-
-//                default:
-//                    clearScreen();
-//                    addEmptyLines(10);
-//                    quitProgram();
-
-//                    addEmptyLines(10);
-//                    exit(0);
-//                    break;
-//               }
-//            }
-//            while(true);
-
-//}
-
-//void infoDisplay::chooseSortion(vector<scientist>& v)
-//{
-
-//    int choice = displaySortOptions();
-
-//    switch(choice)
-//    {
-//        case 1:
-//            clearScreen();
-//            serviceObject.servSortAlph(v);
-//            break;
-//        case 2:
-//            clearScreen();
-//            serviceObject.servSortRevAlph(v);
-//            break;
-//        case 3:
-//            clearScreen();
-//            serviceObject.servSortYOB(v);
-//            break;
-//        case 4:
-//            clearScreen();
-//            serviceObject.servSortYOD(v);
-//        case 5:
-//            clearScreen();
-//        default:
-//            clearScreen();
-//            break;
-//    }
-//}
 void infoDisplay::editScientistDisplayService()
 {
     serviceObject.servReadSqlScientists();
@@ -1066,10 +930,6 @@ void infoDisplay::editScientistDisplayService()
 }
 void infoDisplay::editScientistService(int i)
 {
-    //vector<scientist> v;
-    //v = serviceObject.servGetVector();
-
-
     scientist sO;
 
     if (i < 0)
@@ -1353,11 +1213,7 @@ void infoDisplay::addScientist()
         sO.setYearOfDeath(yod);
         sO.setDescription(descr);
         sO.setLink(link);
-//        vector<scientist> tempVector;
-//        tempVector = serviceObject.servGetVector();
-//        tempVector.push_back(sO);
-//        serviceObject.servPushToVector(sO);
-//        serviceObject.servAddLineToFile(sO, 'A');
+
         serviceObject.servAddscientist(sO);
 
     };
@@ -1904,3 +1760,124 @@ bool infoDisplay::yesOrNo()
 
     return sendBack;
 }
+
+//bool infoDisplay::loopFunction()
+//{
+//    char input;
+//    input = inputCharacterToFunction();
+//    cin.ignore();
+
+//    if (input == 'Y')
+//    {
+//        return true;
+//    }
+//    else
+//    {
+//        return false;
+//    }
+//}
+//void infoDisplay::selectAction()
+//{
+//    splashScreen();
+//    serviceObject.servStartDatabase();
+
+//        do
+//        {
+//            //  Þetta þarf að fara inn í hverja undirvalmynd eftir því hvað við erum að fara að gera.
+//            serviceObject.servEraseVector();
+//            serviceObject.servReadSqlScientists();
+
+//            vector<scientist> v;
+//            v = serviceObject.servGetVector();
+
+//            mainMenu();
+//            int sel = serviceObject.selection();
+//            switch(sel)
+//                {
+//                case 1:
+//                    clearScreen();
+//                    addScientist();
+//                    break;
+//                case 2:
+//                    clearScreen();
+//                    //v = serviceObject.servGetVector();
+//                    displaySciList(v);
+//                    dispSelectScientistToDelete(v);
+//                    serviceObject.servEraseVector();
+//                    serviceObject.servReadSqlScientists();
+//                    break;
+//                case 3:
+//                    clearScreen();
+//                    displayChangeScientist();
+//                    break;
+//                case 4:
+//                    clearScreen();
+//                    displaySearchScientist();
+//                    break;
+//                case 5:
+//                    unsigned int sel;
+//                    chooseSortion(v);
+//                    do
+//                    {
+//                        //  Hér þarf að lesa inn úr grunni eftir að ákv. hefur verið hvaða sort er í gangi.  Þ.e. sortið þarf að kalla á innlesturinn.
+//                        clearScreen();
+//                        displaySciList(v);
+//                        sel = moreInfoOnScientist(v);
+//                        if(sel > 0 && sel <= v.size())
+//                        {
+//                            displayOneScientist(v.at(sel-1));
+//                        }
+//                        else
+//                        {
+//                            break;
+//                        }
+//                    }while(sel > 0);
+//                        break;
+//                case 6:
+//                    clearScreen();
+//                    splashScreen();
+//                    break;
+
+//                default:
+//                    clearScreen();
+//                    addEmptyLines(10);
+//                    quitProgram();
+
+//                    addEmptyLines(10);
+//                    exit(0);
+//                    break;
+//               }
+//            }
+//            while(true);
+
+//}
+
+//void infoDisplay::chooseSortion(vector<scientist>& v)
+//{
+
+//    int choice = displaySortOptions();
+
+//    switch(choice)
+//    {
+//        case 1:
+//            clearScreen();
+//            serviceObject.servSortAlph(v);
+//            break;
+//        case 2:
+//            clearScreen();
+//            serviceObject.servSortRevAlph(v);
+//            break;
+//        case 3:
+//            clearScreen();
+//            serviceObject.servSortYOB(v);
+//            break;
+//        case 4:
+//            clearScreen();
+//            serviceObject.servSortYOD(v);
+//        case 5:
+//            clearScreen();
+//        default:
+//            clearScreen();
+//            break;
+//    }
+//}

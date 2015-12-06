@@ -4,7 +4,6 @@
 #include <iostream>
 #include <string>
 #include <unistd.h>
-//#include "infodisplay.h"
 #include "workingclass.h"
 
 
@@ -106,6 +105,8 @@ public:
     void henda();
     workingclass workingObject;
     // A object of the data layer class.  To be used in good computing :)
+    vector<scientist> servGetScientistsLinkedToComputer(int compID);
+    vector<computer> servGetComputersLinkedToScientists(int sciID);
 
 };
 

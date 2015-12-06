@@ -6,8 +6,6 @@ using namespace std;
 
 int main()
 {    
-//    infoDisplay display;
-
 
     infoDisplay display;
     display.selectAction();

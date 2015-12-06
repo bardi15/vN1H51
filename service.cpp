@@ -92,23 +92,7 @@ void service::servSortComputers(int choice)
                 break;
       }
 }
-//void service::servSortAlph(vector<scientist>& v)
-//{
-//    workingObject.sortAlph(v);
-//}
-//void service::servSortRevAlph(vector<scientist>& v)
-//{
-//    workingObject.sortRevAlph(v);
-//}
-//void service::servSortYOB(vector<scientist>& v)
-//{
-//    workingObject.sortYOB(v);
-//}
-//void service::servSortYOD(vector<scientist>& v)
-//{
-//    workingObject.sortYOD(v);
-//}
-//=======
+
 vector<scientist> service::servGetSciVector()
 {
     return workingObject.getSciVector();
@@ -122,22 +106,7 @@ vector<computertype> service::servGetComTypeVector()
     return workingObject.getComTypeVector();
 }
 
-//void service::servSortAlph(vector<scientist>& v)
-//{
-//    workingObject.sortAlph(v);
-//}
-//void service::servSortRevAlph(vector<scientist>& v)
-//{
-//    workingObject.sortRevAlph(v);
-//}
-//void service::servSortYOB(vector<scientist>& v)
-//{
-//    workingObject.sortYOB(v);
-//}
-//void service::servSortYOD(vector<scientist>& v)
-//{
-//    workingObject.sortYOD(v);
-//}
+
 void service::servAddscientist(scientist& s)
 {
     workingObject.addscientist(s);
@@ -151,20 +120,7 @@ void service::servAddcomputerType(computertype& ct)
     workingObject.addcomputerType(ct);
 }
 
-//void service::servAddScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender)
-//{
-//    workingObject.addScientistChange(name, gender, yob, yod, desc, link, selectedGender);
-//}
 
-// bool service::servAddScientistCheck(string name, int gender, int yob, int yod, string desc, string link)
-// {
-//     return workingObject.addScientistCheck(name, gender, yob, yod, desc, link);
-// }
-
-//void service::servVectorToFile(vector<scientist>& v, char AppOver) const
-//{
-//    workingObject.VectorToFile(v, AppOver);
-//}
 vector<scientist> service::servSearchByName(string subName, bool& isFound)
 {
     return workingObject.searchByName(subName, isFound);
@@ -286,14 +242,7 @@ int service::genderCorrection(string gender)
         return 2;
     }
 }
-//void service::servRemoveScientist(scientist& s)
-//{
-//    workingObject.removeScientist(s);
-//}
-// void service::servAddLineToFile(scientist& s, char AppOver) const
-// {
-//     workingObject.addLineToFile(s, AppOver);
-// }
+
 void service::servStartDatabase()
 {
     workingObject.startDatabase();
@@ -320,8 +269,15 @@ void service::servUpdateSqlComputer(computer& c)
 {
     workingObject.updateSqlComputer(c);
 }
+vector<scientist> service::servGetScientistsLinkedToComputer(int compID)
+{
+    return workingObject.getScientistsLinkedToComputer(compID);
+}
 
-
+vector<computer> service::servGetComputersLinkedToScientists(int sciID)
+{
+    return workingObject.getComputersLinkedToScientists(sciID);
+}
 
 
 
@@ -336,3 +292,58 @@ void service::henda()
 //    workingObject.readSqlCompTypes();
 //    sleep(3);
 }
+//void service::servSortAlph(vector<scientist>& v)
+//{
+//    workingObject.sortAlph(v);
+//}
+//void service::servSortRevAlph(vector<scientist>& v)
+//{
+//    workingObject.sortRevAlph(v);
+//}
+//void service::servSortYOB(vector<scientist>& v)
+//{
+//    workingObject.sortYOB(v);
+//}
+//void service::servSortYOD(vector<scientist>& v)
+//{
+//    workingObject.sortYOD(v);
+//}
+//=======
+//void service::servSortAlph(vector<scientist>& v)
+//{
+//    workingObject.sortAlph(v);
+//}
+//void service::servSortRevAlph(vector<scientist>& v)
+//{
+//    workingObject.sortRevAlph(v);
+//}
+//void service::servSortYOB(vector<scientist>& v)
+//{
+//    workingObject.sortYOB(v);
+//}
+//void service::servSortYOD(vector<scientist>& v)
+//{
+//    workingObject.sortYOD(v);
+//}
+//void service::servAddScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender)
+//{
+//    workingObject.addScientistChange(name, gender, yob, yod, desc, link, selectedGender);
+//}
+
+// bool service::servAddScientistCheck(string name, int gender, int yob, int yod, string desc, string link)
+// {
+//     return workingObject.addScientistCheck(name, gender, yob, yod, desc, link);
+// }
+
+//void service::servVectorToFile(vector<scientist>& v, char AppOver) const
+//{
+//    workingObject.VectorToFile(v, AppOver);
+//}
+//void service::servRemoveScientist(scientist& s)
+//{
+//    workingObject.removeScientist(s);
+//}
+// void service::servAddLineToFile(scientist& s, char AppOver) const
+// {
+//     workingObject.addLineToFile(s, AppOver);
+// }
