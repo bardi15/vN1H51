@@ -771,6 +771,7 @@ void infoDisplay::selectAction()
         printLines(1,"thick");
         cout << "The program will now quit!\n";
         sleep(3);
+        serviceObject.servCreateEmptyDatabase();
     }
     serviceObject.henda();
 

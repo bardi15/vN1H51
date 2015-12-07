@@ -112,6 +112,9 @@ public:
     //      text to inserted into a variable in the scientist, the scientist to be created
     //      and the field to be populated currently.
     //  Postcondition:  The field to be populated has been correcly populated.
+    bool createRelationSciComp(int sciID, int compID);
+    //  Precondition:   Takes in id's of both an existing scientist and an existing computer.
+    //  Postcondition:  Creates a link between the scientist and the computer in the database.  Returns true if the operations goes through, false otherwise.
     void createScientist(string& line, int& oldfind);
     //  Precondition:   A line from the text file has been read. The old location of
     //      the line splitter ';' is available.
@@ -166,6 +169,9 @@ public:
     QSqlDatabase startDatabase();
     //  Precondition:   The database is present in the build directory of the program.
     //  Postconditinon: A link to the database has been established.
+    void createEmptyDatabase();
+    //  Precondition:   There is no database present directory of choice.
+    //  Postconditinon: A new database with empty tables is created.
     bool checkDatabaseExists();
     //  Precondition:   A name for the database has been declered.
     //  Postcondition:  Returns true if database exits, false otherwise.

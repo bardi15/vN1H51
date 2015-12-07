@@ -76,6 +76,8 @@ public:
     //  Calls the addScientistChange function in workingclass.
     bool servAddScientistCheck(string name, int gender, int yob, int yod, string desc, string link);
     //  Calls the addScientistCheck function in workingclass.
+    bool servCreateRelationSciComp(int sciID, int compID);
+    //  Calls the createRelationSciComp function in workingclass.
     void servVectorToFile(vector<scientist>& v, char AppOver) const;
     //  Calls the VectorToFile function in workingclass.
     void servSearchScientistByName(string subName, bool& isFound);
@@ -100,6 +102,8 @@ public:
     //  Calls the startDatabase function in workingclass.
     bool servCheckDatabaseExists();
     //  Calls the checkDatabaseExists function in workingclass.
+    void servCreateEmptyDatabase();
+    //  Calls the createEmptyDatabase function in workingclass.
     void servCloseDatabase();
     //  Calls the CloseDatabase function in workingclass.
     void servDeleteComputer(int compID);

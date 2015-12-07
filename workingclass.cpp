@@ -37,11 +37,61 @@ bool workingclass::checkDatabaseExists()
     QFile db;
     return db.exists(QString::fromStdString(DBASE)) ;
 }
+void workingclass::createEmptyDatabase()
+{
+    startDatabase();
+    QSqlQuery query;
+
+    query.exec("CREATE TABLE 'computer_types' "
+               "('id'' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE,"
+               " 'name' TEXT NOT NULL , "
+               " 'description' TEXT, "
+               " 'deleted' DEFAULT 'FALSE'");
+    query.exec("CREATE TABLE 'computers' "
+               "('id' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE,"
+               " 'name' TEXT NOT NULL , "
+               " 'year' INTEGER, "
+               " 'type' INTEGER NOT NULL , "
+               " 'built' BOOL NOT NULL  DEFAULT 'false', "
+               " 'description' TEXT, "
+               " 'deleted' DEFAULT 'FALSE');");
+    query.exec("CREATE TABLE 'scientists' "
+               "('id' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE,"
+               " 'name' TEXT NOT NULL , "
+               " 'gender' INTEGER NOT NULL  DEFAULT 2, "
+               " 'yob' INTEGER NOT NULL , "
+               " 'yod' INTEGER, "
+               " 'description' TEXT, "
+               " 'link' TEXT, "
+               " 'deleted' DEFAULT FALSE);");
+    query.exec("CREATE TABLE 'scientists_and_computers' "
+               "('id' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE, "
+               " 'scientist_id' INTEGER NOT NULL , "
+               " 'computer_id' INTEGER NOT NULL , "
+               " 'deleted' BOOLEAN DEFAULT FALSE, "
+               " FOREIGN KEY ('scientist_id') REFERENCES 'scientists'('id'), "
+               " FOREIGN KEY ('computer_id') REFERENCES 'computers'('id');");
+}
 
 void workingclass::closeDatabase()
 {
     QSqlDatabase db;
     db.close();
+}
+bool workingclass::createRelationSciComp(int sciID, int compID)
+{
+    QSqlQuery query;
+    query.prepare("INSERT INTO scientists_and_computers"
+                  "(scientist_id, computer_id)"
+                  "VALUES (:sID, :cID);");
+    query.bindValue(";sID", sciID);
+    query.bindValue(":cID", compID);
+    query.exec();
+    if(!query.lastError().isValid())
+    {
+        return true;
+    }
+    return false;
 }
 
 void workingclass::readSqlScientists(string sorting)
