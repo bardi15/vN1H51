@@ -7,8 +7,6 @@ service::service()
 {
 
 }
-
-
 int service::selection()
 {
     int select;
@@ -31,10 +29,6 @@ void service::servEraseCompTypeVector()
 {
     workingObject.eraseCompTypeVector();
 }
-
-
-
-
 void service::servReadSqlScientists(string sorting)
 {
     workingObject.readSqlScientists();
@@ -47,27 +41,24 @@ void service::servReadSqlCompTypes()
 {
     workingObject.readSqlCompTypes();
 }
-
-
-
 void service::servSortScientists(int choice)
 {
-      switch(choice)
-      {
-            case 1:
-                workingObject.readSqlScientists("name ASC;");
-                break;
-            case 2:
-                workingObject.readSqlScientists("name DESC;");
-                break;
-            case 3:
-                workingObject.readSqlScientists("yob ASC;");
-                break;
-            case 4:
-                workingObject.readSqlScientists("yob DESC;");
-                break;
-            default:
-                break;
+    switch(choice)
+    {
+        case 1:
+            workingObject.readSqlScientists("name ASC;");
+            break;
+        case 2:
+            workingObject.readSqlScientists("name DESC;");
+            break;
+        case 3:
+            workingObject.readSqlScientists("yob ASC;");
+            break;
+        case 4:
+            workingObject.readSqlScientists("yob DESC;");
+            break;
+        default:
+            break;
       }
 }
 void service::servSortComputers(int choice)
@@ -103,8 +94,6 @@ vector<computertype> service::servGetComTypeVector()
 {
     return workingObject.getCompTypeVector();
 }
-
-
 void service::servAddscientist(scientist& s)
 {
     workingObject.addscientist(s);
@@ -117,8 +106,6 @@ void service::servAddcomputerType(computertype& ct)
 {
     workingObject.addcomputerType(ct);
 }
-
-
 void service::servSearchScientistByName(string subName, bool& isFound)
 {
     workingObject.searchScientistByName(subName, isFound);
@@ -132,10 +119,6 @@ void service::servSearchScientistByYear(int& yr, char bORd, bool& isFound)
     yr = yearCorrection(yr,isFound);
     workingObject.searchScientistByYear(yr, bORd, isFound);
 }
-//void service::servPushToVector(const scientist& s)
-//{
-//    workingObject.pushToVector(s);
-//}
 int service::yearCorrection(int year, bool &errorInYear)
 {
 
@@ -255,7 +238,6 @@ bool service::servCheckDatabaseExists()
 {
     return workingObject.checkDatabaseExists();
 }
-
 void service::servCloseDatabase()
 {
     workingObject.closeDatabase();
@@ -272,12 +254,10 @@ void service::servDeleteComputerType(int computertypeID)
 {
     workingObject.deleteComputerType(computertypeID);
 }
-
 void service::servUpdateSqlScientist(scientist& s)
 {
     workingObject.updateSqlScientist(s);
 }
-
 void service::servUpdateSqlComputer(computer& c)
 {
     workingObject.updateSqlComputer(c);
@@ -286,12 +266,10 @@ void service::servUpdateSqlComputerType(computertype& ct)
 {
     workingObject.updateSqlComputerType(ct);
 }
-
 vector<scientist> service::servGetScientistsLinkedToComputer(int compID)
 {
     return workingObject.getScientistsLinkedToComputer(compID);
 }
-
 vector<computer> service::servGetComputersLinkedToScientists(int sciID)
 {
     return workingObject.getComputersLinkedToScientists(sciID);

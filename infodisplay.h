@@ -127,16 +127,12 @@ public:
     void selectAction();
     //  Precondition:   The program is running.
     //  Postcondition:  Displays the main menu and takes in the selection from made.
-    void SelectScientistAction();
+//    void SelectScientistAction();
     //  Precondition:   A selection is made from the scientist menu.
     //  Postcondition:  Selects which action to take based on input.
-    void SelectComputerAction();
+//    void SelectComputerAction();
     //  Precondition:   A selection is made from the computer menu.
     //  Postcondition:  Selects which action to take based on input.
-//    void chooseSortion(vector<scientist>& v);
-    //  Precondition:   A list of scientist is about to be displayed on screen.  Takes
-    //      in a reference to the vector about to be sorted.
-    //  Postcondition:  The vector is now sorted correctly according to the selection.
     void editScientistDisplayService();
     void displayScientistService();
     //  Precondition:

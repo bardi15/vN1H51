@@ -133,6 +133,7 @@ void infoDisplay::displayComList()
 
     do
     {
+
         listheaderCom();
         serviceObject.servReadSqlCompTypes();
         for(unsigned int i = scrollBase; i < scrollFactor; i++)
@@ -142,19 +143,42 @@ void infoDisplay::displayComList()
             cout.width(2);
             cout << "\t" << i+1 << ")\t";
             cout.width(30);
+
+			string newstring;
+
+            if (c.getComName().size() > 25)
+            {
+                newstring = c.getComName().substr(0,25) + "....";
+                cout << newstring;
+            }
+            else
+            {
+
             cout << c.getComName();// << "\t";
+
+
+
+
+
+
+
+
+
+
+
             cout << "\t" << c.getComYear()<< "\t";
             computertype ct = serviceObject.servGetComTypeVector().at(c.getComType()-1);
             cout<< ct.getName() << endl;
         }
-        if (scrollNeeded("com") == true)
+
+        if (scrollNeeded("com"))
         {
             continueF = scrollFunction(cSize, scrollBase, scrollFactor);
         }
     }
     while (continueF == true);
 
-    //cout << "\t-----------------------------------------------------" << endl;
+   
     printLines(1, "thin");
 }
 bool infoDisplay::scrollFunction(unsigned int vSize, unsigned int &scrollBase, unsigned int &scrollFactor)

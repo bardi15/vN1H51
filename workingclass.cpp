@@ -37,35 +37,35 @@ void workingclass::createEmptyDatabase()
     startDatabase();
     QSqlQuery query;
 
-    query.exec("CREATE TABLE 'computer_types' "
-               "('id'' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE,"
-               " 'name' TEXT NOT NULL , "
-               " 'description' TEXT, "
-               " 'deleted' DEFAULT 'FALSE'");
-    query.exec("CREATE TABLE 'computers' "
-               "('id' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE,"
-               " 'name' TEXT NOT NULL , "
-               " 'year' INTEGER, "
-               " 'type' INTEGER NOT NULL , "
-               " 'built' BOOL NOT NULL  DEFAULT 'false', "
-               " 'description' TEXT, "
-               " 'deleted' DEFAULT 'FALSE');");
+    query.exec("CREATE TABLE computer_types "
+               "(id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE,"
+               " name TEXT NOT NULL, "
+               " description TEXT, "
+               " deleted DEFAULT 'FALSE'");
+    query.exec("CREATE TABLE computers "
+               "(id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE,"
+               " name TEXT NOT NULL , "
+               " year INTEGER, "
+               " type INTEGER NOT NULL , "
+               " built BOOL NOT NULL  DEFAULT 'false', "
+               " description TEXT, "
+               " deleted DEFAULT 'FALSE');");
     query.exec("CREATE TABLE 'scientists' "
-               "('id' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE,"
-               " 'name' TEXT NOT NULL , "
-               " 'gender' INTEGER NOT NULL  DEFAULT 2, "
-               " 'yob' INTEGER NOT NULL , "
-               " 'yod' INTEGER, "
-               " 'description' TEXT, "
-               " 'link' TEXT, "
-               " 'deleted' DEFAULT FALSE);");
-    query.exec("CREATE TABLE 'scientists_and_computers' "
-               "('id' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE, "
-               " 'scientist_id' INTEGER NOT NULL , "
-               " 'computer_id' INTEGER NOT NULL , "
-               " 'deleted' BOOLEAN DEFAULT FALSE, "
-               " FOREIGN KEY ('scientist_id') REFERENCES 'scientists'('id'), "
-               " FOREIGN KEY ('computer_id') REFERENCES 'computers'('id');");
+               "(id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE,"
+               " name TEXT NOT NULL , "
+               " gender INTEGER NOT NULL  DEFAULT 2, "
+               " yob INTEGER NOT NULL , "
+               " yod INTEGER, "
+               " description' TEXT, "
+               " link TEXT, "
+               " deleted DEFAULT FALSE);");
+    query.exec("CREATE TABLE scientists_and_computers "
+               "(id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE, "
+               " scientist_id INTEGER NOT NULL , "
+               " computer_id INTEGER NOT NULL , "
+               " deleted BOOLEAN DEFAULT FALSE, "
+               " FOREIGN KEY (scientist_id) REFERENCES scientists(id), "
+               " FOREIGN KEY (computer_id) REFERENCES computers(id);");
 }
 
 void workingclass::closeDatabase()
@@ -488,14 +488,3 @@ void workingclass::searchComputerByYear(int& yr, bool& isFound)
     computerVector.clear();
     computerVector = returnVector;
 }
-
-
-//void workingclass::pushToVector(const scientist& s)
-//{
-//    scientistVector.push_back(s);
-//}
-
-//void workingclass::setVector(vector<scientist>& v)
-//{
-//    scientistVector = v;
-//}
