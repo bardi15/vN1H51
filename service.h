@@ -104,10 +104,14 @@ public:
     //  Calls the deleteComputer function in workingclass.
     void servDeleteScientist(int sciID);
     //  Calls the deleteScientist function in workingclass.
+    void servDeleteComputerType(int computertypeID);
+    //  Calls the deleteComputerType function in workingclass.
     void servUpdateSqlComputer(computer& c);
     //  Calls the updateScientist function in workingclass.
     void servUpdateSqlScientist(scientist& s);
     //  Calls the updateComputer function in workingclass.
+    void servUpdateSqlComputerType(computertype& ct);
+    //  Calls the updateComputerType function in workingclass.
     void henda();
     workingclass workingObject;
     // A object of the data layer class.  To be used in good computing :)

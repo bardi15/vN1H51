@@ -259,6 +259,10 @@ void service::servDeleteComputer(int compID)
 {
     workingObject.deleteComputer(compID);
 }
+void service::servDeleteComputerType(int computertypeID)
+{
+    workingObject.deleteComputerType(computertypeID);
+}
 
 void service::servUpdateSqlScientist(scientist& s)
 {
@@ -269,6 +273,11 @@ void service::servUpdateSqlComputer(computer& c)
 {
     workingObject.updateSqlComputer(c);
 }
+void service::servUpdateSqlComputerType(computertype& ct)
+{
+    workingObject.updateSqlComputerType(ct);
+}
+
 vector<scientist> service::servGetScientistsLinkedToComputer(int compID)
 {
     return workingObject.getScientistsLinkedToComputer(compID);

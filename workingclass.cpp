@@ -112,6 +112,23 @@ void workingclass::updateSqlScientist(scientist& s)
 //    cout << str << endl;
 //    sleep(3);
 }
+void workingclass::updateSqlComputerType(computertype& ct)
+{
+    QSqlQuery query;
+
+    query.prepare("UPDATE computer types "
+                  "SET name = :name, "
+                  "description = :desc"
+                  "WHERE id = :id");
+    query.bindValue(":id", ct.getid());
+    query.bindValue(":name", QString::fromStdString(ct.getName()));
+    query.bindValue(":desc", QString::fromStdString(ct.getDesc()));
+    query.exec();
+//    string qstr;
+//    qstr = query.lastQuery().toStdString();
+//    cout << qstr << endl;
+//    sleep(3);
+}
 
 vector<computer> workingclass::getComputersLinkedToScientists(int sciID)
 {
@@ -274,7 +291,16 @@ void workingclass::deleteComputer(int compID)
     query.bindValue(":id", compID);
     query.exec();
 }
+void workingclass::deleteComputerType(int computertypeID)
+{
+    QSqlQuery query;
 
+    query.prepare("UPDATE computer type "
+                  "SET deleted = 'TRUE'"
+                  "WHERE id = :id");
+    query.bindValue(":id", computertypeID);
+    query.exec();
+}
 
 
 void workingclass::pushToVector(const scientist& s)
