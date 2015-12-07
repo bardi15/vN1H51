@@ -83,7 +83,6 @@ void service::servSortComputers(int choice)
                 workingObject.readSqlComputers("type, name;");
                 break;
             default:
-                //  Þarf að detta til baka í mainmenu.
                 break;
       }
 }
@@ -129,10 +128,10 @@ void service::servSearchScientistByYear(int& yr, char bORd, bool& isFound)
     yr = yearCorrection(yr,isFound);
     workingObject.searchScientistByYear(yr, bORd, isFound);
 }
-void service::servPushToVector(const scientist& s)
-{
-    workingObject.pushToVector(s);
-}
+//void service::servPushToVector(const scientist& s)
+//{
+//    workingObject.pushToVector(s);
+//}
 int service::yearCorrection(int year, bool &errorInYear)
 {
 
@@ -312,10 +311,10 @@ void service::servCreateEmptyDatabase()
 {
     workingObject.createEmptyDatabase();
 }
-bool service::servCreateRelationSciComp(int sciID, int compID)
-{
-    return workingObject.createRelationSciComp(sciID, compID);
-}
+//bool service::servCreateRelationSciComp(int sciID, int compID)
+//{
+//    return workingObject.createRelationSciComp(sciID, compID);
+//}
 
 void service::henda()
 {

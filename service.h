@@ -18,14 +18,11 @@ public:
     //  Precondition:   A need for a selection is present.
     //  Postcondition:  Returns a integer corresponding to the selection made.
     void servAddscientist(scientist& s) ;
-
+    //  Calls the addscientist function in workingclass.
     void servAddcomputer(computer& c) ;
-
+    //  Calls the addcomputer function in workingclass.
     void servAddcomputerType(computertype& ct) ;
-
-    void editScientistService(int i); //(int selection, int scientist);
-    //  Precondition:   A scientist is about to be edited.
-    //  Postcondition:  The scientist has been edited and file updated.
+    //  Calls the addcomputerType function in workingclass.
     int yearCorrection(int year, bool &errorInYear);
     //  Precondition: Takes in an integer for the year correction process.
     //  Postcondition: Returns a corrected year.
@@ -36,10 +33,6 @@ public:
     int genderCorrection(string gender);
     //  Precondition: Takes in a string for the gender correction process.
     //  Postcondition: Returns 0 if female, 1 if male, 2 otherwise.
-    int yearCorrection(int year);
-    //  Precondition:   Takes in the year as integer, in two or four digit format.
-    //  Postcondition:  Returns the corrected year as integer.
-
     void servEraseScientistVector();
     //  Calls the eraseScientistVector function in workingclass.
     void servEraseComputerVector();
@@ -64,22 +57,6 @@ public:
     void servSortComputers(int choice);
     //  Precondition: Takes in an interger to select sorting.
     //  Postcondition: Reads computers from database if selection is legal, returns to main menu otherwise.
-    void servSortAlph(vector<scientist>& v);
-    //  Calls the sortAlph function in workingclass.
-    void servSortRevAlph(vector<scientist>& v);
-    //  Calls the sortRevAlph function in workingclass.
-    void servSortYOB(vector<scientist>& v);
-    //  Calls the sortYOB function in workingclass.
-    void servSortYOD(vector<scientist>& v);
-    //  Calls the sortYOD function in workingclass.
-    void servAddScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender);
-    //  Calls the addScientistChange function in workingclass.
-    bool servAddScientistCheck(string name, int gender, int yob, int yod, string desc, string link);
-    //  Calls the addScientistCheck function in workingclass.
-    bool servCreateRelationSciComp(int sciID, int compID);
-    //  Calls the createRelationSciComp function in workingclass.
-    void servVectorToFile(vector<scientist>& v, char AppOver) const;
-    //  Calls the VectorToFile function in workingclass.
     void servSearchScientistByName(string subName, bool& isFound);
     //  Calls the searchByName function in workingclass.
     void servSearchScientistByGender(int sex, bool& isFound);
@@ -92,12 +69,6 @@ public:
     //  Calls the searchComputerByName function in workingclass.
     void servSearchComputerByYear(int& yr, bool& isFound);
     //  Calls the searchComputerByYear function in workingclass.
-    void servPushToVector(const scientist& s);
-    //  Calls the pushToVector function in workingclass.
-    void servRemoveScientist(scientist& s);
-    //  Calls the removeScientist function in workingclass.
-    void servAddLineToFile(scientist& s, char AppOver) const;
-    //  Calls the addLineToFile function in workingclass.
     void servStartDatabase();
     //  Calls the startDatabase function in workingclass.
     bool servCheckDatabaseExists();

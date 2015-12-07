@@ -17,10 +17,6 @@
 using namespace std;
 
 const string DBASE = "../vN1H51/Group51_verklegt_1.sqlite";
-const string SCIENTISTTABLE = "scientists";
-const string COMPUTERSTTABLE = "computers";
-const string COMPTYPESTABLE = "computer_types";
-const string LINKTABLE = "scientists_and_computers";
 const int MAXFIELDS = 6;
 const int MAXNAMELENGTH = 44;
 const int CURRENTYEAR = 2015;
@@ -39,12 +35,6 @@ public:
     //  Postcondition:  Returns the private vector.
     vector<computertype> getCompTypeVector();
     //  Postcondition:  Returns the private vector.
-    void setVector(vector<scientist>& v);
-    //  Precondition:   The vecor v has been filled with scientist.
-    //  Postcondition:  The private vector has been set with the new scientist.
-    void selectAction(int sel);
-    //  Precondition:
-    //  Postcondition:
     bool addscientist(scientist& s);
     //  Precondition:   The parameter s is a new scientist.
     //  Postcondition:  The scientist s is now added to the database and
@@ -90,51 +80,9 @@ public:
     vector<scientist> getScientistsLinkedToComputer(int compID);
     //  Precondition:   A scientist is selected and its ID sent in as sciID.
     //  Postcondition:  Returns a vector of computers related to the scientist.
-    void addToFile();
-    //  Precondition:
-    //  Postcondition:
-    void readLinesFromFile(ifstream& fileWithLines);
-    //  Precondition:   The file with the scientist has been opened.
-    //  Postcondition:  All lines with scientist have been read and scientists created.
-    void addLineToFile(scientist& s, char AppOver) const;
-    //  Precondition:   The scientist s is legally initialized. If he should be added
-    //      to the file, AppOver should be 'A' or 'O' if the file is to overwritten.
-    //  Postcondition:  The scientist has been written to file accordingly.
-    void VectorToFile(vector<scientist>& v, char AppOver) const;
-    //  Precondition:   The vector v is filled with scientist about to be written to
-    //      the text file holding the scientist. If they should be added to the file, AppOver should be 'A' or 'O' if the file is to overwritten.
-    //  Postcondition:  The vector has been written to file accordingly.
-    void pushToVector(const scientist& s);
-    //  Precondition:   A scientist is ready to be inserted into the privat vector.
-    //  Postcondition:  The scientist has been inserted into the vector.
-    void fillScientist(const string& text, scientist& s, const int& field);
-    //  Precondition:   The scientist s is about to be created.  Parameters include the
-    //      text to inserted into a variable in the scientist, the scientist to be created
-    //      and the field to be populated currently.
-    //  Postcondition:  The field to be populated has been correcly populated.
     bool createRelationSciComp(int sciID, int compID);
     //  Precondition:   Takes in id's of both an existing scientist and an existing computer.
     //  Postcondition:  Creates a link between the scientist and the computer in the database.  Returns true if the operations goes through, false otherwise.
-    void createScientist(string& line, int& oldfind);
-    //  Precondition:   A line from the text file has been read. The old location of
-    //      the line splitter ';' is available.
-    //  Postcondition:  The line has been splitted into fields and the created
-    //      scientist been inserted into the private vector.
-    //void sortAlph(vector<scientist>& v);
-    //  Precondition:   The vector v that is to be sorted is populated.
-    //  Postcondition:  The vector is sorted in alphabetical order.
-    //void sortRevAlph(vector<scientist>& v);
-    //  Precondition:   The vector v that is to be sorted is populated.
-    //  Postcondition:  The vector is sorted in reversed alphabetical order.
-    //void sortYOB(vector<scientist>& v);
-    //  Precondition:   The vector v that is to be sorted is populated.
-    //  Postcondition:  The vector is sorted in chronological order by year of birth.
-    //void sortYOD(vector<scientist>& v);
-    //  Precondition:   The vector v that is to be sorted is populated.
-    //  Postcondition:  The vector is sorted in chronological order by year of birth.
-    void removeScientist(scientist& s);
-    //  Precondition:   A scientist to be removed has been selected.
-    //  Postcondition:  The scientist has been removed from the text file.
     void eraseScientistVector();
     //  Precondition:   A new or changed vector is about to be created.
     //  Postcondition:  The privat vector is clear of all scientists.
