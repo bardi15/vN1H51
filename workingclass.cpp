@@ -96,10 +96,9 @@ bool workingclass::createRelationSciComp(int sciID, int compID)
 
 void workingclass::readSqlScientists(string sorting)
 {
-    //QSqlDatabase db;
-    //db.open();
 
-    QSqlQuery query;//(db);
+
+    QSqlQuery query;
 
     query.prepare("SELECT * FROM scientists "
                   "WHERE deleted = 'FALSE' "
@@ -121,10 +120,8 @@ void workingclass::readSqlScientists(string sorting)
 
         scientist s(id,nam,gen,yob,yod,desc,url);
         scientistVector.push_back(s);
-//        cout << nam << " " << s.getName() << endl;
-//        usleep(50000);
     }
-    //return db;
+
 
 }
 void workingclass::updateSqlComputer(computer& c)
@@ -365,59 +362,6 @@ void workingclass::eraseCompTypeVector()
     compTypeVector.clear();
 }
 
-void workingclass::createScientist(string& line, int& oldfind)
-{
-    string fieldtext;
-    int currFind = oldfind;
-    scientist s;
-    int fieldno = 1;
-
-    do
-    {
-        currFind = line.find(';',oldfind);
-        fieldtext = line.substr(oldfind, (currFind-oldfind));
-        fillScientist(fieldtext, s, fieldno);
-        fieldno++;
-        oldfind = currFind + 1;
-    }
-    while(fieldno <= 6);
-
-    if(fieldno == MAXFIELDS+1)
-    {
-        pushToVector(s);
-    }
-}
-
-
-void workingclass::fillScientist(const string& text, scientist& s, const int& field)
-{
-    switch (field)
-    {
-    case 1:
-        s.setName(text);
-        break;
-    case 2:
-        s.setGender(atoi(text.c_str()));
-        break;
-    case 3:
-        s.setYearOfBirth(atoi(text.c_str()));
-        break;
-    case 4:
-        s.setYearOfDeath(atoi(text.c_str()));
-        break;
-    case 5:
-        s.setDescription(text);
-        break;
-    case 6:
-        s.setLink(text);
-        break;
-    default:
-        cout << "error" << endl << endl;
-        break;
-    }
-}
-
-
 void workingclass::searchScientistByName(string subName, bool& isFound)
 {
     vector<scientist> returnVector;
@@ -434,8 +378,6 @@ void workingclass::searchScientistByName(string subName, bool& isFound)
         {
             subName[j] = tolower(subName[j]);
         }
-
-        //  Kemur einhver furðuleg villa þegar reynt er að breyta í lovercase :(
         if( searchstring.find( subName) < 30 )
        {
             s = scientistVector.at(i);
@@ -506,8 +448,6 @@ void workingclass::searchComputerByName(string subName, bool& isFound)
         {
             subName[j] = tolower(subName[j]);
         }
-
-        //  Kemur einhver furðuleg villa þegar reynt er að breyta í lovercase :(
         if( searchstring.find( subName) < 30 )
        {
             c = computerVector.at(i);
@@ -544,7 +484,6 @@ void workingclass::searchComputerByType(string& type, bool& isFound)
     }
     computerVector.clear();
     computerVector = returnVector;
-//    return returnVector;
 }
 void workingclass::searchComputerByYear(int& yr, bool& isFound)
 {
