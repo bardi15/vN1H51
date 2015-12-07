@@ -1320,13 +1320,9 @@ void infoDisplay::addScientist()
 bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &link)
 {
     addEmptyLines(5);
-<<<<<<< HEAD
+
     cout<<"\t1. Add year of Death, 2. Description, "<<endl<<"\t3. Website link; \n";
     cout << "\tany other digit continues: ";
-=======
-    cout<<"\t1. Add year of Death, 2. Description, "<<endl<<"\t3. Computer, 4. Website link; \n";
-    cout << "any other digit continues: ";
->>>>>>> 0d5e54dda6a918d395ad53bb910b18c41f0aaa13
 
     bool addAnother = true;
 

@@ -100,12 +100,7 @@ void workingclass::updateSqlScientist(scientist& s)
 
     query.prepare("UPDATE scientists "
                   "SET name = :name, gender = :gender, yob = :yob, yod = :yod,"
-                  "description = :desc, link = :link "
-<<<<<<< HEAD
-                  "WHERE id = :id");
-=======
-                  "WHERE id = :id; ");
->>>>>>> 0d5e54dda6a918d395ad53bb910b18c41f0aaa13
+                  "description = :desc, link = :link " "WHERE id = :id; ");
     query.bindValue(":id", s.getID());
     query.bindValue(":name", QString::fromStdString(s.getName()));
     query.bindValue(":gender", s.getGender());
@@ -114,14 +109,6 @@ void workingclass::updateSqlScientist(scientist& s)
     query.bindValue(":desc", QString::fromStdString(s.getDescription()));
     query.bindValue(":link", QString::fromStdString(s.getLink()));
     query.exec();
-
-<<<<<<< HEAD
-//    string str;
-//    str = query.lastQuery().toStdString();
-//    cout << str << endl;
-//    sleep(3);
-=======
->>>>>>> 0d5e54dda6a918d395ad53bb910b18c41f0aaa13
 }
 void workingclass::updateSqlComputerType(computertype& ct)
 {
