@@ -21,171 +21,55 @@ class infoDisplay
 {
 public:
     infoDisplay();
-    //  Default constructor for class.
+    //Default constructor for class.
+
+    /*
+    ##Main menu
+    ##----------------------------------------------------------------------------------------------------##
+    */
+
     void mainMenu();
     //  Precondition:   None.
     //  Postcondition:  Displays the main menu on screen.
-    void menuForScientists();
-    //  Precondition:   On main menu working on scientist was selected.
-    //  Postcondition:  Displays the menu to work on scientists on screen.
-    void menuForScientistsDisplay();
-    void menuForScientistsSwitch();
-    void menuForComputers();
-    //  Precondition:   On main menu working on computers was selected.
-    //  Postcondition:  Displays the menu to work on computers on screen.
-    void menuForComputersDisplay();
-    void menuForComputersSwitch();
-    void displayComputerService();
-
-    void menuForComputerTypes();
-    //  Precondition:   On main menu working on computers was selected.
-    //  Postcondition:  Displays the menu to work on computers on screen.
-    void menuForComputersTypesDisplay();
-    void menuForComputersTypesSwitch();
-    void addNewComputerType();
-    void dispSelectNewComputerTypeToDelete();
-    void displayChangeNewComputerType();
-    string addComputerTypeName();
-    string addComputerTypeDescription();
-    bool addComputerTypeCheck(string ctName, string ctDescr);
-    void addComputerTypeChange(string &ctName, string &ctDescr);
-    void editComputerTypeDisplayService();
-    void editComputerTypeService(unsigned int i);
-    void listheaderComType();
-    void displayComTypeList();
-    void displayOneComputerType(computertype& ct);
-    int moreInfoOnComputerTypes();
-    void displayComputerTypeService();
-
     void clearScreen();
     //  Precondition:   None.
     //  Postcondition:  Screen is blank.
     void splashScreen();
     //  Precondition:   None.
     //  Postcondition:  Displays the startup greeting when program is started.
-    void listheaderSci();
-    //  Precondition:   None.
-    //  Postcondition:  Prints a header on the list of scientist.
-    void listheaderCom();
-
-    void displayOneScientist(scientist& s);
-    //  Precondition:   Takes in one scientist to display as a parameter.
-    //  Postcondition:  Displays all information about the scientist on screen
-    void displayOneComputer(computer& c);
-    //  Precondition:   Takes in one computer to display as a parameter.
-    //  Postcondition:  Displays all information about the computer on screen
-    void displaySciList(vector<scientist>& v);
-    //  Precondition:   The vector v has been populated with scientist.
-    //  Postcondition:  Displays all scientist according to condition on screen.
-    void displaySciList();
-    //  Precondition:   The scientist have been read from the database.
-    //  Postcondition:  Displays all scientist according to condition on screen.
-    void displayComList();
-    //  Precondition:   The computers have been read from the database.
-    //  Postcondition:  Displays all computers according to condition on screen.
-    bool scrollNeeded(string comOrSci);
-    bool scrollFunction(unsigned int vSize, unsigned int &scrollBase, unsigned int &scrollFactor);
-    int moreInfoOnScientist();
-    //  Precondition:   A list of scientist has been displayed.
-    //  Postcondition:  Ask for which if any scientist to display fuller information on.
-    //      Returns the selection.
-    int moreInfoOnComputer();
-    //  Precondition:   A list of computers has been displayed.
-    //  Postcondition:  Ask for which if any computer to display fuller information on.
-    //      Returns the selection.
-    void dispScientistToEdit(vector<scientist>& v);
-    //  Precondition:   The vector v has been populated with scientist.
-    //  Postcondition:  Selected scientist has is displayed on screen.
-    void dispSelectScientistToDelete();
-    //  Precondition:   The vector v has been populated with scientist.
-    //  Postcondition:  Selected scientist has been removed from the file.
-    bool dispSureToRemove(int gender);
-    //  Precondition:   A scientist has been selected for deletion.  Takes the
-    //      gender as a parameter to select text to print.
-    //  Postcondition:  If answered yes, the scientist is deleted. Else the action
-    //      is cancelled.
-    void dispSelectComputerToDelete();
-    bool dispSureToRemoveComp();
-
-
-
-
-    void displayChangeScientist();
-    //  Precondition:   A list of scientist has been displayed. Asks which scientist
-    //      to be edited.
-    //  Postcondition:  The scientists to be changed have been edited.
-    void displaySearchScientist();
-    //  Precondition:   The vector of scientist is populated and ready to be
-    //      searched in.
-    //  Postcondition:  Selected search option is carried out.
-    void displaySearchComputer();
-    //  Precondition:   The vector of computers is populated and ready to be
-    //      searched in.
-    //  Postcondition:  Selected search option is carried out.
-    void displaySearchScientistMenu();
-
-    void displaySearchComputersMenu();
-
-    void displaySortScientistOptions();
-    //  Precondition:   A list of scientist is to be displayed.
-    //  Postcondition:  Displays the sorting options available and returns the selection.
-    void displaySortComputersOptions();
-    //  Precondition:   A list of computers is to be displayed.
-    //  Postcondition:  Displays the sorting options available and returns the selection.
-    void quitProgram();
-    //  Precondition:   The program is about to be terminated.  User is asked if
-    //      he/she/it is sure.
-    //  Postcondition:  The program has stopped running.
-//    bool loopFunction();
-    //  Precondition:   A need for Y/N answer is present.
-    //  Postcondition:  Returns true if input is 'Y', false otherwise.
-    void addEmptyLines(int numLines);
-    //  Precondition:   None.
-    //  Postcondition:  Adds empty lines to the screen output according to
-    //      the numLines parameter.
-    int getCurrentDate (string date);
-    //  Precondition:   A string with a date is sent as a parameter.
-    //  Postcondition:  Returns the integer for the date sent in.
     void selectAction();
     //  Precondition:   The program is running.
     //  Postcondition:  Displays the main menu and takes in the selection from made.
-<<<<<<< HEAD
-//    void SelectScientistAction();
-    //  Precondition:   A selection is made from the scientist menu.
-    //  Postcondition:  Selects which action to take based on input.
-//    void SelectComputerAction();
-    //  Precondition:   A selection is made from the computer menu.
-    //  Postcondition:  Selects which action to take based on input.
-=======
->>>>>>> 1fd311b2d2bfe829151259c10c5bf0cf0450bca5
-    void editScientistDisplayService();
-    void displayScientistService();
-    //  Precondition:
-    //  Postcondition:
-    void editScientistService(unsigned int i);
-    //  Precondition:   A scientist is about to be edited.
-    //  Postcondition:  The scientist has been edited and file updated.
 
-    void editComputerDisplayService();
-    void editComputerService(unsigned int i);
+    /*
+    ##Scientist Information
+    ##----------------------------------------------------------------------------------------------------##
+    */
+
+    void menuForScientists();
+    //  Precondition:   On main menu working on scientist was selected.
+    //  Postcondition:  Displays the menu to work on scientists on screen.
+    void menuForScientistsDisplay();
+    //  Postcondition:  Displays the menu text for scientist menu.
+    void menuForScientistsSwitch();
+    //  Postcondition:  Switches user between predermined selections for scientist menu.
+    void listheaderSci();
+    //  Precondition:   None.
+    //  Postcondition:  Prints a header on the list of scientist.
 
 
+    /*
+    ##Scientist Information##INPUT
+    ##----------------------------------------------------------------------------------------------------##
+    */
 
-    void searchScientistSelection(int select);
-    //  Precondition:   A specific search option has been selected. Takes in the
-    //      selection as an integer.
-    //  Postcondition:  A vector of the correct scientist/s is displayed.
-    void searchComputerSelection(int select);
-    //  Precondition:   A specific search option has been selected. Takes in the
-    //      selection as an integer.
-    //  Postcondition:  A vector of the correct computer/s is displayed.
     bool addScientistContinue();
     //  Precondition:   A new scientist has been entered into the vector and the user is
     //      asked if he wants to add more scientest.
     //  Postcondition:  Returns true if answered 'Y', false otherwise.
     void addScientist();
     //  Precondition:   The option to add scientist has been selected on the main mainu.
-    //  Postcondition:  One or more scientists have been added to the privat vector.
+    //  Postcondition:  One or more scientists have been added to the sql database.
     string addScientistName();
     //  Precondition:   A name for a scientist is to be entered.
     //  Postcondition:  The name entered has been corrected or an error message has been
@@ -220,16 +104,304 @@ public:
     //      inserted data is to be changed.
     //  Postcondition:  Entered data for a new scientist has been corrected.
     void commonPhrases(string phrase);
-    void addComputer();
-    void displayChangeComputer();
-    string addComputerName();
-    int addComputerYear();
-    int addComputerType();
-    bool addComputerBuilt();
-    string addComputerDescr();
-    bool addComputerCheck(string cName, int cYear, int cType, bool cBuilt, string cDescr);
-    void addComputerChange(string &cName, int &cYear, int &cType, bool &cBuilt, string &cDescr);
+    //  Precondition:   a string term is sent to function.
+    //  Postcondition:  prints out common phrase, for easier scaling.
 
+
+    /*
+    ##Scientist Information##EDIT
+    ##----------------------------------------------------------------------------------------------------##
+    */
+
+    void dispScientistToEdit(vector<scientist>& v);
+    //  Precondition:   The vector v has been populated with scientist.
+    //  Postcondition:  Selected scientist has is displayed on screen.
+    void displayChangeScientist();
+    //  Precondition:   A list of scientist has been displayed. Asks which scientist
+    //      to be edited.
+    //  Postcondition:  The scientists to be changed have been edited.
+    void editScientistDisplayService();
+    //  Postcondition:  Intermediary between editing scientist.
+    void displayScientistService();
+    //  Postcondition:  Intermediary between editing computers.
+    void editScientistService(unsigned int i);
+    //  Precondition:   A scientist is about to be edited.
+    //  Postcondition:  The scientist has been edited and sql database updated.
+
+
+    /*
+    ##Scientist Information##REMOVE
+    ##----------------------------------------------------------------------------------------------------##
+    */
+
+    void dispSelectScientistToDelete();
+    //  Precondition:   The vector v has been populated with scientist.
+    //  Postcondition:  Selected scientist has been removed from the sql database.
+    bool dispSureToRemove(int gender);
+    //  Precondition:   A scientist has been selected for deletion.  Takes the
+    //      gender as a parameter to select text to print.
+    //  Postcondition:  If answered yes, the scientist is deleted. Else the action
+    //      is cancelled.
+
+
+    /*
+    ##Computers Information
+    ##----------------------------------------------------------------------------------------------------##
+    */
+
+    void menuForComputers();
+    //  Precondition:   On main menu working on computers was selected.
+    //  Postcondition:  Displays the menu to work on computers on screen.
+    void menuForComputersDisplay();
+    //  Postcondition:  Displays the menu text for computers menu.
+    void menuForComputersSwitch();
+    //  Postcondition:  Switches user between predermined selections for computers menu.
+    void displayComputerService();
+    //  Precondition:   List of computers is needed
+    //  Postcondition:  Displays the list of computers.
+    void listheaderCom();
+    //  Precondition:   None.
+    //  Postcondition:  Prints a header on the list of computers.
+
+
+    /*
+    ##Computers Information##INPUT
+    ##----------------------------------------------------------------------------------------------------##
+    */
+
+    void addComputer();
+    //  Precondition:   The option to add a computer has been selected on the main menu.
+    //  Postcondition:  One or more computers have been added to the sql database.
+    string addComputerName();
+    //  Precondition:   The computer name is to be selected.
+    //  Postcondition:  a computer name has been selected.
+    int addComputerYear();
+    //  Precondition:   The computer year of creation is to be selected.
+    //  Postcondition:  a computer year of creation has been selected.
+    int addComputerType();
+    //  Precondition:   The computer type is to be selected.
+    //  Postcondition:  a computer type has been selected.
+    bool addComputerBuilt();
+    //  Precondition:   The computer built status is to be selected.
+    //  Postcondition:  a build status has been selected.
+    string addComputerDescr();
+    //  Precondition:   The computer description is to be selected.
+    //  Postcondition:  a description has been selected.
+    bool addComputerCheck(string cName, int cYear, int cType, bool cBuilt, string cDescr);
+    //  Precondition:   All data for a new computer has been entered.
+    //  Postcondition:  User has been promted for change of input data.
+    void addComputerChange(string &cName, int &cYear, int &cType, bool &cBuilt, string &cDescr);
+    //  Precondition:   The option to change a computer has been selected on the main menu.
+    //  Postcondition:  Intermediates to that goal.
+
+    /*
+    ##Computers Information##EDIT
+    ##----------------------------------------------------------------------------------------------------##
+    */
+
+    void displayChangeComputer();
+    //  Precondition:   The computer to be changed is to be selected.
+    //  Postcondition:  a computer has been selected.
+
+
+    /*
+    ##Computers Information##REMOVE
+    ##----------------------------------------------------------------------------------------------------##
+    */
+
+    void dispSelectComputerToDelete();
+    //  Precondition:   The vector c has been populated with computers.
+    //  Postcondition:  Selected computers has been removed from the sql database.
+    bool dispSureToRemoveComp();
+    //  Precondition:   A computer has been selected for deletion.
+    //  Postcondition:  If answered yes, the computer is deleted. Else the action
+    //      is cancelled.
+
+
+    /*
+    ##Computer Types
+    ##----------------------------------------------------------------------------------------------------##
+    */
+
+    void menuForComputerTypes();
+    //  Precondition:   On main menu working on computers was selected.
+    //  Postcondition:  Displays the menu to work on computers on screen.
+    void menuForComputersTypesDisplay();
+    //  Postcondition:  Displays the menu text for computer types menu.
+    void menuForComputersTypesSwitch();
+    //  Postcondition:  Switches user between predermined selections for computer types menu.
+    void listheaderComType();
+    //  Postcondition:  prints header for computer type lists.
+    void displayComTypeList();
+    //  Postcondition:  prints header for computer lists.
+    void displayComputerTypeService();
+    //  Postcondition:  Intermediary between displaying computer types.
+
+    /*
+    ##Computer Types##INPUT
+    ##----------------------------------------------------------------------------------------------------##
+    */
+
+    void addNewComputerType();
+    //  Precondition:   The option to add computer type has been selected on the main mainu.
+    //  Postcondition:  One or more computers has been added.
+    string addComputerTypeName();
+    //  Precondition:   A name for a computer type is to be entered.
+    //  Postcondition:  The name entered has been corrected and inserted to database.
+    string addComputerTypeDescription();
+    //  Precondition:   A description for a computer type is to be entered.
+    //  Postcondition:  The name entered has been corrected and inserted to database.
+    bool addComputerTypeCheck(string ctName, string ctDescr);
+    //  Precondition:   All data for a new computer type has been entered.
+    //  Postcondition:  User has been promted for change of input data.
+    void addComputerTypeChange(string &ctName, string &ctDescr);
+    //  Precondition:   All data for a new computer type has been entered.
+    //  Postcondition:  If approved computer is added to sql database.
+
+
+    /*
+    ##Computer Types##EDIT
+    ##----------------------------------------------------------------------------------------------------##
+    */
+
+    void displayChangeNewComputerType();
+    //  Precondition:   The option to change computer type has been selected on the main mainu.
+    //  Postcondition:  Intermediates to that goal.
+    void editComputerTypeDisplayService();
+    //  Postcondition:  Intermediary between editing computer types.
+    void editComputerTypeService(unsigned int i);
+    //  Precondition:   All data for a new computer type can be changed.
+    //  Postcondition:  User has been promted for change of input data.
+    void editComputerDisplayService();
+    //  Postcondition:  Intermediary between editing computer types.
+    void editComputerService(unsigned int i);
+    //  Precondition:   A computer is about to be edited.
+    //  Postcondition:  The scientist has been edited and sql database updated.
+
+
+    /*
+    ##Computer Types##REMOVE
+    ##----------------------------------------------------------------------------------------------------##
+    */
+
+    void dispSelectNewComputerTypeToDelete();
+    //  Precondition:   The option to remove computer type has been selected on the main mainu.
+    //  Postcondition:  One or more computer types have been deleted
+
+
+    /*
+    ##Search for Computer scientist
+    ##----------------------------------------------------------------------------------------------------##
+    */
+
+    void displaySearchScientist();
+    //  Precondition:   The vector of scientist is populated and ready to be
+    //      searched in.
+    //  Postcondition:  Selected search option is carried out.
+    void displaySearchScientistMenu();
+    //  Postcondition:  prints out selection for search.
+    void searchScientistSelection(int select);
+    //  Precondition:   A specific search option has been selected. Takes in the
+    //      selection as an integer.
+    //  Postcondition:  A vector of the correct scientist/s is displayed.
+
+
+    /*
+    ##Search for Computers
+    ##----------------------------------------------------------------------------------------------------##
+    */
+
+    void displaySearchComputer();
+    //  Precondition:   The vector of computers is populated and ready to be
+    //      searched in.
+    //  Postcondition:  Selected search option is carried out.
+    void displaySearchComputersMenu();
+    //  Postcondition:  prints out selection for search.
+    void searchComputerSelection(int select);
+    //  Precondition:   A specific search option has been selected. Takes in the
+    //      selection as an integer.
+    //  Postcondition:  A vector of the correct computer/s is displayed.
+
+
+    /*
+    ##List of computer scientists
+    ##----------------------------------------------------------------------------------------------------##
+    */
+
+    void displaySciList(vector<scientist>& v);
+    //  Precondition:   The vector v has been populated with scientist.
+    //  Postcondition:  Displays all scientist according to condition on screen.
+    void displaySciList();
+    //  Precondition:   The scientist have been read from the database.
+    //  Postcondition:  Displays all scientist according to condition on screen.
+    void displayOneScientist(scientist& s);
+    //  Precondition:   Takes in one scientist to display as a parameter.
+    //  Postcondition:  Displays all information about the scientist on screen
+    int moreInfoOnScientist();
+    //  Precondition:   A list of scientist has been displayed.
+    //  Postcondition:  Ask for which if any scientist to display fuller information on.
+    //      Returns the selection.
+    void displaySortScientistOptions();
+    //  Precondition:   A list of scientist is to be displayed.
+    //  Postcondition:  Displays the sorting options available and returns the selection.
+
+
+    /*
+    ##List of computers
+    ##----------------------------------------------------------------------------------------------------##
+    */
+
+    void displayOneComputer(computer& c);
+    //  Precondition:   Takes in one computer to display as a parameter.
+    //  Postcondition:  Displays all information about the computer on screen
+    void displayComList();
+    //  Precondition:   The computers have been read from the database.
+    //  Postcondition:  Displays all computers according to condition on screen.
+
+
+    /*
+    ##List of computer types
+    ##----------------------------------------------------------------------------------------------------##
+    */
+
+    void displayOneComputerType(computertype& ct);
+    //  Precondition:   Takes in one computer type to display as a parameter.
+    //  Postcondition:  Displays all information about the computer type on screen
+    int moreInfoOnComputerTypes();
+    //  Precondition:   A list of computer types has been displayed.
+    //  Postcondition:  Ask for which if any computer types to display further information on.
+    //      Returns the selection.
+    int moreInfoOnComputer();
+    //  Precondition:   A list of computers has been displayed.
+    //  Postcondition:  Ask for which if any computer to display fuller information on.
+    //      Returns the selection.
+    void displaySortComputersOptions();
+    //  Precondition:   A list of computers is to be displayed.
+    //  Postcondition:  Displays the sorting options available and returns the selection.
+
+
+    /*
+    ##Miscellaneous
+    ##----------------------------------------------------------------------------------------------------##
+    */
+
+    bool scrollNeeded(string comOrSci);
+    //  Precondition:   checks if printed list is longer than HOLYSCROLL
+    //  Postcondition:  returns true if scroll is nessacery.
+    bool scrollFunction(unsigned int vSize, unsigned int &scrollBase, unsigned int &scrollFactor);
+    //  Precondition:   list shows first HOLYSCROLL items.
+    //  Postcondition:  scrolls list for user.
+    void quitProgram();
+    //  Precondition:   The program is about to be terminated.  User is asked if
+    //      he/she/it is sure.
+    //  Postcondition:  The program has stopped running.
+    void addEmptyLines(int numLines);
+    //  Precondition:   None.
+    //  Postcondition:  Adds empty lines to the screen output according to
+    //      the numLines parameter.
+    int getCurrentDate (string date);
+    //  Precondition:   A string with a date is sent as a parameter.
+    //  Postcondition:  Returns the integer for the date sent in.
     int inputNumberToFunction();
     //  Precondition:   A number is about to be entered as an input
     //  Postcondition:  Returns a integer if correctly entered, or reiterate the input.
@@ -237,6 +409,8 @@ public:
     //  Precondition:   A character is about to be entered as an input
     //  Postcondition:  Returns a character if correctly entered, or reiterate the input.
     void inputCharOrNumToFunction (int &num, char &letter, bool &type);
+    //  Precondition:   A character or number is about to be entered as an input
+    //  Postcondition:  Returns a character or number by refrence if correctly entered, or reiterate the input.
     bool yesOrNo();
     //  Precondition:   A character is about to be entered to continue or quit.
     //  Postcondition:  Returns true if you should continue or false if not.

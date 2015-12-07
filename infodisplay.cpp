@@ -181,8 +181,6 @@ void infoDisplay::displayComList()
     //cout << "\t-----------------------------------------------------" << endl;
     printLines(1, "thin");
 }
-<<<<<<< HEAD
-=======
 
 void infoDisplay::displayComTypeList()
 {
@@ -236,7 +234,6 @@ void infoDisplay::displayComTypeList()
     printLines(1, "thin");
 }
 
->>>>>>> 1fd311b2d2bfe829151259c10c5bf0cf0450bca5
 bool infoDisplay::scrollFunction(unsigned int vSize, unsigned int &scrollBase, unsigned int &scrollFactor)
 {
 
@@ -649,10 +646,6 @@ void infoDisplay::menuForComputersSwitch()
 
 
 }
-<<<<<<< HEAD
-=======
-
-
 void infoDisplay::menuForComputerTypes()
 {
     serviceObject.servReadSqlCompTypes();
@@ -862,7 +855,6 @@ void infoDisplay::addComputerTypeChange(string &ctName, string &ctDescr)
 }
 
 
->>>>>>> 1fd311b2d2bfe829151259c10c5bf0cf0450bca5
 void infoDisplay::splashScreen()
 {
     opengreeting greet;
@@ -1137,9 +1129,6 @@ void infoDisplay::selectAction()
         while(true);
 
 }
-<<<<<<< HEAD
-=======
-
 void infoDisplay::displayComputerService()
 {
     displaySortComputersOptions();
@@ -1169,7 +1158,6 @@ void infoDisplay::displayComputerTypeService()
 
 }
 
->>>>>>> 1fd311b2d2bfe829151259c10c5bf0cf0450bca5
 void infoDisplay::displayScientistService()
 {
     //bool continueF = false;
@@ -1281,9 +1269,6 @@ void infoDisplay::editComputerService(unsigned int i)
         serviceObject.servUpdateSqlComputer(cO);
     }
 }
-<<<<<<< HEAD
-=======
-
 void infoDisplay::editComputerTypeDisplayService()
 {
     serviceObject.servReadSqlComputers();
@@ -1322,7 +1307,6 @@ void infoDisplay::editComputerTypeService(unsigned int i)
 
 
 
->>>>>>> 1fd311b2d2bfe829151259c10c5bf0cf0450bca5
 void infoDisplay::searchScientistSelection(int select)
 {
     serviceObject.servReadSqlScientists();
@@ -2011,22 +1995,11 @@ int infoDisplay::addComputerType()
 
     computertype ct;
 
-    //vectorsize = serviceObject.servGetComTypeVector().size();
-
     unsigned int selection = 0;
     bool continueF = false;
     serviceObject.servReadSqlCompTypes();
     cout<<"\tSelect computer type: "<<endl;
-<<<<<<< HEAD
-    for(unsigned int i = 0; i < serviceObject.servGetComTypeVector().size(); i++ )
-    {
-        cout << "\t" << i+1 << "\t"
-             << serviceObject.servGetComTypeVector().at(i).getName()
-             << endl;
-    }
-=======
-//    cout<<"\t1) Electronic\n\t2) Mechanical\n\t3) Ternary\n\t";
-    cout<<"\t";
+    //cout<<"\t";
     for (unsigned int i = 0; i < serviceObject.servGetComTypeVector().size(); i++)
     {
         cout<<i+1<<") ";
@@ -2034,7 +2007,6 @@ int infoDisplay::addComputerType()
     }
     cout<<": ";
 
->>>>>>> 1fd311b2d2bfe829151259c10c5bf0cf0450bca5
     do
     {
         continueF = false;
