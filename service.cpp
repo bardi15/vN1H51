@@ -31,10 +31,6 @@ void service::servEraseCompTypeVector()
 {
     workingObject.eraseCompTypeVector();
 }
-
-
-
-
 void service::servReadSqlScientists(string sorting)
 {
     workingObject.readSqlScientists();
