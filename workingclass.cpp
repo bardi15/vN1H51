@@ -27,11 +27,17 @@ QSqlDatabase workingclass::startDatabase()
 {
     QSqlDatabase db;
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbName = "Group51_verklegt_1.sqlite";
+    QString dbName = QString::fromStdString(DBASE);
     db.setDatabaseName(dbName);
     db.open();
     return db;
 }
+bool workingclass::checkDatabaseExists()
+{
+    QFile db;
+    return db.exists(QString::fromStdString(DBASE)) ;
+}
+
 void workingclass::closeDatabase()
 {
     QSqlDatabase db;
@@ -46,7 +52,7 @@ void workingclass::readSqlScientists(string sorting)
     QSqlQuery query;//(db);
 
     query.prepare("SELECT * FROM scientists "
-                  "WHERE deleted = 'FALSE'"
+                  "WHERE deleted = 'FALSE' "
                   "ORDER BY " + QString::fromStdString(sorting));
     query.exec();
 
@@ -77,8 +83,8 @@ void workingclass::updateSqlComputer(computer& c)
 
     query.prepare("UPDATE computers "
                   "SET name = :name, year = :year, type = :type, built = :built, "
-                  "description = :desc"
-                  "WHERE id = :id");
+                  "description = :desc "
+                  "WHERE id = :id; ");
     query.bindValue(":id", c.getId());
     query.bindValue(":name", QString::fromStdString(c.getComName()));
     query.bindValue(":year", c.getComYear());
@@ -86,10 +92,7 @@ void workingclass::updateSqlComputer(computer& c)
     query.bindValue(":built", c.getComBuilt());
     query.bindValue(":desc", QString::fromStdString(c.getComDescription()));
     query.exec();
-//    string qstr;
-//    qstr = query.lastQuery().toStdString();
-//    cout << qstr << endl;
-//    sleep(3);
+
 }
 void workingclass::updateSqlScientist(scientist& s)
 {
@@ -98,7 +101,11 @@ void workingclass::updateSqlScientist(scientist& s)
     query.prepare("UPDATE scientists "
                   "SET name = :name, gender = :gender, yob = :yob, yod = :yod,"
                   "description = :desc, link = :link "
+<<<<<<< HEAD
                   "WHERE id = :id");
+=======
+                  "WHERE id = :id; ");
+>>>>>>> 0d5e54dda6a918d395ad53bb910b18c41f0aaa13
     query.bindValue(":id", s.getID());
     query.bindValue(":name", QString::fromStdString(s.getName()));
     query.bindValue(":gender", s.getGender());
@@ -108,27 +115,27 @@ void workingclass::updateSqlScientist(scientist& s)
     query.bindValue(":link", QString::fromStdString(s.getLink()));
     query.exec();
 
+<<<<<<< HEAD
 //    string str;
 //    str = query.lastQuery().toStdString();
 //    cout << str << endl;
 //    sleep(3);
+=======
+>>>>>>> 0d5e54dda6a918d395ad53bb910b18c41f0aaa13
 }
 void workingclass::updateSqlComputerType(computertype& ct)
 {
     QSqlQuery query;
 
-    query.prepare("UPDATE computer types "
+    query.prepare("UPDATE computer_types "
                   "SET name = :name, "
-                  "description = :desc"
-                  "WHERE id = :id");
+                  "description = :desc "
+                  "WHERE id = :id; ");
     query.bindValue(":id", ct.getid());
     query.bindValue(":name", QString::fromStdString(ct.getName()));
     query.bindValue(":desc", QString::fromStdString(ct.getDesc()));
     query.exec();
-//    string qstr;
-//    qstr = query.lastQuery().toStdString();
-//    cout << qstr << endl;
-//    sleep(3);
+
 }
 
 vector<computer> workingclass::getComputersLinkedToScientists(int sciID)
@@ -192,7 +199,7 @@ void workingclass::readSqlComputers(string sorting)
     QSqlQuery query;
 
     query.prepare("SELECT * FROM computers "
-                  "WHERE deleted = 'FALSE'"
+                  "WHERE deleted = 'FALSE' "
                   "ORDER BY " + QString::fromStdString(sorting));
     query.exec();
     computerVector.clear();
@@ -213,7 +220,7 @@ void workingclass::readSqlCompTypes()
     QSqlQuery query;
 
     query.prepare("SELECT * FROM computer_types "
-                  "WHERE deleted = 'FALSE'"
+                  "WHERE deleted = 'FALSE' "
                   "ORDER BY name ASC");
     query.exec();
     compTypeVector.clear();
@@ -233,7 +240,7 @@ bool workingclass::addscientist(scientist& s)
     QSqlQuery query;
 
     query.prepare("INSERT INTO scientists (name, gender, yob, yod, description, link) "
-                  "VALUES (:name, :sex, :yob, :yod, :desc, :link);");
+                  "VALUES (:name, :sex, :yob, :yod, :desc, :link); ");
 
     query.bindValue(":name", QString::fromStdString(s.getName()));
     query.bindValue(":sex", s.getGender());
@@ -249,7 +256,7 @@ bool workingclass::addscientist(scientist& s)
 bool workingclass::addcomputer(computer& c)
 {
     QSqlQuery query;
-    query.prepare("INSERT INTO computers (name, year, type, built, description )"
+    query.prepare("INSERT INTO computers (name, year, type, built, description) "
                   "VALUES (:name, :year, :type, :built, :desc);");
     query.bindValue(":name", QString::fromStdString(c.getComName()));
     query.bindValue(":year", c.getComYear());
@@ -277,8 +284,8 @@ void workingclass::deleteScientist(int sciID)
     QSqlQuery query;
 
     query.prepare("UPDATE scientists "
-                  "SET deleted = 'TRUE'"
-                  "WHERE id = :id");
+                  "SET deleted = 'TRUE' "
+                  "WHERE id = :id;");
     query.bindValue(":id", sciID);
     query.exec();
 }
@@ -287,8 +294,8 @@ void workingclass::deleteComputer(int compID)
     QSqlQuery query;
 
     query.prepare("UPDATE computers "
-                  "SET deleted = 'TRUE'"
-                  "WHERE id = :id");
+                  "SET deleted = 'TRUE' "
+                  "WHERE id = :id; ");
     query.bindValue(":id", compID);
     query.exec();
 }
@@ -296,9 +303,9 @@ void workingclass::deleteComputerType(int computertypeID)
 {
     QSqlQuery query;
 
-    query.prepare("UPDATE computer type "
-                  "SET deleted = 'TRUE'"
-                  "WHERE id = :id");
+    query.prepare("UPDATE computer_type "
+                  "SET deleted = 'TRUE' "
+                  "WHERE id = :id;");
     query.bindValue(":id", computertypeID);
     query.exec();
 }
@@ -518,144 +525,5 @@ void workingclass::searchComputerByYear(int& yr, bool& isFound)
     computerVector.clear();
     computerVector = returnVector;
 }
-//bool AlphComp(scientist a, scientist b)
-//{
-//    return a.getName() < b.getName();
-
-//}
-//bool RevAlphComp(scientist a, scientist b)
-//{
-//    return a.getName() > b.getName();
-
-//}
-//bool DB_Comp(scientist a, scientist b)
-//{
-//    return a.getYearOfBirth() > b.getYearOfBirth();
-//}
-//bool DD_Comp(scientist a, scientist b)
-//{
-//    return a.getYearOfDeath() > b.getYearOfDeath();
-//}
-//void workingclass::sortAlph(vector<scientist>& v)
-//{
-
-//    sort(v.begin(), v.end(), AlphComp);
-//}
-//void workingclass::sortRevAlph(vector<scientist>& v)
-//{
-//    sort(v.begin(), v.end(), RevAlphComp);
-//}
-//void workingclass::sortYOB(vector<scientist>& v)
-//{
-//   sort(v.begin(), v.end(), DB_Comp);
-//}
-//void workingclass::sortYOD(vector<scientist>& v)
-//{
-//    sort(v.begin(), v.end(), DD_Comp);
-//}
-//  VectorToFile er ekki notað í SQL verkefninu.
-//void workingclass::VectorToFile(vector<scientist>& v, char AppOver) const
-//{
-//    for(unsigned int i = 0; i < v.size(); i++)
-//    {
-//        if(toupper(AppOver) == 'A')
-//        {
-//            addLineToFile(v.at(i), 'A');
-//        }
-//        else
-//        {
-
-//            if(i == 0)
-//            {
-//                addLineToFile(v.at(i), 'O');
-//            }
-//            else
-//            {
-//                addLineToFile(v.at(i), 'A');
-//            }
-//        }
-//    }
-//}
-
-//void workingclass::addLineToFile(scientist& s, char AppOver) const
-//{
-
-
-//    string outstring;
-//    ofstream file_out;
-//    if (toupper(AppOver) == 'A')
-//    {
-//        file_out.open(WORKFILE.c_str(), ios::app);
-//    }
-//    else if (toupper(AppOver) == 'O')
-//    {
-//        file_out.open(WORKFILE.c_str());
-//    }
-//    if(file_out.fail())
-//    {
-//        cout << "error opening addToFile file";
-//        exit(1);
-//    }
-//    cout << outstring << endl;
-//    file_out  << endl << s.getName() << ";" <<
-//                s.getGender() << ";" << s.getYearOfBirth() << ";" <<
-//                s.getYearOfDeath() << ";" << s.getDescription() << ";" <<
-//                s.getLink();
-//    file_out.close();
-
-//}
-
-//void workingclass::readLinesFromFile(ifstream& fileWithLines)
-//{
-//    while(!fileWithLines.eof())
-//    {
-//        int loc = 0;
-//        string next= "";
-//        char nextchar;
-//        fileWithLines.get(nextchar);
-//        while(!fileWithLines.eof() && nextchar != '\n')
-//        {
-//            next += nextchar;
-//            fileWithLines.get(nextchar);
-//        }
-//        if( next.size() > 3)
-//        {
-//            createScientist(next, loc);
-//        }
-
-//    }
-//}
-//void workingclass::removeScientist(scientist& s)
-//{
-//    readSqlScientists();
-//    for(unsigned int j = 0; j < scientistVector.size(); j++)
-//    {
-//        if(scientistVector[j].getName() == s.getName())
-//        {
-//            scientistVector.erase(scientistVector.begin() + j);
-
-//              ofstream newFile(WORKFILE.c_str());
-//              if(newFile.is_open())
-//              {
-//                  for(unsigned int i = 0; i < scientistVector.size(); i++)
-//                  {
-//                      if(i == 0)
-//                      {
-//                        addLineToFile(scientistVector[i], 'O');
-//                      }
-//                      else
-//                      {
-//                          addLineToFile(scientistVector[i], 'A');
-//                      }
-//                  }
-//              }else {
-//                  cout << "can't open file";
-//              }
-//              break;
-//        }
-//   }
-
-//}
-
 
 

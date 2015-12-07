@@ -98,6 +98,8 @@ public:
     //  Calls the addLineToFile function in workingclass.
     void servStartDatabase();
     //  Calls the startDatabase function in workingclass.
+    bool servCheckDatabaseExists();
+    //  Calls the checkDatabaseExists function in workingclass.
     void servCloseDatabase();
     //  Calls the CloseDatabase function in workingclass.
     void servDeleteComputer(int compID);

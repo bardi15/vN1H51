@@ -5,6 +5,7 @@
 #include "computer.h"
 #include "computertype.h"
 #include <QtSql>
+#include<qfile.h>
 
 #include <cstring>
 #include <cstdlib>
@@ -14,9 +15,8 @@
 #include <algorithm>
 
 using namespace std;
-//../vN1H51/
-//const string WORKFILE = "Scientistinfo.txt";
-const string DBASE = "Group51_verklegt_1.sqlite";
+
+const string DBASE = "../vN1H51/Group51_verklegt_1.sqlite";
 const string SCIENTISTTABLE = "scientists";
 const string COMPUTERSTTABLE = "computers";
 const string COMPTYPESTABLE = "computer_types";
@@ -166,6 +166,9 @@ public:
     QSqlDatabase startDatabase();
     //  Precondition:   The database is present in the build directory of the program.
     //  Postconditinon: A link to the database has been established.
+    bool checkDatabaseExists();
+    //  Precondition:   A name for the database has been declered.
+    //  Postcondition:  Returns true if database exits, false otherwise.
     void closeDatabase();
     //  Precondition:   The database is open.
     //  Postconditinon: The database has been closed.
