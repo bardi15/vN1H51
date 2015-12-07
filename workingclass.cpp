@@ -97,7 +97,7 @@ void workingclass::updateSqlScientist(scientist& s)
 
     query.prepare("UPDATE scientists "
                   "SET name = :name, gender = :gender, yob = :yob, yod = :yod,"
-                  "description = :desc, link = :link"
+                  "description = :desc, link = :link "
                   "WHERE id = :id");
     query.bindValue(":id", s.getID());
     query.bindValue(":name", QString::fromStdString(s.getName()));
@@ -107,6 +107,7 @@ void workingclass::updateSqlScientist(scientist& s)
     query.bindValue(":desc", QString::fromStdString(s.getDescription()));
     query.bindValue(":link", QString::fromStdString(s.getLink()));
     query.exec();
+
 //    string str;
 //    str = query.lastQuery().toStdString();
 //    cout << str << endl;

@@ -22,7 +22,7 @@ const string COMPUTERSTTABLE = "computers";
 const string COMPTYPESTABLE = "computer_types";
 const string LINKTABLE = "scientists_and_computers";
 const int MAXFIELDS = 6;
-const int MAXNAMELENGTH = 30;
+const int MAXNAMELENGTH = 44;
 const int CURRENTYEAR = 2015;
 
 

@@ -205,6 +205,12 @@ string service::nameCorrection(string name, bool& badName)
         name[spacePos] = toupper(name[spacePos]);
     }
 
+    if (name.size() > MAXNAMELENGTH)
+    {
+        badName = true;
+        cout<<"\tName is too long! "<<endl;
+    }
+
     return name;
 }
 int service::genderCorrection(string gender)

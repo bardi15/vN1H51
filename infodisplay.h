@@ -61,6 +61,7 @@ public:
     void displayComList();
     //  Precondition:   The computers have been read from the database.
     //  Postcondition:  Displays all computers according to condition on screen.
+    bool scrollNeeded(string comOrSci);
     bool scrollFunction(unsigned int vSize, unsigned int &scrollBase, unsigned int &scrollFactor);
     int moreInfoOnScientist();
     //  Precondition:   A list of scientist has been displayed.
@@ -81,6 +82,12 @@ public:
     //      gender as a parameter to select text to print.
     //  Postcondition:  If answered yes, the scientist is deleted. Else the action
     //      is cancelled.
+    void dispSelectComputerToDelete();
+    bool dispSureToRemoveComp();
+
+
+
+
     void displayChangeScientist();
     //  Precondition:   A list of scientist has been displayed. Asks which scientist
     //      to be edited.
@@ -133,9 +140,15 @@ public:
     void editScientistDisplayService();
     //  Precondition:
     //  Postcondition:
-    void editScientistService(int i);
+    void editScientistService(unsigned int i);
     //  Precondition:   A scientist is about to be edited.
     //  Postcondition:  The scientist has been edited and file updated.
+
+    void editComputerDisplayService();
+    void editComputerService(unsigned int i);
+
+
+
     void searchScientistSelection(int select);
     //  Precondition:   A specific search option has been selected. Takes in the
     //      selection as an integer.
@@ -184,9 +197,9 @@ public:
     //  Precondition:   Data for a new scientist have been entered. Asks if any of the
     //      inserted data is to be changed.
     //  Postcondition:  Entered data for a new scientist has been corrected.
+    void commonPhrases(string phrase);
     void addComputer();
     void displayChangeComputer();
-    void displayRemoveComputer();
     string addComputerName();
     int addComputerYear();
     int addComputerType();
@@ -201,6 +214,7 @@ public:
     char inputCharacterToFunction();
     //  Precondition:   A character is about to be entered as an input
     //  Postcondition:  Returns a character if correctly entered, or reiterate the input.
+    void inputCharOrNumToFunction (int &num, char &letter, bool &type);
     bool yesOrNo();
     //  Precondition:   A character is about to be entered to continue or quit.
     //  Postcondition:  Returns true if you should continue or false if not.
