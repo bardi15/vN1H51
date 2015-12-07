@@ -1235,7 +1235,7 @@ void infoDisplay::addScientist()
 bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &link)
 {
     addEmptyLines(5);
-    cout<<"\t1. Add year of Death, 2. Description, "<<endl<<"\t3. Website link; \n";
+    cout<<"\t1. Add year of Death, 2. Description, "<<endl<<"\t3. Computer, 4. Website link; \n";
     cout << "any other digit continues: ";
 
     bool addAnother = true;
@@ -1256,6 +1256,10 @@ bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &lin
         break;
 
         case 3:
+        displayComList();
+        break;
+
+        case 4:
         link = addScientistLink(link);
         break;
 
@@ -1314,6 +1318,7 @@ string infoDisplay::addScientistLink(string &link)
     getline(cin, link);
     return link;
 }
+
 bool infoDisplay::addScientistCheck(string name, int gender, int yob, int yod, string desc, string link)
 {
     clearScreen();
@@ -1411,7 +1416,7 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
     clearScreen();
     addEmptyLines(5);
     cout<<"\tWhat would you like to change? Choose: "<<endl;
-    cout<<"\t1. Name, 2. Gender, 3. Year of Birth, "<<endl<<"\t4. Year of Death, 5. Description, 6. Link: ";
+    cout<<"\t1. Name, 2. Gender, 3. Year of Birth, "<<endl<<"\t4. Year of Death, 5. Description, 6. Computer, 7. Link: ";
     input = inputNumberToFunction();
     //cin.ignore();
 
@@ -1433,6 +1438,9 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
         desc = addScientistDescription(desc);
         break;
     case 6:
+        displayComList();
+        break;
+    case 7:
         link = addScientistLink(link);
         break;
 
