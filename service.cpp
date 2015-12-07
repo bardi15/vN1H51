@@ -313,7 +313,14 @@ void service::servSearchComputerByYear(int& yr, bool& isFound)
     yr = yearCorrection(yr,isFound);
     workingObject.searchComputerByYear(yr, isFound);
 }
-
+void service::servCreateEmptyDatabase()
+{
+    workingObject.createEmptyDatabase();
+}
+bool service::servCreateRelationSciComp(int sciID, int compID)
+{
+    return workingObject.createRelationSciComp(sciID, compID);
+}
 
 void service::henda()
 {
