@@ -15,9 +15,8 @@
 #include <algorithm>
 
 using namespace std;
-//../vN1H51/
-//const string WORKFILE = "Scientistinfo.txt";
-const string DBASE = "Group51_verklegt_1.sqlite";
+
+const string DBASE = "../vN1H51/Group51_verklegt_1.sqlite";
 const string SCIENTISTTABLE = "scientists";
 const string COMPUTERSTTABLE = "computers";
 const string COMPTYPESTABLE = "computer_types";
