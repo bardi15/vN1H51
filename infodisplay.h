@@ -35,6 +35,28 @@ public:
     //  Postcondition:  Displays the menu to work on computers on screen.
     void menuForComputersDisplay();
     void menuForComputersSwitch();
+    void displayComputerService();
+
+    void menuForComputerTypes();
+    //  Precondition:   On main menu working on computers was selected.
+    //  Postcondition:  Displays the menu to work on computers on screen.
+    void menuForComputersTypesDisplay();
+    void menuForComputersTypesSwitch();
+    void addNewComputerType();
+    void dispSelectNewComputerTypeToDelete();
+    void displayChangeNewComputerType();
+    string addComputerTypeName();
+    string addComputerTypeDescription();
+    bool addComputerTypeCheck(string ctName, string ctDescr);
+    void addComputerTypeChange(string &ctName, string &ctDescr);
+    void editComputerTypeDisplayService();
+    void editComputerTypeService(unsigned int i);
+    void listheaderComType();
+    void displayComTypeList();
+    void displayOneComputerType(computertype& ct);
+    int moreInfoOnComputerTypes();
+    void displayComputerTypeService();
+
     void clearScreen();
     //  Precondition:   None.
     //  Postcondition:  Screen is blank.
@@ -127,12 +149,15 @@ public:
     void selectAction();
     //  Precondition:   The program is running.
     //  Postcondition:  Displays the main menu and takes in the selection from made.
+<<<<<<< HEAD
 //    void SelectScientistAction();
     //  Precondition:   A selection is made from the scientist menu.
     //  Postcondition:  Selects which action to take based on input.
 //    void SelectComputerAction();
     //  Precondition:   A selection is made from the computer menu.
     //  Postcondition:  Selects which action to take based on input.
+=======
+>>>>>>> 1fd311b2d2bfe829151259c10c5bf0cf0450bca5
     void editScientistDisplayService();
     void displayScientistService();
     //  Precondition:
