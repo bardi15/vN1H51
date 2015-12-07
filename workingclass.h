@@ -59,6 +59,9 @@ public:
     void updateSqlScientist(scientist& s);
     //  Precondition:   The parameter s is a scientist that has changes to it.
     //  Postcondition:  The scientist s is now updated with new information.
+    void updateSqlComputerType(computertype& ct);
+    //  Precondition:   The parameter ct is a computer type that has changes to it.
+    //  Postcondition:  The computer type ct is now updated with new information.
     bool addcomputerType(computertype& ct);
     //  Precondition:   The parameter ct is a new computer type.
     //  Postcondition:  The computer type ct is now added to the database
@@ -69,6 +72,9 @@ public:
     void deleteComputer(int compID);
     //  Precondition:   The parameter compID is the ID of a computer to be deleted.
     //  Postcondition:  The computer compID has been deleted from the database.
+    void deleteComputerType(int computertypeID);
+    //  Precondition:   The parameter computertypeID is the ID of a computer type to be deleted.
+    //  Postcondition:  The computer type computertypeID has been deleted from the database.
     void readSqlScientists(string sorting = "name ASC");
     //  Precondition:   The database is open.
     //  Postcondition:  If data available, it is read into the private vector for scientist.
