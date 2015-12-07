@@ -35,9 +35,6 @@ public:
     //  Postcondition:  Returns the private vector.
     vector<computertype> getCompTypeVector();
     //  Postcondition:  Returns the private vector.
-    void setVector(vector<scientist>& v);
-    //  Precondition:   The vecor v has been filled with scientist.
-    //  Postcondition:  The private vector has been set with the new scientist.
     bool addscientist(scientist& s);
     //  Precondition:   The parameter s is a new scientist.
     //  Postcondition:  The scientist s is now added to the database and
@@ -83,10 +80,6 @@ public:
     vector<scientist> getScientistsLinkedToComputer(int compID);
     //  Precondition:   A scientist is selected and its ID sent in as sciID.
     //  Postcondition:  Returns a vector of computers related to the scientist.
-
-    void pushToVector(const scientist& s);
-    //  Precondition:   A scientist is ready to be inserted into the privat vector.
-    //  Postcondition:  The scientist has been inserted into the vector.
     bool createRelationSciComp(int sciID, int compID);
     //  Precondition:   Takes in id's of both an existing scientist and an existing computer.
     //  Postcondition:  Creates a link between the scientist and the computer in the database.  Returns true if the operations goes through, false otherwise.

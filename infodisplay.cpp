@@ -660,7 +660,6 @@ void infoDisplay::printLines(int lines, string thickness)
 
 void infoDisplay::displaySortScientistOptions()
 {
-
     int choice = 1;
     clearScreen();
     addEmptyLines(5);
@@ -673,8 +672,17 @@ void infoDisplay::displaySortScientistOptions()
     printLines(1, "thick");
     cout << "\tInput choice here: ";
     choice = inputNumberToFunction();
-    serviceObject.servSortScientists(choice);
 
+    if ((choice < 1)||(choice > 4))
+    {
+        commonPhrases("nothingsel");
+    }
+    else
+    {
+        serviceObject.servSortScientists(choice);
+    }
+
+    cout<<"testetsetste"<<endl;
 }
 void infoDisplay::displaySortComputersOptions()
 {
@@ -799,17 +807,8 @@ void infoDisplay::selectAction()
             case 5:     //  Displaying scientists
                 clearScreen();
                 serviceObject.servEraseScientistVector();
-                displaySortScientistOptions();
-                do
-                {
-                    displaySciList();
-                    choice = moreInfoOnScientist();
-                    if(choice > 0 && choice <= serviceObject.servGetSciVector().size())
-                    {
-                        displayOneScientist(serviceObject.servGetSciVector().at(choice-1));
-                    }
-                }while(choice > 0);
-                    break;
+                displayScientistService();
+                break;
             case 6:     //  Displaying computers
                 clearScreen();
                 serviceObject.servEraseComputerVector();
@@ -838,6 +837,37 @@ void infoDisplay::selectAction()
         while(true);
 
 }
+
+void infoDisplay::displayScientistService()
+{
+    bool continueF = false;
+    cout<<"displayScientistService part 1"<<endl;
+    displaySortScientistOptions();
+    displaySciList();
+
+    do
+    {
+        cout<<"displayScientistService part 2"<<endl;
+
+        int choice = moreInfoOnScientist();
+        cout<<"displayScientistService part 3"<<endl;
+
+        if(choice > 0 && choice <= serviceObject.servGetSciVector().size())
+        {
+            cout<<"displayScientistService part 4"<<endl;
+
+            displayOneScientist(serviceObject.servGetSciVector().at(choice-1));
+        }
+        //commonPhrases("continue");
+        //continueF = yesOrNo();
+        cout<<"displayScientistService part 5"<<endl;
+
+    }
+    while(continueF == true);
+    cout<<"displayScientistService part 6"<<endl;
+
+}
+
 
 void infoDisplay::editScientistDisplayService()
 {
@@ -1114,11 +1144,8 @@ void infoDisplay::searchScientistSelection(int select)
         //mainMenu();
         break;
     default:
-        addEmptyLines(5);
-        cout << "\tIlligal selection!!" << endl;
-        cout << "\tReturning to Search menu" << endl;
-        sleep(3);
-        displaySearchScientist();
+        commonPhrases("nothingsel");
+        //displaySearchScientist();
         break;
     }
 }
@@ -1243,11 +1270,7 @@ void infoDisplay::searchComputerSelection(int select)
         //mainMenu();
         break;
     default:
-        addEmptyLines(5);
-        cout << "\tIlligal selection!!" << endl;
-        cout << "\tReturning to Search menu" << endl;
-        sleep(3);
-        displaySearchScientist();
+        commonPhrases("nothingsel");
         break;
     }
 }
@@ -1255,7 +1278,8 @@ bool infoDisplay::addScientistContinue()
 {
 
     addEmptyLines(1);
-    cout<<"\tWould you like to continue? Y/N: ";
+    //cout<<"\tWould you like to continue? Y/N: ";
+    commonPhrases("continue");
 
     bool input = yesOrNo();
     //cin.ignore();
@@ -1313,9 +1337,7 @@ void infoDisplay::addScientist()
         sO.setLink(link);
 
         serviceObject.servAddscientist(sO);
-
     };
-    //mainMenu();
 
 }
 bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &link)
@@ -1323,7 +1345,7 @@ bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &lin
     addEmptyLines(5);
 
     cout<<"\t1. Add year of Death, 2. Description, "<<endl<<"\t3. Website link; \n";
-    cout << "\tany other digit continues: ";
+    cout << "\t4. To connect scientist with computer, any other digit continues: ";
 
     bool addAnother = true;
 
@@ -1343,11 +1365,11 @@ bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &lin
         break;
 
         case 3:
-        displayComList();
+        link = addScientistLink(link);
         break;
 
         case 4:
-        link = addScientistLink(link);
+        displayComList();
         break;
 
         default:
@@ -1634,7 +1656,8 @@ void infoDisplay::addComputer()
         }
         while (changeInput == false);
 
-        cout<<"\tWould you like to continue? Y/N: ";
+        //cout<<"\tWould you like to continue? Y/N: ";
+        commonPhrases("continue");
         wYLTContinue = yesOrNo();
         //        computer::computer(string cName, int cYear, int cType, bool cBuilt, string cDescr)
 
@@ -1815,10 +1838,6 @@ bool infoDisplay::dispSureToRemoveComp()
     return continueF;
 }
 
-
-
-
-
 int infoDisplay::inputNumberToFunction()
 {
     string input;
@@ -1982,6 +2001,7 @@ void infoDisplay::commonPhrases(string phrase)
     if (phrase == "nothingsel")
     {
         cout<<"\tNothing selected..."<<endl;
+        sleep(1);
     }
     else if (phrase == "choice")
     {
@@ -1990,6 +2010,10 @@ void infoDisplay::commonPhrases(string phrase)
     else if (phrase == "nothingfound")
     {
         cout << "\tNothing found! - Do you want to try again? (Y/N): ";
+    }
+    else if (phrase == "continue")
+    {
+        cout<<"\tWould you like to continue? Y/N: ";
     }
     else
     {

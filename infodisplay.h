@@ -138,6 +138,7 @@ public:
     //      in a reference to the vector about to be sorted.
     //  Postcondition:  The vector is now sorted correctly according to the selection.
     void editScientistDisplayService();
+    void displayScientistService();
     //  Precondition:
     //  Postcondition:
     void editScientistService(unsigned int i);

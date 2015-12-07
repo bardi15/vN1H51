@@ -18,11 +18,6 @@ vector<computertype> workingclass::getCompTypeVector()
     return compTypeVector;
 }
 
-void workingclass::setVector(vector<scientist>& v)
-{
-    scientistVector = v;
-}
-
 QSqlDatabase workingclass::startDatabase()
 {
     QSqlDatabase db;
@@ -108,8 +103,6 @@ void workingclass::readSqlScientists(string sorting)
     scientistVector.clear();
     while(query.next())
     {
-
-
         int id = query.value("id").toUInt();
         string nam = query.value("name").toString().toStdString();
         int gen = query.value("gender").toUInt();
@@ -121,8 +114,6 @@ void workingclass::readSqlScientists(string sorting)
         scientist s(id,nam,gen,yob,yod,desc,url);
         scientistVector.push_back(s);
     }
-
-
 }
 void workingclass::updateSqlComputer(computer& c)
 {
@@ -345,10 +336,6 @@ void workingclass::deleteComputerType(int computertypeID)
 }
 
 
-void workingclass::pushToVector(const scientist& s)
-{
-    scientistVector.push_back(s);
-}
 void workingclass::eraseScientistVector()
 {
     scientistVector.clear();
@@ -503,3 +490,12 @@ void workingclass::searchComputerByYear(int& yr, bool& isFound)
 }
 
 
+//void workingclass::pushToVector(const scientist& s)
+//{
+//    scientistVector.push_back(s);
+//}
+
+//void workingclass::setVector(vector<scientist>& v)
+//{
+//    scientistVector = v;
+//}
