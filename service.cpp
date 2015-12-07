@@ -67,7 +67,6 @@ void service::servSortScientists(int choice)
                 workingObject.readSqlScientists("yob DESC;");
                 break;
             default:
-                exit(0);
                 break;
       }
 }

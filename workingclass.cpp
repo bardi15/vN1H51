@@ -59,8 +59,6 @@ void workingclass::readSqlScientists(string sorting)
     scientistVector.clear();
     while(query.next())
     {
-
-
         int id = query.value("id").toUInt();
         string nam = query.value("name").toString().toStdString();
         int gen = query.value("gender").toUInt();
@@ -71,10 +69,7 @@ void workingclass::readSqlScientists(string sorting)
 
         scientist s(id,nam,gen,yob,yod,desc,url);
         scientistVector.push_back(s);
-//        cout << nam << " " << s.getName() << endl;
-//        usleep(50000);
     }
-    //return db;
 
 }
 void workingclass::updateSqlComputer(computer& c)
