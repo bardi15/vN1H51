@@ -733,7 +733,21 @@ int infoDisplay::getCurrentDate (string date)
 void infoDisplay::selectAction()
 {
     splashScreen();
-    serviceObject.servStartDatabase();
+    if(serviceObject.servCheckDatabaseExists())
+    {
+        serviceObject.servStartDatabase();
+    }
+    else
+    {
+        clearScreen();
+        addEmptyLines(5);
+        cout << "\tNo database available!\n" ;
+        cout << "\tPlease make sure the database is in the\n";
+        cout << "\tworking folder before running the program\n";
+        printLines(1,"thick");
+        cout << "The program will now quit!\n";
+        sleep(3);
+    }
     serviceObject.henda();
 
 

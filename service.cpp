@@ -247,6 +247,11 @@ void service::servStartDatabase()
 {
     workingObject.startDatabase();
 }
+bool service::servCheckDatabaseExists()
+{
+    return workingObject.checkDatabaseExists();
+}
+
 void service::servCloseDatabase()
 {
     workingObject.closeDatabase();

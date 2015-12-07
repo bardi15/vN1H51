@@ -32,6 +32,12 @@ QSqlDatabase workingclass::startDatabase()
     db.open();
     return db;
 }
+bool workingclass::checkDatabaseExists()
+{
+    QFile db;
+    return db.exists(QString::fromStdString(DBASE)) ;
+}
+
 void workingclass::closeDatabase()
 {
     QSqlDatabase db;
