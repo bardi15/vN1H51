@@ -43,13 +43,13 @@ public:
     //  Precondition:   The parameter c is a new computer.
     //  Postcondition:  The computer c is now added the database and
     //      c has been updated with the correct id.
-    void updateSqlComputer(computer& c);
+    bool updateSqlComputer(computer& c);
     //  Precondition:   The parameter c is a computer that has changes to it.
     //  Postcondition:  The computer c is now updated with new information.
     void updateSqlScientist(scientist& s);
     //  Precondition:   The parameter s is a scientist that has changes to it.
     //  Postcondition:  The scientist s is now updated with new information.
-    void updateSqlComputerType(computertype& ct);
+    bool updateSqlComputerType(computertype& ct);
     //  Precondition:   The parameter ct is a computer type that has changes to it.
     //  Postcondition:  The computer type ct is now updated with new information.
     bool addcomputerType(computertype& ct);
@@ -59,10 +59,10 @@ public:
     void deleteScientist(int sciID);
     //  Precondition:   The parameter sciID is the ID of a scientist to be deleted.
     //  Postcondition:  The scientist sciID has been deleted from the database.
-    void deleteComputer(int compID);
+    bool deleteComputer(int compID);
     //  Precondition:   The parameter compID is the ID of a computer to be deleted.
     //  Postcondition:  The computer compID has been deleted from the database.
-    void deleteComputerType(int computertypeID);
+    bool deleteComputerType(int computertypeID);
     //  Precondition:   The parameter computertypeID is the ID of a computer type to be deleted.
     //  Postcondition:  The computer type computertypeID has been deleted from the database.
     void readSqlScientists(string sorting = "name ASC");
@@ -126,6 +126,10 @@ public:
     void closeDatabase();
     //  Precondition:   The database is open.
     //  Postconditinon: The database has been closed.
+    void createScientistsAndComputers();
+    void createComputers();
+    void createTableScientists();
+    void createTableComputerTypes();
 
 
 private:

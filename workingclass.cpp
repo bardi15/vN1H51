@@ -35,37 +35,58 @@ bool workingclass::checkDatabaseExists()
 void workingclass::createEmptyDatabase()
 {
     startDatabase();
-    QSqlQuery query;
+    createTableComputerTypes();
+    createTableScientists();
+    createComputers();
+    createScientistsAndComputers();
+}
 
+void workingclass::createTableComputerTypes()
+{
+    QSqlQuery query;
     query.exec("CREATE TABLE computer_types "
-               "(id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE,"
+               "(id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE, "
                " name TEXT NOT NULL, "
                " description TEXT, "
-               " deleted DEFAULT 'FALSE'");
-    query.exec("CREATE TABLE computers "
-               "(id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE,"
-               " name TEXT NOT NULL , "
-               " year INTEGER, "
-               " type INTEGER NOT NULL , "
-               " built BOOL NOT NULL  DEFAULT 'false', "
-               " description TEXT, "
                " deleted DEFAULT 'FALSE');");
-    query.exec("CREATE TABLE 'scientists' "
-               "(id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE,"
-               " name TEXT NOT NULL , "
-               " gender INTEGER NOT NULL  DEFAULT 2, "
-               " yob INTEGER NOT NULL , "
-               " yod INTEGER, "
-               " description' TEXT, "
-               " link TEXT, "
-               " deleted DEFAULT FALSE);");
-    query.exec("CREATE TABLE scientists_and_computers "
+}
+void workingclass::createTableScientists()
+{
+    QSqlQuery query;
+    query.exec("CREATE TABLE scientists "
                "(id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE, "
-               " scientist_id INTEGER NOT NULL , "
-               " computer_id INTEGER NOT NULL , "
-               " deleted BOOLEAN DEFAULT FALSE, "
+               " name TEXT NOT NULL, "
+               " gender INTEGER NOT NULL  DEFAULT 2, "
+               " yob INTEGER NOT NULL, "
+               " yod INTEGER, "
+               " description TEXT, "
+               " link TEXT, "
+               " deleted DEFAULT 'FALSE');");
+}
+
+void workingclass::createComputers()
+{
+    QSqlQuery query;
+    query.exec("CREATE TABLE computers "
+               "(id INTEGER PRIMARY KEY  AUTOINCREMENT NOT NULL UNIQUE, "
+               " name TEXT NOT NULL, "
+               " year INTEGER, "
+               " type INTEGER NOT NULL, "
+               " built BOOL NOT NULL DEFAULT 'FALSE', "
+               " description TEXT, "
+               " deleted DEFAULT 'FALSE',"
+               " FOREIGN KEY(type) REFERENCES computer_types(id));");
+}
+void workingclass::createScientistsAndComputers()
+{
+    QSqlQuery query;
+    query.exec("CREATE TABLE scientists_and_computers "
+               " scientist_id INTEGER NOT NULL, "
+               " computer_id INTEGER NOT NULL, "
+               " deleted BOOLEAN DEFAULT 'FALSE', "
                " FOREIGN KEY (scientist_id) REFERENCES scientists(id), "
-               " FOREIGN KEY (computer_id) REFERENCES computers(id);");
+               " FOREIGN KEY (computer_id) REFERENCES computers(id)"
+               " PRIMARY KEY (scientist_id,computer_id));");
 }
 
 void workingclass::closeDatabase()
@@ -76,9 +97,9 @@ void workingclass::closeDatabase()
 bool workingclass::createRelationSciComp(int sciID, int compID)
 {
     QSqlQuery query;
-    query.prepare("INSERT INTO scientists_and_computers"
-                  "(scientist_id, computer_id)"
-                  "VALUES (:sID, :cID);");
+    query.prepare("INSERT INTO scientists_and_computers "
+                  "(scientist_id, computer_id) "
+                  "VALUES (:sID, :cID); ");
     query.bindValue(";sID", sciID);
     query.bindValue(":cID", compID);
     query.exec();
@@ -115,7 +136,7 @@ void workingclass::readSqlScientists(string sorting)
         scientistVector.push_back(s);
     }
 }
-void workingclass::updateSqlComputer(computer& c)
+bool workingclass::updateSqlComputer(computer& c)
 {
     QSqlQuery query;
 
@@ -130,6 +151,11 @@ void workingclass::updateSqlComputer(computer& c)
     query.bindValue(":built", c.getComBuilt());
     query.bindValue(":desc", QString::fromStdString(c.getComDescription()));
     query.exec();
+    if(!query.lastError().isValid())
+    {
+        return true;
+    }
+    return false;
 
 }
 void workingclass::updateSqlScientist(scientist& s)
@@ -148,7 +174,7 @@ void workingclass::updateSqlScientist(scientist& s)
     query.bindValue(":link", QString::fromStdString(s.getLink()));
     query.exec();
 }
-void workingclass::updateSqlComputerType(computertype& ct)
+bool workingclass::updateSqlComputerType(computertype& ct)
 {
     QSqlQuery query;
 
@@ -160,6 +186,11 @@ void workingclass::updateSqlComputerType(computertype& ct)
     query.bindValue(":name", QString::fromStdString(ct.getName()));
     query.bindValue(":desc", QString::fromStdString(ct.getDesc()));
     query.exec();
+    if(!query.lastError().isValid())
+    {
+        return true;
+    }
+    return false;
 
 }
 
@@ -289,8 +320,12 @@ bool workingclass::addcomputer(computer& c)
     query.bindValue(":built", c.getComBuilt());
     query.bindValue(":desc", QString::fromStdString(c.getComDescription()));
     query.exec();
-    c.setComID(query.lastInsertId().toUInt());
-    return 1;
+    if(!query.lastError().isValid())
+    {
+        c.setComID(query.lastInsertId().toUInt());
+        return true;
+    }
+    return false;
 }
 bool workingclass::addcomputerType(computertype & ct)
 {
@@ -300,9 +335,11 @@ bool workingclass::addcomputerType(computertype & ct)
     query.bindValue(":name", QString::fromStdString(ct.getName()));
     query.bindValue(":desc", QString::fromStdString(ct.getDesc()));
     query.exec();
-    ct.setID(query.lastInsertId().toUInt());
-
-    return 1;
+    if(!query.lastError().isValid())
+    {
+        return true;
+    }
+    return false;
 }
 void workingclass::deleteScientist(int sciID)
 {
@@ -314,7 +351,7 @@ void workingclass::deleteScientist(int sciID)
     query.bindValue(":id", sciID);
     query.exec();
 }
-void workingclass::deleteComputer(int compID)
+bool workingclass::deleteComputer(int compID)
 {
     QSqlQuery query;
 
@@ -323,8 +360,13 @@ void workingclass::deleteComputer(int compID)
                   "WHERE id = :id; ");
     query.bindValue(":id", compID);
     query.exec();
+    if(!query.lastError().isValid())
+    {
+        return true;
+    }
+    return false;
 }
-void workingclass::deleteComputerType(int computertypeID)
+bool workingclass::deleteComputerType(int computertypeID)
 {
     QSqlQuery query;
 
@@ -333,6 +375,11 @@ void workingclass::deleteComputerType(int computertypeID)
                   "WHERE id = :id;");
     query.bindValue(":id", computertypeID);
     query.exec();
+    if(!query.lastError().isValid())
+    {
+        return true;
+    }
+    return false;
 }
 
 

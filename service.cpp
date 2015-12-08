@@ -246,11 +246,11 @@ void service::servDeleteScientist(int sciID)
 {
     workingObject.deleteScientist(sciID);
 }
-void service::servDeleteComputer(int compID)
+bool service::servDeleteComputer(int compID)
 {
     workingObject.deleteComputer(compID);
 }
-void service::servDeleteComputerType(int computertypeID)
+bool service::servDeleteComputerType(int computertypeID)
 {
     workingObject.deleteComputerType(computertypeID);
 }
@@ -258,11 +258,11 @@ void service::servUpdateSqlScientist(scientist& s)
 {
     workingObject.updateSqlScientist(s);
 }
-void service::servUpdateSqlComputer(computer& c)
+bool service::servUpdateSqlComputer(computer& c)
 {
     workingObject.updateSqlComputer(c);
 }
-void service::servUpdateSqlComputerType(computertype& ct)
+bool service::servUpdateSqlComputerType(computertype& ct)
 {
     workingObject.updateSqlComputerType(ct);
 }

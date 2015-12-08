@@ -149,15 +149,6 @@ public:
     void selectAction();
     //  Precondition:   The program is running.
     //  Postcondition:  Displays the main menu and takes in the selection from made.
-<<<<<<< HEAD
-//    void SelectScientistAction();
-    //  Precondition:   A selection is made from the scientist menu.
-    //  Postcondition:  Selects which action to take based on input.
-//    void SelectComputerAction();
-    //  Precondition:   A selection is made from the computer menu.
-    //  Postcondition:  Selects which action to take based on input.
-=======
->>>>>>> 1fd311b2d2bfe829151259c10c5bf0cf0450bca5
     void editScientistDisplayService();
     void displayScientistService();
     //  Precondition:
@@ -168,8 +159,6 @@ public:
 
     void editComputerDisplayService();
     void editComputerService(unsigned int i);
-
-
 
     void searchScientistSelection(int select);
     //  Precondition:   A specific search option has been selected. Takes in the
