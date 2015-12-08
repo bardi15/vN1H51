@@ -1,10 +1,12 @@
 #ifndef SERVICE_H
 #define SERVICE_H
 
+#include "workingclass.h"
+
 #include <iostream>
 #include <string>
 #include <unistd.h>
-#include "workingclass.h"
+
 
 
 using namespace std;
@@ -77,17 +79,17 @@ public:
     //  Calls the createEmptyDatabase function in workingclass.
     void servCloseDatabase();
     //  Calls the CloseDatabase function in workingclass.
-    void servDeleteComputer(int compID);
+    bool servDeleteComputer(int compID);
     //  Calls the deleteComputer function in workingclass.
     void servDeleteScientist(int sciID);
     //  Calls the deleteScientist function in workingclass.
-    void servDeleteComputerType(int computertypeID);
+    bool servDeleteComputerType(int computertypeID);
     //  Calls the deleteComputerType function in workingclass.
-    void servUpdateSqlComputer(computer& c);
+    bool servUpdateSqlComputer(computer& c);
     //  Calls the updateScientist function in workingclass.
     void servUpdateSqlScientist(scientist& s);
     //  Calls the updateComputer function in workingclass.
-    void servUpdateSqlComputerType(computertype& ct);
+    bool servUpdateSqlComputerType(computertype& ct);
     //  Calls the updateComputerType function in workingclass.
     void henda();
     workingclass workingObject;

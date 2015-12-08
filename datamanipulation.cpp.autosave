@@ -1,9 +1,0 @@
-#include "datamanipulation.h"
-#include <iostream>
-#include <string>
-
-dataManipulation::dataManipulation()
-{
-    
-}
-

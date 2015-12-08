@@ -188,7 +188,6 @@ void infoDisplay::displayComList()
 
     printLines(1, "thin");
 }
-
 void infoDisplay::displayComTypeList()
 {
     unsigned int ctSize = serviceObject.servGetComTypeVector().size();
@@ -244,6 +243,7 @@ void infoDisplay::displayComTypeList()
 
     printLines(1, "thin");
 }
+
 
 bool infoDisplay::scrollFunction(unsigned int vSize, unsigned int &scrollBase, unsigned int &scrollFactor)
 {
@@ -375,17 +375,17 @@ bool infoDisplay::dispSureToRemove(int gender)
 
     return yesOrNo();// continueF;
 }
-void infoDisplay::dispScientistToEdit(vector<scientist>& v)
-{
-    int sel;
-    cout << "\tEnter the number of the scientist you would like to edit" << endl;
-    commonPhrases("choice");
-    sel = inputNumberToFunction();
-    if(sel > 0)
-    {
-        displayOneScientist(v.at(sel-1));
-    }
-}
+//void infoDisplay::dispScienUtistToEdit(vector<scientist>& v)
+//{
+//    int sel;
+//    cout << "\tEnter the number of the scientist you would like to edit" << endl;
+//    commonPhrases("choice");
+//    sel = inputNumberToFunction();
+//    if(sel > 0)
+//    {
+//        displayOneScientist(v.at(sel-1));
+//    }
+//}
 
 void infoDisplay::displayOneScientist(scientist& s)
 {
@@ -658,6 +658,7 @@ void infoDisplay::menuForComputersSwitch()
 
 
 }
+
 void infoDisplay::menuForComputerTypes()
 {
     serviceObject.servReadSqlCompTypes();
@@ -867,6 +868,7 @@ void infoDisplay::addComputerTypeChange(string &ctName, string &ctDescr)
 }
 
 
+
 void infoDisplay::splashScreen()
 {
     opengreeting greet;
@@ -1031,6 +1033,7 @@ void infoDisplay::quitProgram()
         clearScreen();
         //mainMenu();
     }
+
 }
 int infoDisplay::getCurrentDate (string date)
 {
@@ -1073,7 +1076,7 @@ void infoDisplay::selectAction()
         addEmptyLines(5);
         cout << "\tNo database available!\n" ;
         printLines(1,"thick");
-        cout << "Do you want to create a new database? (Y/N): ";
+        cout << "\tDo you want to create a new database? (Y/N): ";
         if(yesOrNo())
         {
             serviceObject.servCreateEmptyDatabase();
@@ -1151,6 +1154,7 @@ void infoDisplay::selectAction()
         while(true);
 
 }
+
 void infoDisplay::displayComputerService()
 {
 
@@ -1186,6 +1190,7 @@ void infoDisplay::displayComputerTypeService()
     }
 
 }
+
 
 void infoDisplay::displayScientistService()
 {
@@ -1291,6 +1296,7 @@ void infoDisplay::editComputerService(unsigned int i)
         serviceObject.servUpdateSqlComputer(cO);
     }
 }
+
 void infoDisplay::editComputerTypeDisplayService()
 {
     serviceObject.servReadSqlComputers();
@@ -1326,6 +1332,7 @@ void infoDisplay::editComputerTypeService(unsigned int i)
         serviceObject.servUpdateSqlComputerType(ct);
     }
 }
+
 
 
 
@@ -2023,17 +2030,28 @@ int infoDisplay::addComputerType()
 
     computertype ct;
 
+    //vectorsize = serviceObject.servGetComTypeVector().size();
+
     unsigned int selection = 0;
     bool continueF = false;
     serviceObject.servReadSqlCompTypes();
     cout<<"\tSelect computer type: "<<endl;
-    //cout<<"\t";
+    for(unsigned int i = 0; i < serviceObject.servGetComTypeVector().size(); i++ )
+    {
+        cout << "\t" << i+1 << "\t"
+             << serviceObject.servGetComTypeVector().at(i).getName()
+             << endl;
+    }
+
+//    cout<<"\t1) Electronic\n\t2) Mechanical\n\t3) Ternary\n\t";
+    cout<<"\t";
     for (unsigned int i = 0; i < serviceObject.servGetComTypeVector().size(); i++)
     {
         cout<<i+1<<") ";
         cout<<serviceObject.servGetComTypeVector().at(i).getName()<<" ";
     }
     cout<<": ";
+
 
     do
     {
