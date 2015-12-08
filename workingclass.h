@@ -30,7 +30,10 @@ public:
     workingclass();
     //  Default constructor for class.
 
-
+    /*
+    ##  Get vector functions
+    ##---------------------------------------------------------------------------------------##
+    */
     vector<scientist> getSciVector();
     //  Precondition:   The private scientists vector has been populated
     //  Postcondition:  Returns the private vector.
@@ -40,7 +43,6 @@ public:
     vector<computertype> getCompTypeVector();
     //  Precondition:   The private computer types vector has been populated
     //  Postcondition:  Returns the private vector.
-
     vector<computer> getComputersLinkedToScientists(int sciID);
     //  Precondition:   A computer is selected and its ID sent in as compID.
     //  Postcondition:  Returns a vector of scientist related to the computer.
@@ -48,6 +50,10 @@ public:
     //  Precondition:   A scientist is selected and its ID sent in as sciID.
     //  Postcondition:  Returns a vector of computers related to the scientist.
 
+    /*
+    ##  Add funtctinos
+    ##---------------------------------------------------------------------------------------##
+    */
     bool addscientist(scientist& s);
     //  Precondition:   The parameter s is a new scientist.
     //  Postcondition:  The scientist s is now added to the database and
@@ -65,6 +71,10 @@ public:
     //  Postcondition:  Creates a link between the scientist and the computer in the database.
     //      Returns true if the operations goes through, false otherwise.
 
+    /*
+    ##  Update instances
+    ##---------------------------------------------------------------------------------------##
+    */
     void updateSqlScientist(scientist& s);
     //  Precondition:   The parameter s is a scientist that has changes to it.
     //  Postcondition:  The scientist s is now updated with new information.
@@ -75,6 +85,10 @@ public:
     //  Precondition:   The parameter ct is a computer type that has changes to it.
     //  Postcondition:  The computer type ct is now updated with new information.
 
+    /*
+    ##  Delete functions
+    ##---------------------------------------------------------------------------------------##
+    */
     void deleteScientist(int sciID);
     //  Precondition:   The parameter sciID is the ID of a scientist to be deleted.
     //  Postcondition:  The scientist sciID has been deleted from the database.
@@ -85,6 +99,10 @@ public:
     //  Precondition:   The parameter computertypeID is the ID of a computer type to be deleted.
     //  Postcondition:  The computer type computertypeID has been deleted from the database.
 
+    /*
+    ##  Read functions
+    ##---------------------------------------------------------------------------------------##
+    */
     void readSqlScientists(string sorting = "name ASC");
     //  Precondition:   The database is open.
     //  Postcondition:  If data available, it is read into the private vector for scientist.
@@ -95,6 +113,10 @@ public:
     //  Precondition:   The database is open.
     //  Postcondition:  If data available, it is read into the private vector for computertypes.
 
+    /*
+    ##  Erase vector functions
+    ##---------------------------------------------------------------------------------------##
+    */
     void eraseScientistVector();
     //  Precondition:   A new or changed vector is about to be created.
     //  Postcondition:  The privat vector is clear of all scientists.
@@ -105,6 +127,10 @@ public:
     //  Precondition:   A new or changed vector is about to be created.
     //  Postcondition:  The privat vector is clear of all computer types.
 
+    /*
+    ##  Search scientist functions
+    ##---------------------------------------------------------------------------------------##
+    */
     void searchScientistByName(string subName, bool& isFound);
     //  Precondition:   Takes in the parameter subName to be searched for and a boolean
     //      variable to indicate if found.
@@ -119,6 +145,10 @@ public:
     //      variable to indicate if found.
     //  Postcondition:  Returns a vector of the scientist matching the criteria.
 
+    /*
+    ##  Search computer functions
+    ##---------------------------------------------------------------------------------------##
+    */
     void searchComputerByName(string subName, bool& isFound);
     //  Precondition:   Takes in the parameter subName to be searched for and a boolean variable to indicate if found.
     //  Postcondition:  Returns a vector of the computers matching the criteria.
@@ -129,6 +159,10 @@ public:
     //  Precondition:   Takes in the parameter year to be searched for and a boolean variable to indicate if found.
     //  Postcondition:  Returns a vector of the computers matching the criteria.
 
+    /*
+    ##  Database functions
+    ##---------------------------------------------------------------------------------------##
+    */
     QSqlDatabase startDatabase();
     //  Precondition:   The database is present in the build directory of the program.
     //  Postconditinon: A link to the database has been established.
