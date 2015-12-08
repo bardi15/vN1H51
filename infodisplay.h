@@ -11,6 +11,7 @@
 
 const unsigned int HOLYSCROLL = 15;
 
+
 class infoDisplay
 {
     public:
@@ -38,9 +39,6 @@ class infoDisplay
         void mainMenu();
         //  Precondition:   None.
         //  Postcondition:  Displays the main menu on screen.
-        void clearScreen();
-        //  Precondition:   None.
-        //  Postcondition:  Screen is blank.
         void splashScreen();
         //  Precondition:   None.
         //  Postcondition:  Displays the startup greeting when program is started.
@@ -97,9 +95,6 @@ class infoDisplay
         string addScientistLink(string &link);
         //  Precondition:   The link for a scientist is to be entered.
         //  Postcondition:  The link for a scientist has been entered.
-        void addScientistComp(int number);
-        // Precondition:    A computer is selected from the list of computers.
-        // Postcondition:   The computer has been connected to the scientist.
         bool addScientistCheck(string name, int gender, int yob, int yod, string desc, string link);
         //  Precondition:   All data for a new scientist has been entered.
         //  Postcondition:  If approved scientist is added to private vector, else modified.
@@ -112,7 +107,7 @@ class infoDisplay
         ##  Scientist Information##EDIT
         ##---------------------------------------------------------------------------------------##
         */
-        void dispScientistToEdit(vector<scientist>& v);
+//        void dispScientistToEdit(vector<scientist>& v);
         //  Precondition:   The vector v has been populated with scientist.
         //  Postcondition:  Selected scientist has is displayed on screen.
         void displayChangeScientist();
@@ -322,9 +317,6 @@ class infoDisplay
         ##  List of computer scientists
         ##---------------------------------------------------------------------------------------##
         */
-        void displaySciList(vector<scientist>& v);
-        //  Precondition:   The vector v has been populated with scientist.
-        //  Postcondition:  Displays all scientist according to condition on screen.
         void displaySciList();
         //  Precondition:   The scientist have been read from the database.
         //  Postcondition:  Displays all scientist according to condition on screen.
@@ -349,6 +341,13 @@ class infoDisplay
         void displayComList();
         //  Precondition:   The computers have been read from the database.
         //  Postcondition:  Displays all computers according to condition on screen.
+        int moreInfoOnComputer();
+        //  Precondition:   A list of computers has been displayed.
+        //  Postcondition:  Ask for which if any computer to display fuller information on.
+        //      Returns the selection.
+        int displaySortComputersOptions();
+        //  Precondition:   A list of computers is to be displayed.
+        //  Postcondition:  Displays the sorting options available and returns the selection.
 
         /*
         ##  List of computer types
@@ -361,13 +360,7 @@ class infoDisplay
         //  Precondition:   A list of computer types has been displayed.
         //  Postcondition:  Ask for which if any computer types to display further information on.
         //      Returns the selection.
-        int moreInfoOnComputer();
-        //  Precondition:   A list of computers has been displayed.
-        //  Postcondition:  Ask for which if any computer to display fuller information on.
-        //      Returns the selection.
-        int displaySortComputersOptions();
-        //  Precondition:   A list of computers is to be displayed.
-        //  Postcondition:  Displays the sorting options available and returns the selection.
+
 
         /*
         ##  Miscellaneous
@@ -408,6 +401,10 @@ class infoDisplay
         void commonPhrases(string phrase);
         //  Precondition:   a string term is sent to function.
         //  Postcondition:  prints out common phrase, for easier scaling.
+        void clearScreen();
+        //  Precondition:   None.
+        //  Postcondition:  Screen is blank.
+
 
         service serviceObject;
         // An object of the service layer class.

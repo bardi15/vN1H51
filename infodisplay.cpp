@@ -15,20 +15,6 @@ infoDisplay::infoDisplay()
 ##  Main menu selection function.
 ##---------------------------------------------------------------------------------------##
 */
-
-//void infoDisplay::displaySearchComputersMenu()
-//{
-//    addEmptyLines(5);
-//    cout << "\tMenu for Computer search " << endl;
-//    printLines(1, "thin");
-//    cout << "\t1) Search by name or part of name." << endl;
-//    cout << "\t2) Search by type." << endl;
-//    cout << "\t3) Search by the building year." << endl;
-//    printLines(1, "thin");
-//    cout << "\tAll other digits for main menu. \n";
-//    printLines(1, "thick");
-//    cout << "\tEnter your selection: ";
-//}
 void infoDisplay::selectAction()
 {
     splashScreen();
@@ -122,6 +108,7 @@ void infoDisplay::selectAction()
         while(true);
 
 }
+
 /*
 ##  Main menu
 ##---------------------------------------------------------------------------------------##
@@ -1020,7 +1007,6 @@ void infoDisplay::menuForComputersTypesDisplay()
     cout << "\tAll other digits for main menu. \n";
     printLines(1, "thick");
     cout << "\tEnter your selection: ";
-    sleep(2);
 }
 void infoDisplay::menuForComputersTypesSwitch()
 {
@@ -1277,23 +1263,20 @@ void infoDisplay::displayChangeNewComputerType()
         string name;
 
         cout << "\tEnter the number of the computer type you would like to edit: ";
-        i = inputNumberToFunction();
+        i = inputNumberToFunction()-1;
 
-        if ((i < 1)||(i > (serviceObject.servGetCompTypeVector().size())))
+        if ( i > 0 && i < serviceObject.servGetCompTypeVector().size())
         {
-            continueP = false;
-            commonPhrases("nothingsel");
-        }
-        else
-        {
-            displayOneComputerType(serviceObject.servGetCompTypeVector().at(i-1));
+            displayOneComputerType(serviceObject.servGetCompTypeVector().at(i));
             editComputerTypeService(i);
             clearScreen();
             continueP = addScientistContinue();
         }
-
-
-
+        else
+        {
+            continueP = false;
+            commonPhrases("nothingsel");
+        }
     }
 }
 void infoDisplay::editComputerTypeDisplayService()
@@ -1303,14 +1286,6 @@ void infoDisplay::editComputerTypeDisplayService()
 }
 void infoDisplay::editComputerTypeService(unsigned int i)
 {
-
-
-    if (i > serviceObject.servGetComVector().size()-1)
-    {
-        commonPhrases("nothingsel");
-    }
-    else
-    {
         string ctName, ctDesc;
         int ctId;
 
@@ -1326,7 +1301,6 @@ void infoDisplay::editComputerTypeService(unsigned int i)
         }
         computertype ct(ctId, ctName, ctDesc);
         serviceObject.servUpdateSqlComputerType(ct);
-    }
 }
 void infoDisplay::editComputerDisplayService()
 {

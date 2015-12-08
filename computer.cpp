@@ -35,22 +35,18 @@ string computer::getComName() const
 {
     return comName;
 }
-
 int computer::getComYear() const
 {
     return comYear;
 }
-
 int computer::getComType() const
 {
     return comType;
 }
-
 string computer::getComDescription() const
 {
     return comDescr;
 }
-
 bool computer::getComBuilt() const
 {
     return comBuilt;
@@ -59,27 +55,22 @@ void computer::setComID(int coID)
 {
     comId = coID;
 }
-
 void computer::setComName(string coName)
 {
     comName = coName;
 }
-
 void computer::setComYear(int coYear)
 {
     comYear = coYear;
 }
-
 void computer::setComType(int coType)
 {
     comType = coType;
 }
-
 void computer::setComDescription(string coDesc)
 {
     comDescr = coDesc;
 }
-
 void computer::setComBuilt(bool coBuilt)
 {
     comBuilt = coBuilt;
