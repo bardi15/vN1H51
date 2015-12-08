@@ -1722,7 +1722,11 @@ bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &lin
         break;
 
         case 4:
+        serviceObject.servReadSqlComputers();
         displayComList();
+        cout << "\tSelect a computer from the list, other entries return to the menu: ";
+        cin >> choice;
+        cout << "\tThis scientist is connected to: " << serviceObject.servGetComVector().at(choice - 1).getComName() << endl;
         break;
 
         default:
@@ -1884,7 +1888,11 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
         desc = addScientistDescription(desc);
         break;
     case 6:
+        serviceObject.servReadSqlComputers();
         displayComList();
+        cout << "\tSelect a computer from the list: ";
+        cin >> input;
+        cout << "\tThis scientist is now connected to: " << serviceObject.servGetComVector().at(input - 1).getComName() << endl;
         break;
     case 7:
         link = addScientistLink(link);
