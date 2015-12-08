@@ -37,8 +37,8 @@ void workingclass::createEmptyDatabase()
     startDatabase();
     createTableComputerTypes();
     createTableScientists();
-    createComputers();
-    createScientistsAndComputers();
+    createTableComputers();
+    createTableScientistsAndComputers();
 }
 
 void workingclass::createTableComputerTypes()
