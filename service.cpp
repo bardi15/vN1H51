@@ -299,7 +299,4 @@ bool service::servAddRelationSciComp(int sciID, int compID)
 {
     return workingObject.addRelationSciComp(sciID, compID);
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> ab778f8bdae41534f80531e4f6f4d004c5d1e819

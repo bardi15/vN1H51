@@ -1130,11 +1130,7 @@ void infoDisplay::selectAction()
             sleep(3);
         }
     }
-<<<<<<< HEAD
-=======
 
-
->>>>>>> ab778f8bdae41534f80531e4f6f4d004c5d1e819
 
     do
     {
@@ -1762,13 +1758,10 @@ bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &lin
 
         case 4:
         displayComList();
-<<<<<<< HEAD
         cout << "\tSelect a computer from the list, other entries return to the menu: ";
         cin >> choice;
         serviceObject.servAddRelationSciComp(id, serviceObject.servGetComVector().at(choice - 1).getId());
         cout << "\tThis scientist is connected to: " << serviceObject.servGetComVector().at(choice - 1).getComName() << endl;
-=======
->>>>>>> ab778f8bdae41534f80531e4f6f4d004c5d1e819
         break;
 
         default:
@@ -1908,12 +1901,9 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
     //clearScreen();
     addEmptyLines(1);
     commonPhrases("change");
-<<<<<<< HEAD
     cout<<"\t1. Name, 2. Gender, 3. Year of Birth, 4. Year of Death \n\t5. Description, 6. Computer, 7. Link \n\tOther digits cancel: ";
-=======
     printLines(1,"thin");
     cout<<"\t1. Name, 2. Gender, 3. Year of Birth, 4. Year of Death \n\t5. Description, 6. Computer, 7. Link, other digits cancel: ";
->>>>>>> ab778f8bdae41534f80531e4f6f4d004c5d1e819
     input = inputNumberToFunction();
 
     switch (input)
@@ -1935,13 +1925,10 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
         break;
     case 6:
         displayComList();
-<<<<<<< HEAD
         cout << "\tSelect a computer from the list: ";
         cin >> input;
         serviceObject.servAddRelationSciComp(id, serviceObject.servGetComVector().at(input - 1).getId());
         cout << "\tThis scientist is connected to: " << serviceObject.servGetComVector().at(input - 1).getComName() << endl;
-=======
->>>>>>> ab778f8bdae41534f80531e4f6f4d004c5d1e819
         break;
     case 7:
         link = addScientistLink(link);
