@@ -2,140 +2,19 @@
 
 using namespace std;
 
+/*
+##  Constructors
+##---------------------------------------------------------------------------------------##
+*/
 service::service()
 {
 
 }
 
-void service::servEraseScientistVector()
-{
-    workingObject.eraseScientistVector();
-}
-void service::servEraseComputerVector()
-{
-    workingObject.eraseComputerVector();
-}
-void service::servEraseCompTypeVector()
-{
-    workingObject.eraseCompTypeVector();
-}
-void service::servReadSqlScientists(string sorting)
-{
-    workingObject.readSqlScientists(sorting);
-}
-void service::servReadSqlComputers(string sorting)
-{
-    workingObject.readSqlComputers(sorting);
-}
-void service::servReadSqlCompTypes()
-{
-    workingObject.readSqlCompTypes();
-}
-void service::servSortScientists(int choice)
-{
-    switch(choice)
-    {
-        case 1:
-            workingObject.readSqlScientists("name ASC;");
-            break;
-        case 2:
-            workingObject.readSqlScientists("name DESC;");
-            break;
-        case 3:
-            workingObject.readSqlScientists("yob ASC;");
-            break;
-        case 4:
-            workingObject.readSqlScientists("yob DESC;");
-            break;
-        default:
-            break;
-      }
-}
-void service::servSortComputers(int choice)
-{
-      switch(choice)
-      {
-            case 1:
-                workingObject.readSqlComputers("name;");
-                break;
-            case 2:
-                workingObject.readSqlComputers("name DESC;");
-                break;
-            case 3:
-                workingObject.readSqlComputers("year;");
-                break;
-            case 4:
-                workingObject.readSqlComputers("type, name;");
-                break;
-            default:
-                break;
-          cout<<"test4 "<<endl;
-
-      }
-}
-
-vector<scientist> service::servGetSciVector()
-{
-    return workingObject.getSciVector();
-}
-vector<computer> service::servGetComVector()
-{
-    return workingObject.getComVector();
-}
-vector<computertype> service::servGetCompTypeVector()
-{
-    return workingObject.getCompTypeVector();
-}
-void service::servAddscientist(scientist& s)
-{
-    workingObject.addscientist(s);
-}   
-void service::servAddcomputer(computer& c)
-{
-    workingObject.addcomputer(c);
-}
-void service::servAddcomputerType(computertype& ct)
-{
-    workingObject.addcomputerType(ct);
-}
-void service::servSearchScientistByName(string subName, bool& isFound)
-{
-    workingObject.searchScientistByName(subName, isFound);
-}
-void service::servSearchScientistByGender(int sex, bool& isFound)
-{
-    workingObject.searchScientistByGender(sex, isFound);
-}
-void service::servSearchScientistByYear(int& yr, char bORd, bool& isFound)
-{
-    yr = yearCorrection(yr,isFound);
-    workingObject.searchScientistByYear(yr, bORd, isFound);
-}
-int service::yearCorrection(int year, bool &errorInYear)
-{
-
-    int tempYear = year;
-
-    if ((tempYear >= 20) && (tempYear < 100))
-    {
-        tempYear += 1900;
-    }
-    else if ((tempYear >= 0) && (tempYear < 20))
-    {
-        tempYear += 2000;
-    }
-
-    if ((tempYear > 0) && (tempYear <= CURRENTYEAR))
-    {
-        errorInYear = false;
-    }
-    else
-    {
-        errorInYear = true;
-    }
-
-    return tempYear;
-}
+/*
+##  Correction functions
+##---------------------------------------------------------------------------------------##
+*/
 string service::nameCorrection(string name, bool& badName)
 {
     int spaceCount = 0;
@@ -221,31 +100,74 @@ int service::genderCorrection(string gender)
         return 2;
     }
 }
+int service::yearCorrection(int year, bool &errorInYear)
+{
 
-void service::servStartDatabase()
-{
-    workingObject.startDatabase();
+    int tempYear = year;
+
+    if ((tempYear >= 20) && (tempYear < 100))
+    {
+        tempYear += 1900;
+    }
+    else if ((tempYear >= 0) && (tempYear < 20))
+    {
+        tempYear += 2000;
+    }
+
+    if ((tempYear > 0) && (tempYear <= CURRENTYEAR))
+    {
+        errorInYear = false;
+    }
+    else
+    {
+        errorInYear = true;
+    }
+
+    return tempYear;
 }
-bool service::servCheckDatabaseExists()
+
+/*
+##  Read functions
+##---------------------------------------------------------------------------------------##
+*/
+void service::servReadSqlScientists(string sorting)
 {
-    return workingObject.checkDatabaseExists();
+    workingObject.readSqlScientists(sorting);
 }
-void service::servCloseDatabase()
+void service::servReadSqlComputers(string sorting)
 {
-    workingObject.closeDatabase();
+    workingObject.readSqlComputers(sorting);
 }
-void service::servDeleteScientist(int sciID)
+void service::servReadSqlCompTypes()
 {
-    workingObject.deleteScientist(sciID);
+    workingObject.readSqlCompTypes();
 }
-bool service::servDeleteComputer(int compID)
+
+/*
+##  Add functions
+##---------------------------------------------------------------------------------------##
+*/
+void service::servAddscientist(scientist& s)
 {
-    return workingObject.deleteComputer(compID);
+    workingObject.addscientist(s);
 }
-bool service::servDeleteComputerType(int computertypeID)
+void service::servAddcomputer(computer& c)
 {
-    return workingObject.deleteComputerType(computertypeID);
+    workingObject.addcomputer(c);
 }
+void service::servAddcomputerType(computertype& ct)
+{
+    workingObject.addcomputerType(ct);
+}
+bool service::servAddRelationSciComp(int sciID, int compID)
+{
+    return workingObject.addRelationSciComp(sciID, compID);
+}
+
+/*
+##  Update functions
+##---------------------------------------------------------------------------------------##
+*/
 void service::servUpdateSqlScientist(scientist& s)
 {
     workingObject.updateSqlScientist(s);
@@ -258,6 +180,44 @@ bool service::servUpdateSqlComputerType(computertype& ct)
 {
     return workingObject.updateSqlComputerType(ct);
 }
+
+/*
+##  Delete functions
+##---------------------------------------------------------------------------------------##
+*/
+void service::servDeleteScientist(int sciID)
+{
+    workingObject.deleteScientist(sciID);
+}
+bool service::servDeleteComputer(int compID)
+{
+    return workingObject.deleteComputer(compID);
+}
+bool service::servDeleteComputerType(int computertypeID)
+{
+    return workingObject.deleteComputerType(computertypeID);
+}
+bool service::servDeleteRelationSciComp(int sciID, int compID)
+{
+    return workingObject.deleteRelationSciComp(sciID, compID);
+}
+
+/*
+##  Get vector functions
+##---------------------------------------------------------------------------------------##
+*/
+vector<scientist> service::servGetSciVector()
+{
+    return workingObject.getSciVector();
+}
+vector<computer> service::servGetComVector()
+{
+    return workingObject.getComVector();
+}
+vector<computertype> service::servGetCompTypeVector()
+{
+    return workingObject.getCompTypeVector();
+}
 vector<scientist> service::servGetScientistsLinkedToComputer(int compID)
 {
     return workingObject.getScientistsLinkedToComputer(compID);
@@ -266,31 +226,130 @@ vector<computer> service::servGetComputersLinkedToScientists(int sciID)
 {
     return workingObject.getComputersLinkedToScientists(sciID);
 }
+
+/*
+##  Erase vector functions
+##---------------------------------------------------------------------------------------##
+*/
+void service::servEraseScientistVector()
+{
+    workingObject.eraseScientistVector();
+}
+void service::servEraseComputerVector()
+{
+    workingObject.eraseComputerVector();
+}
+void service::servEraseCompTypeVector()
+{
+    workingObject.eraseCompTypeVector();
+}
+
+/*
+##  Sort functions
+##---------------------------------------------------------------------------------------##
+*/
+void service::servSortScientists(int choice)
+{
+    switch(choice)
+    {
+        case 1:
+            workingObject.readSqlScientists("name ASC;");
+            break;
+        case 2:
+            workingObject.readSqlScientists("name DESC;");
+            break;
+        case 3:
+            workingObject.readSqlScientists("yob ASC;");
+            break;
+        case 4:
+            workingObject.readSqlScientists("yob DESC;");
+            break;
+        default:
+            break;
+      }
+}
+void service::servSortComputers(int choice)
+{
+      switch(choice)
+      {
+            case 1:
+                workingObject.readSqlComputers("name;");
+                break;
+            case 2:
+                workingObject.readSqlComputers("name DESC;");
+                break;
+            case 3:
+                workingObject.readSqlComputers("year;");
+                break;
+            case 4:
+                workingObject.readSqlComputers("type, name;");
+                break;
+            default:
+                break;
+          cout<<"test4 "<<endl;
+
+      }
+}
+
+/*
+##  Search scientists functions
+##---------------------------------------------------------------------------------------##
+*/
+void service::servSearchScientistByName(string subName, bool& isFound)
+{
+    workingObject.searchScientistByName(subName, isFound);
+}
+void service::servSearchScientistByGender(int sex, bool& isFound)
+{
+    workingObject.searchScientistByGender(sex, isFound);
+}
+void service::servSearchScientistByYear(int& yr, char bORd, bool& isFound)
+{
+    yr = yearCorrection(yr,isFound);
+    workingObject.searchScientistByYear(yr, bORd, isFound);
+}
+
+/*
+##  Search computers functions
+##---------------------------------------------------------------------------------------##
+*/
 void service::servSearchComputerByName(string subName, bool& isFound)
 {
     workingObject.searchComputerByName(subName, isFound);
 }
-
 void service::servSearchComputerByType(string& type, bool& isFound)
 {
     workingObject.searchComputerByType(type, isFound);
 }
-
 void service::servSearchComputerByYear(int& yr, bool& isFound)
 {
     yr = yearCorrection(yr,isFound);
     workingObject.searchComputerByYear(yr, isFound);
 }
+
+/*
+##  Database functions
+##---------------------------------------------------------------------------------------##
+*/
+void service::servStartDatabase()
+{
+    workingObject.startDatabase();
+}
+bool service::servCheckDatabaseExists()
+{
+    return workingObject.checkDatabaseExists();
+}
 void service::servCreateEmptyDatabase()
 {
     workingObject.createEmptyDatabase();
 }
-bool service::servAddRelationSciComp(int sciID, int compID)
+void service::servCloseDatabase()
 {
-    return workingObject.addRelationSciComp(sciID, compID);
+    workingObject.closeDatabase();
 }
-bool service::servDeleteRelationSciComp(int sciID, int compID)
-{
-    return workingObject.deleteRelationSciComp(sciID, compID);
-}
+
+
+
+
+
 

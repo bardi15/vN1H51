@@ -11,7 +11,7 @@ class scientist
     public:
 
         /*
-        ##  Initialisers
+        ##  Constructors
         ##---------------------------------------------------------------------------------------##
         */
         scientist();
