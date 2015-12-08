@@ -14,6 +14,7 @@ using namespace std;
 class service
 {
 public:
+
     service();
     //  Default constructor for class.
 
@@ -133,6 +134,8 @@ public:
     //  Calls the deleteScientist function in workingclass.
     bool servDeleteComputerType(int computertypeID);
     //  Calls the deleteComputerType function in workingclass.
+    bool servDeleteRelationSciComp(int sciID, int compID);
+    //  Calls the deleteRelationSciComp function in workingclass.
 
     /*
     ##  Update functions

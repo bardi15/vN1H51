@@ -30,6 +30,10 @@ public:
     workingclass();
     //  Default constructor for class.
 
+
+    string stringToLower(string str);
+
+
     /*
     ##  Get vector functions
     ##---------------------------------------------------------------------------------------##
@@ -98,6 +102,10 @@ public:
     bool deleteComputerType(int computertypeID);
     //  Precondition:   The parameter computertypeID is the ID of a computer type to be deleted.
     //  Postcondition:  The computer type computertypeID has been deleted from the database.
+    bool deleteRelationSciComp(int sciID, int compID);
+    //  Precondition:   The parameters sciID and compID are the IDs of a scientist and a computer
+    //      which relation is about to be deleted.
+    //  Postcondition:  The relation between the scientist and the computer has been deleted from the database.
 
     /*
     ##  Read functions

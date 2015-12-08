@@ -171,8 +171,8 @@ void infoDisplay::displayComList()
             cout.width(30);
             cout << c.getComName();// << "\t";
             cout << "\t" << c.getComYear()<< "\t";
-            computertype ct;
-            if (comtype > (serviceObject.servGetCompTypeVector().size() - 1))
+            //computertype ct;
+            if (comtype >= (serviceObject.servGetCompTypeVector().size()))
             {
                 cout<<"\t\n";
 
@@ -180,7 +180,7 @@ void infoDisplay::displayComList()
             else
             {
                 cout<<serviceObject.servGetCompTypeVector().at(comtype).getName()<<endl;
-                cout<< ct.getName();
+               // cout<< ct.getName();
             }
             //cout<<endl;
 

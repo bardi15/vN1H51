@@ -97,9 +97,9 @@ void workingclass::closeDatabase()
 bool workingclass::addRelationSciComp(int sciID, int compID)
 {
     QSqlQuery query;
-    query.prepare("INSERT INTO scientists_and_computers "
-                  "(scientist_id, computer_id) "
-                  "VALUES (:sID, :cID); ");
+    query.prepare(" INSERT INTO scientists_and_computers "
+                  " (scientist_id, computer_id) "
+                  " VALUES (:sID, :cID); ");
     query.bindValue(";sID", sciID);
     query.bindValue(":cID", compID);
     query.exec();
@@ -112,8 +112,6 @@ bool workingclass::addRelationSciComp(int sciID, int compID)
 
 void workingclass::readSqlScientists(string sorting)
 {
-
-
     QSqlQuery query;
 
     query.prepare("SELECT * FROM scientists "
@@ -276,7 +274,7 @@ void workingclass::readSqlCompTypes()
 
     query.prepare("SELECT * FROM computer_types "
                   "WHERE deleted = 'FALSE' "
-                  "ORDER BY name ASC");
+                  "ORDER BY id ASC");
     query.exec();
     compTypeVector.clear();
     while(query.next())
@@ -380,6 +378,21 @@ bool workingclass::deleteComputerType(int computertypeID)
     }
     return false;
 }
+bool workingclass::deleteRelationSciComp(int sciID, int compID)
+{
+    QSqlQuery query;
+    query.prepare(" UPDATE scientists_and_computers SET deleted = 'FALSE' "
+                  " WHERE scientist_id = :sid AND computer_id = :cid ");
+    query.bindValue(":sid", sciID);
+    query.bindValue(":cid", compID);
+    query.exec();
+    if(!query.lastError().isValid())
+    {
+        return true;
+    }
+    return false;
+}
+
 
 void workingclass::eraseScientistVector()
 {
@@ -490,32 +503,51 @@ void workingclass::searchComputerByName(string subName, bool& isFound)
     computerVector.clear();
     computerVector = returnVector;
 }
+string workingclass::stringToLower(string str)
+{
+    string tempstr;
+    for(unsigned int i = 0; i < str.size(); i++)
+    {
+        tempstr[i] = str[i];
+    }
+}
+
 void workingclass::searchComputerByType(string& type, bool& isFound)
 {
     vector<computer> returnVector;
     computer c;
     readSqlCompTypes();
-    for(unsigned int i = 0; i < computerVector.size(); i++)
+    for (unsigned int i = 0; i < type.size(); i++)  // set inputið í lowercase
     {
-        string searchstring = getCompTypeVector().at(computerVector.at(i).getComType()-1).getName();
-        for (unsigned int j = 0; j < searchstring.size(); j++)
+        type[i] = tolower(type[i]);
+    }
+    for(unsigned int i = 0; i < compTypeVector.size(); i++) // Hleyp í gegnum comptype vectorinn
+    {
+        string searchstring = compTypeVector.at(i).getName();
+        for (unsigned int j = 0; j < searchstring.size(); j++)  //set comptypename í lowercase
         {
             searchstring[j] = tolower(searchstring[j]);
         }
-        for (unsigned int j = 0; j < type.size(); j++)
+        if( searchstring.find( type) < 30 ) //  ef type finnst í comptypename
         {
-            type[j] = tolower(type[j]);
+            int iType = compTypeVector.at(i).getid();
+            for(unsigned int k = 0; k < computerVector.size(); k++) //Hleyp í gengum computer vectorinn
+            {
+                if(computerVector.at(k).getComType() == iType)  // Ef type == compputertype
+                {
+                    c = computerVector.at(k);
+                    returnVector.push_back(c);
+                    isFound    = true;
+                }
+            }
         }
 
-        if( searchstring.find( type) < 30 )
-       {
-            c = computerVector.at(i);
-            returnVector.push_back(c);
-            isFound = true;
-       }
     }
-    computerVector.clear();
-    computerVector = returnVector;
+    if( returnVector.size() > 0)
+    {
+        computerVector.clear();
+        computerVector = returnVector;
+    }
 }
 void workingclass::searchComputerByYear(int& yr, bool& isFound)
 {
