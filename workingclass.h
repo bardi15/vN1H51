@@ -7,12 +7,12 @@
 
 #include <QtSql>
 #include<qfile.h>
-#include <cstring>
-#include <cstdlib>
-#include <stdlib.h>
+//#include <cstring>
+//#include <cstdlib>
+//#include <stdlib.h>
 #include <string>
 #include <vector>
-#include <algorithm>
+//#include <algorithm>
 
 using namespace std;
 
@@ -51,7 +51,7 @@ public:
     //  Postcondition:  Returns a vector of computers related to the scientist.
 
     /*
-    ##  Add funtctinos
+    ##  Add functions
     ##---------------------------------------------------------------------------------------##
     */
     bool addscientist(scientist& s);
@@ -72,7 +72,7 @@ public:
     //      Returns true if the operations goes through, false otherwise.
 
     /*
-    ##  Update instances
+    ##  Update functions
     ##---------------------------------------------------------------------------------------##
     */
     void updateSqlScientist(scientist& s);
@@ -150,13 +150,16 @@ public:
     ##---------------------------------------------------------------------------------------##
     */
     void searchComputerByName(string subName, bool& isFound);
-    //  Precondition:   Takes in the parameter subName to be searched for and a boolean variable to indicate if found.
+    //  Precondition:   Takes in the parameter subName to be searched for and a boolean variable
+    //      to indicate if found.
     //  Postcondition:  Returns a vector of the computers matching the criteria.
     void searchComputerByType(string& type, bool& isFound);
-    //  Precondition:   Takes in the parameter type to be searched for and a boolean variable to indicate if found.
+    //  Precondition:   Takes in the parameter type to be searched for and a boolean variable
+    //      to indicate if found.
     //  Postcondition:  Returns a vector of the computers matching the criteria.
     void searchComputerByYear(int& yr, bool& isFound);
-    //  Precondition:   Takes in the parameter year to be searched for and a boolean variable to indicate if found.
+    //  Precondition:   Takes in the parameter year to be searched for and a boolean variable
+    //      to indicate if found.
     //  Postcondition:  Returns a vector of the computers matching the criteria.
 
     /*

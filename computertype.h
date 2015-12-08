@@ -1,5 +1,6 @@
 #ifndef COMPUTERTYPE_H
 #define COMPUTERTYPE_H
+
 #include <string>
 
 using namespace  std;
@@ -8,6 +9,11 @@ using namespace  std;
 class computertype
 {
 public:
+
+    /*
+    ##  Initialisers
+    ##---------------------------------------------------------------------------------------##
+    */
     computertype();
     // Precondition:    An instance of the class has been created.
     // Postcondition:   Initialises all string variablaes with an empty string,
@@ -18,6 +24,11 @@ public:
     computertype(string ctName, string ctDesc);
     // Precondition:    An instance of the class has been created.
     // Postcondition:   Initialises name as ctName and desc as ctDesc, iD is created in the database.
+
+    /*
+    ##  Get functions
+    ##---------------------------------------------------------------------------------------##
+    */
     int getid();
     // Postcondition:   Returns an integer with the id of the computer type.
     string getName();
@@ -26,6 +37,11 @@ public:
     string getDesc();
     // Precondition:    The class has been initialised with a legal description.
     // Postcondition:   Returns a string with the description.
+
+    /*
+    ##  Set functions
+    ##---------------------------------------------------------------------------------------##
+    */
     void setID(int inID);
     // Precondition:    The parameter is of a legal type and value.
     // Postcondition:   The id has been set to the parameter inID.

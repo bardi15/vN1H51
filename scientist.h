@@ -9,6 +9,11 @@ using namespace std;
 class scientist
 {
     public:
+
+        /*
+        ##  Initialisers
+        ##---------------------------------------------------------------------------------------##
+        */
         scientist();
         // Precondition:    An instance of the class has been created.
         // Postcondition:   Initialises all string variablaes with a space, integer and boolean variables as 0.
@@ -19,7 +24,12 @@ class scientist
         // Precondition:    All variables have been set with leagal values.
         // Postcondition:   Initialises all variables exept id according to parameters.
 
+        /*
+        ##  Get functions
+        ##---------------------------------------------------------------------------------------##
+        */
         int getID() const;
+        // Precondition:    The class has been initialised with a legal id.
         // Postcondition:   Returns an integer with the id of the famous scientist.
         string getName() const;
         // Precondition:    The class has been initialised with a legal name.
@@ -39,6 +49,11 @@ class scientist
         string getLink() const;
         // Precondition:    The class has been initialised with a legal link.
         // Postcondition:   Returns a string with a link.
+
+        /*
+        ##  Set functions
+        ##---------------------------------------------------------------------------------------##
+        */
         void setID(int inID);
         // Precondition:    The parameter is of a legal type and value.
         // Postcondition:   The id has been set to the parameter inID.

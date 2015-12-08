@@ -459,7 +459,7 @@ void workingclass::searchScientistByYear(int& yr, char bORd, bool& isFound)
 {
     vector<scientist> returnVector;
     scientist s;
-    bool error = false;
+
     for(unsigned int i = 0; i < scientistVector.size(); i++)
     {
         if(bORd == 'b')
