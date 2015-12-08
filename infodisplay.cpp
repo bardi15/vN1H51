@@ -364,17 +364,17 @@ bool infoDisplay::dispSureToRemove(int gender)
 
     return yesOrNo();// continueF;
 }
-void infoDisplay::dispScientistToEdit(vector<scientist>& v)
-{
-    int sel;
-    cout << "\tEnter the number of the scientist you would like to edit" << endl;
-    commonPhrases("choice");
-    sel = inputNumberToFunction();
-    if(sel > 0)
-    {
-        displayOneScientist(v.at(sel-1));
-    }
-}
+//void infoDisplay::dispScienUtistToEdit(vector<scientist>& v)
+//{
+//    int sel;
+//    cout << "\tEnter the number of the scientist you would like to edit" << endl;
+//    commonPhrases("choice");
+//    sel = inputNumberToFunction();
+//    if(sel > 0)
+//    {
+//        displayOneScientist(v.at(sel-1));
+//    }
+//}
 
 void infoDisplay::displayOneScientist(scientist& s)
 {

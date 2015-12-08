@@ -1,6 +1,10 @@
 #ifndef INFODISPLAY_H
 #define INFODISPLAY_H
 
+#include "opengreeting.h"
+#include "service.h"
+
+
 #include <iostream>
 #include <cstdlib>
 #include <vector>
@@ -10,9 +14,6 @@
 #include <sstream>
 #include <time.h>
 #include <unistd.h>
-#include "opengreeting.h"
-#include "scientist.h"
-#include "service.h"
 #include <iomanip>
 
 const unsigned int HOLYSCROLL = 15;
@@ -74,9 +75,6 @@ public:
     void displayOneComputer(computer& c);
     //  Precondition:   Takes in one computer to display as a parameter.
     //  Postcondition:  Displays all information about the computer on screen
-    void displaySciList(vector<scientist>& v);
-    //  Precondition:   The vector v has been populated with scientist.
-    //  Postcondition:  Displays all scientist according to condition on screen.
     void displaySciList();
     //  Precondition:   The scientist have been read from the database.
     //  Postcondition:  Displays all scientist according to condition on screen.
@@ -93,9 +91,6 @@ public:
     //  Precondition:   A list of computers has been displayed.
     //  Postcondition:  Ask for which if any computer to display fuller information on.
     //      Returns the selection.
-    void dispScientistToEdit(vector<scientist>& v);
-    //  Precondition:   The vector v has been populated with scientist.
-    //  Postcondition:  Selected scientist has is displayed on screen.
     void dispSelectScientistToDelete();
     //  Precondition:   The vector v has been populated with scientist.
     //  Postcondition:  Selected scientist has been removed from the file.
@@ -106,8 +101,6 @@ public:
     //      is cancelled.
     void dispSelectComputerToDelete();
     bool dispSureToRemoveComp();
-
-
 
 
     void displayChangeScientist();

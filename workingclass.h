@@ -4,9 +4,9 @@
 #include "scientist.h"
 #include "computer.h"
 #include "computertype.h"
+
 #include <QtSql>
 #include<qfile.h>
-
 #include <cstring>
 #include <cstdlib>
 #include <stdlib.h>
