@@ -94,7 +94,7 @@ void workingclass::closeDatabase()
     QSqlDatabase db;
     db.close();
 }
-bool workingclass::createRelationSciComp(int sciID, int compID)
+bool workingclass::addRelationSciComp(int sciID, int compID)
 {
     QSqlQuery query;
     query.prepare("INSERT INTO scientists_and_computers "
@@ -330,7 +330,7 @@ bool workingclass::addcomputer(computer& c)
 bool workingclass::addcomputerType(computertype & ct)
 {
     QSqlQuery query;
-    query.prepare("INSERT INTO computers_and_scientists (name, description) "
+    query.prepare("INSERT INTO computer_types (name, description) "
                   "VALUES (:name, :desc);");
     query.bindValue(":name", QString::fromStdString(ct.getName()));
     query.bindValue(":desc", QString::fromStdString(ct.getDesc()));
@@ -341,6 +341,22 @@ bool workingclass::addcomputerType(computertype & ct)
     }
     return false;
 }
+//bool workingclass::addRelationSciComp(int sciID, int compID)
+//{
+//    QSqlQuery query;
+//    query.prepare("INSERT INTO scientists_and_computers "
+//                  "(scientist_id, computer_id) "
+//                  "VALUES (:sID, :cID); ");
+//     query.bindValue(";sID", sciID);
+//     query.bindValue(":cID", compID);
+//     query.exec();
+//     if(!query.lastError().isValid())
+//     {
+//         return true;
+//     }
+//     return false;
+// }
+
 void workingclass::deleteScientist(int sciID)
 {
     QSqlQuery query;
@@ -381,7 +397,6 @@ bool workingclass::deleteComputerType(int computertypeID)
     }
     return false;
 }
-
 
 void workingclass::eraseScientistVector()
 {

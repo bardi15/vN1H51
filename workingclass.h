@@ -80,7 +80,7 @@ public:
     vector<scientist> getScientistsLinkedToComputer(int compID);
     //  Precondition:   A scientist is selected and its ID sent in as sciID.
     //  Postcondition:  Returns a vector of computers related to the scientist.
-    bool createRelationSciComp(int sciID, int compID);
+    bool addRelationSciComp(int sciID, int compID);
     //  Precondition:   Takes in id's of both an existing scientist and an existing computer.
     //  Postcondition:  Creates a link between the scientist and the computer in the database.  Returns true if the operations goes through, false otherwise.
     void eraseScientistVector();

@@ -91,6 +91,8 @@ public:
     //  Calls the updateComputer function in workingclass.
     bool servUpdateSqlComputerType(computertype& ct);
     //  Calls the updateComputerType function in workingclass.
+    bool servAddRelationSciComp(int sciID, int compID);
+    //  Calls the addRelationSciComp function in workingclass.
     void henda();
     workingclass workingObject;
     // A object of the data layer class.  To be used in good computing :)

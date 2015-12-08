@@ -190,6 +190,7 @@ void infoDisplay::displayComList()
 }
 void infoDisplay::displayComTypeList()
 {
+    serviceObject.servReadSqlCompTypes();
     unsigned int ctSize = serviceObject.servGetComTypeVector().size();
     unsigned int scrollFactor;
     if (ctSize > HOLYSCROLL)
@@ -206,7 +207,7 @@ void infoDisplay::displayComTypeList()
     do
     {
         listheaderComType();
-        serviceObject.servReadSqlCompTypes();
+
         for(unsigned int i = scrollBase; i < scrollFactor; i++)
         {
             computertype ct = serviceObject.servGetComTypeVector().at(i);
@@ -1179,11 +1180,10 @@ void infoDisplay::displayComputerService()
 
 void infoDisplay::displayComputerTypeService()
 {
-    serviceObject.servReadSqlComputers();
 
     displayComTypeList();
 
-    unsigned int choice = moreInfoOnComputer();
+    unsigned int choice = moreInfoOnComputerTypes();
     if(choice > 0 && choice <= serviceObject.servGetComTypeVector().size())
     {
         displayOneComputerType(serviceObject.servGetComTypeVector().at(choice-1));

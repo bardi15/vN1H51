@@ -295,10 +295,10 @@ void service::servCreateEmptyDatabase()
 {
     workingObject.createEmptyDatabase();
 }
-//bool service::servCreateRelationSciComp(int sciID, int compID)
-//{
-//    return workingObject.createRelationSciComp(sciID, compID);
-//}
+bool service::servAddRelationSciComp(int sciID, int compID)
+{
+    return workingObject.addRelationSciComp(sciID, compID);
+}
 
 void service::henda()
 {
