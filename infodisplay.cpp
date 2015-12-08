@@ -536,7 +536,7 @@ void infoDisplay::displayOneComputerType(computertype& ct)
 
 void infoDisplay::clearScreen()
 {
-    //system("cls");
+    system("cls");
 }
 
 void infoDisplay::mainMenu()
@@ -877,7 +877,7 @@ void infoDisplay::splashScreen()
 {
     opengreeting greet;
 
-    //greet.greetingPost();
+    greet.greetingPost();
 }
 void infoDisplay::displayChangeScientist()
 {
