@@ -2093,9 +2093,9 @@ void infoDisplay::sciToComRelations()
     cout<<"\tSelect the scientist you want to add Relations to: ";
     unsigned int choiceSc = inputNumberToFunction();
 
-    if(choiceSc > 0 && choiceSc <= serviceObject.servGetSciVector().size())
+    if(choiceSc > 0 && choiceSc < serviceObject.servGetSciVector().size())
     {
-        sciID = serviceObject.servGetSciVector().at(choiceSc).getID();
+        sciID = serviceObject.servGetSciVector().at(choiceSc-1).getID();
     }
 
     cout<<"\tsciID is :"<<sciID<<endl;
@@ -2107,9 +2107,9 @@ void infoDisplay::sciToComRelations()
 
     unsigned int choiceC = inputNumberToFunction();
 
-    if(choiceC > 0 && choiceC <= serviceObject.servGetComVector().size())
+    if(choiceC > 0 && choiceC < serviceObject.servGetComVector().size())
     {
-        comID = serviceObject.servGetComVector().at(choiceC).getId();
+        comID = serviceObject.servGetComVector().at(choiceC-1).getId();
     }
 
     cout<<"\tsciID is :"<<sciID<<endl;

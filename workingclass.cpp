@@ -100,7 +100,7 @@ bool workingclass::addRelationSciComp(int sciID, int compID)
     query.prepare(" INSERT INTO scientists_and_computers "
                   " (scientist_id, computer_id) "
                   " VALUES (:sID, :cID); ");
-    query.bindValue(";sID", sciID);
+    query.bindValue(":sID", sciID);
     query.bindValue(":cID", compID);
     query.exec();
     if(!query.lastError().isValid())
