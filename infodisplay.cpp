@@ -130,7 +130,7 @@ bool infoDisplay::scrollNeeded(string comOrSci)
     }
     else if(comOrSci == "comtype")
     {
-        unsigned int vSize = serviceObject.servGetComTypeVector().size();
+        unsigned int vSize = serviceObject.servGetCompTypeVector().size();
         if (vSize > HOLYSCROLL)
         {
             returntype = true;
@@ -172,7 +172,7 @@ void infoDisplay::displayComList()
             cout << c.getComName();// << "\t";
             cout << "\t" << c.getComYear()<< "\t";
             computertype ct;
-            cout<<serviceObject.servGetComTypeVector().at(comtype).getName()<<endl;
+            cout<<serviceObject.servGetCompTypeVector().at(comtype).getName()<<endl;
             //cout<< ct.getName() << endl;
         }
         if (scrollNeeded("com") == true)
@@ -191,7 +191,7 @@ void infoDisplay::displayComList()
 void infoDisplay::displayComTypeList()
 {
     serviceObject.servReadSqlCompTypes();
-    unsigned int ctSize = serviceObject.servGetComTypeVector().size();
+    unsigned int ctSize = serviceObject.servGetCompTypeVector().size();
     unsigned int scrollFactor;
     if (ctSize > HOLYSCROLL)
     {
@@ -210,7 +210,7 @@ void infoDisplay::displayComTypeList()
 
         for(unsigned int i = scrollBase; i < scrollFactor; i++)
         {
-            computertype ct = serviceObject.servGetComTypeVector().at(i);
+            computertype ct = serviceObject.servGetCompTypeVector().at(i);
             cout.width(2);
             cout << "\t" << i+1 << ")\t";
             cout.width(16);
@@ -323,7 +323,7 @@ int infoDisplay::moreInfoOnComputer()
 int infoDisplay::moreInfoOnComputerTypes()
 {
     unsigned int sel;
-    if(serviceObject.servGetComTypeVector().size() > 0)
+    if(serviceObject.servGetCompTypeVector().size() > 0)
     {
         cout << "\tWould you like more info on any of the computers types?" << endl;
         commonPhrases("choice");
@@ -474,7 +474,7 @@ void infoDisplay::displayOneComputer(computer& c)
     printLines(1, "thin");
     cout << "\tName: " << c.getComName() << endl;
     cout << "\tType: ";
-    cout << serviceObject.servGetComTypeVector().at(c.getComType()-1).getName() << endl;
+    cout << serviceObject.servGetCompTypeVector().at(c.getComType()-1).getName() << endl;
     cout << "\tProduction year: " <<  c.getComYear() << endl;
 
     if(c.getComDescription().size() > firstLine)
@@ -747,12 +747,12 @@ void infoDisplay::dispSelectNewComputerTypeToDelete()
     cout << "\tWhat computer Type would you like delete?" << endl;
     commonPhrases("choice");
     sel = inputNumberToFunction();
-    if(sel > 0  && sel < serviceObject.servGetComTypeVector().size()+1)
+    if(sel > 0  && sel < serviceObject.servGetCompTypeVector().size()+1)
     {
-        displayOneComputerType(serviceObject.servGetComTypeVector().at(sel-1));
+        displayOneComputerType(serviceObject.servGetCompTypeVector().at(sel-1));
         if(dispSureToRemoveComp())
         {
-            deleted = serviceObject.servDeleteComputerType(serviceObject.servGetComTypeVector().at(sel-1).getid());
+            deleted = serviceObject.servDeleteComputerType(serviceObject.servGetCompTypeVector().at(sel-1).getid());
 
             if (deleted == true)
             {
@@ -789,7 +789,7 @@ void infoDisplay::displayChangeNewComputerType()
 
         cout << "\tEnter the number of the computer type you would like to edit: ";
         i = inputNumberToFunction() - 1;
-        displayOneComputerType(serviceObject.servGetComTypeVector().at(i));
+        displayOneComputerType(serviceObject.servGetCompTypeVector().at(i));
         editComputerTypeService(i);
         clearScreen();
         continueP = addScientistContinue();
@@ -877,7 +877,7 @@ void infoDisplay::splashScreen()
 {
     opengreeting greet;
 
-    greet.greetingPost();
+    //greet.greetingPost();
 }
 void infoDisplay::displayChangeScientist()
 {
@@ -1097,7 +1097,7 @@ void infoDisplay::selectAction()
             sleep(3);
         }
     }
-    serviceObject.henda();
+
 
 
     do
@@ -1183,9 +1183,9 @@ void infoDisplay::displayComputerTypeService()
     string temp;
     displayComTypeList();
     unsigned int choice = moreInfoOnComputerTypes();
-    if(choice > 0 && choice <= serviceObject.servGetComTypeVector().size())
+    if(choice > 0 && choice <= serviceObject.servGetCompTypeVector().size())
     {
-        displayOneComputerType(serviceObject.servGetComTypeVector().at(choice-1));
+        displayOneComputerType(serviceObject.servGetCompTypeVector().at(choice-1));
     }
     addEmptyLines(1);
     cout<<"\tPress any key to continue: ";
@@ -1319,8 +1319,8 @@ void infoDisplay::editComputerTypeService(unsigned int i)
     {
         string ctName, ctDesc;
 
-        ctName = serviceObject.servGetComTypeVector().at(i).getName();
-        ctDesc = serviceObject.servGetComTypeVector().at(i).getDesc();
+        ctName = serviceObject.servGetCompTypeVector().at(i).getName();
+        ctDesc = serviceObject.servGetCompTypeVector().at(i).getDesc();
 
         bool continueP = false;
 
@@ -1832,7 +1832,7 @@ bool infoDisplay::addComputerCheck(string cName, int cYear, int cType, bool cBui
     printLines(1, "thick");
     cout<<"\tName: "<<cName<<endl;
     cout<<"\tYear of Creation: "<<cYear<<endl;
-    cout<<"\tComputer Type: "<<serviceObject.servGetComTypeVector().at(cType - 1).getName()<<endl;
+    cout<<"\tComputer Type: "<<serviceObject.servGetCompTypeVector().at(cType - 1).getName()<<endl;
     cout<<"\tWas the Computer built?: ";
     if (cBuilt == true)
     {
@@ -2041,10 +2041,10 @@ int infoDisplay::addComputerType()
     serviceObject.servReadSqlCompTypes();
     cout<<"\tSelect computer type: "<<endl;
     cout<<"\t";
-    for (unsigned int i = 0; i < serviceObject.servGetComTypeVector().size(); i++)
+    for (unsigned int i = 0; i < serviceObject.servGetCompTypeVector().size(); i++)
     {
         cout<<i+1<<") ";
-        cout<<serviceObject.servGetComTypeVector().at(i).getName();
+        cout<<serviceObject.servGetCompTypeVector().at(i).getName();
         cout<<endl<<"\t";
     }
     cout<<"Enter selection : ";
@@ -2055,7 +2055,7 @@ int infoDisplay::addComputerType()
         continueF = false;
 
         selection = inputNumberToFunction();
-        if ((selection < 1)||(selection > serviceObject.servGetComTypeVector().size()))
+        if ((selection < 1)||(selection > serviceObject.servGetCompTypeVector().size()))
         {
             cout<<"\tBad selection, try again: ";
             continueF = true;

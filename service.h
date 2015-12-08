@@ -72,7 +72,7 @@ public:
     //  Calls the getVector function in workingclass.
     vector<computer> servGetComVector();
     //  Calls the getVector function in workingclass.
-    vector<computertype> servGetComTypeVector();
+    vector<computertype> servGetCompTypeVector();
     //  Calls the getComTypeVector function in workingclass.
     vector<scientist> servGetScientistsLinkedToComputer(int compID);
     //  Calls the getScientistsLinkedToComputer function in workingclass.
