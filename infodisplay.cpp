@@ -159,7 +159,7 @@ void infoDisplay::displayComList()
     bool continueF;
 
     do
-    {
+    {        
         listheaderCom();
         for(unsigned int i = scrollBase; i < scrollFactor; i++)
         {
@@ -172,8 +172,18 @@ void infoDisplay::displayComList()
             cout << c.getComName();// << "\t";
             cout << "\t" << c.getComYear()<< "\t";
             computertype ct;
-            cout<<serviceObject.servGetCompTypeVector().at(comtype).getName()<<endl;
-            //cout<< ct.getName() << endl;
+            if ((comtype < 0)||(comtype > (serviceObject.servGetCompTypeVector().size() - 1)))
+            {
+                cout<<"\t\n";
+
+            }
+            else
+            {
+                cout<<serviceObject.servGetCompTypeVector().at(comtype).getName()<<endl;
+                cout<< ct.getName();
+            }
+            //cout<<endl;
+
         }
         if (scrollNeeded("com") == true)
         {
@@ -789,10 +799,22 @@ void infoDisplay::displayChangeNewComputerType()
 
         cout << "\tEnter the number of the computer type you would like to edit: ";
         i = inputNumberToFunction() - 1;
-        displayOneComputerType(serviceObject.servGetCompTypeVector().at(i));
-        editComputerTypeService(i);
-        clearScreen();
-        continueP = addScientistContinue();
+
+        if ((i < 1)||(i > serviceObject.servGetCompTypeVector().size()))
+        {
+            continueP = false;
+            commonPhrases("nothingsel");
+        }
+        else
+        {
+            displayOneComputerType(serviceObject.servGetCompTypeVector().at(i));
+            editComputerTypeService(i);
+            clearScreen();
+            continueP = addScientistContinue();
+        }
+
+
+
     }
 }
 
@@ -856,6 +878,7 @@ void infoDisplay::addComputerTypeChange(string &ctName, string &ctDescr)
     //clearScreen();
     addEmptyLines(1);
     commonPhrases("change");
+    printLines(1,"thin");
     cout<<"\t1. Type name, 2. Description, other digits cancel: ";
     input = inputNumberToFunction();
 
@@ -893,10 +916,20 @@ void infoDisplay::displayChangeScientist()
 
         cout << "\tEnter the number of the scientist you would like to edit: ";
         i = inputNumberToFunction() - 1;
-        displayOneScientist(serviceObject.servGetSciVector().at(i));
-        editScientistService(i);
-        clearScreen();
-        continueP = addScientistContinue();
+
+        if ((i < 1)||(i > serviceObject.servGetSciVector().size()))
+        {
+            continueP = false;
+            commonPhrases("nothingsel");
+        }
+        else
+        {
+            displayOneScientist(serviceObject.servGetSciVector().at(i));
+            editScientistService(i);
+            clearScreen();
+            continueP = addScientistContinue();
+        }
+
     }
 }
 
@@ -1868,6 +1901,7 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
     //clearScreen();
     addEmptyLines(1);
     commonPhrases("change");
+    printLines(1,"thin");
     cout<<"\t1. Name, 2. Gender, 3. Year of Birth, 4. Year of Death \n\t5. Description, 6. Computer, 7. Link, other digits cancel: ";
     input = inputNumberToFunction();
 
@@ -2091,6 +2125,7 @@ void infoDisplay::addComputerChange(string &cName, int &cYear, int &cType, bool 
     //clearScreen();
     addEmptyLines(1);
     commonPhrases("change");
+    printLines(1,"thin");
     cout<<"\t1. Name, 2. Year of Creation, 3. Type, 4. Built, 5. Description \n";
     cout << "\tother digits cancel: ";
     input = inputNumberToFunction();
@@ -2133,10 +2168,19 @@ void infoDisplay::displayChangeComputer()
 
         cout << "\tEnter the number of the computer you would like to edit: ";
         i = inputNumberToFunction() - 1;
-        displayOneComputer(serviceObject.servGetComVector().at(i));
-        editComputerService(i);
-        clearScreen();
-        continueP = addScientistContinue();
+
+        if ((i < 1)||(i > serviceObject.servGetComVector().size()))
+        {
+            continueP = false;
+            commonPhrases("nothingsel");
+        }
+        else
+        {
+            displayOneComputer(serviceObject.servGetComVector().at(i));
+            editComputerService(i);
+            clearScreen();
+            continueP = addScientistContinue();
+        }
     }
 }
 
