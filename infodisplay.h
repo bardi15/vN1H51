@@ -103,9 +103,7 @@ public:
     //  Precondition:   Data for a new scientist have been entered. Asks if any of the
     //      inserted data is to be changed.
     //  Postcondition:  Entered data for a new scientist has been corrected.
-    void commonPhrases(string phrase);
-    //  Precondition:   a string term is sent to function.
-    //  Postcondition:  prints out common phrase, for easier scaling.
+
 
 
     /*
@@ -416,6 +414,9 @@ public:
     //  Postcondition:  Returns true if you should continue or false if not.
     void printLines(int lines, string thickness);
     //  prints lines
+    void commonPhrases(string phrase);
+    //  Precondition:   a string term is sent to function.
+    //  Postcondition:  prints out common phrase, for easier scaling.
 
 
     service serviceObject;

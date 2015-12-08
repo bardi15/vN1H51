@@ -92,6 +92,10 @@ void infoDisplay::displaySciList()
         {
             continueF = scrollFunction(vSize, scrollBase, scrollFactor);
         }
+        else
+        {
+            continueF = false;
+        }
     }
     while (continueF == true);
     printLines(1, "thin");
@@ -157,9 +161,9 @@ void infoDisplay::displayComList()
     do
     {
         listheaderCom();
-        serviceObject.servReadSqlCompTypes();
         for(unsigned int i = scrollBase; i < scrollFactor; i++)
         {
+            serviceObject.servReadSqlCompTypes();
             computer c = serviceObject.servGetComVector().at(i);
             int comtype = (serviceObject.servGetComVector().at(i).getComType()) - 1;
             cout.width(2);
@@ -175,10 +179,13 @@ void infoDisplay::displayComList()
         {
             continueF = scrollFunction(cSize, scrollBase, scrollFactor);
         }
+        else
+        {
+            continueF = false;
+        }
     }
     while (continueF == true);
 
-    //cout << "\t-----------------------------------------------------" << endl;
     printLines(1, "thin");
 }
 
@@ -208,9 +215,9 @@ void infoDisplay::displayComTypeList()
             cout << "\t" << i+1 << ")\t";
             cout.width(16);
             cout << ct.getName();// << "\t";
-            if (ct.getDesc().size() >= 29)
+            if (ct.getDesc().size() >= 34)
             {
-                string newstring = ct.getDesc().substr(0,29) + "...";
+                string newstring = ct.getDesc().substr(0,34) + "...";
                 cout<<newstring;
             }
             else if ((ct.getDesc().size() > 1)&&(ct.getDesc().size() < 25))
@@ -227,6 +234,10 @@ void infoDisplay::displayComTypeList()
         if (scrollNeeded("com") == true)
         {
             continueF = scrollFunction(ctSize, scrollBase, scrollFactor);
+        }
+        else
+        {
+            continueF = false;
         }
     }
     while (continueF == true);
@@ -246,7 +257,7 @@ bool infoDisplay::scrollFunction(unsigned int vSize, unsigned int &scrollBase, u
             if (scrollFactor >= vSize)
             {
                 addEmptyLines(1);
-                cout<<"\tAny key continues.";
+                cout<<"\tAny character continues.";
             }
             else
             {
@@ -452,8 +463,8 @@ void infoDisplay::displayOneScientist(scientist& s)
         }
         printLines(1,"thick");
     }
-    cout << "\tEnter any character to continue ";
-    ans = inputCharacterToFunction();
+    commonPhrases("anycharacter");
+    cin>>ans;
 }
 
 void infoDisplay::displayOneComputer(computer& c)
@@ -498,8 +509,8 @@ void infoDisplay::displayOneComputer(computer& c)
         printLines(1,"thick");
     }
 
-    cout << "\tEnter any character to continue ";
-    ans = inputCharacterToFunction();
+    commonPhrases("anycharacter");
+    cin>>ans;
 }
 
 void infoDisplay::displayOneComputerType(computertype& ct)
@@ -527,14 +538,15 @@ void infoDisplay::displayOneComputerType(computertype& ct)
     {
         cout << "\tDescription: " << ct.getDesc() << endl;
     }
+    printLines(1,"thick");
 
-    cout << "\tEnter any character to continue ";
-    ans = inputCharacterToFunction();
+    commonPhrases("anycharacter");
+    cin>>ans;
 }
 
 void infoDisplay::clearScreen()
 {
-    //system("cls");
+    system("cls");
 }
 
 void infoDisplay::mainMenu()
@@ -558,7 +570,7 @@ void infoDisplay::mainMenu()
     cout << "\t7) Display a list of famous computers. \n";
     cout << "\t8) Display a list of computers types. \n";
     printLines(1, "thick");
-    cout << "\tAll other entries exit the program: ";
+    cout << "\tAll other digits exit the program: ";
 }
 
 void infoDisplay::menuForScientists()
@@ -900,8 +912,8 @@ void infoDisplay::displaySearchComputer()
 void infoDisplay::displaySearchScientistMenu()
 {
     addEmptyLines(5);
-    cout << "\tMenu for Search " << endl;
-    printLines(1, "thick");
+    cout << "\tMenu for Scientist search " << endl;
+    printLines(1, "thin");
     cout << "\t1) Search by name or part of name." << endl;
     cout << "\t2) Search by gender." << endl;
     cout << "\t3) Search by year of birth." << endl;
@@ -913,8 +925,8 @@ void infoDisplay::displaySearchScientistMenu()
 void infoDisplay::displaySearchComputersMenu()
 {
     addEmptyLines(5);
-    cout << "\tMenu for Search " << endl;
-    printLines(1, "thick");
+    cout << "\tMenu for Computer search " << endl;
+    printLines(1, "thin");
     cout << "\t1) Search by name or part of name." << endl;
     cout << "\t2) Search by type." << endl;
     cout << "\t3) Search by the building year." << endl;
@@ -929,14 +941,14 @@ void infoDisplay::printLines(int lines, string thickness)
     {
         for (int i = 0; i < lines; i++)
         {
-            cout<<"\t========================================================"<<endl;
+            cout<<"\t============================================================="<<endl;
         }
     }
     else if (thickness == "thin")
     {
         for (int i = 0; i < lines; i++)
         {
-            cout<<"\t--------------------------------------------------------"<<endl;
+            cout<<"\t-------------------------------------------------------------"<<endl;
 
         }
     }
@@ -969,12 +981,9 @@ void infoDisplay::displaySortScientistOptions()
     {
         serviceObject.servSortScientists(choice);
     }
-
-    cout<<"testetsetste"<<endl;
 }
 void infoDisplay::displaySortComputersOptions()
 {
-
     int choice = 1;
     clearScreen();
     addEmptyLines(5);
@@ -987,7 +996,15 @@ void infoDisplay::displaySortComputersOptions()
     printLines(1, "thick");
     cout << "\tInput choice here: ";
     choice = inputNumberToFunction();
-    serviceObject.servSortComputers(choice);
+
+    if ((choice < 1)||(choice > 4))
+    {
+        commonPhrases("nothingsel");
+    }
+    else
+    {
+        serviceObject.servSortComputers(choice);
+    }
 
 }
 void infoDisplay::addEmptyLines(int numLines)
@@ -1000,15 +1017,20 @@ void infoDisplay::addEmptyLines(int numLines)
 }
 void infoDisplay::quitProgram()
 {
+    bool sel;
     cout << "\tAre you sure you want to quit?  (Y/N): ";
-    if (yesOrNo())
+    sel = yesOrNo();
+    if (sel == true)
     {
         cout << "\tThank you, please come again!." << endl;
         serviceObject.servCloseDatabase();  // To close the database before quitting.
         exit(0);
     }
-    clearScreen();
-    mainMenu();
+    else
+    {
+        clearScreen();
+        //mainMenu();
+    }
 }
 int infoDisplay::getCurrentDate (string date)
 {
@@ -1074,7 +1096,7 @@ void infoDisplay::selectAction()
         clearScreen();
         mainMenu();
         int sel = serviceObject.selection();
-        unsigned int choice = 0;
+        //unsigned int choice = 0;
         switch(sel)
             {
             case 1:     //  Working with scientists
@@ -1122,7 +1144,7 @@ void infoDisplay::selectAction()
                 addEmptyLines(10);
                 quitProgram();
                 addEmptyLines(10);
-                exit(0);
+                //exit(0);
                 break;
            }
         }
@@ -1131,16 +1153,23 @@ void infoDisplay::selectAction()
 }
 void infoDisplay::displayComputerService()
 {
+
     displaySortComputersOptions();
     displayComList();
-//    do
-//    {
-        int choice = moreInfoOnComputerTypes();
-        if(choice > 0 && choice <= serviceObject.servGetComVector().size())
-        {
-            displayOneComputer(serviceObject.servGetComVector().at(choice-1));
-        }
-//    }while(choice > 0);
+
+    unsigned int choice = moreInfoOnComputer();
+
+    if(choice > 0 && choice <= serviceObject.servGetComVector().size())
+    {
+        cout<<"true!!"<<endl;
+        displayOneComputer(serviceObject.servGetComVector().at(choice-1));
+    }
+    else
+    {
+        cout<<"false!!"<<endl;
+
+        //selectAction();
+    }
 
 }
 
@@ -1150,33 +1179,26 @@ void infoDisplay::displayComputerTypeService()
 
     displayComTypeList();
 
-        int choice = moreInfoOnComputer();
-        if(choice > 0 && choice <= serviceObject.servGetComTypeVector().size())
-        {
-            displayOneComputerType(serviceObject.servGetComTypeVector().at(choice-1));
-        }
+    unsigned int choice = moreInfoOnComputer();
+    if(choice > 0 && choice <= serviceObject.servGetComTypeVector().size())
+    {
+        displayOneComputerType(serviceObject.servGetComTypeVector().at(choice-1));
+    }
 
 }
 
 void infoDisplay::displayScientistService()
 {
-    //bool continueF = false;
     displaySortScientistOptions();
+
     displaySciList();
 
-   // do
-   // {
+    unsigned int choice = moreInfoOnScientist();
 
-        int choice = moreInfoOnScientist();
-
-        if(choice > 0 && choice <= serviceObject.servGetSciVector().size())
-        {
-
-            displayOneScientist(serviceObject.servGetSciVector().at(choice-1));
-        }
-
-  //  }
-  //  while(continueF == true);
+    if(choice > 0 && choice <= serviceObject.servGetSciVector().size())
+    {
+        displayOneScientist(serviceObject.servGetSciVector().at(choice-1));
+    }
 
 }
 
@@ -1310,7 +1332,7 @@ void infoDisplay::editComputerTypeService(unsigned int i)
 void infoDisplay::searchScientistSelection(int select)
 {
     serviceObject.servReadSqlScientists();
-    char cont;
+    //char cont;
     bool continueF = false;
     switch (select)
     {
@@ -1326,7 +1348,7 @@ void infoDisplay::searchScientistSelection(int select)
             cout << "\tPlease enter a part of the name you would like to find: ";
             cin >> tempName;
             serviceObject.servSearchScientistByName(tempName, found);
-            if( found == true)
+            if(found == true)
             {
                 unsigned int sel;
                 do
@@ -1342,8 +1364,9 @@ void infoDisplay::searchScientistSelection(int select)
                     {
                         break;
                     }
-                }while(sel > 0 && sel < serviceObject.servGetSciVector().size());
-                cont = 'N';
+                }
+                while(sel > 0 && sel < serviceObject.servGetSciVector().size());
+                continueF = false;
             }
             else
             {
@@ -1379,8 +1402,9 @@ void infoDisplay::searchScientistSelection(int select)
                     {
                         break;
                     }
-                }while(sel > 0 && sel < serviceObject.servGetSciVector().size());
-                cont = 'N';
+                }
+                while(sel > 0 && sel < serviceObject.servGetSciVector().size());
+                continueF = false;
             }
             else
             {
@@ -1418,8 +1442,9 @@ void infoDisplay::searchScientistSelection(int select)
                     {
                         break;
                     }
-                }while(sel > 0 && sel <= serviceObject.servGetSciVector().size());
-                cont = 'N';
+                }
+                while(sel > 0 && sel <= serviceObject.servGetSciVector().size());
+                continueF = false;
             }
             else
             {
@@ -1457,8 +1482,10 @@ void infoDisplay::searchScientistSelection(int select)
                     {
                         break;
                     }
-                }while(sel > 0 && sel < serviceObject.servGetSciVector().size());
-                cont = 'N';
+                }
+                while(sel > 0 && sel < serviceObject.servGetSciVector().size());
+                continueF = false;
+
             }
             else
             {
@@ -1483,46 +1510,43 @@ void infoDisplay::searchComputerSelection(int select)
 {
     serviceObject.servReadSqlComputers();
     bool continueF = false;
-    char cont;
+    //char cont;
 
     switch (select)
     {
     case 1:     //  Search by name
+    {
+        string tempName;
+        bool found = false;
 
-        do
+        clearScreen();
+        addEmptyLines(5);
+        cout << "\tPlease enter a part of the name you would like to find: ";
+        cin >> tempName;
+        serviceObject.servSearchComputerByName(tempName, found);
+        if(found == true)
         {
-            string tempName;
-            bool found = false;
-
+            unsigned int sel;
             clearScreen();
-            addEmptyLines(5);
-            cout << "\tPlease enter a part of the name you would like to find: ";
-            cin >> tempName;
-            serviceObject.servSearchComputerByName(tempName, found);
-            if( found == true)
-            {
-                unsigned int sel;
-                do
-                {
-                    clearScreen();
-                    displayComList();
-                    sel = moreInfoOnComputer();
-                    if(sel > 0 && sel <= serviceObject.servGetComVector().size())
-                    {
-                        displayOneComputer(serviceObject.servGetComVector().at(sel-1));
-                    }
 
-                }while(sel > 0 && sel < serviceObject.servGetComVector().size());
-                cont = 'N';
-            }
-            else
+            displayComList();
+
+            sel = moreInfoOnComputer();
+
+            if((sel > 0) && (sel <= serviceObject.servGetComVector().size()))
             {
-                commonPhrases("nothingfound");
-                continueF = yesOrNo();
+                displayOneComputer(serviceObject.servGetComVector().at(sel-1));
             }
+
         }
-        while(continueF == true);
+        else
+        {
+            commonPhrases("nothingfound");
+            continueF = yesOrNo();
+        }
+
         break;
+    }
     case 2:     //  Search by type
         do
         {
@@ -1545,8 +1569,10 @@ void infoDisplay::searchComputerSelection(int select)
                     {
                         displayOneComputer(serviceObject.servGetComVector().at(sel-1));
                     }
-                }while(sel > 0 && sel < serviceObject.servGetComVector().size());
-                cont = 'N';
+                }
+                while(sel > 0 && sel < serviceObject.servGetComVector().size());
+                continueF = false;
+
             }
             else
             {
@@ -1582,8 +1608,10 @@ void infoDisplay::searchComputerSelection(int select)
                         displayOneComputer(serviceObject.servGetComVector().at(sel-1));
                     }
 
-                }while(sel > 0 && sel <= serviceObject.servGetComVector().size());
-                cont = 'N';
+                }
+                while(sel > 0 && sel <= serviceObject.servGetComVector().size());
+                continueF = false;
+
             }
             else
             {
@@ -2300,6 +2328,10 @@ void infoDisplay::commonPhrases(string phrase)
     else if (phrase == "happy")
     {
         cout<<"\tAre you happy with this input ? Y/N:";
+    }
+    else if (phrase == "anycharacter")
+    {
+        cout << "\tEnter any character to continue ";
     }
 
     else

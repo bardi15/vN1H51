@@ -79,6 +79,8 @@ void service::servSortComputers(int choice)
                 break;
             default:
                 break;
+          cout<<"test4 "<<endl;
+
       }
 }
 
