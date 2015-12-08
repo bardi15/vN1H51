@@ -67,9 +67,9 @@ void infoDisplay::displaySciList()
 
             string newstring;
 
-            if (s.getName().size() > 25)
+            if (s.getName().size() > 26)
             {
-                newstring = s.getName().substr(0,25) + "....";
+                newstring = s.getName().substr(0,26) + "...";
                 cout<<newstring;
             }
             else
@@ -190,6 +190,7 @@ void infoDisplay::displayComList()
 }
 void infoDisplay::displayComTypeList()
 {
+    serviceObject.servReadSqlCompTypes();
     unsigned int ctSize = serviceObject.servGetComTypeVector().size();
     unsigned int scrollFactor;
     if (ctSize > HOLYSCROLL)
@@ -206,7 +207,7 @@ void infoDisplay::displayComTypeList()
     do
     {
         listheaderComType();
-        serviceObject.servReadSqlCompTypes();
+
         for(unsigned int i = scrollBase; i < scrollFactor; i++)
         {
             computertype ct = serviceObject.servGetComTypeVector().at(i);
@@ -784,6 +785,7 @@ void infoDisplay::displayChangeNewComputerType()
         cout << "\tEnter the number of the computer type you would like to edit: ";
         i = inputNumberToFunction() - 1;
         editComputerTypeService(i);
+        displayOneComputerType(serviceObject.servGetComTypeVector().at(i));
         clearScreen();
         continueP = addScientistContinue();
     }
@@ -828,9 +830,9 @@ bool infoDisplay::addComputerTypeCheck(string ctName, string ctDescr)
     printLines(1, "thick");
     cout<<"\tComputer Type: "<<ctName<<endl;
 
-    if (ctDescr.size() > 40)
+    if (ctDescr.size() > 45)
     {
-        cout<<"\tDescription: "<<ctDescr.substr(0,40)<<"..."<<endl;
+        cout<<"\tDescription: "<<ctDescr.substr(0,45)<<"..."<<endl;
     }
     else
     {
@@ -846,9 +848,9 @@ bool infoDisplay::addComputerTypeCheck(string ctName, string ctDescr)
 void infoDisplay::addComputerTypeChange(string &ctName, string &ctDescr)
 {
     int input = 0;
-    clearScreen();
-    addEmptyLines(5);
-    cout<<"\tWhat would you like to change? Choose: "<<endl;
+    //clearScreen();
+    addEmptyLines(1);
+    commonPhrases("change");
     cout<<"\t1. Type name, 2. Description"<<endl;
     cout << "\tAny other digit to go back.";
     input = inputNumberToFunction();
@@ -889,6 +891,7 @@ void infoDisplay::displayChangeScientist()
 
         cout << "\tEnter the number of the scientist you would like to edit: ";
         i = inputNumberToFunction() - 1;
+        displayOneScientist(serviceObject.servGetSciVector().at(i));
         editScientistService(i);
         clearScreen();
         continueP = addScientistContinue();
@@ -1179,11 +1182,10 @@ void infoDisplay::displayComputerService()
 
 void infoDisplay::displayComputerTypeService()
 {
-    serviceObject.servReadSqlComputers();
 
     displayComTypeList();
 
-    unsigned int choice = moreInfoOnComputer();
+    unsigned int choice = moreInfoOnComputerTypes();
     if(choice > 0 && choice <= serviceObject.servGetComTypeVector().size())
     {
         displayOneComputerType(serviceObject.servGetComTypeVector().at(choice-1));
@@ -1232,8 +1234,7 @@ void infoDisplay::editScientistService(unsigned int i)
         link = serviceObject.servGetSciVector().at(i).getLink();
         yob = serviceObject.servGetSciVector().at(i).getYearOfBirth();
         yod = serviceObject.servGetSciVector().at(i).getYearOfDeath();
-        id = serviceObject.servGetSciVector().at(i).getID();
-
+        id = serviceObject.servGetSciVector().at(i).getID();        
         bool continueP = false;
 
         while (continueP == false)
@@ -1803,9 +1804,9 @@ bool infoDisplay::addScientistCheck(string name, int gender, int yob, int yod, s
     cout<<"\tYear of Birth: "<<yob<<endl;
     cout<<"\tYear of Death: "<<yod<<endl;
 
-    if (desc.size() > 40)
+    if (desc.size() > 45)
     {
-        cout<<"\tDescription: "<<desc.substr(0,40)<<"..."<<endl;
+        cout<<"\tDescription: "<<desc.substr(0,45)<<"..."<<endl;
     }
     else
     {
@@ -1839,9 +1840,9 @@ bool infoDisplay::addComputerCheck(string cName, int cYear, int cType, bool cBui
         cout<<"No"<<endl;
     }
 
-    if (cDescr.size() > 40)
+    if (cDescr.size() > 45)
     {
-        cout<<"\tDescription: "<<cDescr.substr(0,40)<<"..."<<endl;
+        cout<<"\tDescription: "<<cDescr.substr(0,45)<<"..."<<endl;
     }
     else
     {
@@ -1860,9 +1861,9 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
     int input = 0;
     int yOBirth = yob;
 
-    clearScreen();
-    addEmptyLines(5);
-    cout<<"\tWhat would you like to change? Choose: "<<endl;
+    //clearScreen();
+    addEmptyLines(1);
+    commonPhrases("change");
     cout<<"\t1. Name, 2. Gender, 3. Year of Birth, "<<endl<<"\t4. Year of Death, 5. Description, 6. Computer, 7. Link: ";
     input = inputNumberToFunction();
 
@@ -2036,21 +2037,14 @@ int infoDisplay::addComputerType()
     bool continueF = false;
     serviceObject.servReadSqlCompTypes();
     cout<<"\tSelect computer type: "<<endl;
-    for(unsigned int i = 0; i < serviceObject.servGetComTypeVector().size(); i++ )
-    {
-        cout << "\t" << i+1 << "\t"
-             << serviceObject.servGetComTypeVector().at(i).getName()
-             << endl;
-    }
-
-//    cout<<"\t1) Electronic\n\t2) Mechanical\n\t3) Ternary\n\t";
     cout<<"\t";
     for (unsigned int i = 0; i < serviceObject.servGetComTypeVector().size(); i++)
     {
         cout<<i+1<<") ";
-        cout<<serviceObject.servGetComTypeVector().at(i).getName()<<" ";
+        cout<<serviceObject.servGetComTypeVector().at(i).getName();
+        cout<<endl<<"\t";
     }
-    cout<<": ";
+    cout<<"Enter selection : ";
 
 
     do
@@ -2090,9 +2084,9 @@ string infoDisplay::addComputerDescr()
 void infoDisplay::addComputerChange(string &cName, int &cYear, int &cType, bool &cBuilt, string &cDescr)
 {
     int input = 0;
-    clearScreen();
-    addEmptyLines(5);
-    cout<<"\tWhat would you like to change? Choose: "<<endl;
+    //clearScreen();
+    addEmptyLines(1);
+    commonPhrases("change");
     cout<<"\t1. Name, 2. Year of Creation, 3. Type, "<<endl;
     cout << "\t4. Built, 5. Description \n";
     cout << "\tAny other digit to go back.";
@@ -2136,6 +2130,7 @@ void infoDisplay::displayChangeComputer()
 
         cout << "\tEnter the number of the computer you would like to edit: ";
         i = inputNumberToFunction() - 1;
+        displayOneComputer(serviceObject.servGetComVector().at(i));
         editComputerService(i);
         clearScreen();
         continueP = addScientistContinue();
@@ -2350,6 +2345,10 @@ void infoDisplay::commonPhrases(string phrase)
     else if (phrase == "anycharacter")
     {
         cout << "\tEnter any character to continue ";
+    }
+    else if (phrase == "change")
+    {
+        cout<<"\tWhat would you like to change? Choose: "<<endl;
     }
 
     else
