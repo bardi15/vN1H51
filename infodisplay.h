@@ -269,6 +269,21 @@ class infoDisplay
         //  Precondition:   The option to remove computer type has been selected on the main mainu.
         //  Postcondition:  One or more computer types have been deleted
 
+
+        /*
+        ##Computers and Scientists Relations
+        ##---------------------------------------------------------------------------------------##
+        */
+
+        void displayComSciRelations();
+        void displayComSciRelationsMenu();
+        void displayComSciRelationsSwitch();
+        void comToSciRelations();
+        void sciToComRelations();
+        void rmvComToSciRelations();
+        void rmvSciToComRelations();
+
+
         /*
         ##Search for Computer scientist
         ##---------------------------------------------------------------------------------------##

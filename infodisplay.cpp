@@ -546,7 +546,7 @@ void infoDisplay::displayOneComputerType(computertype& ct)
 
 void infoDisplay::clearScreen()
 {
-    system("cls");
+    //system("cls");
 }
 
 void infoDisplay::mainMenu()
@@ -1180,6 +1180,9 @@ void infoDisplay::selectAction()
                 //serviceObject.servEraseCompTypeVector();
                 displayComputerTypeService();
                 break;
+            case 9:
+                displayComSciRelations();
+
             default:
                 clearScreen();
                 addEmptyLines(10);
@@ -1738,7 +1741,7 @@ bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &lin
 
     addEmptyLines(5);
     cout<<"\t1. Add year of Death, 2. Description, "<<endl<<"\t3. Website link, \n";
-    cout << "\t4. To connect scientist with computer \n\tAny other digit continues: ";
+    cout << "\tAny other digit continues: ";
 
     choice = inputNumberToFunction();
 
@@ -1754,14 +1757,6 @@ bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &lin
 
         case 3:
         link = addScientistLink(link);
-        break;
-
-        case 4:
-        displayComList();
-        cout << "\tSelect a computer from the list, other entries return to the menu: ";
-        cin >> choice;
-        serviceObject.servAddRelationSciComp(id, serviceObject.servGetComVector().at(choice - 1).getId());
-        cout << "\tThis scientist is connected to: " << serviceObject.servGetComVector().at(choice - 1).getComName() << endl;
         break;
 
         default:
@@ -1892,6 +1887,134 @@ bool infoDisplay::addComputerCheck(string cName, int cYear, int cType, bool cBui
     return cont;
 }
 
+
+void infoDisplay::displayComSciRelations()
+{
+    serviceObject.servReadSqlComputers();
+    serviceObject.servReadSqlScientists();
+    displayComSciRelationsMenu();
+    displayComSciRelationsSwitch();
+
+//    displayComList();
+//    cout << "\tSelect a computer from the list, other entries return to the menu: ";
+//    cin >> choice;
+//    serviceObject.servAddRelationSciComp(id, serviceObject.servGetComVector().at(choice - 1).getId());
+//    cout << "\tThis scientist is connected to: " << serviceObject.servGetComVector().at(choice - 1).getComName() << endl;
+//    break;
+
+//    displayComList();
+//    cout << "\tSelect a computer from the list: ";
+//    cin >> input;
+//    serviceObject.servAddRelationSciComp(id, serviceObject.servGetComVector().at(input - 1).getId());
+//    cout << "\tThis scientist is connected to: " << serviceObject.servGetComVector().at(input - 1).getComName() << endl;
+//    break;
+}
+void infoDisplay::displayComSciRelationsMenu()
+{
+    clearScreen();
+    addEmptyLines(5);
+    cout << "\tMenu for Scientists and Computer Relations" << endl;
+    printLines(1, "thin");
+    cout << "\t1) Connect a Scientist to a Computer. \n";
+    cout << "\t2) Connect a Computer to a Scientist. \n";
+    cout << "\t3) Remove connection between Scientist and a Computer. \n";
+    cout << "\t4) Remove connection between Computer and a Scientist. \n";
+    printLines(1, "thin");
+    cout << "\tAll other digits for main menu. \n";
+    printLines(1, "thick");
+    cout << "\tEnter your selection: ";
+}
+
+void infoDisplay::displayComSciRelationsSwitch()
+{
+    int input = inputNumberToFunction();
+    switch (input)
+    {
+    case 1:
+        sciToComRelations();
+        break;
+    case 2:
+        comToSciRelations();
+        break;
+    case 3:
+        rmvComToSciRelations();
+        break;
+    case 4:
+        rmvComToSciRelations();
+        break;
+
+    default:
+        commonPhrases("nothing");
+
+    }
+}
+
+void infoDisplay::sciToComRelations()
+{
+    displaySciList();
+
+    int sciID = 0;
+    int comID = 0;
+
+    cout<<"\tSelect the scientist you want to add Relations to: ";
+    unsigned int choiceSc = inputNumberToFunction();
+
+    if(choiceSc > 0 && choiceSc <= serviceObject.servGetSciVector().size())
+    {
+        sciID = serviceObject.servGetSciVector().at(choiceSc).getID();
+    }
+
+    cout<<"\tsciID is :"<<sciID<<endl;
+    addEmptyLines(1);
+
+    displayComList();
+
+    cout<<"\tNow select the computer: ";
+
+    unsigned int choiceC = inputNumberToFunction();
+
+    if(choiceC > 0 && choiceC <= serviceObject.servGetComVector().size())
+    {
+        comID = serviceObject.servGetComVector().at(choiceC).getId();
+    }
+
+    cout<<"\tsciID is :"<<sciID<<endl;
+
+    cout<<"\tcomID is :"<<comID<<endl;
+    bool error = false;
+    error = serviceObject.servAddRelationSciComp(sciID, comID);
+
+    if (error == true)
+    {
+        cout<<"true";
+    }
+    else
+    {
+        cout<<"false";
+    }
+
+
+    //cin>>sciID;
+    addEmptyLines(1);
+
+}
+
+void infoDisplay::comToSciRelations()
+{
+    displayComList();
+}
+
+void infoDisplay::rmvSciToComRelations()
+{
+
+}
+
+void infoDisplay::rmvComToSciRelations()
+{
+
+}
+
+
 void infoDisplay::addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender, int id)
 {
 
@@ -1901,9 +2024,9 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
     //clearScreen();
     addEmptyLines(1);
     commonPhrases("change");
-    cout<<"\t1. Name, 2. Gender, 3. Year of Birth, 4. Year of Death \n\t5. Description, 6. Computer, 7. Link \n\tOther digits cancel: ";
+    //cout<<"\t1. Name, 2. Gender, 3. Year of Birth, 4. Year of Death \n\t5. Description, 6. Computer, 7. Link \n\tOther digits cancel: ";
     printLines(1,"thin");
-    cout<<"\t1. Name, 2. Gender, 3. Year of Birth, 4. Year of Death \n\t5. Description, 6. Computer, 7. Link, other digits cancel: ";
+    cout<<"\t1. Name, 2. Gender, 3. Year of Birth, 4. Year of Death \n\t5. Description, 6. Link, other digits cancel: ";
     input = inputNumberToFunction();
 
     switch (input)
@@ -1924,13 +2047,6 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
         desc = addScientistDescription(desc);
         break;
     case 6:
-        displayComList();
-        cout << "\tSelect a computer from the list: ";
-        cin >> input;
-        serviceObject.servAddRelationSciComp(id, serviceObject.servGetComVector().at(input - 1).getId());
-        cout << "\tThis scientist is connected to: " << serviceObject.servGetComVector().at(input - 1).getComName() << endl;
-        break;
-    case 7:
         link = addScientistLink(link);
         break;
 
