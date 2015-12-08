@@ -64,7 +64,7 @@ void workingclass::createTableScientists()
                " deleted DEFAULT 'FALSE');");
 }
 
-void workingclass::createComputers()
+void workingclass::createTableComputers()
 {
     QSqlQuery query;
     query.exec("CREATE TABLE computers "
@@ -77,7 +77,7 @@ void workingclass::createComputers()
                " deleted DEFAULT 'FALSE',"
                " FOREIGN KEY(type) REFERENCES computer_types(id));");
 }
-void workingclass::createScientistsAndComputers()
+void workingclass::createTableScientistsAndComputers()
 {
     QSqlQuery query;
     query.exec("CREATE TABLE scientists_and_computers "
