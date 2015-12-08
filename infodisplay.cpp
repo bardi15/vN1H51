@@ -390,7 +390,6 @@ bool infoDisplay::dispSureToRemove(int gender)
 
 void infoDisplay::displayOneScientist(scientist& s)
 {
-    char ans;
     clearScreen();
     addEmptyLines(5);
     cout << "\tName: " << s.getName() << endl;
@@ -464,15 +463,12 @@ void infoDisplay::displayOneScientist(scientist& s)
         }
         printLines(1,"thick");
     }
-    commonPhrases("anycharacter");
-    cin>>ans;
 }
 
 void infoDisplay::displayOneComputer(computer& c)
 {
     unsigned int jumpLength = 53;
     unsigned int firstLine = 48;
-    char ans;
     clearScreen();
     addEmptyLines(5);
     printLines(1, "thin");
@@ -509,16 +505,12 @@ void infoDisplay::displayOneComputer(computer& c)
         }
         printLines(1,"thick");
     }
-
-    commonPhrases("anycharacter");
-    cin>>ans;
 }
 
 void infoDisplay::displayOneComputerType(computertype& ct)
 {
     unsigned int jumpLength = 53;
     unsigned int firstLine = 48;
-    char ans;
     clearScreen();
     addEmptyLines(5);
     printLines(1, "thin");
@@ -540,9 +532,6 @@ void infoDisplay::displayOneComputerType(computertype& ct)
         cout << "\tDescription: " << ct.getDesc() << endl;
     }
     printLines(1,"thick");
-
-    commonPhrases("anycharacter");
-    cin>>ans;
 }
 
 void infoDisplay::clearScreen()
@@ -565,8 +554,10 @@ void infoDisplay::mainMenu()
     cout << "\t1) Work on the scientists information. \n";
     cout << "\t2) Work on the computers information. \n";
     cout << "\t3) Work on the computer types information. \n";
+    cout << endl;
     cout << "\t4) Search for a computer scientists. \n";
     cout << "\t5) Search for a famous computer \n";
+    cout << endl;
     cout << "\t6) Display a list of computer scientists. \n";
     cout << "\t7) Display a list of famous computers. \n";
     cout << "\t8) Display a list of computers types. \n";
@@ -702,8 +693,6 @@ void infoDisplay::menuForComputersTypesSwitch()
     default:
         commonPhrases("nothingsel");
     }
-
-
 }
 
 void infoDisplay::addNewComputerType()
@@ -753,6 +742,8 @@ void infoDisplay::dispSelectNewComputerTypeToDelete()
 
     displayComTypeList();
 
+    bool deleted;
+
     cout << "\tWhat computer Type would you like delete?" << endl;
     commonPhrases("choice");
     sel = inputNumberToFunction();
@@ -761,7 +752,21 @@ void infoDisplay::dispSelectNewComputerTypeToDelete()
         displayOneComputerType(serviceObject.servGetComTypeVector().at(sel-1));
         if(dispSureToRemoveComp())
         {
-            serviceObject.servDeleteComputerType(serviceObject.servGetComTypeVector().at(sel-1).getid());
+            deleted = serviceObject.servDeleteComputerType(serviceObject.servGetComTypeVector().at(sel-1).getid());
+
+            if (deleted == true)
+            {
+                printLines(1,"thick");
+                cout<<"\tDelete was successfull."<<endl;
+                sleep(3);
+            }
+            else
+            {
+                printLines(1,"thick");
+                cout<<"\tDelete failed. Check if Computer Type is \n\tlinked to a Computer and try again."<<endl;
+                sleep(3);
+            }
+
         }
     }
     else
@@ -869,8 +874,6 @@ void infoDisplay::addComputerTypeChange(string &ctName, string &ctDescr)
     }
 }
 
-
-
 void infoDisplay::splashScreen()
 {
     opengreeting greet;
@@ -897,6 +900,7 @@ void infoDisplay::displayChangeScientist()
         continueP = addScientistContinue();
     }
 }
+
 void infoDisplay::displaySearchScientist()
 {
     int sel;
