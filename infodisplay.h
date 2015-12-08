@@ -20,6 +20,7 @@ const unsigned int HOLYSCROLL = 15;
 class infoDisplay
 {
     public:
+
         infoDisplay();
         //Default constructor for class.
 

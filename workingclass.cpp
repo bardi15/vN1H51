@@ -112,8 +112,6 @@ bool workingclass::addRelationSciComp(int sciID, int compID)
 
 void workingclass::readSqlScientists(string sorting)
 {
-
-
     QSqlQuery query;
 
     query.prepare("SELECT * FROM scientists "
@@ -495,27 +493,37 @@ void workingclass::searchComputerByType(string& type, bool& isFound)
     vector<computer> returnVector;
     computer c;
     readSqlCompTypes();
-    for(unsigned int i = 0; i < computerVector.size(); i++)
+    for (unsigned int i = 0; i < type.size(); i++)  // set inputið í lowercase
     {
-        string searchstring = getCompTypeVector().at(computerVector.at(i).getComType()-1).getName();
-        for (unsigned int j = 0; j < searchstring.size(); j++)
+        type[i] = tolower(type[i]);
+    }
+    for(unsigned int i = 0; i < compTypeVector.size(); i++) // Hleyp í gegnum comptype vectorinn
+    {
+        string searchstring = compTypeVector.at(i).getName();
+        for (unsigned int j = 0; j < searchstring.size(); j++)  //set comptypename í lowercase
         {
             searchstring[j] = tolower(searchstring[j]);
         }
-        for (unsigned int j = 0; j < type.size(); j++)
+        if( searchstring.find( type) < 30 ) //  ef type finnst í comptypename
         {
-            type[j] = tolower(type[j]);
+            int iType = compTypeVector.at(i).getid();
+            for(unsigned int k = 0; k < computerVector.size(); k++) //Hleyp í gengum computer vectorinn
+            {
+                if(computerVector.at(k).getComType() == iType)  // Ef type == compputertype
+                {
+                    c = computerVector.at(k);
+                    returnVector.push_back(c);
+                    isFound    = true;
+                }
+            }
         }
 
-        if( searchstring.find( type) < 30 )
-       {
-            c = computerVector.at(i);
-            returnVector.push_back(c);
-            isFound = true;
-       }
     }
-    computerVector.clear();
-    computerVector = returnVector;
+    if( returnVector.size() > 0)
+    {
+        computerVector.clear();
+        computerVector = returnVector;
+    }
 }
 void workingclass::searchComputerByYear(int& yr, bool& isFound)
 {

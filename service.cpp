@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 service::service()
 {
 
@@ -14,8 +13,6 @@ int service::selection()
     cin.ignore();
     return select;
 }
-
-
 
 void service::servEraseScientistVector()
 {

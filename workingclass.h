@@ -30,6 +30,10 @@ public:
     workingclass();
     //  Default constructor for class.
 
+
+    int getScientistsNextSeqId();
+
+
     /*
     ##  Get vector functions
     ##---------------------------------------------------------------------------------------##
