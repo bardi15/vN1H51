@@ -92,7 +92,7 @@ vector<computer> service::servGetComVector()
 {
     return workingObject.getComVector();
 }
-vector<computertype> service::servGetCompTypeVector()
+vector<computertype> service::servGetComTypeVector()
 {
     return workingObject.getCompTypeVector();
 }
@@ -298,4 +298,15 @@ void service::servCreateEmptyDatabase()
 bool service::servAddRelationSciComp(int sciID, int compID)
 {
     return workingObject.addRelationSciComp(sciID, compID);
+}
+
+void service::henda()
+{
+
+//    workingObject.readSqlComputers();
+//    sleep(3);
+//    workingObject.readSqlScientists();
+//    sleep(3);
+//    workingObject.readSqlCompTypes();
+//    sleep(3);
 }

@@ -386,7 +386,7 @@ bool workingclass::deleteComputerType(int computertypeID)
 {
     QSqlQuery query;
 
-    query.prepare("UPDATE computer_types "
+    query.prepare("UPDATE computer_type "
                   "SET deleted = 'TRUE' "
                   "WHERE id = :id;");
     query.bindValue(":id", computertypeID);
