@@ -1,18 +1,14 @@
 #include "workingclass.h"
 #include <unistd.h>
 
-
 /*
 ##  Constructors
 ##---------------------------------------------------------------------------------------##
 */
-
 workingclass::workingclass()
 {
 
 }
-
-
 
 /*
 ##  Read functions
@@ -566,6 +562,7 @@ string workingclass::stringToLower(string str)
     {
         tempstr[i] = tolower(str[i]);
     }
+    return tempstr;
 }
 
 /*

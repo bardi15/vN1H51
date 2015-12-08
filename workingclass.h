@@ -13,13 +13,10 @@
 
 using namespace std;
 
+
 const string DBASE = "../vN1H51/Group51_verklegt_1.sqlite";
-const int MAXFIELDS = 6;
+// Locaton of the database file
 const int MAXNAMELENGTH = 44;
-//const int CURRENTYUEAR = 2015;
-
-
-
 
 class workingclass
 {

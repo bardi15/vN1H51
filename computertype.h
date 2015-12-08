@@ -9,7 +9,6 @@ using namespace  std;
 class computertype
 {
     public:
-
         /*
         ##  Constructors
         ##---------------------------------------------------------------------------------------##

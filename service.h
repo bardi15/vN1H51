@@ -7,6 +7,7 @@
 #include <string>
 #include <unistd.h>
 
+const int CURRENTYEAR = 2015;
 
 
 using namespace std;
@@ -38,6 +39,17 @@ class service
         //  Postcondition: Returns 0 if female, 1 if male, 2 otherwise.
 
         /*
+        ##  Read functions
+        ##---------------------------------------------------------------------------------------##
+        */
+        void servReadSqlScientists(string sorting="name");
+        //  Calls the readSqlScientists function in workingclass.
+        void servReadSqlComputers(string sorting="name");
+        //  Calls the readSqlComputers function in workingclass.
+        void servReadSqlCompTypes();
+        //  Calls the readSqlCompTypes function in workingclass.
+
+        /*
         ##  Add functions
         ##---------------------------------------------------------------------------------------##
         */
@@ -51,15 +63,28 @@ class service
         //  Calls the addRelationSciComp function in workingclass.
 
         /*
-        ##  Read functions
+        ##  Update functions
         ##---------------------------------------------------------------------------------------##
         */
-        void servReadSqlScientists(string sorting="name");
-        //  Calls the readSqlScientists function in workingclass.
-        void servReadSqlComputers(string sorting="name");
-        //  Calls the readSqlComputers function in workingclass.
-        void servReadSqlCompTypes();
-        //  Calls the readSqlCompTypes function in workingclass.
+        bool servUpdateSqlComputer(computer& c);
+        //  Calls the updateScientist function in workingclass.
+        void servUpdateSqlScientist(scientist& s);
+        //  Calls the updateComputer function in workingclass.
+        bool servUpdateSqlComputerType(computertype& ct);
+        //  Calls the updateComputerType function in workingclass.
+
+        /*
+        ##  Delete functions
+        ##---------------------------------------------------------------------------------------##
+        */
+        bool servDeleteComputer(int compID);
+        //  Calls the deleteComputer function in workingclass.
+        void servDeleteScientist(int sciID);
+        //  Calls the deleteScientist function in workingclass.
+        bool servDeleteComputerType(int computertypeID);
+        //  Calls the deleteComputerType function in workingclass.
+        bool servDeleteRelationSciComp(int sciID, int compID);
+        //  Calls the deleteRelationSciComp function in workingclass.
 
         /*
         ##  Get vector functions
@@ -119,30 +144,6 @@ class service
         //  Calls the searchComputerByName function in workingclass.
         void servSearchComputerByYear(int& yr, bool& isFound);
         //  Calls the searchComputerByYear function in workingclass.
-
-        /*
-        ##  Delete functions
-        ##---------------------------------------------------------------------------------------##
-        */
-        bool servDeleteComputer(int compID);
-        //  Calls the deleteComputer function in workingclass.
-        void servDeleteScientist(int sciID);
-        //  Calls the deleteScientist function in workingclass.
-        bool servDeleteComputerType(int computertypeID);
-        //  Calls the deleteComputerType function in workingclass.
-        bool servDeleteRelationSciComp(int sciID, int compID);
-        //  Calls the deleteRelationSciComp function in workingclass.
-
-        /*
-        ##  Update functions
-        ##---------------------------------------------------------------------------------------##
-        */
-        bool servUpdateSqlComputer(computer& c);
-        //  Calls the updateScientist function in workingclass.
-        void servUpdateSqlScientist(scientist& s);
-        //  Calls the updateComputer function in workingclass.
-        bool servUpdateSqlComputerType(computertype& ct);
-        //  Calls the updateComputerType function in workingclass.
 
         /*
         ##  Database functions
