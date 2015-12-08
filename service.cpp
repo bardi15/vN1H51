@@ -296,4 +296,8 @@ bool service::servAddRelationSciComp(int sciID, int compID)
 {
     return workingObject.addRelationSciComp(sciID, compID);
 }
+bool service::servDeleteRelationSciComp(int sciID, int compID)
+{
+    return workingObject.deleteRelationSciComp(sciID, compID);
+}
 

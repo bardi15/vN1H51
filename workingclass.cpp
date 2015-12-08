@@ -97,9 +97,9 @@ void workingclass::closeDatabase()
 bool workingclass::addRelationSciComp(int sciID, int compID)
 {
     QSqlQuery query;
-    query.prepare("INSERT INTO scientists_and_computers "
-                  "(scientist_id, computer_id) "
-                  "VALUES (:sID, :cID); ");
+    query.prepare(" INSERT INTO scientists_and_computers "
+                  " (scientist_id, computer_id) "
+                  " VALUES (:sID, :cID); ");
     query.bindValue(";sID", sciID);
     query.bindValue(":cID", compID);
     query.exec();
@@ -274,7 +274,7 @@ void workingclass::readSqlCompTypes()
 
     query.prepare("SELECT * FROM computer_types "
                   "WHERE deleted = 'FALSE' "
-                  "ORDER BY name ASC");
+                  "ORDER BY id ASC");
     query.exec();
     compTypeVector.clear();
     while(query.next())
@@ -378,6 +378,21 @@ bool workingclass::deleteComputerType(int computertypeID)
     }
     return false;
 }
+bool workingclass::deleteRelationSciComp(int sciID, int compID)
+{
+    QSqlQuery query;
+    query.prepare(" UPDATE scientists_and_computers SET deleted = 'FALSE' "
+                  " WHERE scientist_id = :sid AND computer_id = :cid ");
+    query.bindValue(":sid", sciID);
+    query.bindValue(":cid", compID);
+    query.exec();
+    if(!query.lastError().isValid())
+    {
+        return true;
+    }
+    return false;
+}
+
 
 void workingclass::eraseScientistVector()
 {
@@ -488,6 +503,15 @@ void workingclass::searchComputerByName(string subName, bool& isFound)
     computerVector.clear();
     computerVector = returnVector;
 }
+string workingclass::stringToLower(string str)
+{
+    string tempstr;
+    for(unsigned int i = 0; i < str.size(); i++)
+    {
+        tempstr[i] = str[i];
+    }
+}
+
 void workingclass::searchComputerByType(string& type, bool& isFound)
 {
     vector<computer> returnVector;
