@@ -235,7 +235,7 @@ class infoDisplay
         string addComputerTypeName();
         //  Precondition:   A name for a computer type is to be entered.
         //  Postcondition:  The name entered has been corrected and inserted to database.
-        string addComputerTypeDescription();
+        string addComputerTypeDescription(int &editCount);
         //  Precondition:   A description for a computer type is to be entered.
         //  Postcondition:  The name entered has been corrected and inserted to database.
         bool addComputerTypeCheck(string ctName, string ctDescr);

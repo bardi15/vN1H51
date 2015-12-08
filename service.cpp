@@ -6,13 +6,6 @@ service::service()
 {
 
 }
-int service::selection()
-{
-    int select;
-    cin>>select;
-    cin.ignore();
-    return select;
-}
 
 void service::servEraseScientistVector()
 {

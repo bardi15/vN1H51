@@ -74,7 +74,7 @@ void infoDisplay::displaySciList()
             }
             else
             {
-                cout << s.getName();// << "\t";
+                cout << s.getName();
             }
 
             if(s.getGender() == 0)
@@ -169,13 +169,11 @@ void infoDisplay::displayComList()
             cout.width(2);
             cout << "\t" << i+1 << ")\t";
             cout.width(30);
-            cout << c.getComName();// << "\t";
+            cout << c.getComName();
             cout << "\t" << c.getComYear()<< "\t";
-            //computertype ct;
             if (comtype >= (serviceObject.servGetCompTypeVector().size()))
             {
                 cout<<"\t\n";
-
             }
             else
             {
@@ -222,7 +220,7 @@ void infoDisplay::displayComTypeList()
             cout.width(2);
             cout << "\t" << i+1 << ")\t";
             cout.width(16);
-            cout << ct.getName();// << "\t";
+            cout << ct.getName();
             if (ct.getDesc().size() >= 34)
             {
                 string newstring = ct.getDesc().substr(0,34) + "...";
@@ -230,7 +228,7 @@ void infoDisplay::displayComTypeList()
             }
             else if ((ct.getDesc().size() > 1)&&(ct.getDesc().size() < 25))
             {
-                cout << ct.getDesc();// << "\t";
+                cout << ct.getDesc();
             }
             else
             {
@@ -363,7 +361,6 @@ void infoDisplay::dispSelectScientistToDelete()
 }
 bool infoDisplay::dispSureToRemove(int gender)
 {
-    //char ans;
     addEmptyLines(2);
     cout << "\tAre you sure you would like to delete";
     if(gender == 0)
@@ -380,21 +377,8 @@ bool infoDisplay::dispSureToRemove(int gender)
     }
     addEmptyLines(1);
     cout << "\tEnter (Y/N):";
-    //bool continueF = yesOrNo();
-
-    return yesOrNo();// continueF;
+    return yesOrNo();
 }
-//void infoDisplay::dispScienUtistToEdit(vector<scientist>& v)
-//{
-//    int sel;
-//    cout << "\tEnter the number of the scientist you would like to edit" << endl;
-//    commonPhrases("choice");
-//    sel = inputNumberToFunction();
-//    if(sel > 0)
-//    {
-//        displayOneScientist(v.at(sel-1));
-//    }
-//}
 
 void infoDisplay::displayOneScientist(scientist& s)
 {
@@ -594,7 +578,6 @@ void infoDisplay::menuForScientistsDisplay()
     cout << "\tAll other digits for main menu. \n";
     printLines(1, "thick");
     cout << "\tEnter your selection: ";
-    //sleep(2);
 }
 
 void infoDisplay::menuForScientistsSwitch()
@@ -695,8 +678,6 @@ void infoDisplay::menuForComputersTypesSwitch()
         dispSelectNewComputerTypeToDelete();
         break;
     case 3:
-        //displayComList();
-        //displayComTypeList();
         displayChangeNewComputerType();
         break;
     default:
@@ -706,7 +687,6 @@ void infoDisplay::menuForComputersTypesSwitch()
 
 void infoDisplay::addNewComputerType()
 {
-    //int selectedGender;
     bool wYLTContinue = true;
     bool changeInput = false;
 
@@ -715,13 +695,14 @@ void infoDisplay::addNewComputerType()
     while(wYLTContinue == true)
     {
         clearScreen();
+        int editCount = 0;
         addEmptyLines(5);
         cout<<"\tCreating a new Computer Type: "<<endl;
 
         printLines(1, "thick");
         string ctName, ctDescr;
         ctName = (addComputerTypeName());
-        ctDescr = (addComputerTypeDescription());
+        ctDescr = (addComputerTypeDescription(editCount));
 
         do
         {
@@ -824,8 +805,9 @@ string infoDisplay::addComputerTypeName()
 
     do
     {
+        cin.ignore();
         cout<<"\tEnter name: ";
-        cin>>compTypeName;
+        getline(cin, compTypeName);
         serviceObject.nameCorrection(compTypeName, badName);
 
         if(badName == true)
@@ -838,9 +820,12 @@ string infoDisplay::addComputerTypeName()
 
     return compTypeName;
 }
-string infoDisplay::addComputerTypeDescription()
+string infoDisplay::addComputerTypeDescription(int &editCount)
 {
-    cin.ignore();
+    if (editCount > 0)
+    {
+        cin.ignore();
+    }
     string cTDescr;
     cout<<"\tDescription: ";
     getline(cin, cTDescr);
@@ -873,20 +858,19 @@ bool infoDisplay::addComputerTypeCheck(string ctName, string ctDescr)
 void infoDisplay::addComputerTypeChange(string &ctName, string &ctDescr)
 {
     int input = 0;
-    //clearScreen();
     addEmptyLines(1);
     commonPhrases("change");
     printLines(1,"thin");
     cout<<"\t1. Type name, 2. Description, other digits cancel: ";
     input = inputNumberToFunction();
-
+    int editcount = 1;
     switch (input)
     {
     case 1:
         ctName = addComputerTypeName();
         break;
     case 2:
-        ctDescr = addComputerTypeDescription();
+        ctDescr = addComputerTypeDescription(editcount);
         break;
     default:
         commonPhrases("nothingsel");
@@ -898,7 +882,7 @@ void infoDisplay::splashScreen()
 {
     opengreeting greet;
 
-    //greet.greetingPost();
+    greet.greetingPost();
 }
 void infoDisplay::displayChangeScientist()
 {
@@ -1080,7 +1064,6 @@ void infoDisplay::quitProgram()
     else
     {
         clearScreen();
-        //mainMenu();
     }
 
 }
@@ -1147,7 +1130,6 @@ void infoDisplay::selectAction()
         clearScreen();
         mainMenu();
         int sel = inputNumberToFunction();
-        //unsigned int choice = 0;
         switch(sel)
             {
             case 1:     //  Working with scientists
@@ -1606,7 +1588,6 @@ void infoDisplay::searchComputerSelection(int select)
 {
     serviceObject.servReadSqlComputers();
     bool continueF = false;
-    //char cont;
 
     switch (select)
     {
@@ -2060,7 +2041,6 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
     int input = 0;
     int yOBirth = yob;
 
-    //clearScreen();
     addEmptyLines(1);
     commonPhrases("change");
     printLines(1,"thin");
@@ -2209,7 +2189,6 @@ int infoDisplay::addComputerYear()
         cout<<"\tEnter year of creation: ";
 
         temp = inputNumberToFunction();
-        //cin.ignore();
 
         temp = serviceObject.yearCorrection(temp, errorInYear);
 
@@ -2227,8 +2206,6 @@ int infoDisplay::addComputerType()
     serviceObject.servReadSqlCompTypes();
 
     computertype ct;
-
-    //vectorsize = serviceObject.servGetComTypeVector().size();
 
     unsigned int selection = 0;
     bool continueF = false;
@@ -2281,14 +2258,12 @@ string infoDisplay::addComputerDescr()
 void infoDisplay::addComputerChange(string &cName, int &cYear, int &cType, bool &cBuilt, string &cDescr)
 {
     int input = 0;
-    //clearScreen();
     addEmptyLines(1);
     commonPhrases("change");
     printLines(1,"thin");
     cout<<"\t1. Name, 2. Year of Creation, 3. Type, 4. Built, 5. Description \n";
     cout << "\tother digits cancel: ";
     input = inputNumberToFunction();
-    //cin.ignore();
 
     switch (input)
     {
@@ -2368,7 +2343,6 @@ void infoDisplay::dispSelectComputerToDelete()
 }
 bool infoDisplay::dispSureToRemoveComp()
 {
-    //char ans;
     addEmptyLines(2);
     cout << "\tAre you sure you would like to delete it: " << endl;
 
@@ -2388,7 +2362,6 @@ int infoDisplay::inputNumberToFunction()
     do
     {
         cin>>input;
-        //cin.ignore();
 
         for (unsigned int i = 0; i < input.size(); i++)
         {
@@ -2433,7 +2406,6 @@ char infoDisplay::inputCharacterToFunction()
         else
         {
             badInput = false;
-            //input = returnInput;
             returnInput = toupper(input);
         }
     }

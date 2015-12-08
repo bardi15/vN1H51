@@ -19,14 +19,6 @@ public:
     //  Default constructor for class.
 
     /*
-    ##  Why the hell is this here?
-    ##---------------------------------------------------------------------------------------##
-    */
-    int selection();
-    //  Precondition:   A need for a selection is present.
-    //  Postcondition:  Returns a integer corresponding to the selection made.
-
-    /*
     ##  Correction functions
     ##---------------------------------------------------------------------------------------##
     */
