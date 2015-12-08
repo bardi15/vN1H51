@@ -1,5 +1,6 @@
 #ifndef COMPUTER_H
 #define COMPUTER_H
+
 #include <string>
 
 using namespace std;
@@ -7,9 +8,19 @@ using namespace std;
 class computer
 {
     public:
+
+        /*
+        ##  Initialisers
+        ##---------------------------------------------------------------------------------------##
+        */
         computer();
         computer( int cid, string cname, int cyear, int ctype, bool cbuilt, string cdescription);
         computer(string cName, int cYear, int cType, bool cBuilt, string cDescr);
+
+        /*
+        ##  Get functions
+        ##---------------------------------------------------------------------------------------##
+        */
         int getId() const;
         //  Returns the id of the computer.
         string getComName() const;
@@ -17,6 +28,11 @@ class computer
         int getComType() const;
         string getComDescription() const;
         bool getComBuilt() const;
+
+        /*
+        ##  Set functions
+        ##---------------------------------------------------------------------------------------##
+        */
         void setComID(int coID);
         // Precondition:    The parameter is of a legal type and value.
         // Postcondition:   The id has been set to the parameter coID.
@@ -25,7 +41,6 @@ class computer
         void setComType(int coType);
         void setComDescription(string coDesc);
         void setComBuilt(bool coBuilt);
-
 
     private:
         int comId;

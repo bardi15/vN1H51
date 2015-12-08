@@ -31,11 +31,11 @@ void service::servEraseCompTypeVector()
 }
 void service::servReadSqlScientists(string sorting)
 {
-    workingObject.readSqlScientists();
+    workingObject.readSqlScientists(sorting);
 }
 void service::servReadSqlComputers(string sorting)
 {
-    workingObject.readSqlComputers();
+    workingObject.readSqlComputers(sorting);
 }
 void service::servReadSqlCompTypes()
 {
@@ -250,11 +250,11 @@ void service::servDeleteScientist(int sciID)
 }
 bool service::servDeleteComputer(int compID)
 {
-    workingObject.deleteComputer(compID);
+    return workingObject.deleteComputer(compID);
 }
 bool service::servDeleteComputerType(int computertypeID)
 {
-    workingObject.deleteComputerType(computertypeID);
+    return workingObject.deleteComputerType(computertypeID);
 }
 void service::servUpdateSqlScientist(scientist& s)
 {
@@ -262,11 +262,11 @@ void service::servUpdateSqlScientist(scientist& s)
 }
 bool service::servUpdateSqlComputer(computer& c)
 {
-    workingObject.updateSqlComputer(c);
+    return workingObject.updateSqlComputer(c);
 }
 bool service::servUpdateSqlComputerType(computertype& ct)
 {
-    workingObject.updateSqlComputerType(ct);
+    return workingObject.updateSqlComputerType(ct);
 }
 vector<scientist> service::servGetScientistsLinkedToComputer(int compID)
 {
@@ -295,10 +295,10 @@ void service::servCreateEmptyDatabase()
 {
     workingObject.createEmptyDatabase();
 }
-//bool service::servCreateRelationSciComp(int sciID, int compID)
-//{
-//    return workingObject.createRelationSciComp(sciID, compID);
-//}
+bool service::servAddRelationSciComp(int sciID, int compID)
+{
+    return workingObject.addRelationSciComp(sciID, compID);
+}
 
 void service::henda()
 {
