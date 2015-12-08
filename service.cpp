@@ -92,7 +92,7 @@ vector<computer> service::servGetComVector()
 {
     return workingObject.getComVector();
 }
-vector<computertype> service::servGetComTypeVector()
+vector<computertype> service::servGetCompTypeVector()
 {
     return workingObject.getCompTypeVector();
 }
@@ -299,4 +299,7 @@ bool service::servAddRelationSciComp(int sciID, int compID)
 {
     return workingObject.addRelationSciComp(sciID, compID);
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> ab778f8bdae41534f80531e4f6f4d004c5d1e819

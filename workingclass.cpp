@@ -177,14 +177,13 @@ void workingclass::updateSqlScientist(scientist& s)
 bool workingclass::updateSqlComputerType(computertype& ct)
 {
     QSqlQuery query;
-
-    query.prepare("UPDATE computer_types "
-                  "SET name = :name, "
-                  "description = :desc "
-                  "WHERE id = :id; ");
-    query.bindValue(":id", ct.getid());
-    query.bindValue(":name", QString::fromStdString(ct.getName()));
-    query.bindValue(":desc", QString::fromStdString(ct.getDesc()));
+    query.prepare(" UPDATE computer_types "
+                  " SET name = :ctName, "
+                  " description = :ctDesc "
+                  " WHERE id = :ctId; ");
+    query.bindValue(":ctId", ct.getid());
+    query.bindValue(":ctName", QString::fromStdString(ct.getName()));
+    query.bindValue(":ctDesc", QString::fromStdString(ct.getDesc()));
     query.exec();
     if(!query.lastError().isValid())
     {
@@ -341,22 +340,6 @@ bool workingclass::addcomputerType(computertype & ct)
     }
     return false;
 }
-//bool workingclass::addRelationSciComp(int sciID, int compID)
-//{
-//    QSqlQuery query;
-//    query.prepare("INSERT INTO scientists_and_computers "
-//                  "(scientist_id, computer_id) "
-//                  "VALUES (:sID, :cID); ");
-//     query.bindValue(";sID", sciID);
-//     query.bindValue(":cID", compID);
-//     query.exec();
-//     if(!query.lastError().isValid())
-//     {
-//         return true;
-//     }
-//     return false;
-// }
-
 void workingclass::deleteScientist(int sciID)
 {
     QSqlQuery query;
@@ -386,7 +369,7 @@ bool workingclass::deleteComputerType(int computertypeID)
 {
     QSqlQuery query;
 
-    query.prepare("UPDATE computer_type "
+    query.prepare("UPDATE computer_types "
                   "SET deleted = 'TRUE' "
                   "WHERE id = :id;");
     query.bindValue(":id", computertypeID);
