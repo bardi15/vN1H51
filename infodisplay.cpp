@@ -165,14 +165,14 @@ void infoDisplay::displayComList()
         {
             serviceObject.servReadSqlCompTypes();
             computer c = serviceObject.servGetComVector().at(i);
-            int comtype = (serviceObject.servGetComVector().at(i).getComType()) - 1;
+            unsigned int comtype = (serviceObject.servGetComVector().at(i).getComType()) - 1;
             cout.width(2);
             cout << "\t" << i+1 << ")\t";
             cout.width(30);
             cout << c.getComName();// << "\t";
             cout << "\t" << c.getComYear()<< "\t";
             computertype ct;
-            if ((comtype < 0)||(comtype > (serviceObject.servGetCompTypeVector().size() - 1)))
+            if (comtype > (serviceObject.servGetCompTypeVector().size() - 1))
             {
                 cout<<"\t\n";
 
@@ -800,7 +800,7 @@ void infoDisplay::displayChangeNewComputerType()
         cout << "\tEnter the number of the computer type you would like to edit: ";
         i = inputNumberToFunction() - 1;
 
-        if ((i < 1)||(i > serviceObject.servGetCompTypeVector().size()))
+        if ((i < 0)||(i > (serviceObject.servGetCompTypeVector().size() - 1)))
         {
             continueP = false;
             commonPhrases("nothingsel");
@@ -917,7 +917,7 @@ void infoDisplay::displayChangeScientist()
         cout << "\tEnter the number of the scientist you would like to edit: ";
         i = inputNumberToFunction() - 1;
 
-        if ((i < 1)||(i > serviceObject.servGetSciVector().size()))
+        if ((i < 0)||(i > (serviceObject.servGetSciVector().size() - 1)))
         {
             continueP = false;
             commonPhrases("nothingsel");
@@ -1137,7 +1137,7 @@ void infoDisplay::selectAction()
     {
         clearScreen();
         mainMenu();
-        int sel = serviceObject.selection();
+        int sel = inputNumberToFunction();
         //unsigned int choice = 0;
         switch(sel)
             {
@@ -1196,7 +1196,7 @@ void infoDisplay::selectAction()
 
 void infoDisplay::displayComputerService()
 {
-    string temp;
+    //string temp;
     displaySortComputersOptions();
     displayComList();
 
@@ -1207,13 +1207,13 @@ void infoDisplay::displayComputerService()
         displayOneComputer(serviceObject.servGetComVector().at(choice-1));
     }
     addEmptyLines(1);
-    cout<<"\tPress any key to continue: ";
-    cin>>temp;
+//    cout<<"\tPress any key to continue: ";
+//    cin>>temp;
 }
 
 void infoDisplay::displayComputerTypeService()
 {
-    string temp;
+    //string temp;
     displayComTypeList();
     unsigned int choice = moreInfoOnComputerTypes();
     if(choice > 0 && choice <= serviceObject.servGetCompTypeVector().size())
@@ -1221,8 +1221,8 @@ void infoDisplay::displayComputerTypeService()
         displayOneComputerType(serviceObject.servGetCompTypeVector().at(choice-1));
     }
     addEmptyLines(1);
-    cout<<"\tPress any key to continue: ";
-    cin>>temp;
+    //cout<<"\tPress any key to continue: ";
+    //cin>>temp;
 }
 
 void infoDisplay::displayScientistService()
@@ -1239,8 +1239,8 @@ void infoDisplay::displayScientistService()
         displayOneScientist(serviceObject.servGetSciVector().at(choice-1));
     }
     addEmptyLines(1);
-    cout<<"\tPress any key to continue: ";
-    cin>>temp;
+    //cout<<"\tPress any key to continue: ";
+    //cin>>temp;
 
 }
 
@@ -1363,10 +1363,6 @@ void infoDisplay::editComputerTypeService(unsigned int i)
             continueP = addComputerTypeCheck(ctName,ctDesc);
         }
         computertype ct(ctId, ctName, ctDesc);
-       cout << ct.getid() << endl;
-        cout << ct.getName() << endl;
-        cout << ct.getDesc() << endl;
-
         serviceObject.servUpdateSqlComputerType(ct);
     }
 }
@@ -2169,7 +2165,7 @@ void infoDisplay::displayChangeComputer()
         cout << "\tEnter the number of the computer you would like to edit: ";
         i = inputNumberToFunction() - 1;
 
-        if ((i < 1)||(i > serviceObject.servGetComVector().size()))
+        if ((i < 0)||(i > (serviceObject.servGetComVector().size() - 1)))
         {
             continueP = false;
             commonPhrases("nothingsel");
