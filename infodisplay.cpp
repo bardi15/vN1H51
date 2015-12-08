@@ -1097,8 +1097,6 @@ void infoDisplay::selectAction()
             sleep(3);
         }
     }
-    serviceObject.henda();
-
 
     do
     {
@@ -1242,7 +1240,7 @@ void infoDisplay::editScientistService(unsigned int i)
 
         while (continueP == false)
         {
-            addScientistChange(name,gender,yob,yod,descr,link,selectedGender);
+            addScientistChange(name,gender,yob,yod,descr,link,selectedGender,id);
             continueP = addScientistCheck(name,selectedGender,yob,yod,descr,link);
         }
 
@@ -1666,7 +1664,7 @@ void infoDisplay::addScientist()
         cout<<"\tCreating a new Scientist: "<<endl;
         printLines(1, "thick");
         string name = " ", gender = " ", descr = " ", link = " ";
-        int yob = 0, yod = 0;
+        int yob = 0, yod = 0, id = 0;
 
         name = (addScientistName());
         selectedGender = addScientistGender(gender);
@@ -1674,7 +1672,7 @@ void infoDisplay::addScientist()
         bool addEvenMore = true;
         while (addEvenMore == true)
         {
-            addEvenMore = addScientistMore(yob, yod, descr, link);
+            addEvenMore = addScientistMore(yob, yod, descr, link, id);
         }
         bool changeInput = false;
         do
@@ -1683,7 +1681,9 @@ void infoDisplay::addScientist()
 
             if (changeInput == false)
             {
-                addScientistChange(name,gender,yob,yod,descr,link,selectedGender);
+
+                int id = serviceObject.servGetSciVector().at(serviceObject.servGetSciVector().size() - 1).getID();
+                addScientistChange(name,gender,yob,yod,descr,link,selectedGender,id);
             }
         }
         while (changeInput == false);
@@ -1700,14 +1700,14 @@ void infoDisplay::addScientist()
         serviceObject.servAddscientist(sO);
     };
 }
-bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &link)
+bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &link, int id)
 {
     bool addAnother = true;
     int choice;
 
     addEmptyLines(5);
-    cout<<"\t1. Add year of Death, 2. Description, "<<endl<<"\t3. Website link; \n";
-    cout << "\t4. To connect scientist with computer, any other digit continues: ";
+    cout<<"\t1. Add year of Death, 2. Description, "<<endl<<"\t3. Website link, \n";
+    cout << "\t4. To connect scientist with computer \n\tAny other digit continues: ";
 
     choice = inputNumberToFunction();
 
@@ -1730,6 +1730,7 @@ bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &lin
         displayComList();
         cout << "\tSelect a computer from the list, other entries return to the menu: ";
         cin >> choice;
+        serviceObject.servAddRelationSciComp(id, serviceObject.servGetComVector().at(choice - 1).getId());
         cout << "\tThis scientist is connected to: " << serviceObject.servGetComVector().at(choice - 1).getComName() << endl;
         break;
 
@@ -1746,7 +1747,6 @@ bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &lin
     }
 
     return addAnother;
-
 }
 int infoDisplay::addScientistYearOfDeath(int yob)
 {
@@ -1862,7 +1862,7 @@ bool infoDisplay::addComputerCheck(string cName, int cYear, int cType, bool cBui
     return cont;
 }
 
-void infoDisplay::addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender)
+void infoDisplay::addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender, int id)
 {
 
     int input = 0;
@@ -1871,7 +1871,7 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
     //clearScreen();
     addEmptyLines(1);
     commonPhrases("change");
-    cout<<"\t1. Name, 2. Gender, 3. Year of Birth, 4. Year of Death \n\t5. Description, 6. Computer, 7. Link, other digits cancel: ";
+    cout<<"\t1. Name, 2. Gender, 3. Year of Birth, 4. Year of Death \n\t5. Description, 6. Computer, 7. Link \n\tOther digits cancel: ";
     input = inputNumberToFunction();
 
     switch (input)
@@ -1896,7 +1896,8 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
         displayComList();
         cout << "\tSelect a computer from the list: ";
         cin >> input;
-        cout << "\tThis scientist is now connected to: " << serviceObject.servGetComVector().at(input - 1).getComName() << endl;
+        serviceObject.servAddRelationSciComp(id, serviceObject.servGetComVector().at(input - 1).getId());
+        cout << "\tThis scientist is connected to: " << serviceObject.servGetComVector().at(input - 1).getComName() << endl;
         break;
     case 7:
         link = addScientistLink(link);

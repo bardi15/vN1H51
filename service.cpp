@@ -300,13 +300,3 @@ bool service::servAddRelationSciComp(int sciID, int compID)
     return workingObject.addRelationSciComp(sciID, compID);
 }
 
-void service::henda()
-{
-
-//    workingObject.readSqlComputers();
-//    sleep(3);
-//    workingObject.readSqlScientists();
-//    sleep(3);
-//    workingObject.readSqlCompTypes();
-//    sleep(3);
-}

@@ -81,7 +81,7 @@ class infoDisplay
         //  Precondition:   The year of birth for a scientist is to be entered.
         //  Postcondition:  The year of birth has been corrected or an error message has been
         //      displayed on screen.
-        bool addScientistMore(int yob, int &yod, string &descr, string &link);
+        bool addScientistMore(int yob, int &yod, string &descr, string &link, int id);
         //  Precondition:   The necessary data for a new scientist is to be entered.
         //  Postcondition:  If required the new scientist has the field for year of death,
         //      description and link have been populated.
@@ -95,10 +95,13 @@ class infoDisplay
         string addScientistLink(string &link);
         //  Precondition:   The link for a scientist is to be entered.
         //  Postcondition:  The link for a scientist has been entered.
+        void addScientistComp(int number);
+        // Precondition:    A computer is selected from the list of computers.
+        // Postcondition:   The computer has been connected to the scientist.
         bool addScientistCheck(string name, int gender, int yob, int yod, string desc, string link);
         //  Precondition:   All data for a new scientist has been entered.
         //  Postcondition:  If approved scientist is added to private vector, else modified.
-        void addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender);
+        void addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender, int id);
         //  Precondition:   Data for a new scientist have been entered. Asks if any of the
         //      inserted data is to be changed.
         //  Postcondition:  Entered data for a new scientist has been corrected.
