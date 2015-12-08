@@ -180,9 +180,7 @@ void infoDisplay::displayComList()
             else
             {
                 cout<<serviceObject.servGetCompTypeVector().at(comtype).getName()<<endl;
-               // cout<< ct.getName();
             }
-            //cout<<endl;
 
         }
         if (scrollNeeded("com") == true)
@@ -547,7 +545,6 @@ void infoDisplay::displayOneComputerType(computertype& ct)
 void infoDisplay::clearScreen()
 {
     system("cls");
-    //cout<<"clearScreen"<<endl;
 }
 
 void infoDisplay::mainMenu()
@@ -796,20 +793,20 @@ void infoDisplay::displayChangeNewComputerType()
         clearScreen();
         editComputerTypeDisplayService();
 
-        int i = 0;
+        unsigned int i = 0;
         string name;
 
         cout << "\tEnter the number of the computer type you would like to edit: ";
-        i = inputNumberToFunction() - 1;
+        i = inputNumberToFunction();
 
-        if ((i < 0)||(i > (serviceObject.servGetCompTypeVector().size() - 1)))
+        if ((i < 1)||(i > (serviceObject.servGetCompTypeVector().size())))
         {
             continueP = false;
             commonPhrases("nothingsel");
         }
         else
         {
-            displayOneComputerType(serviceObject.servGetCompTypeVector().at(i));
+            displayOneComputerType(serviceObject.servGetCompTypeVector().at(i-1));
             editComputerTypeService(i);
             clearScreen();
             continueP = addScientistContinue();
@@ -855,7 +852,6 @@ bool infoDisplay::addComputerTypeCheck(string ctName, string ctDescr)
     clearScreen();
     addEmptyLines(5);
     cout<<"\tCurrent entry: "<<endl;
-    //cout<<"\t======================================"<<endl;
     printLines(1, "thick");
     cout<<"\tComputer Type: "<<ctName<<endl;
 
@@ -913,20 +909,20 @@ void infoDisplay::displayChangeScientist()
         clearScreen();
         editScientistDisplayService();
 
-        int i = 0;
+        unsigned int i = 0;
         string name;
 
         cout << "\tEnter the number of the scientist you would like to edit: ";
-        i = inputNumberToFunction() - 1;
+        i = inputNumberToFunction();
 
-        if ((i < 0)||(i > (serviceObject.servGetSciVector().size() - 1)))
+        if ((i < 1)||(i > (serviceObject.servGetSciVector().size())))
         {
             continueP = false;
             commonPhrases("nothingsel");
         }
         else
         {
-            displayOneScientist(serviceObject.servGetSciVector().at(i));
+            displayOneScientist(serviceObject.servGetSciVector().at(i-1));
             editScientistService(i);
             clearScreen();
             continueP = addScientistContinue();
@@ -961,7 +957,8 @@ void infoDisplay::displaySearchScientistMenu()
     cout << "\t2) Search by gender." << endl;
     cout << "\t3) Search by year of birth." << endl;
     cout << "\t4) Search by year of death." << endl;
-    cout << "\t5) Return to main menu." << endl;
+    printLines(1, "thin");
+    cout << "\tAll other digits for main menu. \n";
     printLines(1, "thick");
     cout << "\tEnter your selection: ";
 }
@@ -973,7 +970,8 @@ void infoDisplay::displaySearchComputersMenu()
     cout << "\t1) Search by name or part of name." << endl;
     cout << "\t2) Search by type." << endl;
     cout << "\t3) Search by the building year." << endl;
-    cout << "\t4) Return to main menu." << endl;
+    printLines(1, "thin");
+    cout << "\tAll other digits for main menu. \n";
     printLines(1, "thick");
     cout << "\tEnter your selection: ";
 }
@@ -1012,24 +1010,21 @@ int infoDisplay::displaySortScientistOptions()
     cout << "\t2) In reverse alphabetical order. \n";
     cout << "\t3) By year of birth ascending. \n";
     cout << "\t4) By year of birth descending. \n";
+    printLines(1, "thin");
+    cout << "\tAll other digits for main menu. \n";
     printLines(1, "thick");
     cout << "\tInput choice here: ";
     choice = inputNumberToFunction();
-    //cout<<"debuga"<<endl;
 
     if ((choice < 1)||(choice > 4))
     {
-        //cout<<"debugb"<<endl;
-
         commonPhrases("nothingsel");
     }
     else
     {
-        //cout<<"debugc"<<endl;
 
         serviceObject.servSortScientists(choice);
     }
-    //cout<<"debugd"<<endl;
 
     return choice;
 
@@ -1045,6 +1040,8 @@ int infoDisplay::displaySortComputersOptions()
     cout << "\t2) In reverse alphabetical order. \n";
     cout << "\t3) By the building year\n";
     cout << "\t4) By type and name. \n";
+    printLines(1, "thin");
+    cout << "\tAll other digits for main menu. \n";
     printLines(1, "thick");
     cout << "\tInput choice here: ";
     choice = inputNumberToFunction();
@@ -1203,7 +1200,6 @@ void infoDisplay::selectAction()
                 addEmptyLines(10);
                 quitProgram();
                 addEmptyLines(10);
-                //exit(0);
                 break;
            }
         }
@@ -1220,22 +1216,13 @@ void infoDisplay::displayComputerService()
     {
         choice = 0;
         continueF = false;
-        //cout<<"debug00"<<endl;
         searchSelection = displaySortComputersOptions();
-        //cout<<"debug0"<<endl;
-        //cout<<"choice is: "<<choice<<endl;
         if (searchSelection != 0)
         {
-            //cout<<"debug1"<<endl;
-
             displayComList();
             choice = moreInfoOnComputer();
-            //cout<<"choice is: "<<choice<<endl;
 
         }
-        //cout<<"choice is: "<<choice<<endl;
-
-        //cout<<"debug2"<<endl;
 
         if(choice > 0 && choice <= serviceObject.servGetComVector().size())
         {
@@ -1243,64 +1230,20 @@ void infoDisplay::displayComputerService()
         }
 
         addEmptyLines(1);
-        //cout<<"debug5"<<endl;
 
         if (choice != 0)
         {
-            cout<<"debug7"<<endl;
-            //cout<<"else!!"<<endl;
             commonPhrases("continue");
             continueF = yesOrNo();
         }
-        //cout<<"debug8"<<endl;
 
     }
     while(continueF == true);
-    //cout<<"debug9"<<endl;
-
-
-//    bool continueF = false;
-//    int searchSelection = 0;
-
-//    do
-//    {
-//        continueF = false;
-//        searchSelection = displaySortComputersOptions();
-
-//        if (searchSelection != 0)
-//        {
-//            displayComList();
-//        }
-
-//        unsigned int choice = moreInfoOnComputer();
-
-//        if(choice > 0 && choice <= serviceObject.servGetComVector().size())
-//        {
-//            displayOneComputer(serviceObject.servGetComVector().at(choice-1));
-//        }
-
-//        addEmptyLines(1);
-//        if (choice != 0)
-//        {
-//            //cout<<"else!!"<<endl;
-//            commonPhrases("continue");
-//            continueF = yesOrNo();
-//        }
-//    }
-//    while(continueF == true);
-
 
 }
 
 void infoDisplay::displayComputerTypeService()
 {
-//    unsigned int choice = moreInfoOnComputerTypes();
-//    if(choice > 0 && choice <= serviceObject.servGetCompTypeVector().size())
-//    {
-//        displayOneComputerType(serviceObject.servGetCompTypeVector().at(choice-1));
-//    }
-//    addEmptyLines(1);
-
     bool continueF = false;
 
     do
@@ -1317,13 +1260,10 @@ void infoDisplay::displayComputerTypeService()
         addEmptyLines(1);
         if (choice == 0)
         {
-            //cout<<"NOT else!!"<<endl;
-
             commonPhrases("nothingsel");
         }
         else
         {
-            //cout<<"else!!"<<endl;
             commonPhrases("continue");
             continueF = yesOrNo();
         }
@@ -1342,45 +1282,27 @@ void infoDisplay::displayScientistService()
     {
         choice = 0;
         continueF = false;
-        //cout<<"debug00"<<endl;
         searchSelection = displaySortScientistOptions();
-        //cout<<"debug0"<<endl;
-        //cout<<"choice is: "<<choice<<endl;
         if (searchSelection != 0)
         {
-            //cout<<"debug1"<<endl;
-
             displaySciList();
             choice = moreInfoOnScientist();
-            //cout<<"choice is: "<<choice<<endl;
-
         }
-        //cout<<"choice is: "<<choice<<endl;
-
-        //cout<<"debug2"<<endl;
 
         if(choice > 0 && choice <= serviceObject.servGetSciVector().size())
         {
-            //cout<<"debug3"<<endl;
             displayOneScientist(serviceObject.servGetSciVector().at(choice-1));
-            //cout<<"debug4"<<endl;
-
         }
         addEmptyLines(1);
-        //cout<<"debug5"<<endl;
 
         if (choice != 0)
         {
-            cout<<"debug7"<<endl;
-            //cout<<"else!!"<<endl;
             commonPhrases("continue");
             continueF = yesOrNo();
         }
-        //cout<<"debug8"<<endl;
 
     }
     while(continueF == true);
-    //cout<<"debug9"<<endl;
 
 }
 
@@ -1414,7 +1336,7 @@ void infoDisplay::editScientistService(unsigned int i)
 
         while (continueP == false)
         {
-            addScientistChange(name,gender,yob,yod,descr,link,selectedGender,id);
+            addScientistChange(name,gender,yob,yod,descr,link,selectedGender);
             continueP = addScientistCheck(name,selectedGender,yob,yod,descr,link);
         }
 
@@ -1476,7 +1398,6 @@ void infoDisplay::editComputerService(unsigned int i)
 void infoDisplay::editComputerTypeDisplayService()
 {
     serviceObject.servReadSqlComputers();
-    //vector<scientist> tempVector = serviceObject.servGetSciVector();
     displayComTypeList();
 }
 void infoDisplay::editComputerTypeService(unsigned int i)
@@ -1513,7 +1434,6 @@ void infoDisplay::editComputerTypeService(unsigned int i)
 void infoDisplay::searchScientistSelection(int select)
 {
     serviceObject.servReadSqlScientists();
-    //char cont;
     bool continueF = false;
     switch (select)
     {
@@ -1677,13 +1597,8 @@ void infoDisplay::searchScientistSelection(int select)
         }
         while(continueF == true);
         break;
-    case 5:     //  Back to main menu
-        clearScreen();
-        //mainMenu();
-        break;
     default:
         commonPhrases("nothingsel");
-        //displaySearchScientist();
         break;
     }
 }
@@ -1803,10 +1718,7 @@ void infoDisplay::searchComputerSelection(int select)
         }
         while(continueF == true);
         break;
-    case 4:     //  Back to main menu
-        clearScreen();
-        //mainMenu();
-        break;
+
     default:
         commonPhrases("nothingsel");
         break;
@@ -1819,7 +1731,6 @@ bool infoDisplay::addScientistContinue()
     commonPhrases("continue");
 
     bool input = yesOrNo();
-    //cin.ignore();
     return input;
 }
 void infoDisplay::addScientist()
@@ -1836,7 +1747,7 @@ void infoDisplay::addScientist()
         cout<<"\tCreating a new Scientist: "<<endl;
         printLines(1, "thick");
         string name = " ", gender = " ", descr = " ", link = " ";
-        int yob = 0, yod = 0, id = 0;
+        int yob = 0, yod = 0;
 
         name = (addScientistName());
         selectedGender = addScientistGender(gender);
@@ -1844,7 +1755,7 @@ void infoDisplay::addScientist()
         bool addEvenMore = true;
         while (addEvenMore == true)
         {
-            addEvenMore = addScientistMore(yob, yod, descr, link, id);
+            addEvenMore = addScientistMore(yob, yod, descr, link);
         }
         bool changeInput = false;
         do
@@ -1853,9 +1764,7 @@ void infoDisplay::addScientist()
 
             if (changeInput == false)
             {
-
-                int id = serviceObject.servGetSciVector().at(serviceObject.servGetSciVector().size() - 1).getID();
-                addScientistChange(name,gender,yob,yod,descr,link,selectedGender,id);
+                addScientistChange(name,gender,yob,yod,descr,link,selectedGender);
             }
         }
         while (changeInput == false);
@@ -1872,7 +1781,7 @@ void infoDisplay::addScientist()
         serviceObject.servAddscientist(sO);
     };
 }
-bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &link, int id)
+bool infoDisplay::addScientistMore(int yob, int &yod, string &descr, string &link)
 {
     bool addAnother = true;
     int choice;
@@ -2078,8 +1987,13 @@ void infoDisplay::sciToComRelations(string sel)
     }
     clearScreen();
     addEmptyLines(5);
-    cout<<"\tSelect the scientist you want to "<<placeholder<<" Relations to... ";
-    sleep(3);
+    cout<<"\tSelect the scientist you want to "<<placeholder<<" Relations to";
+    for (int i = 0; i < 3; i++)
+    {
+        cout<<".";
+        sleep(1);
+    }
+
     displaySciList();
 
     int sciID = 0;
@@ -2095,8 +2009,12 @@ void infoDisplay::sciToComRelations(string sel)
 
     clearScreen();
     addEmptyLines(5);
-    cout<<"\tNow select the computer... ";
-    sleep(3);
+    cout<<"\tNow select the computer";
+    for (int i = 0; i < 3; i++)
+    {
+        cout<<".";
+        sleep(1);
+    }
     displayComList();
 
     cout<<"\tInput selection: ";
@@ -2136,7 +2054,7 @@ void infoDisplay::sciToComRelations(string sel)
 
 }
 
-void infoDisplay::addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender, int id)
+void infoDisplay::addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender)
 {
 
     int input = 0;
@@ -2145,7 +2063,6 @@ void infoDisplay::addScientistChange(string &name, string gender, int &yob, int 
     //clearScreen();
     addEmptyLines(1);
     commonPhrases("change");
-    //cout<<"\t1. Name, 2. Gender, 3. Year of Birth, 4. Year of Death \n\t5. Description, 6. Computer, 7. Link \n\tOther digits cancel: ";
     printLines(1,"thin");
     cout<<"\t1. Name, 2. Gender, 3. Year of Birth, 4. Year of Death \n\t5. Description, 6. Link, other digits cancel: ";
     input = inputNumberToFunction();
@@ -2405,20 +2322,20 @@ void infoDisplay::displayChangeComputer()
         clearScreen();
         editComputerDisplayService();
 
-        int i = 0;
+        unsigned int i = 0;
         string name;
 
         cout << "\tEnter the number of the computer you would like to edit: ";
         i = inputNumberToFunction() - 1;
 
-        if ((i < 0)||(i > (serviceObject.servGetComVector().size() - 1)))
+        if ((i < 1)||(i > serviceObject.servGetComVector().size()))
         {
             continueP = false;
             commonPhrases("nothingsel");
         }
         else
         {
-            displayOneComputer(serviceObject.servGetComVector().at(i));
+            displayOneComputer(serviceObject.servGetComVector().at(i-1));
             editComputerService(i);
             clearScreen();
             continueP = addScientistContinue();

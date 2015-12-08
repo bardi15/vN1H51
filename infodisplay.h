@@ -14,6 +14,7 @@
 #include "scientist.h"
 #include "service.h"
 #include <iomanip>
+#include <istream>
 
 const unsigned int HOLYSCROLL = 15;
 
@@ -82,7 +83,7 @@ class infoDisplay
         //  Precondition:   The year of birth for a scientist is to be entered.
         //  Postcondition:  The year of birth has been corrected or an error message has been
         //      displayed on screen.
-        bool addScientistMore(int yob, int &yod, string &descr, string &link, int id);
+        bool addScientistMore(int yob, int &yod, string &descr, string &link);
         //  Precondition:   The necessary data for a new scientist is to be entered.
         //  Postcondition:  If required the new scientist has the field for year of death,
         //      description and link have been populated.
@@ -102,7 +103,7 @@ class infoDisplay
         bool addScientistCheck(string name, int gender, int yob, int yod, string desc, string link);
         //  Precondition:   All data for a new scientist has been entered.
         //  Postcondition:  If approved scientist is added to private vector, else modified.
-        void addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender, int id);
+        void addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender);
         //  Precondition:   Data for a new scientist have been entered. Asks if any of the
         //      inserted data is to be changed.
         //  Postcondition:  Entered data for a new scientist has been corrected.
@@ -277,9 +278,15 @@ class infoDisplay
         */
 
         void displayComSciRelations();
+        //  Precondition:   A scientist or computer have no relation.
+        //  Postcondition:  A scientist or computer have a relation.
         void displayComSciRelationsMenu();
+        //  Postcondition:  prints out selection for relations.
         void displayComSciRelationsSwitch();
+        //  Postcondition:  Switches user between predermined selections for relations menu.
         void sciToComRelations(string sel);
+        //  Precondition:   A scientist or computer have no relation.
+        //  Postcondition:  A scientist or computer have a relation.
 
         /*
         ##Search for Computer scientist
