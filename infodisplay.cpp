@@ -999,7 +999,7 @@ void infoDisplay::printLines(int lines, string thickness)
     }
 
 }
-void infoDisplay::displaySortScientistOptions()
+int infoDisplay::displaySortScientistOptions()
 {
     int choice = 1;
     clearScreen();
@@ -1013,17 +1013,26 @@ void infoDisplay::displaySortScientistOptions()
     printLines(1, "thick");
     cout << "\tInput choice here: ";
     choice = inputNumberToFunction();
+    //cout<<"debuga"<<endl;
 
     if ((choice < 1)||(choice > 4))
     {
+        //cout<<"debugb"<<endl;
+
         commonPhrases("nothingsel");
     }
     else
     {
+        //cout<<"debugc"<<endl;
+
         serviceObject.servSortScientists(choice);
     }
+    //cout<<"debugd"<<endl;
+
+    return choice;
+
 }
-void infoDisplay::displaySortComputersOptions()
+int infoDisplay::displaySortComputersOptions()
 {
     int choice = 1;
     clearScreen();
@@ -1046,6 +1055,8 @@ void infoDisplay::displaySortComputersOptions()
     {
         serviceObject.servSortComputers(choice);
     }
+
+    return choice;
 
 }
 void infoDisplay::addEmptyLines(int numLines)
@@ -1198,51 +1209,174 @@ void infoDisplay::selectAction()
 
 void infoDisplay::displayComputerService()
 {
-    //string temp;
-    displaySortComputersOptions();
-    displayComList();
-
-    unsigned int choice = moreInfoOnComputer();
-
-    if(choice > 0 && choice <= serviceObject.servGetComVector().size())
+    bool continueF = false;
+    int searchSelection = 0;
+    unsigned int choice = 0;
+    do
     {
-        displayOneComputer(serviceObject.servGetComVector().at(choice-1));
+        choice = 0;
+        continueF = false;
+        //cout<<"debug00"<<endl;
+        searchSelection = displaySortComputersOptions();
+        //cout<<"debug0"<<endl;
+        //cout<<"choice is: "<<choice<<endl;
+        if (searchSelection != 0)
+        {
+            //cout<<"debug1"<<endl;
+
+            displayComList();
+            choice = moreInfoOnComputer();
+            //cout<<"choice is: "<<choice<<endl;
+
+        }
+        //cout<<"choice is: "<<choice<<endl;
+
+        //cout<<"debug2"<<endl;
+
+        if(choice > 0 && choice <= serviceObject.servGetComVector().size())
+        {
+            displayOneComputer(serviceObject.servGetComVector().at(choice-1));
+        }
+
+        addEmptyLines(1);
+        //cout<<"debug5"<<endl;
+
+        if (choice != 0)
+        {
+            cout<<"debug7"<<endl;
+            //cout<<"else!!"<<endl;
+            commonPhrases("continue");
+            continueF = yesOrNo();
+        }
+        //cout<<"debug8"<<endl;
+
     }
-    addEmptyLines(1);
-//    cout<<"\tPress any key to continue: ";
-//    cin>>temp;
+    while(continueF == true);
+    //cout<<"debug9"<<endl;
+
+
+//    bool continueF = false;
+//    int searchSelection = 0;
+
+//    do
+//    {
+//        continueF = false;
+//        searchSelection = displaySortComputersOptions();
+
+//        if (searchSelection != 0)
+//        {
+//            displayComList();
+//        }
+
+//        unsigned int choice = moreInfoOnComputer();
+
+//        if(choice > 0 && choice <= serviceObject.servGetComVector().size())
+//        {
+//            displayOneComputer(serviceObject.servGetComVector().at(choice-1));
+//        }
+
+//        addEmptyLines(1);
+//        if (choice != 0)
+//        {
+//            //cout<<"else!!"<<endl;
+//            commonPhrases("continue");
+//            continueF = yesOrNo();
+//        }
+//    }
+//    while(continueF == true);
+
+
 }
 
 void infoDisplay::displayComputerTypeService()
 {
-    //string temp;
-    displayComTypeList();
-    unsigned int choice = moreInfoOnComputerTypes();
-    if(choice > 0 && choice <= serviceObject.servGetCompTypeVector().size())
+//    unsigned int choice = moreInfoOnComputerTypes();
+//    if(choice > 0 && choice <= serviceObject.servGetCompTypeVector().size())
+//    {
+//        displayOneComputerType(serviceObject.servGetCompTypeVector().at(choice-1));
+//    }
+//    addEmptyLines(1);
+
+    bool continueF = false;
+
+    do
     {
-        displayOneComputerType(serviceObject.servGetCompTypeVector().at(choice-1));
+        continueF = false;
+        displayComTypeList();
+
+        unsigned int choice = moreInfoOnComputerTypes();
+        if(choice > 0 && choice <= serviceObject.servGetCompTypeVector().size())
+        {
+            displayOneComputerType(serviceObject.servGetCompTypeVector().at(choice-1));
+        }
+
+        addEmptyLines(1);
+        if (choice == 0)
+        {
+            //cout<<"NOT else!!"<<endl;
+
+            commonPhrases("nothingsel");
+        }
+        else
+        {
+            //cout<<"else!!"<<endl;
+            commonPhrases("continue");
+            continueF = yesOrNo();
+        }
     }
-    addEmptyLines(1);
-    //cout<<"\tPress any key to continue: ";
-    //cin>>temp;
+    while(continueF == true);
+
+
 }
 
 void infoDisplay::displayScientistService()
 {
-    string temp;
-    displaySortScientistOptions();
-
-    displaySciList();
-
-    unsigned int choice = moreInfoOnScientist();
-
-    if(choice > 0 && choice <= serviceObject.servGetSciVector().size())
+    bool continueF = false;
+    int searchSelection = 0;
+    unsigned int choice = 0;
+    do
     {
-        displayOneScientist(serviceObject.servGetSciVector().at(choice-1));
+        choice = 0;
+        continueF = false;
+        //cout<<"debug00"<<endl;
+        searchSelection = displaySortScientistOptions();
+        //cout<<"debug0"<<endl;
+        //cout<<"choice is: "<<choice<<endl;
+        if (searchSelection != 0)
+        {
+            //cout<<"debug1"<<endl;
+
+            displaySciList();
+            choice = moreInfoOnScientist();
+            //cout<<"choice is: "<<choice<<endl;
+
+        }
+        //cout<<"choice is: "<<choice<<endl;
+
+        //cout<<"debug2"<<endl;
+
+        if(choice > 0 && choice <= serviceObject.servGetSciVector().size())
+        {
+            //cout<<"debug3"<<endl;
+            displayOneScientist(serviceObject.servGetSciVector().at(choice-1));
+            //cout<<"debug4"<<endl;
+
+        }
+        addEmptyLines(1);
+        //cout<<"debug5"<<endl;
+
+        if (choice != 0)
+        {
+            cout<<"debug7"<<endl;
+            //cout<<"else!!"<<endl;
+            commonPhrases("continue");
+            continueF = yesOrNo();
+        }
+        //cout<<"debug8"<<endl;
+
     }
-    addEmptyLines(1);
-    //cout<<"\tPress any key to continue: ";
-    //cin>>temp;
+    while(continueF == true);
+    //cout<<"debug9"<<endl;
 
 }
 

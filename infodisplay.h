@@ -332,7 +332,7 @@ class infoDisplay
         //  Precondition:   A list of scientist has been displayed.
         //  Postcondition:  Ask for which if any scientist to display fuller information on.
         //      Returns the selection.
-        void displaySortScientistOptions();
+        int displaySortScientistOptions();
         //  Precondition:   A list of scientist is to be displayed.
         //  Postcondition:  Displays the sorting options available and returns the selection.
 
@@ -362,7 +362,7 @@ class infoDisplay
         //  Precondition:   A list of computers has been displayed.
         //  Postcondition:  Ask for which if any computer to display fuller information on.
         //      Returns the selection.
-        void displaySortComputersOptions();
+        int displaySortComputersOptions();
         //  Precondition:   A list of computers is to be displayed.
         //  Postcondition:  Displays the sorting options available and returns the selection.
 
