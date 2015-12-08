@@ -546,7 +546,8 @@ void infoDisplay::displayOneComputerType(computertype& ct)
 
 void infoDisplay::clearScreen()
 {
-    //system("cls");
+    system("cls");
+    //cout<<"clearScreen"<<endl;
 }
 
 void infoDisplay::mainMenu()
@@ -564,13 +565,14 @@ void infoDisplay::mainMenu()
     cout << "\t1) Work on the scientists information. \n";
     cout << "\t2) Work on the computers information. \n";
     cout << "\t3) Work on the computer types information. \n";
+    cout << "\t4) Add computer and scientists relations. \n";
     cout << endl;
-    cout << "\t4) Search for a computer scientists. \n";
-    cout << "\t5) Search for a famous computer \n";
+    cout << "\t5) Search for a computer scientists. \n";
+    cout << "\t6) Search for a famous computer \n";
     cout << endl;
-    cout << "\t6) Display a list of computer scientists. \n";
-    cout << "\t7) Display a list of famous computers. \n";
-    cout << "\t8) Display a list of computers types. \n";
+    cout << "\t7) Display a list of computer scientists. \n";
+    cout << "\t8) Display a list of famous computers. \n";
+    cout << "\t9) Display a list of computers types. \n";
     printLines(1, "thick");
     cout << "\tAll other digits exit the program: ";
 }
@@ -1161,38 +1163,40 @@ void infoDisplay::selectAction()
                 serviceObject.servEraseComputerVector();
                 menuForComputers();
                 break;
-            case 3:
+            case 3:     //  Working with computer types
                 clearScreen();
                 serviceObject.servEraseCompTypeVector();
                 menuForComputerTypes();
                 break;
-            case 4:     //  Searching for scientist
+            case 4:
+                displayComSciRelations();
+                break;
+            case 5:     //  Searching for scientist
                 clearScreen();
                 serviceObject.servEraseScientistVector();
                 displaySearchScientist();
                 break;
-            case 5:     //  Searching for computers
+            case 6:     //  Searching for computers
                 clearScreen();
                 serviceObject.servEraseComputerVector();
                 displaySearchComputer();
                 break;
-            case 6:     //  Displaying scientists
+            case 7:     //  Displaying scientists
                 clearScreen();
                 serviceObject.servEraseScientistVector();
                 displayScientistService();
                 break;
-            case 7:     //  Displaying computers
+            case 8:     //  Displaying computers
                 clearScreen();
                 serviceObject.servEraseComputerVector();
                 displayComputerService();
                 break;
-            case 8:     //  Displaying computer types
+            case 9:     //  Displaying computer types
                 clearScreen();
                 //serviceObject.servEraseCompTypeVector();
                 displayComputerTypeService();
                 break;
-            case 9:
-                displayComSciRelations();
+
 
             default:
                 clearScreen();
@@ -2028,20 +2032,6 @@ void infoDisplay::displayComSciRelations()
     serviceObject.servReadSqlScientists();
     displayComSciRelationsMenu();
     displayComSciRelationsSwitch();
-
-//    displayComList();
-//    cout << "\tSelect a computer from the list, other entries return to the menu: ";
-//    cin >> choice;
-//    serviceObject.servAddRelationSciComp(id, serviceObject.servGetComVector().at(choice - 1).getId());
-//    cout << "\tThis scientist is connected to: " << serviceObject.servGetComVector().at(choice - 1).getComName() << endl;
-//    break;
-
-//    displayComList();
-//    cout << "\tSelect a computer from the list: ";
-//    cin >> input;
-//    serviceObject.servAddRelationSciComp(id, serviceObject.servGetComVector().at(input - 1).getId());
-//    cout << "\tThis scientist is connected to: " << serviceObject.servGetComVector().at(input - 1).getComName() << endl;
-//    break;
 }
 void infoDisplay::displayComSciRelationsMenu()
 {
@@ -2050,9 +2040,7 @@ void infoDisplay::displayComSciRelationsMenu()
     cout << "\tMenu for Scientists and Computer Relations" << endl;
     printLines(1, "thin");
     cout << "\t1) Connect a Scientist to a Computer. \n";
-    cout << "\t2) Connect a Computer to a Scientist. \n";
-    cout << "\t3) Remove connection between Scientist and a Computer. \n";
-    cout << "\t4) Remove connection between Computer and a Scientist. \n";
+    cout << "\t2) Remove connection between Scientist and a Computer. \n";
     printLines(1, "thin");
     cout << "\tAll other digits for main menu. \n";
     printLines(1, "thick");
@@ -2065,32 +2053,39 @@ void infoDisplay::displayComSciRelationsSwitch()
     switch (input)
     {
     case 1:
-        sciToComRelations();
+        sciToComRelations("add");
         break;
     case 2:
-        comToSciRelations();
-        break;
-    case 3:
-        rmvComToSciRelations();
-        break;
-    case 4:
-        rmvComToSciRelations();
+        sciToComRelations("remove");
         break;
 
     default:
-        commonPhrases("nothing");
-
+        commonPhrases("nothingsel");
+        break;
     }
 }
 
-void infoDisplay::sciToComRelations()
+void infoDisplay::sciToComRelations(string sel)
 {
+    string placeholder = " ";
+    if (sel == "add")
+    {
+        placeholder = "add";
+    }
+    else if (sel == "remove")
+    {
+        placeholder = "remove";
+    }
+    clearScreen();
+    addEmptyLines(5);
+    cout<<"\tSelect the scientist you want to "<<placeholder<<" Relations to... ";
+    sleep(3);
     displaySciList();
 
     int sciID = 0;
     int comID = 0;
 
-    cout<<"\tSelect the scientist you want to add Relations to: ";
+    cout<<"\tInput selection: ";
     unsigned int choiceSc = inputNumberToFunction();
 
     if(choiceSc > 0 && choiceSc < serviceObject.servGetSciVector().size())
@@ -2098,13 +2093,13 @@ void infoDisplay::sciToComRelations()
         sciID = serviceObject.servGetSciVector().at(choiceSc-1).getID();
     }
 
-    cout<<"\tsciID is :"<<sciID<<endl;
-    addEmptyLines(1);
-
+    clearScreen();
+    addEmptyLines(5);
+    cout<<"\tNow select the computer... ";
+    sleep(3);
     displayComList();
 
-    cout<<"\tNow select the computer: ";
-
+    cout<<"\tInput selection: ";
     unsigned int choiceC = inputNumberToFunction();
 
     if(choiceC > 0 && choiceC < serviceObject.servGetComVector().size())
@@ -2112,42 +2107,34 @@ void infoDisplay::sciToComRelations()
         comID = serviceObject.servGetComVector().at(choiceC-1).getId();
     }
 
-    cout<<"\tsciID is :"<<sciID<<endl;
-
-    cout<<"\tcomID is :"<<comID<<endl;
     bool error = false;
-    error = serviceObject.servAddRelationSciComp(sciID, comID);
+
+    if (sel == "add")
+    {
+        error = serviceObject.servAddRelationSciComp(sciID, comID);
+    }
+    else if (sel == "remove")
+    {
+        error = serviceObject.servDeleteRelationSciComp(sciID, comID);
+    }
 
     if (error == true)
     {
-        cout<<"true";
+        clearScreen();
+        addEmptyLines(5);
+        cout<<"\tOperation succeeded!";
+        sleep(2);
     }
     else
     {
-        cout<<"false";
+        clearScreen();
+        addEmptyLines(5);
+        cout<<"\tOperation failed!";
+        sleep(2);
     }
-
-
-    //cin>>sciID;
     addEmptyLines(1);
 
 }
-
-void infoDisplay::comToSciRelations()
-{
-    displayComList();
-}
-
-void infoDisplay::rmvSciToComRelations()
-{
-
-}
-
-void infoDisplay::rmvComToSciRelations()
-{
-
-}
-
 
 void infoDisplay::addScientistChange(string &name, string gender, int &yob, int &yod, string &desc, string &link, int &selectedGender, int id)
 {

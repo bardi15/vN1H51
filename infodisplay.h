@@ -279,11 +279,7 @@ class infoDisplay
         void displayComSciRelations();
         void displayComSciRelationsMenu();
         void displayComSciRelationsSwitch();
-        void comToSciRelations();
-        void sciToComRelations();
-        void rmvComToSciRelations();
-        void rmvSciToComRelations();
-
+        void sciToComRelations(string sel);
 
         /*
         ##Search for Computer scientist
