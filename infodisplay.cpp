@@ -1192,7 +1192,6 @@ void infoDisplay::displayComputerTypeService()
     cin>>temp;
 }
 
-
 void infoDisplay::displayScientistService()
 {
     string temp;
@@ -1309,7 +1308,7 @@ void infoDisplay::editComputerTypeDisplayService()
 }
 void infoDisplay::editComputerTypeService(unsigned int i)
 {
-    computertype ct;
+
 
     if (i > serviceObject.servGetComVector().size()-1)
     {
@@ -1318,10 +1317,11 @@ void infoDisplay::editComputerTypeService(unsigned int i)
     else
     {
         string ctName, ctDesc;
+        int ctId;
 
+        ctId = serviceObject.servGetCompTypeVector().at(i).getid();
         ctName = serviceObject.servGetCompTypeVector().at(i).getName();
         ctDesc = serviceObject.servGetCompTypeVector().at(i).getDesc();
-
         bool continueP = false;
 
         while (continueP == false)
@@ -1329,9 +1329,10 @@ void infoDisplay::editComputerTypeService(unsigned int i)
             addComputerTypeChange(ctName, ctDesc);
             continueP = addComputerTypeCheck(ctName,ctDesc);
         }
-
-        ct.setName(ctName);
-        ct.setName(ctDesc);
+        computertype ct(ctId, ctName, ctDesc);
+       cout << ct.getid() << endl;
+        cout << ct.getName() << endl;
+        cout << ct.getDesc() << endl;
 
         serviceObject.servUpdateSqlComputerType(ct);
     }
