@@ -258,7 +258,7 @@ bool workingclass::deleteComputerType(int computertypeID)
 bool workingclass::deleteRelationSciComp(int sciID, int compID)
 {
     QSqlQuery query;
-    query.prepare(" UPDATE scientists_and_computers SET deleted = 'FALSE' "
+    query.prepare(" UPDATE scientists_and_computers SET deleted = 'TRUE' "
                   " WHERE scientist_id = :sid AND computer_id = :cid ");
     query.bindValue(":sid", sciID);
     query.bindValue(":cid", compID);
@@ -552,32 +552,18 @@ void workingclass::createEmptyDatabase()
 }
 
 /*
-##  Miscellaneous functions
-##---------------------------------------------------------------------------------------##
-*/
-string workingclass::stringToLower(string str)
-{
-    string tempstr;
-    for(unsigned int i = 0; i < str.size(); i++)
-    {
-        tempstr[i] = tolower(str[i]);
-    }
-    return tempstr;
-}
-
-/*
 ##  Private functions
 ##---------------------------------------------------------------------------------------##
 */
 void workingclass::createTableScientistsAndComputers()
 {
     QSqlQuery query;
-    query.exec("CREATE TABLE scientists_and_computers "
-               " scientist_id INTEGER NOT NULL, "
+    query.exec(" CREATE TABLE scientists_and_computers "
+               " (scientist_id INTEGER NOT NULL, "
                " computer_id INTEGER NOT NULL, "
                " deleted BOOLEAN DEFAULT 'FALSE', "
                " FOREIGN KEY (scientist_id) REFERENCES scientists(id), "
-               " FOREIGN KEY (computer_id) REFERENCES computers(id)"
+               " FOREIGN KEY (computer_id) REFERENCES computers(id) "
                " PRIMARY KEY (scientist_id,computer_id));");
 }
 void workingclass::createTableComputers()

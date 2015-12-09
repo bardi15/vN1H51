@@ -189,6 +189,12 @@ class infoDisplay
         void displayChangeComputer();
         //  Precondition:   The computer to be changed is to be selected.
         //  Postcondition:  a computer has been selected.
+        void editComputerDisplayService();
+        //  Postcondition:  Intermediary between editing computer types.
+        void editComputerService(unsigned int i);
+        //  Precondition:   A computer is about to be edited.
+        //  Postcondition:  The scientist has been edited and sql database updated.
+
 
         /*
         ##  Computers Information##REMOVE
@@ -252,11 +258,6 @@ class infoDisplay
         void editComputerTypeService(unsigned int i);
         //  Precondition:   All data for a new computer type can be changed.
         //  Postcondition:  User has been promted for change of input data.
-        void editComputerDisplayService();
-        //  Postcondition:  Intermediary between editing computer types.
-        void editComputerService(unsigned int i);
-        //  Precondition:   A computer is about to be edited.
-        //  Postcondition:  The scientist has been edited and sql database updated.
 
         /*
         ##  Computer Types##REMOVE

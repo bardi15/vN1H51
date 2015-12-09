@@ -177,13 +177,6 @@ public:
     //  Precondition:   There is no database present directory of choice.
     //  Postconditinon: A new database with empty tables is created.
 
-    /*
-    ##  Miscellaneous functions
-    ##---------------------------------------------------------------------------------------##
-    */
-    string stringToLower(string str);
-
-
 private:
     void createTableScientistsAndComputers();
     //  Precondition:   A new database has just been created.

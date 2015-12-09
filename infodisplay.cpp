@@ -125,17 +125,17 @@ void infoDisplay::mainMenu()
     printLines(1, "thin");
     cout << "\tWhat would you like to do? \n";
     cout << endl;
-    cout << "\t1) Work on the scientists information. \n";
-    cout << "\t2) Work on the computers information. \n";
-    cout << "\t3) Work on the computer types information. \n";
-    cout << "\t4) Add computer and scientists relations. \n";
+    cout << "\t1) Work on scientist information \n";
+    cout << "\t2) Work on computer information \n";
+    cout << "\t3) Work on computer types information \n";
+    cout << "\t4) Add/Remove scientist to computer relations \n";
     cout << endl;
-    cout << "\t5) Search for a computer scientists. \n";
+    cout << "\t5) Search for a computer scientist \n";
     cout << "\t6) Search for a famous computer \n";
     cout << endl;
-    cout << "\t7) Display a list of computer scientists. \n";
-    cout << "\t8) Display a list of famous computers. \n";
-    cout << "\t9) Display a list of computers types. \n";
+    cout << "\t7) Display a list of computer scientists \n";
+    cout << "\t8) Display a list of famous computers \n";
+    cout << "\t9) Display a list of computer types \n";
     printLines(1, "thick");
     cout << "\tAll other digits exit the program: ";
 }
@@ -160,13 +160,13 @@ void infoDisplay::menuForScientistsDisplay()
 {
     clearScreen();
     addEmptyLines(5);
-    cout << "\tMenu for Scientists " << endl;
+    cout << "\tMenu for work on scientist information " << endl;
     printLines(1, "thin");
-    cout << "\t1) Add a new computer scientist. \n";
-    cout << "\t2) Delete existing information. \n";
-    cout << "\t3) Edit existing information. \n";
+    cout << "\t1) Add a new computer scientist \n";
+    cout << "\t2) Delete existing scientist \n";
+    cout << "\t3) Edit existing scientist \n";
     printLines(1, "thin");
-    cout << "\tAll other digits for main menu. \n";
+    cout << "\tAll other digits for main menu \n";
     printLines(1, "thick");
     cout << "\tEnter your selection: ";
 }
@@ -635,13 +635,13 @@ void infoDisplay::menuForComputersDisplay()
 {
     clearScreen();
     addEmptyLines(5);
-    cout << "\tMenu for Computers " << endl;
+    cout << "\tMenu for work on computer information " << endl;
     printLines(1, "thin");
-    cout << "\t1) Add a new computer. \n";
-    cout << "\t2) Delete existing information. \n";
-    cout << "\t3) Edit existing information. \n";
+    cout << "\t1) Add a new computer \n";
+    cout << "\t2) Delete existing computer \n";
+    cout << "\t3) Edit existing computer \n";
     printLines(1, "thin");
-    cout << "\tAll other digits for main menu. \n";
+    cout << "\tAll other digits for main menu \n";
     printLines(1, "thick");
     cout << "\tEnter your selection: ";
     sleep(2);
@@ -945,6 +945,50 @@ void infoDisplay::displayChangeComputer()
         }
     }
 }
+void infoDisplay::editComputerDisplayService()
+{
+    serviceObject.servReadSqlComputers();
+    displayComList();
+}
+void infoDisplay::editComputerService(unsigned int i)
+{
+    computer cO;
+
+    if (i > serviceObject.servGetComVector().size()-1)
+    {
+        commonPhrases("nothingsel");
+    }
+    else
+    {
+        string cname, cdescr;
+        int cyear, ctype, cid;
+        bool cbuilt;
+
+        cname = serviceObject.servGetComVector().at(i).getComName();
+        cdescr = serviceObject.servGetComVector().at(i).getComDescription();
+        cyear = serviceObject.servGetComVector().at(i).getComYear();
+        ctype = serviceObject.servGetComVector().at(i).getComType();
+        cbuilt = serviceObject.servGetComVector().at(i).getComBuilt();
+        cid = serviceObject.servGetComVector().at(i).getId();
+
+        bool continueP = false;
+
+        while (continueP == false)
+        {
+            addComputerChange(cname,cyear,ctype,cbuilt,cdescr);
+            continueP = addComputerCheck(cname,cyear,ctype,cbuilt,cdescr);
+        }
+
+        cO.setComBuilt(cbuilt);
+        cO.setComDescription(cdescr);
+        cO.setComID(cid);
+        cO.setComName(cname);
+        cO.setComType(ctype);
+        cO.setComYear(cyear);
+
+        serviceObject.servUpdateSqlComputer(cO);
+    }
+}
 
 /*
 ##  Computers Information##REMOVE
@@ -998,13 +1042,13 @@ void infoDisplay::menuForComputersTypesDisplay()
 {
     clearScreen();
     addEmptyLines(5);
-    cout << "\tMenu for Computer Types " << endl;
+    cout << "\tMenu for work on computer types " << endl;
     printLines(1, "thin");
-    cout << "\t1) Add a new computer Type. \n";
-    cout << "\t2) Delete a Type. \n";
-    cout << "\t3) Edit existing Type. \n";
+    cout << "\t1) Add a new computer type \n";
+    cout << "\t2) Delete a computer type \n";
+    cout << "\t3) Edit existing computer type \n";
     printLines(1, "thin");
-    cout << "\tAll other digits for main menu. \n";
+    cout << "\tAll other digits for main menu \n";
     printLines(1, "thick");
     cout << "\tEnter your selection: ";
 }
@@ -1103,7 +1147,7 @@ void infoDisplay::displayComputerTypeService()
         displayComTypeList();
 
         unsigned int choice = moreInfoOnComputerTypes();
-        if(choice > 0 && choice <= serviceObject.servGetCompTypeVector().size())
+        if(choice > 0 && choice < serviceObject.servGetCompTypeVector().size())
         {
             displayOneComputerType(serviceObject.servGetCompTypeVector().at(choice-1));
         }
@@ -1265,7 +1309,7 @@ void infoDisplay::displayChangeNewComputerType()
         cout << "\tEnter the number of the computer type you would like to edit: ";
         i = inputNumberToFunction()-1;
 
-        if ( i > 0 && i < serviceObject.servGetCompTypeVector().size())
+        if ( i+1 > 0 && i < serviceObject.servGetCompTypeVector().size())
         {
             displayOneComputerType(serviceObject.servGetCompTypeVector().at(i));
             editComputerTypeService(i);
@@ -1301,50 +1345,6 @@ void infoDisplay::editComputerTypeService(unsigned int i)
         }
         computertype ct(ctId, ctName, ctDesc);
         serviceObject.servUpdateSqlComputerType(ct);
-}
-void infoDisplay::editComputerDisplayService()
-{
-    serviceObject.servReadSqlComputers();
-    displayComList();
-}
-void infoDisplay::editComputerService(unsigned int i)
-{
-    computer cO;
-
-    if (i > serviceObject.servGetComVector().size()-1)
-    {
-        commonPhrases("nothingsel");
-    }
-    else
-    {
-        string cname, cdescr;
-        int cyear, ctype, cid;
-        bool cbuilt;
-
-        cname = serviceObject.servGetComVector().at(i).getComName();
-        cdescr = serviceObject.servGetComVector().at(i).getComDescription();
-        cyear = serviceObject.servGetComVector().at(i).getComYear();
-        ctype = serviceObject.servGetComVector().at(i).getComType();
-        cbuilt = serviceObject.servGetComVector().at(i).getComBuilt();
-        cid = serviceObject.servGetComVector().at(i).getId();
-
-        bool continueP = false;
-
-        while (continueP == false)
-        {
-            addComputerChange(cname,cyear,ctype,cbuilt,cdescr);
-            continueP = addComputerCheck(cname,cyear,ctype,cbuilt,cdescr);
-        }
-
-        cO.setComBuilt(cbuilt);
-        cO.setComDescription(cdescr);
-        cO.setComID(cid);
-        cO.setComName(cname);
-        cO.setComType(ctype);
-        cO.setComYear(cyear);
-
-        serviceObject.servUpdateSqlComputer(cO);
-    }
 }
 
 /*
@@ -1405,12 +1405,12 @@ void infoDisplay::displayComSciRelationsMenu()
 {
     clearScreen();
     addEmptyLines(5);
-    cout << "\tMenu for Scientists and Computer Relations" << endl;
+    cout << "\tMenu for work on a relation between a scientist and a computer" << endl;
     printLines(1, "thin");
-    cout << "\t1) Connect a Scientist to a Computer. \n";
-    cout << "\t2) Remove connection between Scientist and a Computer. \n";
+    cout << "\t1) Connect a Scientist and a computer \n";
+    cout << "\t2) Remove connection between a scientist and a computer \n";
     printLines(1, "thin");
-    cout << "\tAll other digits for main menu. \n";
+    cout << "\tAll other digits for main menu \n";
     printLines(1, "thick");
     cout << "\tEnter your selection: ";
 }
@@ -1526,14 +1526,14 @@ void infoDisplay::displaySearchScientist()
 void infoDisplay::displaySearchScientistMenu()
 {
     addEmptyLines(5);
-    cout << "\tMenu for Scientist search " << endl;
+    cout << "\tMenu for a scientist search " << endl;
     printLines(1, "thin");
-    cout << "\t1) Search by name or part of name." << endl;
+    cout << "\t1) Search by name or part of a name" << endl;
     cout << "\t2) Search by gender." << endl;
-    cout << "\t3) Search by year of birth." << endl;
-    cout << "\t4) Search by year of death." << endl;
+    cout << "\t3) Search by year of birth" << endl;
+    cout << "\t4) Search by year of death" << endl;
     printLines(1, "thin");
-    cout << "\tAll other digits for main menu. \n";
+    cout << "\tAll other digits for main menu \n";
     printLines(1, "thick");
     cout << "\tEnter your selection: ";
 }
@@ -1725,13 +1725,13 @@ void infoDisplay::displaySearchComputer()
 void infoDisplay::displaySearchComputersMenu()
 {
     addEmptyLines(5);
-    cout << "\tMenu for Computer search " << endl;
+    cout << "\tMenu for a computer search " << endl;
     printLines(1, "thin");
-    cout << "\t1) Search by name or part of name." << endl;
-    cout << "\t2) Search by type." << endl;
-    cout << "\t3) Search by the building year." << endl;
+    cout << "\t1) Search by name or part of a name" << endl;
+    cout << "\t2) Search by computer type" << endl;
+    cout << "\t3) Search by the building year" << endl;
     printLines(1, "thin");
-    cout << "\tAll other digits for main menu. \n";
+    cout << "\tAll other digits for main menu \n";
     printLines(1, "thick");
     cout << "\tEnter your selection: ";
 }
@@ -2017,12 +2017,12 @@ int infoDisplay::displaySortScientistOptions()
     addEmptyLines(5);
     cout << "\tHow would you like the list to be sorted? \n";
     printLines(1, "thin");
-    cout << "\t1) In alphabetical order. \n";
-    cout << "\t2) In reverse alphabetical order. \n";
-    cout << "\t3) By year of birth ascending. \n";
-    cout << "\t4) By year of birth descending. \n";
+    cout << "\t1) In alphabetical order \n";
+    cout << "\t2) In reverse alphabetical order \n";
+    cout << "\t3) By year of birth ascending \n";
+    cout << "\t4) By year of birth descending \n";
     printLines(1, "thin");
-    cout << "\tAll other digits for main menu. \n";
+    cout << "\tAll other digits for main menu \n";
     printLines(1, "thick");
     cout << "\tInput choice here: ";
     choice = inputNumberToFunction();
@@ -2156,12 +2156,12 @@ int infoDisplay::displaySortComputersOptions()
     addEmptyLines(5);
     cout << "\tHow would you like the list to be sorted? \n";
     printLines(1, "thin");
-    cout << "\t1) In alphabetical order. \n";
-    cout << "\t2) In reverse alphabetical order. \n";
-    cout << "\t3) By the building year\n";
-    cout << "\t4) By type and name. \n";
+    cout << "\t1) In alphabetical order \n";
+    cout << "\t2) In reverse alphabetical order \n";
+    cout << "\t3) By the building year \n";
+    cout << "\t4) By type and name \n";
     printLines(1, "thin");
-    cout << "\tAll other digits for main menu. \n";
+    cout << "\tAll other digits for main menu \n";
     printLines(1, "thick");
     cout << "\tInput choice here: ";
     choice = inputNumberToFunction();
@@ -2323,7 +2323,7 @@ void infoDisplay::quitProgram()
     sel = yesOrNo();
     if (sel == true)
     {
-        cout << "\tThank you, please come again!." << endl;
+        cout << "\tThank you, please come again!" << endl;
         serviceObject.servCloseDatabase();  // To close the database before quitting.
         exit(0);
     }
