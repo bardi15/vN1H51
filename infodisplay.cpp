@@ -539,7 +539,6 @@ void infoDisplay::displayScientistService()
 }
 void infoDisplay::editScientistService(unsigned int i)
 {
-    scientist sO;
 
     if (i > serviceObject.servGetSciVector().size()-1)
     {
@@ -565,14 +564,8 @@ void infoDisplay::editScientistService(unsigned int i)
             continueP = addScientistCheck(name,selectedGender,yob,yod,descr,link);
         }
 
-        sO.setName(name);
-        sO.setGender(selectedGender);
-        sO.setDescription(descr);
-        sO.setLink(link);
-        sO.setYearOfBirth(yob);
-        sO.setYearOfDeath(yod);
-        sO.setID(id);
-        serviceObject.servUpdateSqlScientist(sO);
+        scientist s(id,name,selectedGender,yob,yod,descr,link);
+        serviceObject.servUpdateSqlScientist(s);
     }
 }
 
@@ -721,8 +714,6 @@ void infoDisplay::addComputer()
     bool wYLTContinue = true;
     bool changeInput = false;
 
-    computer cO;
-
     while(wYLTContinue == true)
     {
         clearScreen();
@@ -754,13 +745,8 @@ void infoDisplay::addComputer()
         commonPhrases("continue");
         wYLTContinue = yesOrNo();
 
-        cO.setComName(compName);
-        cO.setComYear(compYear);
-        cO.setComType(compType);
-        cO.setComBuilt(compBuilt);
-        cO.setComDescription(compDescr);
-
-        serviceObject.servAddcomputer(cO);
+        computer c(compName, compYear, compType, compBuilt, compDescr);
+        serviceObject.servAddcomputer(c);
 
     };
 }
@@ -952,7 +938,6 @@ void infoDisplay::editComputerDisplayService()
 }
 void infoDisplay::editComputerService(unsigned int i)
 {
-    computer cO;
 
     if (i > serviceObject.servGetComVector().size()-1)
     {
@@ -979,14 +964,8 @@ void infoDisplay::editComputerService(unsigned int i)
             continueP = addComputerCheck(cname,cyear,ctype,cbuilt,cdescr);
         }
 
-        cO.setComBuilt(cbuilt);
-        cO.setComDescription(cdescr);
-        cO.setComID(cid);
-        cO.setComName(cname);
-        cO.setComType(ctype);
-        cO.setComYear(cyear);
-
-        serviceObject.servUpdateSqlComputer(cO);
+        computer c(cid, cname, cyear, ctype, cbuilt, cdescr);
+        serviceObject.servUpdateSqlComputer(c);
     }
 }
 

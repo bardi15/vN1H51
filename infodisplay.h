@@ -72,7 +72,7 @@ class infoDisplay
         string addScientistName();
         //  Precondition:   A name for a scientist is to be entered.
         //  Postcondition:  The name entered has been corrected or an error message has been
-        //      displayed on screen.
+        //                  displayed on screen.
         int addScientistGender(string &gender);
         //  Precondition:   The gender for a scientist is to be entered.
         //  Postcondition:  The gender has been corrected or an error message has been

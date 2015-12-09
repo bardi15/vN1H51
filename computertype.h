@@ -16,7 +16,7 @@ class computertype
         computertype();
         // Precondition:    An instance of the class has been created.
         // Postcondition:   Initialises all string variablaes with an empty string,
-        //      integer and boolean variables as 0.
+        //                  integer and boolean variables as 0.
         computertype(int ctId, string ctName, string ctDesc);
         // Precondition:    An instance of the class has been created.
         // Postcondition:   Initialises id as ctId, name as ctName and desc as ctDesc.
@@ -29,6 +29,7 @@ class computertype
         ##---------------------------------------------------------------------------------------##
         */
         int getid();
+        // Precondition:    The class has been initialised with a legal id.
         // Postcondition:   Returns an integer with the id of the computer type.
         string getName();
         // Precondition:    The class has been initialised with a legal name.
@@ -50,6 +51,7 @@ class computertype
         void setDesc(string inDesc);
         // Precondition:    The parameter is of a legal type and value.
         // Postcondition:   The desc has been set to the parameter inDesc.
+
     private:
         int id;
         string name;

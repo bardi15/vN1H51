@@ -1,5 +1,9 @@
 #include "scientist.h"
 
+/*
+##  Constructors
+##---------------------------------------------------------------------------------------##
+*/
 scientist::scientist()
 {
     name = "";
@@ -29,7 +33,10 @@ scientist::scientist(string sname, int sgender, int syoBirth,int syoDeath, strin
     link = slink;
 }
 
-
+/*
+##  Get functions
+##---------------------------------------------------------------------------------------##
+*/
 int scientist::getID() const
 {
     return id;
@@ -38,7 +45,6 @@ string scientist::getName() const
 {
     return name;
 }
-
 int scientist::getGender() const
 {
     return gender;
@@ -59,36 +65,35 @@ string scientist::getLink() const
 {
     return link;
 }
+
+/*
+##  Set functions
+##---------------------------------------------------------------------------------------##
+*/
 void scientist::setID(int inID)
 {
     id = inID;
 }
-
 void scientist::setName(string inName)
 {
     name = inName;
 }
-
 void scientist::setGender(int sex)
 {
     gender = sex;
 }
-
 void scientist::setYearOfBirth(int birthYear)
 {
     yearOfBirth = birthYear;
 }
-
 void scientist::setYearOfDeath(int deathYear)
 {
     yearOfDeath = deathYear;
 }
-
 void scientist::setDescription(string desc)
 {
     description = desc;
 }
-
 void scientist::setLink(string url)
 {
     link = url;

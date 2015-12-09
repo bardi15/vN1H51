@@ -28,15 +28,15 @@ class service
         ##---------------------------------------------------------------------------------------##
         */
         int yearCorrection(int year, bool &errorInYear);
-        //  Precondition: Takes in an integer for the year correction process.
-        //  Postcondition: Returns a corrected year.
+        //  Precondition:   Takes in an integer for the year correction process.
+        //  Postcondition:  Returns a corrected year.
         string nameCorrection(string name, bool& badName);
         //  Precondition:   A name has been entered into the parameter name.
         //  Postcondition:  Returns the corrected string and the badName variable is false
-        //      if the name is ok, true otherwise.
+        //                  if the name is ok, true otherwise.
         int genderCorrection(string gender);
-        //  Precondition: Takes in a string for the gender correction process.
-        //  Postcondition: Returns 0 if female, 1 if male, 2 otherwise.
+        //  Precondition:   Takes in a string for the gender correction process.
+        //  Postcondition:  Returns 0 if female, 1 if male, 2 otherwise.
 
         /*
         ##  Read functions
@@ -117,11 +117,13 @@ class service
         ##---------------------------------------------------------------------------------------##
         */
         void servSortScientists(int choice);
-        //  Precondition: Takes in an interger to select sorting.
-        //  Postcondition: Reads scientists from database if selection is legal, returns to main menu otherwise.
+        //  Precondition:   Takes in an interger to select sorting.
+        //  Postcondition:  Reads scientists from database if selection is legal,
+        //                  returns to main menu otherwise.
         void servSortComputers(int choice);
-        //  Precondition: Takes in an interger to select sorting.
-        //  Postcondition: Reads computers from database if selection is legal, returns to main menu otherwise.
+        //  Precondition:   Takes in an interger to select sorting.
+        //  Postcondition:  Reads computers from database if selection is legal,
+        //                  returns to main menu otherwise.
 
         /*
         ##  Search scientists functions

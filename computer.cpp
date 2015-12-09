@@ -1,6 +1,9 @@
 #include "computer.h"
 
-
+/*
+##  Constructors
+##---------------------------------------------------------------------------------------##
+*/
 computer::computer()
 {
     comName = "";
@@ -27,6 +30,10 @@ computer::computer(int cid, string cName, int cYear, int cType, bool cBuilt, str
     comDescr = cDescr;
 }
 
+/*
+##  Get functions
+##---------------------------------------------------------------------------------------##
+*/
 int computer::getId() const
 {
     return comId;
@@ -51,6 +58,11 @@ bool computer::getComBuilt() const
 {
     return comBuilt;
 }
+
+/*
+##  Set functions
+##---------------------------------------------------------------------------------------##
+*/
 void computer::setComID(int coID)
 {
     comId = coID;
